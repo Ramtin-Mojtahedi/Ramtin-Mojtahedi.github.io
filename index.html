@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Professional Website</title>
+  <title>Ramtin Mojtahedi - Professional Website</title>
   <!-- Bootstrap CSS -->
   <link
     rel="stylesheet"
@@ -41,6 +41,20 @@
       text-align: center;
       margin-top: 40px;
     }
+    .subsection-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #0d6efd;
+    }
+    .list-item {
+      margin-bottom: 5px;
+      padding-left: 15px;
+    }
+    .list-item li {
+      list-style-type: disc;
+    }
   </style>
 </head>
 <body>
@@ -48,7 +62,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="#">YourName</a>
+      <a class="navbar-brand" href="#home">Ramtin Mojtahedi</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -66,16 +80,22 @@
             <a class="nav-link" href="#home">Home</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="#education">Education</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#experience">Experience</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#honors">Honors</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#publications">Publications</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#projects">Projects</a>
+            <a class="nav-link" href="#presentations">Presentations</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#posts">Posts</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#talks">Talks</a>
+            <a class="nav-link" href="#volunteer">Volunteer</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
@@ -91,9 +111,9 @@
     class="hero-section d-flex align-items-center justify-content-center"
   >
     <div class="container">
-      <h1>Your Name</h1>
-      <h3>Your Title or Role</h3>
-      <p>Write a brief introduction or tagline here.</p>
+      <h1>Ramtin Mojtahedi</h1>
+      <h3>PhD Candidate in Medical AI</h3>
+      <p>I focus on liver cancer detection using deep learning. Welcome to my page.</p>
       <a href="#publications" class="btn btn-primary mt-3">Explore</a>
     </div>
   </section>
@@ -101,28 +121,238 @@
   <!-- Main Content Container -->
   <div class="container">
 
+    <!-- Education -->
+    <div id="education" class="section">
+      <h2 class="section-title">Education</h2>
+
+      <div class="mb-4">
+        <p class="subsection-title">Doctor of Philosophy (Ph.D.) in Medical AI</p>
+        <p><strong>Queen's University</strong>, Kingston, ON, Canada</p>
+        <ul class="list-item">
+          <li>Focus on Liver Cancer Detection Using Deep Learning Vision Transformers</li>
+          <li>GPA: A+ (highest grades in all PhD courses)</li>
+        </ul>
+      </div>
+
+      <div class="mb-4">
+        <p class="subsection-title">Master of Science in Engineering (M.Sc.)</p>
+        <p><strong>Iran University of Science and Technology (IUST)</strong>, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>GPA: 3.9/4 (Ranked 2nd)</li>
+          <li>Brain Connectivity and Neural Cross-Frequency Coupling Analysis Using ECoG & EEG</li>
+        </ul>
+      </div>
+
+      <div class="mb-4">
+        <p class="subsection-title">Bachelor of Science in Engineering (B.Sc.)</p>
+        <p><strong>Iran University of Science and Technology (IUST)</strong>, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Major GPA: 3.9/4 (Ranked 1st)</li>
+          <li>FPGA-based Implementation of a Novel Human Tracking System</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div id="experience" class="section">
+      <h2 class="section-title">Experience</h2>
+
+      <!-- Teaching Experience -->
+      <h4 class="subsection-title">Teaching</h4>
+      <div class="mb-3">
+        <p><strong>Course Instructor</strong> - Iran University of Science and Technology (IUST)</p>
+        <ul class="list-item">
+          <li>Introduction to Microprocessor: ARM and AVR processors</li>
+          <li>Field-Programmable Gate Array (FPGA): Xilinx and Altera series</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <p><strong>Teaching Assistant</strong> - Queen's University, Kingston, ON, Canada</p>
+        <ul class="list-item">
+          <li>CISC 454 - Computer Graphics</li>
+          <li>CISC 457 - Image Processing</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <p><strong>Teaching Assistant</strong> - Iran University of Science and Technology, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Very High-Speed Integrated Circuits (VHDL)</li>
+          <li>Electrical Circuits</li>
+          <li>Electronics I</li>
+          <li>Mathematical Engineering</li>
+          <li>Insulation and High Voltages</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <p><strong>Teaching Assistant</strong> - Sharif University of Technology, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Communication Systems I</li>
+          <li>Business Decision Making</li>
+        </ul>
+      </div>
+      <div class="mb-4">
+        <p><strong>Private Tutor</strong></p>
+        <ul class="list-item">
+          <li>Electrical and Computer Engineering, Computer Science, Statistics, and Mathematics</li>
+        </ul>
+      </div>
+
+      <!-- Research Experience -->
+      <h4 class="subsection-title">Research</h4>
+      <div class="mb-3">
+        <p><strong>Research Assistant</strong> - Queen's University, Kingston, ON, Canada</p>
+        <ul class="list-item">
+          <li>Developed medical AI models for liver cancer using deep learning</li>
+          <li>Improved segmentation performance with self-supervised methods</li>
+          <li>Worked on foundation models and few-shot learning</li>
+          <li>Fine-tuned the Segment Anything Model (SAM) for 3D CT</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <p><strong>Research Assistant</strong> - Iran University of Science and Technology, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Analyzed EEG and LFP signals for cross-frequency coupling</li>
+          <li>Built a secure image encryption algorithm based on Wavelet transform</li>
+          <li>Implemented human tracking algorithms using FPGA</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <p><strong>Research Assistant</strong> - Royan Institute, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Designed a high-frequency electromagnetic wave propagator</li>
+          <li>Studied the effect of electromagnetic waves on cultured cells</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <p><strong>Research Assistant</strong> - Institute for Research in Fundamental Sciences (IPM), Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Collected EEG signals using a memory-based task</li>
+          <li>Designed a neural network for human concentration</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <p><strong>Research Assistant</strong> - Iranian National Aerospace, Iran</p>
+        <ul class="list-item">
+          <li>Developed a climate monitoring and tracking system</li>
+          <li>Designed the PCB and integrated circuit of the system</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Honors -->
+    <div id="honors" class="section">
+      <h2 class="section-title">Honors</h2>
+      <ul class="list-item">
+        <li>SGS Award in Leadership, Innovation, and Community Engagement, Queen's University</li>
+        <li>Ian A. Macleod Award, School of Computing, Queen's University</li>
+        <li>Neighbourhood Climate Action Champions Funding, City of Kingston</li>
+        <li>Sustainable Action Fund, AMS Commission of Environmental Sustainability</li>
+        <li>Champion for Mental Health, Queen's University</li>
+        <li>SGPS International Student Leader Award, Queen's University</li>
+        <li>SGPS International Student Scholarship Award, Queen's University</li>
+        <li>People's Choice Research Award, Center for Health Innovation Spring Symposium</li>
+        <li>Graduate Community Leadership Award, IEEE Section, IUST</li>
+        <li>Ranked 1st, PhD Coursework Class 2025, Queen’s University</li>
+        <li>Ranked 1st (B.Sc.) and 2nd (M.Sc.) at IUST</li>
+        <li>Iran’s National Elite Scholarship, 2015</li>
+        <li>Ranked top 0.02% in Natural Science University Entrance Exam, 2014</li>
+        <li>Ranked 1st and 3rd, Iranian National Student CanSat Competition, 2014</li>
+        <li>IEEE Membership Award, Iran IEEE Section, 2013</li>
+        <li>Ranked 1st, Power Wireless Transferring Competition, 2011</li>
+        <li>Ranked 2nd, National Nano Technology Competition, 2011</li>
+        <li>Ranked top 0.03% in Mathematical and Technical Entrance Exam, 2009</li>
+      </ul>
+    </div>
+
     <!-- Publications -->
     <div id="publications" class="section">
       <h2 class="section-title">Publications</h2>
-      <p>List your important works and links here.</p>
+      <ul class="list-item">
+        <li>R. Mojtahedi et al., "Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Cancer Segmentation in CT Scans," to be submitted to SPIE Medical Imaging, 2024.</li>
+        <li>R. Mojtahedi et al., "End-to-End Deep Learning Pipeline for Liver Tumor Segmentation and Classification," to be submitted to JMI, 2024.</li>
+        <li>R. Mojtahedi et al., "Dilated Convolutional Transformer-Based Segmentation for Primary and Secondary Liver Cancers," IMNO2024 Conference.</li>
+        <li>R. Mojtahedi et al., "Leveraging Contrastive Learning with SimSiam for Liver Cancer Classification," MICCAI, 2023.</li>
+        <li>R. Mojtahedi et al., "Tumor Segmentation in Colorectal Liver Metastasis Using an Optimal Vision Transformer," MICCAI, 2022.</li>
+        <li>R. Mojtahedi et al., "Towards an Optimal Patch Resolution in Vision Transformer for Multimodal Brain Tumor Segmentation," MICCAI, 2022.</li>
+        <li>R. Mojtahedi et al., "A Novel Cross-Frequency Coupling Measure Based on Frequency-Frequency Coupling" (in preparation).</li>
+        <li>R. Mojtahedi and S. Mirzakuchaki, "An Innovative Smart Package for Liquid Flow Meters," IEEE ICEE, 2017.</li>
+        <li>R. Mojtahedi and S. Mirzakuchaki, "A Novel Image Encryption Algorithm Based on Discrete Wavelet Transform," IEEE ICEE, 2016.</li>
+        <li>R. Mojtahedi and S. Mirzakuchaki, "A Novel FPGA Design of a High Dynamic Human Tracking System Using Particle Filter," IEEE ICEE, 2016.</li>
+        <li>M. Ayat, R. Mojtahedi, and S. Mirzakuchaki, "On Design of Carrier Synchronization System Using Bayesian Filtering Framework," IEEE ICEE, 2015.</li>
+        <li>M. Ayat, R. Mojtahedi, S. Mirzakuchaki, and A. A. Beheshti-Shirazi, "Design and FPGA Implementation of a Robust Digital Demodulator" (in preparation).</li>
+      </ul>
     </div>
 
-    <!-- Projects -->
-    <div id="projects" class="section">
-      <h2 class="section-title">Projects</h2>
-      <p>Describe ongoing or completed projects.</p>
+    <!-- Presentations -->
+    <div id="presentations" class="section">
+      <h2 class="section-title">Presentations</h2>
+      <p class="subsection-title">Talks</p>
+      <ul class="list-item">
+        <li>"Tumor Segmentation in Colorectal Liver Metastasis Using Vision Transformer," MICCAI 2022, Singapore</li>
+        <li>"Leveraging Contrastive Learning with SimSiam for the Classification of Liver Cancers," MICCAI 2023, Vancouver</li>
+        <li>"Tumor Segmentation in Colorectal Liver Metastasis Using Vision Transformer Patch Resolution," IMNO2024 Conference</li>
+        <li>"Application of Cross Frequency Coupling Measures," Young Iranian Researchers, 2017</li>
+        <li>"Real-time Human Tracking System," IUST, 2014</li>
+      </ul>
+
+      <p class="subsection-title">Posters</p>
+      <ul class="list-item">
+        <li>"Frequency-frequency Cross Frequency Coupling in Neuroscience," ISCELEC, 2017</li>
+        <li>"Assessment of the Electromagnetic Field Effects on Primary Mouse Cortical Neurons," Royan Institute, 2017</li>
+        <li>"FPGA-based Real-time Human Tracking System," IUST ECE Department, 2015</li>
+      </ul>
+
+      <p class="subsection-title">Academic Reviewer</p>
+      <ul class="list-item">
+        <li>IEEE Journal of Biomedical and Health Informatics</li>
+        <li>European Journal of Neuroscience</li>
+        <li>MICCAI Conference</li>
+      </ul>
     </div>
 
-    <!-- Posts -->
-    <div id="posts" class="section">
-      <h2 class="section-title">Posts</h2>
-      <p>Share articles, blog entries, or news here.</p>
-    </div>
+    <!-- Volunteer and Membership -->
+    <div id="volunteer" class="section">
+      <h2 class="section-title">Volunteer & Membership</h2>
+      <p class="subsection-title">Professional Affiliation & Certificates</p>
+      <ul class="list-item">
+        <li>Member of the Institute of Electrical and Electronics Engineers (IEEE)</li>
+        <li>Member of the Cognitive Sciences and Technologies Council</li>
+        <li>Member of the MICCAI Society</li>
+      </ul>
 
-    <!-- Talks -->
-    <div id="talks" class="section">
-      <h2 class="section-title">Talks</h2>
-      <p>Mention conferences, speeches, or presentations.</p>
+      <p class="subsection-title">Volunteer Experience & Membership</p>
+      <ul class="list-item">
+        <li>Champion in the City of Kingston Climate Action Program</li>
+        <li>PhD Officer at Queen’s School of Computing Society</li>
+        <li>Peer Writing Assistant at Queen’s Student Academic Success Service</li>
+        <li>Volunteer for the AMS Queen’s Food Bank</li>
+        <li>Volunteer for the Queen's ASUS tutoring platform</li>
+        <li>Member of the Finance Committee, Queen’s SGPS</li>
+        <li>Volunteer at Queen’s SHRC</li>
+        <li>IMNO conference student committee member and session chair</li>
+        <li>Judge at the Frontenac, Lennox, and Addington Science Fair</li>
+        <li>Judge at the i@Q conference, Queen's University</li>
+        <li>Web manager and community outreach at Kingston Rotaract</li>
+        <li>SGPS Liaison at Queen’s School of Computing</li>
+        <li>Mentor at the GirlSystem mentorship program</li>
+        <li>Member of the Queen’s PhD-Community Initiative (PhD-CI)</li>
+        <li>Member of the Canadian Cancer Research Community</li>
+      </ul>
+
+      <p class="subsection-title">Computer Skills</p>
+      <ul class="list-item">
+        <li>VHDL, VLSI, C, C++, C#, Python, Java, VB, PHP, HTML</li>
+        <li>MATLAB, LaTeX, Microsoft Office, Photoshop, 3D Max</li>
+        <li>Quartus Prime, Verilog, LabVIEW, ADS, OrCAD PSpice, ISE, Altium Designer, Keil, Proteus, AVR Code Vision, AVR Bascom, CST, Multisim</li>
+        <li>Linux, Windows, iOS, Android</li>
+      </ul>
+
+      <p class="subsection-title">Hobbies</p>
+      <ul class="list-item">
+        <li>Swimming (Bronze National Medal)</li>
+        <li>Culture and Finance</li>
+        <li>Playing guitar and Santoor</li>
+      </ul>
     </div>
 
     <!-- Contact -->
@@ -159,9 +389,9 @@
         <button type="submit" class="btn btn-success">Send</button>
       </form>
       <div class="mt-3">
-        <p>Email: your_email@example.com</p>
-        <p>Phone: +1-234-567-890</p>
-        <p>Address: Your Address, City, Country</p>
+        <p>Email: <a href="mailto:ramtin.mojtahedi@queensu.ca">ramtin.mojtahedi@queensu.ca</a></p>
+        <p>Phone: +1-647-818-1522</p>
+        <p>Address: Kingston, Ontario, Canada</p>
       </div>
     </div>
 
@@ -170,11 +400,11 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>&copy; 2024 Your Name</p>
+      <p>&copy; 2024 Ramtin Mojtahedi</p>
     </div>
   </footer>
 
-  <!-- Bootstrap JS (for toggler and more) -->
+  <!-- Bootstrap JS -->
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
   ></script>
