@@ -10,59 +10,26 @@
   />
   <!-- Custom Styles -->
   <style>
+    /* Global Styles */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       color: #333;
+      background: linear-gradient(to bottom, #ffffff, #f3f3f3);
     }
     nav.navbar {
       margin-bottom: 20px;
+      transition: background-color 0.3s ease;
+    }
+    nav.navbar:hover {
+      background-color: #343a40cc;
     }
     .section-title {
       margin-top: 40px;
       margin-bottom: 20px;
       font-weight: 600;
       text-align: center;
-    }
-    /* Hero Section */
-    .hero-section {
-      /* AI-themed cover image */
-      background: url('https://www.saic.com/sites/default/files/2023-08/22-0723-AI-header.jpg') no-repeat center center;
-      background-size: cover;
-      color: #fff;
-      text-align: center;
-      padding: 100px 0;
-      position: relative;
-    }
-    .hero-section h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-    /* About Section */
-    .about-section {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 40px;
-    }
-    .about-section img {
-      width: 250px;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(0,0,0,0.2);
-    }
-    .about-section .about-text {
-      max-width: 600px;
-    }
-    footer {
-      background-color: #f8f9fa;
-      padding: 20px 0;
-      text-align: center;
-      margin-top: 40px;
     }
     .subsection-title {
       font-size: 1.1rem;
@@ -81,6 +48,75 @@
     .mb-3, .mb-4 {
       margin-bottom: 1.5rem;
     }
+
+    /* Hero Section */
+    .hero-section {
+      background: url('https://www.saic.com/sites/default/files/2023-08/22-0723-AI-header.jpg') center center no-repeat;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+      padding: 120px 0;
+      position: relative;
+    }
+    /* Subtle overlay for readability */
+    .hero-section::before {
+      content: "";
+      background: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-section h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    .hero-section p, .hero-section h3 {
+      font-size: 1.2rem;
+    }
+
+    /* About Section */
+    .about-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .about-section img {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .about-section img:hover {
+      transform: scale(1.05);
+    }
+    .about-section .about-text {
+      max-width: 600px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #f8f9fa;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    /* Interactive Hover for Buttons */
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
@@ -88,7 +124,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <!-- Change the name in the brand to "Ramtin Mojtaheid" as requested -->
+      <!-- Top brand name -->
       <a class="navbar-brand" href="#home">Ramtin Mojtaheid</a>
       <button
         class="navbar-toggler"
@@ -146,7 +182,7 @@
     id="home"
     class="hero-section d-flex align-items-center justify-content-center"
   >
-    <div class="container">
+    <div class="container hero-content">
       <h1>Ramtin Mojtahedi</h1>
       <h3>PhD Candidate in Medical AI</h3>
       <p>I focus on liver cancer detection using deep learning.</p>
@@ -154,19 +190,20 @@
     </div>
   </section>
 
-  <!-- About Section (Your Photo) -->
+  <!-- About Section (Photo) -->
   <section id="about" class="container about-section">
-    <!-- Use your actual photo link from Google Drive -->
-    <img 
-      src="https://drive.google.com/file/d/1VSuk1ll-KhZXFgYPSSjXAM5g-ngpu7r4/view?usp=sharing" 
-      alt="Ramtin Mojtahedi" 
+    <!-- Use your actual photo link from ucarecdn -->
+    <img
+      src="https://ucarecdn.com/6c1f5283-c681-431b-a6e3-3ece53af6fed/Ramtin____Mojtahedi.jpg"
+      alt="Ramtin Mojtahedi"
     />
     <div class="about-text">
       <h2>About Me</h2>
       <p>
-        Hello, I am Ramtin Mojtahedi, a PhD Candidate specializing in Medical AI.
-        I develop advanced deep learning models for liver cancer detection, segmentation, 
-        and classification.
+        Hello, I am Ramtin Mojtahedi, a PhD Candidate in Medical AI. 
+        I build advanced deep learning models for liver cancer detection, segmentation, 
+        and classification. I am passionate about bridging cutting-edge AI research with 
+        real-world clinical applications to improve healthcare outcomes.
       </p>
     </div>
   </section>
