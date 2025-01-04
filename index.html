@@ -564,31 +564,37 @@
 
   <!-- Counter Animation Script -->
   <script>
-    let countersStarted = false;
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM fully loaded and parsed. Initializing counters...');
 
-    function startCounters() {
+      let countersStarted = false;
+      const statsSection = document.querySelector('#stats');
       const counters = document.querySelectorAll('.counter');
-      counters.forEach(counter => {
-        const updateCount = () => {
-          const target = +counter.getAttribute('data-target');
-          const count = +counter.innerText;
-          const increment = target / 80; // Speed can be tweaked
 
-          if (count < target) {
-            counter.innerText = Math.ceil(count + increment);
-            setTimeout(updateCount, 40);
-          } else {
-            counter.innerText = target;
-          }
-        };
-        updateCount();
-      });
-    }
+      function startCounters() {
+        counters.forEach(counter => {
+          const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+            // Speed can be tweaked. Smaller divisor => faster increment.
+            const increment = Math.ceil(target / 80);
 
-    // Observe the stats section with IntersectionObserver
-    const statsSection = document.querySelector('#stats');
-    const observer = new IntersectionObserver(
-      (entries, observer) => {
+            if (count < target) {
+              counter.innerText = count + increment;
+              setTimeout(updateCount, 30);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          updateCount();
+        });
+      }
+
+      const observerOptions = {
+        threshold: 0.3
+      };
+
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting && !countersStarted) {
             startCounters();
@@ -596,13 +602,13 @@
             observer.unobserve(statsSection);
           }
         });
-      },
-      {
-        threshold: 0.3
-      }
-    );
+      }, observerOptions);
 
-    observer.observe(statsSection);
+      // If statsSection is found, observe it
+      if (statsSection) {
+        observer.observe(statsSection);
+      }
+    });
   </script>
 
 </body>
