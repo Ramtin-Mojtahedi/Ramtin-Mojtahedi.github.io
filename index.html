@@ -8,6 +8,11 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
   />
+  <!-- AOS CSS for animations -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+  />
   <!-- Custom Styles -->
   <style>
     /* Global Styles */
@@ -17,6 +22,7 @@
       padding: 0;
       color: #333;
       background: linear-gradient(to bottom, #ffffff, #f3f3f3);
+      scroll-behavior: smooth; /* Smooth scrolling to anchors */
     }
     nav.navbar {
       margin-bottom: 20px;
@@ -61,6 +67,7 @@
       text-align: center;
       padding: 120px 0;
       position: relative;
+      overflow: hidden; 
     }
     .hero-section::before {
       content: "";
@@ -142,7 +149,7 @@
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" data-aos="fade-down" data-aos-duration="800">
     <div class="container">
       <!-- Top brand name -->
       <a class="navbar-brand" href="#home">Ramtin Mojtaheid</a>
@@ -205,7 +212,7 @@
     id="home"
     class="hero-section d-flex align-items-center justify-content-center"
   >
-    <div class="container hero-content">
+    <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
       <h1>Ramtin Mojtahedi</h1>
       <h3>PhD Candidate in Medical AI</h3>
       <p>I focus on liver cancer detection using deep learning.</p>
@@ -214,7 +221,7 @@
   </section>
 
   <!-- About Section (Photo) -->
-  <section id="about" class="container about-section">
+  <section id="about" class="container about-section" data-aos="fade-up" data-aos-duration="1000">
     <!-- Use your actual photo link from ucarecdn -->
     <img
       src="https://ucarecdn.com/6c1f5283-c681-431b-a6e3-3ece53af6fed/Ramtin____Mojtahedi.jpg"
@@ -232,7 +239,7 @@
   </section>
 
   <!-- Stats Section -->
-  <section id="stats" class="stats-section container">
+  <section id="stats" class="stats-section container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Key Stats</h2>
     <p>Some highlights of my experience:</p>
     <div class="row mt-4">
@@ -263,7 +270,7 @@
   <div class="container">
 
     <!-- Education -->
-    <section id="education" class="mt-5">
+    <section id="education" class="mt-5" data-aos="fade-up" data-aos-duration="1000">
       <h2 class="section-title">Education</h2>
       <div class="mb-4">
         <p class="subsection-title">Doctor of Philosophy (Ph.D.) in Medical AI</p>
@@ -292,7 +299,7 @@
     </section>
 
     <!-- Teaching Experience -->
-    <section id="teaching" class="mt-5">
+    <section id="teaching" class="mt-5" data-aos="fade-up" data-aos-duration="1000">
       <h2 class="section-title">Teaching Experience</h2>
       <div class="mb-3">
         <p class="subsection-title">Course Instructor</p>
@@ -338,7 +345,7 @@
     </section>
 
     <!-- Research Experience -->
-    <section id="research" class="mt-5">
+    <section id="research" class="mt-5" data-aos="fade-up" data-aos-duration="1000">
       <h2 class="section-title">Research Experience</h2>
       <div class="mb-3">
         <p class="subsection-title">Research Assistant</p>
@@ -386,7 +393,7 @@
     </section>
 
     <!-- Honors -->
-    <section id="honors" class="mt-5">
+    <section id="honors" class="mt-5" data-aos="fade-up" data-aos-duration="1000">
       <h2 class="section-title">Honors and Awards</h2>
       <ul class="list-item">
         <li>SGS Award in Leadership, Innovation, and Community Engagement, Queen's University</li>
@@ -411,7 +418,7 @@
     </section>
 
     <!-- Publications -->
-    <section id="publications" class="mt-5">
+    <section id="publications" class="mt-5" data-aos="fade-up" data-aos-duration="1000">
       <h2 class="section-title">Publications</h2>
       <ul class="list-item">
         <li>R. Mojtahedi, M. Hamghalam, W.R. Jarnagin, R.K.G. Do, A.L. Simpson, "Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Cancer Segmentation in CT," (SPIE Medical Imaging, 2024, in preparation)</li>
@@ -430,7 +437,7 @@
     </section>
 
     <!-- Presentations -->
-    <section id="presentations" class="mt-5">
+    <section id="presentations" class="mt-5" data-aos="fade-up" data-aos-duration="1000">
       <h2 class="section-title">Presentations</h2>
       <p class="subsection-title">Talks</p>
       <ul class="list-item">
@@ -455,7 +462,7 @@
     </section>
 
     <!-- Volunteer and Membership -->
-    <section id="volunteer" class="mt-5">
+    <section id="volunteer" class="mt-5" data-aos="fade-up" data-aos-duration="1000">
       <h2 class="section-title">Volunteer & Membership</h2>
       <p class="subsection-title">Professional Affiliation & Certificates</p>
       <ul class="list-item">
@@ -497,7 +504,7 @@
     </section>
 
     <!-- References -->
-    <section id="references" class="mt-5">
+    <section id="references" class="mt-5" data-aos="fade-up" data-aos-duration="1000">
       <h2 class="section-title">References</h2>
       <ul class="list-item">
         <li>Dr. Peyman Shokrollahi, Stanford University, <em>pshokrol@stanford.edu</em></li>
@@ -509,7 +516,7 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="mt-5">
+    <section id="contact" class="mt-5" data-aos="fade-up" data-aos-duration="1000">
       <h2 class="section-title">Contact</h2>
       <form>
         <div class="mb-3">
@@ -561,12 +568,17 @@
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
   ></script>
+  
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS (Animate On Scroll)
+    AOS.init();
+  </script>
 
   <!-- Counter Animation Script -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('DOM fully loaded and parsed. Initializing counters...');
-
       let countersStarted = false;
       const statsSection = document.querySelector('#stats');
       const counters = document.querySelectorAll('.counter');
@@ -576,9 +588,7 @@
           const updateCount = () => {
             const target = +counter.getAttribute('data-target');
             const count = +counter.innerText;
-            // Speed can be tweaked. Smaller divisor => faster increment.
             const increment = Math.ceil(target / 80);
-
             if (count < target) {
               counter.innerText = count + increment;
               setTimeout(updateCount, 30);
