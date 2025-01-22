@@ -3,26 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <title>Ramtin Mojtahedi - Professional Website</title>
+
   <!-- Bootstrap CSS -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
   />
+
   <!-- AOS CSS -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/aos@2.3.1/dist/aos.css"
   />
-  <!-- Typed.js for dynamic text -->
+
+  <!-- Typed.js -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
   <style>
+    /* Global */
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       color: #333;
       background: linear-gradient(to bottom, #ffffff, #f3f3f3);
       scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
     }
     nav.navbar {
       margin-bottom: 20px;
@@ -58,6 +63,7 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
+
     /* Hero Section */
     .hero-section {
       background: url('https://www.saic.com/sites/default/files/2023-08/22-0723-AI-header.jpg') center center no-repeat;
@@ -66,6 +72,7 @@
       padding: 120px 0;
       position: relative;
       overflow: hidden;
+      background-attachment: fixed; /* Parallax effect */
     }
     .hero-section::before {
       content: "";
@@ -80,7 +87,7 @@
       position: relative;
       z-index: 2;
       max-width: 600px;
-      margin-left: 50px; /* shift to left */
+      margin-left: 50px;
     }
     .hero-content h1 {
       font-size: 2rem;
@@ -88,7 +95,17 @@
     }
     .hero-content h3 {
       font-size: 1.3rem;
-      margin-bottom: 0;
+      margin-bottom: 10px;
+    }
+    .scroll-down-arrow {
+      font-size: 2rem;
+      display: block;
+      margin-top: 20px;
+      color: #fff;
+      text-decoration: none;
+    }
+    .scroll-down-arrow:hover {
+      color: #f0f0f0;
     }
 
     /* About Section */
@@ -114,6 +131,7 @@
     .about-section .about-text {
       max-width: 600px;
     }
+
     /* Stats Section */
     .stats-section {
       margin-top: 40px;
@@ -126,7 +144,7 @@
     .counter {
       font-size: 2.5rem;
       font-weight: bold;
-      color: #0d6efd; /* Blue color */
+      color: #0d6efd;
       display: block;
     }
     .counter-text {
@@ -136,12 +154,33 @@
     .stats-col {
       margin-bottom: 30px;
     }
+
     /* Footer */
     footer {
       background-color: #f8f9fa;
       padding: 20px 0;
       text-align: center;
       margin-top: 40px;
+    }
+
+    /* Back to Top Button */
+    #backToTopBtn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      display: none;
+      font-size: 18px;
+      background-color: #0d6efd;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: opacity 0.3s;
+      z-index: 999;
+    }
+    #backToTopBtn:hover {
+      background-color: #0a58ca;
     }
   </style>
 </head>
@@ -213,6 +252,8 @@
     <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
       <h1>Ramtin Mojtahedi</h1>
       <h3 id="title-typed"></h3>
+      <!-- Scroll Down Arrow -->
+      <a href="#about" class="scroll-down-arrow" title="Scroll to About">&darr;</a>
     </div>
   </section>
 
@@ -496,7 +537,7 @@
     <ul class="list-item">
       <li>Dr. Peyman Shokrollahi, Stanford University, <em>pshokrol@stanford.edu</em></li>
       <li>Prof. Sattar Mirzakuchaki, IUST, <em>m_kuchaki@iust.ac.ir</em></li>
-      <li>Prof. Reza Faieghi, Toronto Metropolitan University (Ryerson), <em>Reza.Faieghi@TorontoMet.ca</em></li>
+      <li>Prof. Reza Faieghi, Toronto Metropolitan University, <em>Reza.Faieghi@TorontoMet.ca</em></li>
       <li>Prof. Mohammadreza Daliri, IUST, <em>Daliri@iust.ac.ir</em></li>
       <li>Prof. Baradaran Shokouhi, IUST, <em>BShokouhi@iust.ac.ir</em></li>
     </ul>
@@ -549,26 +590,31 @@
     </div>
   </footer>
 
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" title="Back to top">Top</button>
+
   <!-- Bootstrap JS -->
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
   ></script>
+
   <!-- AOS JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
-  <!-- Typed.js Script for dynamic title -->
+  <script>AOS.init();</script>
+
+  <!-- Typed.js Script -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       new Typed('#title-typed', {
         strings: ["PhD Candidate in Medical AI", "Medical AI Enthusiast", "Deep Learning Vision Researcher"],
         typeSpeed: 50,
         backSpeed: 30,
-        loop: true
+        loop: true,
+        showCursor: false // remove the vertical bar
       });
     });
   </script>
+
   <!-- Counter Script -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -612,5 +658,21 @@
       }
     });
   </script>
+
+  <!-- Back to Top Script -->
+  <script>
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
 </body>
 </html>
