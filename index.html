@@ -98,6 +98,30 @@
       margin-bottom: 10px;
     }
 
+    /* About Section */
+    .about-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .about-section img {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .about-section img:hover {
+      transform: scale(1.05);
+    }
+    .about-section .about-text {
+      max-width: 600px;
+    }
+
     /* Stats Section */
     .stats-section {
       margin-top: 40px;
@@ -142,29 +166,12 @@
       text-align: center;
       width: 0%;
       transition: width 0.6s ease;
-      position: relative;
     }
+    /* We'll show numeric scale as "X/10" inside the progress bar */
     .progress-bar span {
       position: absolute;
       width: 100%;
       left: 0;
-    }
-
-    /* Text Animation Classes */
-    .text-animate p {
-      opacity: 0;
-    }
-    .fade-in-word {
-      display: inline-block;
-      opacity: 0;
-      transform: translateX(-15px);
-      animation: fadeInLeft 0.4s forwards;
-    }
-    @keyframes fadeInLeft {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
     }
 
     /* Footer */
@@ -225,9 +232,6 @@
             <a class="nav-link" href="#stats">Stats</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#skills">Skills</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="#education">Education</a>
           </li>
           <li class="nav-item">
@@ -259,10 +263,10 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Section (arrow removed) -->
   <section
     id="home"
-    class="hero-section d-flex align-items-center text-animate"
+    class="hero-section d-flex align-items-center"
   >
     <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
       <h1>Ramtin Mojtahedi</h1>
@@ -271,7 +275,7 @@
   </section>
 
   <!-- About Section -->
-  <section id="about" class="container about-section text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <section id="about" class="container about-section" data-aos="fade-up" data-aos-duration="1000">
     <img
       src="https://ucarecdn.com/6c1f5283-c681-431b-a6e3-3ece53af6fed/Ramtin____Mojtahedi.jpg"
       alt="Ramtin Mojtahedi"
@@ -288,7 +292,7 @@
   </section>
 
   <!-- Stats Section -->
-  <section id="stats" class="stats-section container text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <section id="stats" class="stats-section container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Key Stats</h2>
     <div class="row mt-4">
       <div class="col-md-3 stats-col">
@@ -310,8 +314,8 @@
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section id="skills" class="skills-section container text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <!-- Skills Section (Ranked on a 10 scale) -->
+  <section id="skills" class="skills-section container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Technical Skills</h2>
     <p>Below are some of my key technical skills, now using a 1-10 scale with dynamic progress bars:</p>
     <div class="row">
@@ -320,6 +324,7 @@
         <div class="skill-bar-wrapper">
           <p><strong>Python</strong></p>
           <div class="progress">
+            <!-- data-scale means out of 10 -->
             <div class="progress-bar skill-progress" role="progressbar" data-scale="9"
                  aria-valuemin="0" aria-valuemax="10">
               <span>9/10</span>
@@ -369,7 +374,7 @@
   </section>
 
   <!-- Education -->
-  <section id="education" class="mt-5 container text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <section id="education" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Education</h2>
     <div class="mb-4">
       <p class="subsection-title">Doctor of Philosophy (Ph.D.) in Medical AI</p>
@@ -398,7 +403,7 @@
   </section>
 
   <!-- Teaching -->
-  <section id="teaching" class="mt-5 container text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <section id="teaching" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Teaching Experience</h2>
     <div class="mb-3">
       <p class="subsection-title">Course Instructor</p>
@@ -444,7 +449,7 @@
   </section>
 
   <!-- Research -->
-  <section id="research" class="mt-5 container text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <section id="research" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Research Experience</h2>
     <div class="mb-3">
       <p class="subsection-title">Research Assistant</p>
@@ -492,7 +497,7 @@
   </section>
 
   <!-- Honors -->
-  <section id="honors" class="mt-5 container text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <section id="honors" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Honors and Awards</h2>
     <ul class="list-item">
       <li>SGS Award in Leadership, Innovation, and Community Engagement, Queen's University</li>
@@ -517,7 +522,7 @@
   </section>
 
   <!-- Publications -->
-  <section id="publications" class="mt-5 container text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <section id="publications" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Publications</h2>
     <ul class="list-item">
       <li>R. Mojtahedi, M. Hamghalam, W.R. Jarnagin, R.K.G. Do, A.L. Simpson, "Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Cancer Segmentation in CT," (SPIE Medical Imaging, 2024)</li>
@@ -536,7 +541,7 @@
   </section>
 
   <!-- Presentations -->
-  <section id="presentations" class="mt-5 container text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <section id="presentations" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Presentations</h2>
     <p class="subsection-title">Talks</p>
     <ul class="list-item">
@@ -561,7 +566,7 @@
   </section>
 
   <!-- Volunteer, Membership & Hobbies -->
-  <section id="volunteer" class="mt-5 container text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <section id="volunteer" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Volunteer, Membership & Hobbies</h2>
 
     <p class="subsection-title">Professional Affiliation & Certificates</p>
@@ -599,7 +604,7 @@
   </section>
 
   <!-- References -->
-  <section id="references" class="mt-5 container text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <section id="references" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">References</h2>
     <ul class="list-item">
       <li>Dr. Peyman Shokrollahi, Stanford University, <em>pshokrol@stanford.edu</em></li>
@@ -611,7 +616,7 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="mt-5 container text-animate" data-aos="fade-up" data-aos-duration="1000">
+  <section id="contact" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Contact</h2>
     <form>
       <div class="mb-3">
@@ -647,6 +652,7 @@
       <p>Email: <a href="mailto:ramtin.mojtahedi@queensu.ca">ramtin.mojtahedi@queensu.ca</a></p>
       <p>Phone: +1-647-818-1522</p>
       <p>Location: Kingston, Ontario, Canada</p>
+    </div>
   </section>
 
   <!-- Footer -->
@@ -765,55 +771,6 @@
       if (skillsSection) {
         skillObserver.observe(skillsSection);
       }
-    });
-  </script>
-
-  <!-- Text Animation (word-by-word from left to right) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const textSections = document.querySelectorAll('.text-animate');
-
-      textSections.forEach(section => {
-        const paragraphs = section.querySelectorAll('p');
-
-        paragraphs.forEach(paragraph => {
-          const originalText = paragraph.textContent.trim();
-          const words = originalText.split(' ');
-          paragraph.textContent = ''; // clear paragraph
-
-          // Create a span for each word
-          words.forEach((word, index) => {
-            const wordSpan = document.createElement('span');
-            wordSpan.classList.add('fade-in-word');
-            wordSpan.style.animationDelay = `${index * 0.1}s`;
-            wordSpan.textContent = word + ' ';
-            paragraph.appendChild(wordSpan);
-          });
-        });
-      });
-
-      // Use IntersectionObserver to fade them in once visible
-      const textObserverOptions = {
-        threshold: 0.2
-      };
-
-      const textObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // Add animation by setting animation-play-state or letting it run
-            const fadeWords = entry.target.querySelectorAll('.fade-in-word');
-            fadeWords.forEach(wordSpan => {
-              // The presence of the CSS keyframes + default animation is enough
-              // We can do more if needed, but we have the delay set above
-            });
-            textObserver.unobserve(entry.target);
-          }
-        });
-      }, textObserverOptions);
-
-      textSections.forEach(section => {
-        textObserver.observe(section);
-      });
     });
   </script>
 
