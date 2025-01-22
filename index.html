@@ -155,6 +155,28 @@
       margin-bottom: 30px;
     }
 
+    /* Skills Section */
+    .skills-section {
+      margin-top: 40px;
+    }
+    .skill-bar-wrapper {
+      margin-bottom: 20px;
+    }
+    .progress {
+      background-color: #e9ecef;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 24px;
+    }
+    .progress-bar {
+      background-color: #0d6efd;
+      line-height: 24px;
+      color: #fff;
+      text-align: center;
+      width: 0%;
+      transition: width 0.6s ease;
+    }
+
     /* Footer */
     footer {
       background-color: #f8f9fa;
@@ -293,6 +315,60 @@
       <div class="col-md-3 stats-col">
         <span class="counter" data-target="18">0</span>
         <p class="counter-text">Awards</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Skills Section (Dynamic & after stats) -->
+  <section id="skills" class="skills-section container" data-aos="fade-up" data-aos-duration="1000">
+    <h2 class="section-title">Technical Skills</h2>
+    <p>Below are some of my key technical skills, with dynamic progress bars:</p>
+    <div class="row">
+      <!-- Left Column: progress bars (example for a few popular skills) -->
+      <div class="col-md-6">
+        <div class="skill-bar-wrapper">
+          <p><strong>Python</strong></p>
+          <div class="progress">
+            <div class="progress-bar skill-progress" role="progressbar" data-target-width="95"
+                 aria-valuemin="0" aria-valuemax="100">0%
+            </div>
+          </div>
+        </div>
+        <div class="skill-bar-wrapper">
+          <p><strong>C/C++</strong></p>
+          <div class="progress">
+            <div class="progress-bar skill-progress" role="progressbar" data-target-width="90"
+                 aria-valuemin="0" aria-valuemax="100">0%
+            </div>
+          </div>
+        </div>
+        <div class="skill-bar-wrapper">
+          <p><strong>VHDL / Verilog</strong></p>
+          <div class="progress">
+            <div class="progress-bar skill-progress" role="progressbar" data-target-width="85"
+                 aria-valuemin="0" aria-valuemax="100">0%
+            </div>
+          </div>
+        </div>
+        <div class="skill-bar-wrapper">
+          <p><strong>Machine Learning / AI</strong></p>
+          <div class="progress">
+            <div class="progress-bar skill-progress" role="progressbar" data-target-width="92"
+                 aria-valuemin="0" aria-valuemax="100">0%
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right Column: Tools & Platforms as a list -->
+      <div class="col-md-6">
+        <p class="subsection-title">Other Tools & Platforms</p>
+        <ul class="list-item">
+          <li>MATLAB, LaTeX, Microsoft Office, Photoshop, 3D Max</li>
+          <li>Quartus Prime, LabVIEW, ADS, OrCAD PSpice, ISE, Altium Designer</li>
+          <li>Keil, Proteus, AVR Code Vision, AVR Bascom, CST, Multisim</li>
+          <li>Linux, Windows, iOS, Android</li>
+          <li>FPGA toolchains (Xilinx, Altera/Intel)</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -489,15 +565,17 @@
     </ul>
   </section>
 
-  <!-- Volunteer and Membership -->
+  <!-- Volunteer, Membership & Hobbies -->
   <section id="volunteer" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
-    <h2 class="section-title">Volunteer & Membership</h2>
+    <h2 class="section-title">Volunteer, Membership & Hobbies</h2>
+
     <p class="subsection-title">Professional Affiliation & Certificates</p>
     <ul class="list-item">
       <li>Member of IEEE</li>
       <li>Member of Cognitive Sciences and Technologies Council</li>
       <li>Member of the MICCAI Society</li>
     </ul>
+
     <p class="subsection-title">Volunteer Experience & Membership</p>
     <ul class="list-item">
       <li>Champion in the City of Kingston Climate Action Program</li>
@@ -516,13 +594,7 @@
       <li>Member of the Queen’s PhD-Community Initiative (PhD-CI)</li>
       <li>Member of the Canadian Cancer Research Community</li>
     </ul>
-    <p class="subsection-title">Computer Skills</p>
-    <ul class="list-item">
-      <li>VHDL, VLSI, C, C++, C#, Python, Java, VB, PHP, HTML</li>
-      <li>MATLAB, LaTeX, Microsoft Office, Photoshop, 3D Max</li>
-      <li>Quartus Prime, Verilog, LabVIEW, ADS, OrCAD PSpice, ISE, Altium Designer, Keil, Proteus, AVR Code Vision, AVR Bascom, CST, Multisim</li>
-      <li>Linux, Windows, iOS, Android</li>
-    </ul>
+
     <p class="subsection-title">Hobbies</p>
     <ul class="list-item">
       <li>Swimming (Bronze National Medal)</li>
@@ -610,7 +682,7 @@
         typeSpeed: 50,
         backSpeed: 30,
         loop: true,
-        showCursor: false // remove the vertical bar
+        showCursor: false
       });
     });
   </script>
@@ -655,6 +727,49 @@
 
       if (statsSection) {
         observer.observe(statsSection);
+      }
+    });
+  </script>
+
+  <!-- Dynamic Skill Bars Animation Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let skillAnimationStarted = false;
+      const skillsSection = document.querySelector('#skills');
+      const skillProgressBars = document.querySelectorAll('.skill-progress');
+
+      function animateSkillBars() {
+        skillProgressBars.forEach(bar => {
+          const targetWidth = bar.getAttribute('data-target-width');
+          let currentWidth = 0;
+          const interval = setInterval(() => {
+            if (currentWidth >= targetWidth) {
+              clearInterval(interval);
+            } else {
+              currentWidth += 1;
+              bar.style.width = currentWidth + '%';
+              bar.textContent = currentWidth + '%';
+            }
+          }, 10);
+        });
+      }
+
+      const skillObserverOptions = {
+        threshold: 0.3
+      };
+
+      const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !skillAnimationStarted) {
+            animateSkillBars();
+            skillAnimationStarted = true;
+            skillObserver.unobserve(skillsSection);
+          }
+        });
+      }, skillObserverOptions);
+
+      if (skillsSection) {
+        skillObserver.observe(skillsSection);
       }
     });
   </script>
