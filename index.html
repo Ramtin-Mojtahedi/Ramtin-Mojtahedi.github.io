@@ -67,7 +67,7 @@
       text-align: center;
       padding: 120px 0;
       position: relative;
-      overflow: hidden; 
+      overflow: hidden;
     }
     .hero-section::before {
       content: "";
@@ -114,9 +114,9 @@
       max-width: 600px;
     }
 
-    /* Stats Section */
+    /* Stats Section (now placed in Hero) */
     .stats-section {
-      margin-top: 60px;
+      margin-top: 40px;
       text-align: center;
     }
     .stats-section h2 {
@@ -177,9 +177,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#teaching">Teaching</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#stats">Stats</a>
-          </li>
+          <!-- Removed the Stats link since we moved stats to the hero -->
           <li class="nav-item">
             <a class="nav-link" href="#research">Research</a>
           </li>
@@ -206,7 +204,7 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Section with Stats -->
   <section
     id="home"
     class="hero-section d-flex align-items-center justify-content-center"
@@ -216,6 +214,28 @@
       <h3>PhD Candidate in Medical AI</h3>
       <p>I focus on liver cancer detection using deep learning.</p>
       <a href="#publications" class="btn btn-primary mt-3">Explore</a>
+
+      <!-- Stats added in the first section -->
+      <div class="stats-section" id="statsContainer">
+        <div class="row mt-5">
+          <div class="col-md-3 stats-col">
+            <span class="counter" data-target="10">0</span>
+            <p class="counter-text">Programming Languages</p>
+          </div>
+          <div class="col-md-3 stats-col">
+            <span class="counter" data-target="3">0</span>
+            <p class="counter-text">Human Languages</p>
+          </div>
+          <div class="col-md-3 stats-col">
+            <span class="counter" data-target="12">0</span>
+            <p class="counter-text">Publications</p>
+          </div>
+          <div class="col-md-3 stats-col">
+            <span class="counter" data-target="18">0</span>
+            <p class="counter-text">Awards</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -311,23 +331,7 @@
     </div>
   </section>
 
-  <!-- Stats (moved to the middle) -->
-  <section id="stats" class="stats-section container" data-aos="fade-up" data-aos-duration="1000">
-    <h2 class="section-title">Key Stats</h2>
-    <p>Some highlights of my experience:</p>
-    <div class="row mt-4">
-      <!-- Programming Languages Known -->
-      <div class="col-md-3 stats-col">
-        <span class="counter" data-target="10">0</span>
-        <p class="counter-text">Programming Languages</p>
-      </div>
-      <!-- Human Languages Spoken -->
-      <div class="col-md-3 stats-col">
-        <span class="counter" data-target="3">0</span>
-        <p class="counter-text">Human Languages</p>
-      </div>
-    </div>
-  </section>
+  <!-- Removed the dedicated Stats section since stats are now in the Hero -->
 
   <!-- Research Experience -->
   <section id="research" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
@@ -555,7 +559,7 @@
   <!-- AOS JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Initialize AOS (Animate On Scroll)
+    // Initialize AOS
     AOS.init();
   </script>
 
@@ -563,7 +567,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       let countersStarted = false;
-      const statsSection = document.querySelector('#stats');
+      const statsContainer = document.querySelector('#statsContainer');
       const counters = document.querySelectorAll('.counter');
 
       function startCounters() {
@@ -583,26 +587,24 @@
         });
       }
 
-      const observerOptions = {
-        threshold: 0.3
-      };
+      if (statsContainer) {
+        const observerOptions = {
+          threshold: 0.3
+        };
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !countersStarted) {
-            startCounters();
-            countersStarted = true;
-            observer.unobserve(statsSection);
-          }
-        });
-      }, observerOptions);
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !countersStarted) {
+              startCounters();
+              countersStarted = true;
+              observer.unobserve(statsContainer);
+            }
+          });
+        }, observerOptions);
 
-      // If statsSection is found, observe it
-      if (statsSection) {
-        observer.observe(statsSection);
+        observer.observe(statsContainer);
       }
     });
   </script>
-
 </body>
 </html>
