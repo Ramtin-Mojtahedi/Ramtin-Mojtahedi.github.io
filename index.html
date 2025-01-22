@@ -205,6 +205,14 @@
     section {
       scroll-margin-top: 80px;
     }
+
+    /* Note for email sent */
+    #emailSentNote {
+      display: none;
+      color: green;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -321,7 +329,7 @@
   <!-- Skills Section -->
   <section id="skills" class="skills-section container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Technical Skills</h2>
-    <p>Below are some of my key technical skills, now using a 1-10 scale with dynamic progress bars:</p>
+    <p>Below are some of my key technical skills, using a 1-10 scale with dynamic progress bars:</p>
     <div class="row">
       <div class="col-md-6">
         <div class="skill-bar-wrapper">
@@ -618,8 +626,10 @@
 
   <!-- Contact -->
   <section id="contact" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
+    <!-- Note shown after email is sent -->
+    <div id="emailSentNote">Thank you for contacting me. Your message has been sent.</div>
     <h2 class="section-title">Contact</h2>
-    <form>
+    <form onsubmit="sendEmail(event)">
       <div class="mb-3">
         <label for="nameInput" class="form-label">Name</label>
         <input
@@ -788,6 +798,30 @@
     backToTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  </script>
+
+  <!-- Send Email Script -->
+  <script>
+    function sendEmail(e) {
+      e.preventDefault();
+      const name = document.getElementById('nameInput').value;
+      const email = document.getElementById('emailInput').value;
+      const message = document.getElementById('messageInput').value;
+
+      // Construct mailto link
+      const mailtoLink = `mailto:ramtin.mojtahedi@queensu.ca
+        ?subject=Message%20from%20${encodeURIComponent(name)}
+        &body=${encodeURIComponent("From: " + email + "\n\n" + message)}`;
+
+      // Open user's mail client
+      window.location.href = mailtoLink;
+
+      // Show "email sent" note
+      document.getElementById('emailSentNote').style.display = 'block';
+
+      // Optional: Clear form
+      e.target.reset();
+    }
   </script>
 
 </body>
