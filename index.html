@@ -13,6 +13,8 @@
     rel="stylesheet"
     href="https://unpkg.com/aos@2.3.1/dist/aos.css"
   />
+  <!-- Typed.js for dynamic text -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -61,7 +63,6 @@
       background: url('https://www.saic.com/sites/default/files/2023-08/22-0723-AI-header.jpg') center center no-repeat;
       background-size: cover;
       color: #fff;
-      text-align: center;
       padding: 120px 0;
       position: relative;
       overflow: hidden;
@@ -78,14 +79,18 @@
     .hero-content {
       position: relative;
       z-index: 2;
+      max-width: 600px;
+      margin-left: 50px; /* shift to left */
     }
-    .hero-section h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
+    .hero-content h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
     }
-    .hero-section p, .hero-section h3 {
-      font-size: 1.2rem;
+    .hero-content h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0;
     }
+
     /* About Section */
     .about-section {
       display: flex;
@@ -121,7 +126,7 @@
     .counter {
       font-size: 2.5rem;
       font-weight: bold;
-      color: #dc3545; /* Changed color to a red variant */
+      color: #0d6efd; /* Blue color */
       display: block;
     }
     .counter-text {
@@ -203,13 +208,11 @@
   <!-- Hero Section -->
   <section
     id="home"
-    class="hero-section d-flex align-items-center justify-content-center"
+    class="hero-section d-flex align-items-center"
   >
-    <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
+    <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
       <h1>Ramtin Mojtahedi</h1>
-      <h3>PhD Candidate in Medical AI</h3>
-      <p>I focus on liver cancer detection using deep learning.</p>
-      <a href="#publications" class="btn btn-primary mt-3">Explore</a>
+      <h3 id="title-typed"></h3>
     </div>
   </section>
 
@@ -224,13 +227,13 @@
       <p>
         Hello, I am Ramtin Mojtahedi, a PhD Candidate in Medical AI.
         I build deep learning models for liver cancer detection, segmentation,
-        and classification. I am focused on bridging AI research with
+        and classification. I focus on bridging AI research with
         clinical applications to improve healthcare outcomes.
       </p>
     </div>
   </section>
 
-  <!-- Stats Section (below about section) -->
+  <!-- Stats Section -->
   <section id="stats" class="stats-section container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Key Stats</h2>
     <div class="row mt-4">
@@ -338,7 +341,7 @@
         <li>Developed AI models for liver cancer using vision transformers</li>
         <li>Enhanced segmentation with self-supervised methods</li>
         <li>Worked on few-shot learning for liver tumor segmentation</li>
-        <li>Fine-tuned the Segment Anything Model (SAM) for 3D CT scans</li>
+        <li>Fine-tuned the Segment Anything Model for 3D CT scans</li>
       </ul>
     </div>
     <div class="mb-3">
@@ -405,8 +408,8 @@
   <section id="publications" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
     <h2 class="section-title">Publications</h2>
     <ul class="list-item">
-      <li>R. Mojtahedi, M. Hamghalam, W.R. Jarnagin, R.K.G. Do, A.L. Simpson, "Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Cancer Segmentation in CT," (SPIE Medical Imaging, 2024, in preparation)</li>
-      <li>R. Mojtahedi, M. Hamghalam, W.R. Jarnagin, R.K.G. Do, A.L. Simpson, "End-to-End Deep Learning Pipeline for Liver Tumor Segmentation and Classification: A Self-Supervised Approach," (JMI, 2024, in preparation)</li>
+      <li>R. Mojtahedi, M. Hamghalam, W.R. Jarnagin, R.K.G. Do, A.L. Simpson, "Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Cancer Segmentation in CT," (SPIE Medical Imaging, 2024)</li>
+      <li>R. Mojtahedi, M. Hamghalam, W.R. Jarnagin, R.K.G. Do, A.L. Simpson, "End-to-End Deep Learning Pipeline for Liver Tumor Segmentation and Classification: A Self-Supervised Approach," (JMI, 2024)</li>
       <li>R. Mojtahedi, M. Hamghalam, R.K.G. Do, A.L. Simpson, "Dilated Convolutional Transformer-Based Segmentation for Primary and Secondary Liver Cancers," (IMNO2024 Conference)</li>
       <li>R. Mojtahedi, M. Hamghalam, W.R. Jarnagin, R.K.G. Do, A.L. Simpson, "Leveraging Contrastive Learning with SimSiam for Primary and Secondary Liver Cancers," MICCAI, 2023</li>
       <li>R. Mojtahedi, M. Hamghalam, A.L. Simpson, "Tumor Segmentation in Colorectal Liver Metastasis Using Vision Transformer Patch Resolution," MICCAI, 2022</li>
@@ -493,7 +496,7 @@
     <ul class="list-item">
       <li>Dr. Peyman Shokrollahi, Stanford University, <em>pshokrol@stanford.edu</em></li>
       <li>Prof. Sattar Mirzakuchaki, IUST, <em>m_kuchaki@iust.ac.ir</em></li>
-      <li>Prof. Reza Faieghi, Ryerson University, <em>Reza.Faieghi@Ryerson.ca</em></li>
+      <li>Prof. Reza Faieghi, Toronto Metropolitan University (Ryerson), <em>Reza.Faieghi@TorontoMet.ca</em></li>
       <li>Prof. Mohammadreza Daliri, IUST, <em>Daliri@iust.ac.ir</em></li>
       <li>Prof. Baradaran Shokouhi, IUST, <em>BShokouhi@iust.ac.ir</em></li>
     </ul>
@@ -554,6 +557,17 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
+  </script>
+  <!-- Typed.js Script for dynamic title -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      new Typed('#title-typed', {
+        strings: ["PhD Candidate in Medical AI", "Medical AI Enthusiast", "Deep Learning Vision Researcher"],
+        typeSpeed: 50,
+        backSpeed: 30,
+        loop: true
+      });
+    });
   </script>
   <!-- Counter Script -->
   <script>
