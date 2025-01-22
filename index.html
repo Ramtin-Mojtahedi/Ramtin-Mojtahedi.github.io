@@ -1,3 +1,28 @@
+<?php
+// Save this file as index.php on a server that supports PHP.
+// When a visitor submits the contact form, PHP will attempt
+// to send an email using the mail() function.
+
+$responseMessage = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name    = isset($_POST['name']) ? trim($_POST['name']) : "";
+  $email   = isset($_POST['email']) ? trim($_POST['email']) : "";
+  $message = isset($_POST['message']) ? trim($_POST['message']) : "";
+
+  // Where the email goes
+  $to       = "ramtin.mojtahedi@queensu.ca";
+  $subject  = "Website Contact: " . $name;
+  $body     = "Name: $name\nEmail: $email\nMessage:\n$message";
+  $headers  = "From: no-reply@yourdomain.com\r\n";
+
+  if (mail($to, $subject, $body, $headers)) {
+    $responseMessage = "<p style='color:green;font-weight:bold;margin-bottom:1rem;'>Thank you for contacting me. Your message has been sent.</p>";
+  } else {
+    $responseMessage = "<p style='color:red;font-weight:bold;margin-bottom:1rem;'>An error occurred. Please try again later.</p>";
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,13 +34,11 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
   />
-
   <!-- AOS CSS -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/aos@2.3.1/dist/aos.css"
   />
-
   <!-- Typed.js -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
@@ -204,14 +227,6 @@
     /* Ensure section titles are visible when scrolling via nav links */
     section {
       scroll-margin-top: 80px;
-    }
-
-    /* Note for email sent */
-    #emailSentNote {
-      display: none;
-      color: green;
-      font-weight: bold;
-      margin-bottom: 1rem;
     }
   </style>
 </head>
@@ -626,17 +641,23 @@
 
   <!-- Contact -->
   <section id="contact" class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
-    <!-- Note shown after email is sent -->
-    <div id="emailSentNote">Thank you for contacting me. Your message has been sent.</div>
+    <!-- Response message (success or error) will appear here -->
+    <?php
+      if(!empty($responseMessage)) {
+        echo $responseMessage;
+      }
+    ?>
     <h2 class="section-title">Contact</h2>
-    <form onsubmit="sendEmail(event)">
+    <form method="POST" action="#contact">
       <div class="mb-3">
         <label for="nameInput" class="form-label">Name</label>
         <input
           type="text"
           class="form-control"
           id="nameInput"
+          name="name"
           placeholder="Enter your name"
+          required
         />
       </div>
       <div class="mb-3">
@@ -645,7 +666,9 @@
           type="email"
           class="form-control"
           id="emailInput"
+          name="email"
           placeholder="Enter your email"
+          required
         />
       </div>
       <div class="mb-3">
@@ -653,17 +676,14 @@
         <textarea
           class="form-control"
           id="messageInput"
+          name="message"
           rows="4"
           placeholder="Your message"
+          required
         ></textarea>
       </div>
       <button type="submit" class="btn btn-success">Send</button>
     </form>
-    <div class="mt-3">
-      <p>Email: <a href="mailto:ramtin.mojtahedi@queensu.ca">ramtin.mojtahedi@queensu.ca</a></p>
-      <p>Phone: +1-647-818-1522</p>
-      <p>Location: Kingston, Ontario, Canada</p>
-    </div>
   </section>
 
   <!-- Footer -->
@@ -799,30 +819,5 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
-
-  <!-- Send Email Script -->
-  <script>
-    function sendEmail(e) {
-      e.preventDefault();
-      const name = document.getElementById('nameInput').value;
-      const email = document.getElementById('emailInput').value;
-      const message = document.getElementById('messageInput').value;
-
-      // Construct mailto link
-      const mailtoLink = `mailto:ramtin.mojtahedi@queensu.ca
-        ?subject=Message%20from%20${encodeURIComponent(name)}
-        &body=${encodeURIComponent("From: " + email + "\n\n" + message)}`;
-
-      // Open user's mail client
-      window.location.href = mailtoLink;
-
-      // Show "email sent" note
-      document.getElementById('emailSentNote').style.display = 'block';
-
-      // Optional: Clear form
-      e.target.reset();
-    }
-  </script>
-
 </body>
 </html>
