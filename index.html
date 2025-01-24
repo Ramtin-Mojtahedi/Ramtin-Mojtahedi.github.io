@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Contact - Ramtin Mojtahedi</title>
+  <title>Ramtin Mojtahedi - Single HTML with Separate Views</title>
 
   <!-- Bootstrap CSS -->
   <link
@@ -14,14 +14,18 @@
     rel="stylesheet"
     href="https://unpkg.com/aos@2.3.1/dist/aos.css"
   />
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
   <style>
+    /* Global */
     body {
       margin: 0;
       padding: 0;
       color: #333;
       background: linear-gradient(to bottom, #ffffff, #f3f3f3);
       font-family: Arial, sans-serif;
+      overflow-x: hidden; /* remove any horizontal scroll */
     }
     nav.navbar {
       margin-bottom: 20px;
@@ -30,14 +34,32 @@
     nav.navbar:hover {
       background-color: #343a40cc;
     }
+    .nav-link {
+      cursor: pointer;
+    }
     .section-title {
       margin-top: 40px;
       margin-bottom: 20px;
       font-weight: 600;
       text-align: center;
     }
-    .form-label {
-      font-weight: 500;
+    .subsection-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #0d6efd;
+    }
+    .list-item {
+      margin-bottom: 8px;
+      padding-left: 18px;
+    }
+    .mb-3, .mb-4 {
+      margin-bottom: 1.5rem;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     footer {
       background-color: #f8f9fa;
@@ -45,6 +67,16 @@
       text-align: center;
       margin-top: 40px;
     }
+    /* Hide all sections by default */
+    section {
+      display: none;
+      padding: 0 0 60px 0;
+    }
+    /* "Home" will show by default */
+    #homeSection {
+      display: block;
+    }
+    /* Back to Top Button */
     #backToTopBtn {
       position: fixed;
       bottom: 40px;
@@ -63,13 +95,114 @@
     #backToTopBtn:hover {
       background-color: #0a58ca;
     }
+
+    /* Hero Section */
+    .hero-section {
+      background: url('https://www.saic.com/sites/default/files/2023-08/22-0723-AI-header.jpg') center center no-repeat;
+      background-size: cover;
+      color: #fff;
+      padding: 120px 0;
+      position: relative;
+      overflow: hidden;
+      background-attachment: fixed;
+    }
+    .hero-section::before {
+      content: "";
+      background: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin-left: 50px;
+    }
+    .hero-content h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .hero-content h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    /* About Section */
+    .about-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .about-section img {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .about-section img:hover {
+      transform: scale(1.05);
+    }
+    .about-text {
+      max-width: 600px;
+    }
+
+    /* Stats Section */
+    .stats-section .counter {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #0d6efd;
+      display: block;
+    }
+    .counter-text {
+      font-size: 1rem;
+      margin-top: 8px;
+    }
+    .stats-col {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    /* Skills Section */
+    .skill-bar-wrapper {
+      margin-bottom: 20px;
+    }
+    .progress {
+      background-color: #e9ecef;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 24px;
+      position: relative;
+    }
+    .progress-bar {
+      background-color: #0d6efd;
+      line-height: 24px;
+      color: #fff;
+      text-align: center;
+      width: 0%;
+      transition: width 0.6s ease;
+      position: relative;
+    }
+    .progress-bar span {
+      position: absolute;
+      width: 100%;
+      left: 0;
+    }
   </style>
 </head>
 <body>
+
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" data-aos="fade-down" data-aos-duration="800">
     <div class="container">
-      <a class="navbar-brand" href="index.html">Ramtin Mojtaheid</a>
+      <a class="navbar-brand" onclick="showSection('homeSection')">Ramtin Mojtaheid</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -83,61 +216,452 @@
         id="navbarNav"
       >
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="stats.html">Stats</a></li>
-          <li class="nav-item"><a class="nav-link" href="skills.html">Skills</a></li>
-          <li class="nav-item"><a class="nav-link" href="education.html">Education</a></li>
-          <li class="nav-item"><a class="nav-link" href="teaching.html">Teaching</a></li>
-          <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
-          <li class="nav-item"><a class="nav-link" href="honors.html">Honors</a></li>
-          <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
-          <li class="nav-item"><a class="nav-link" href="presentations.html">Presentations</a></li>
-          <li class="nav-item"><a class="nav-link" href="volunteer.html">Volunteer</a></li>
-          <li class="nav-item"><a class="nav-link" href="references.html">References</a></li>
-          <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('homeSection')">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('aboutSection')">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('statsSection')">Stats</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('skillsSection')">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('educationSection')">Education</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('teachingSection')">Teaching</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('researchSection')">Research</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('honorsSection')">Honors</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('publicationsSection')">Publications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('presentationsSection')">Presentations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('volunteerSection')">Volunteer</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('referencesSection')">References</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="showSection('contactSection')">Contact</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Contact -->
-  <section class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
-    <h2 class="section-title">Contact</h2>
-    <form>
+  <!-- HOME -->
+  <section id="homeSection" class="hero-section d-flex align-items-center">
+    <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
+      <h1>Ramtin Mojtahedi</h1>
+      <h3 id="title-typed"></h3>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="aboutSection">
+    <div class="container about-section" data-aos="fade-up" data-aos-duration="1000">
+      <img
+        src="https://ucarecdn.com/6c1f5283-c681-431b-a6e3-3ece53af6fed/Ramtin____Mojtahedi.jpg"
+        alt="Ramtin Mojtahedi"
+      />
+      <div class="about-text">
+        <h2 class="section-title">About Me</h2>
+        <p>
+          Hello, I am Ramtin Mojtahedi, a PhD Candidate in Medical AI.
+          I build deep learning models for liver cancer detection, segmentation,
+          and classification. I focus on bridging AI research with clinical
+          applications to improve healthcare outcomes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="statsSection">
+    <div class="stats-section container" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="section-title">Key Stats</h2>
+      <div class="row mt-4">
+        <div class="col-md-3 stats-col">
+          <span class="counter" data-target="3">0</span>
+          <p class="counter-text">Spoken Languages</p>
+        </div>
+        <div class="col-md-3 stats-col">
+          <span class="counter" data-target="10">0</span>
+          <p class="counter-text">Programming Languages</p>
+        </div>
+        <div class="col-md-3 stats-col">
+          <span class="counter" data-target="12">0</span>
+          <p class="counter-text">Publications</p>
+        </div>
+        <div class="col-md-3 stats-col">
+          <span class="counter" data-target="18">0</span>
+          <p class="counter-text">Awards</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skillsSection">
+    <div class="skills-section container" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="section-title">Technical Skills</h2>
+      <p>Below are some of my key technical skills, rated on a 1-10 scale.</p>
+      <div class="row">
+        <!-- Left Column -->
+        <div class="col-md-6">
+          <div class="skill-bar-wrapper">
+            <p><strong>Python</strong></p>
+            <div class="progress">
+              <div class="progress-bar skill-progress" data-scale="9">
+                <span>9/10</span>
+              </div>
+            </div>
+          </div>
+          <div class="skill-bar-wrapper">
+            <p><strong>C/C++</strong></p>
+            <div class="progress">
+              <div class="progress-bar skill-progress" data-scale="8">
+                <span>8/10</span>
+              </div>
+            </div>
+          </div>
+          <div class="skill-bar-wrapper">
+            <p><strong>VHDL / Verilog</strong></p>
+            <div class="progress">
+              <div class="progress-bar skill-progress" data-scale="8">
+                <span>8/10</span>
+              </div>
+            </div>
+          </div>
+          <div class="skill-bar-wrapper">
+            <p><strong>Machine Learning / AI</strong></p>
+            <div class="progress">
+              <div class="progress-bar skill-progress" data-scale="9">
+                <span>9/10</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Column -->
+        <div class="col-md-6">
+          <p class="subsection-title">Other Tools & Platforms</p>
+          <ul class="list-item">
+            <li>MATLAB, LaTeX, Microsoft Office, Photoshop, 3D Max</li>
+            <li>Quartus Prime, LabVIEW, ADS, OrCAD PSpice, ISE, Altium Designer</li>
+            <li>Keil, Proteus, AVR Code Vision, AVR Bascom, CST, Multisim</li>
+            <li>Linux, Windows, iOS, Android</li>
+            <li>FPGA toolchains (Xilinx, Altera/Intel)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="educationSection">
+    <div class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="section-title">Education</h2>
+      <div class="mb-4">
+        <p class="subsection-title">Doctor of Philosophy (Ph.D.) in Medical AI</p>
+        <p><strong>Queen's University</strong>, Kingston, ON, Canada</p>
+        <ul class="list-item">
+          <li>Focus on Liver Cancer Detection Using Deep Learning Vision Transformers</li>
+          <li>GPA: A+</li>
+        </ul>
+      </div>
+      <div class="mb-4">
+        <p class="subsection-title">Master of Science in Engineering (M.Sc.)</p>
+        <p><strong>Iran University of Science and Technology (IUST)</strong>, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>GPA: 3.9/4 (Ranked 2nd)</li>
+          <li>Brain Connectivity and Cross-Frequency Coupling</li>
+        </ul>
+      </div>
+      <div>
+        <p class="subsection-title">Bachelor of Science in Engineering (B.Sc.)</p>
+        <p><strong>Iran University of Science and Technology (IUST)</strong>, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Major GPA: 3.9/4 (Ranked 1st)</li>
+          <li>FPGA-based Human Tracking System Using Particle Filter</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEACHING -->
+  <section id="teachingSection">
+    <div class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="section-title">Teaching Experience</h2>
       <div class="mb-3">
-        <label for="nameInput" class="form-label">Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="nameInput"
-          placeholder="Enter your name"
-        />
+        <p class="subsection-title">Course Instructor</p>
+        <p><strong>Iran University of Science and Technology (IUST)</strong>, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Introduction to Microprocessor (ARM and AVR)</li>
+          <li>FPGA (Xilinx and Altera)</li>
+        </ul>
       </div>
       <div class="mb-3">
-        <label for="emailInput" class="form-label">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="emailInput"
-          placeholder="Enter your email"
-        />
+        <p class="subsection-title">Teaching Assistant</p>
+        <p><strong>Queen's University</strong>, Kingston, ON, Canada</p>
+        <ul class="list-item">
+          <li>CISC 454 - Computer Graphics</li>
+          <li>CISC 457 - Image Processing</li>
+        </ul>
       </div>
       <div class="mb-3">
-        <label for="messageInput" class="form-label">Message</label>
-        <textarea
-          class="form-control"
-          id="messageInput"
-          rows="4"
-          placeholder="Your message"
-        ></textarea>
+        <p class="subsection-title">Teaching Assistant</p>
+        <p><strong>Iran University of Science and Technology (IUST)</strong>, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Very High-Speed Integrated Circuits (VHDL)</li>
+          <li>Electrical Circuits</li>
+          <li>Electronics I</li>
+          <li>Mathematical Engineering</li>
+          <li>Insulation and High Voltages</li>
+        </ul>
       </div>
-      <button type="submit" class="btn btn-success">Send</button>
-    </form>
-    <div class="mt-3">
-      <p>Email: <a href="mailto:ramtin.mojtahedi@queensu.ca">ramtin.mojtahedi@queensu.ca</a></p>
-      <p>Phone: +1-647-818-1522</p>
-      <p>Location: Kingston, Ontario, Canada</p>
+      <div class="mb-3">
+        <p class="subsection-title">Teaching Assistant</p>
+        <p><strong>Sharif University of Technology</strong>, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Communication Systems I</li>
+          <li>Business Decision Making</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <p class="subsection-title">Private Tutor</p>
+        <ul class="list-item">
+          <li>Electrical & Computer Engineering, Computer Science, Statistics, Mathematics</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="researchSection">
+    <div class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="section-title">Research Experience</h2>
+      <div class="mb-3">
+        <p class="subsection-title">Research Assistant</p>
+        <p><strong>Queen's University</strong>, Kingston, ON, Canada</p>
+        <ul class="list-item">
+          <li>Developed AI models for liver cancer using vision transformers</li>
+          <li>Enhanced segmentation with self-supervised methods</li>
+          <li>Worked on few-shot learning for liver tumor segmentation</li>
+          <li>Fine-tuned the Segment Anything Model for 3D CT scans</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <p class="subsection-title">Research Assistant</p>
+        <p><strong>Iran University of Science and Technology (IUST)</strong>, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Analyzed EEG signals for cross-frequency coupling</li>
+          <li>Built a secure image encryption method using Wavelet transform</li>
+          <li>Real-time human tracking on FPGA</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <p class="subsection-title">Research Assistant</p>
+        <p><strong>Royan Institute</strong>, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Designed a high-frequency electromagnetic wave propagator</li>
+          <li>Studied effects of electromagnetic waves on cells</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <p class="subsection-title">Research Assistant</p>
+        <p><strong>Institute for Research in Fundamental Sciences (IPM)</strong>, Tehran, Iran</p>
+        <ul class="list-item">
+          <li>Collected EEG signals with a memory-based task</li>
+          <li>Built a neural network for human concentration analysis</li>
+        </ul>
+      </div>
+      <div>
+        <p class="subsection-title">Research Assistant</p>
+        <p><strong>Iranian National Aerospace</strong>, Iran</p>
+        <ul class="list-item">
+          <li>Developed a climate monitoring system</li>
+          <li>Designed PCB and integrated circuit</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- HONORS -->
+  <section id="honorsSection">
+    <div class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="section-title">Honors and Awards</h2>
+      <ul class="list-item">
+        <li>SGS Award in Leadership, Innovation, and Community Engagement, Queen's University</li>
+        <li>Ian A. Macleod Award, School of Computing, Queen's University</li>
+        <li>Neighbourhood Climate Action Champions Funding, City of Kingston</li>
+        <li>Sustainable Action Fund, AMS Commission of Environmental Sustainability</li>
+        <li>Champion for Mental Health, Queen's University</li>
+        <li>SGPS International Student Leader Award, Queen's University</li>
+        <li>SGPS International Student Scholarship Award, Queen's University</li>
+        <li>People's Choice Research Award, Center for Health Innovation Symposium</li>
+        <li>Graduate Community Leadership Award, IEEE Section, IUST</li>
+        <li>Ranked 1st, PhD Coursework Class 2025, Queen’s University</li>
+        <li>Ranked 1st (B.Sc.) and 2nd (M.Sc.) at IUST</li>
+        <li>Iran’s National Elite Scholarship, 2015</li>
+        <li>Ranked top 0.02% in Natural Science University Entrance Exam, 2014</li>
+        <li>Ranked 1st and 3rd, Iranian National Student CanSat Competition, 2014</li>
+        <li>IEEE Membership Award, Iran IEEE Section, 2013</li>
+        <li>Ranked 1st, Power Wireless Transferring Competition, 2011</li>
+        <li>Ranked 2nd, National Nano Technology Competition, 2011</li>
+        <li>Ranked top 0.03% in Mathematical Entrance Exam, 2009</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publicationsSection">
+    <div class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="section-title">Publications</h2>
+      <ul class="list-item">
+        <li>R. Mojtahedi, M. Hamghalam, W.R. Jarnagin, R.K.G. Do, A.L. Simpson, "Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Cancer Segmentation in CT," (SPIE Medical Imaging, 2024)</li>
+        <li>R. Mojtahedi, M. Hamghalam, W.R. Jarnagin, R.K.G. Do, A.L. Simpson, "End-to-End Deep Learning Pipeline for Liver Tumor Segmentation and Classification: A Self-Supervised Approach," (JMI, 2024)</li>
+        <li>R. Mojtahedi, M. Hamghalam, R.K.G. Do, A.L. Simpson, "Dilated Convolutional Transformer-Based Segmentation for Primary and Secondary Liver Cancers," (IMNO2024 Conference)</li>
+        <li>R. Mojtahedi, M. Hamghalam, W.R. Jarnagin, R.K.G. Do, A.L. Simpson, "Leveraging Contrastive Learning with SimSiam for Primary and Secondary Liver Cancers," MICCAI, 2023</li>
+        <li>R. Mojtahedi, M. Hamghalam, A.L. Simpson, "Tumor Segmentation in Colorectal Liver Metastasis Using Vision Transformer Patch Resolution," MICCAI, 2022</li>
+        <li>R. Mojtahedi, M. Hamghalam, A.L. Simpson, "Towards an Optimal Patch Resolution in Vision Transformer for Multimodal Brain Tumor Segmentation," MICCAI, 2022</li>
+        <li>R. Mojtahedi, M.R. Daliri, S. Mirzakuchaki, "A Novel Cross-Frequency Coupling Measure Based on Frequency-Frequency Coupling," (in preparation)</li>
+        <li>R. Mojtahedi, S. Mirzakuchaki, "An Innovative Smart Package for Liquid Flow Meters," IEEE ICEE, 2017</li>
+        <li>R. Mojtahedi, S. Mirzakuchaki, "A Novel Image Encryption Algorithm Based on DWT Using Two-Dimensional Logistic Map," IEEE ICEE, 2016</li>
+        <li>R. Mojtahedi, S. Mirzakuchaki, "A Novel FPGA Design of a High Dynamic Human Tracking System Using Particle Filter," IEEE ICEE, 2016</li>
+        <li>M. Ayat, R. Mojtahedi, S. Mirzakuchaki, "On Design of Carrier Synchronization System Using Bayesian Filtering," IEEE ICEE, 2015</li>
+        <li>M. Ayat, R. Mojtahedi, S. Mirzakuchaki, A.A. Beheshti-Shirazi, "Design and FPGA Implementation of a Robust Digital Demodulator," (in preparation)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PRESENTATIONS -->
+  <section id="presentationsSection">
+    <div class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="section-title">Presentations</h2>
+      <p class="subsection-title">Talks</p>
+      <ul class="list-item">
+        <li>"Tumor Segmentation in Colorectal Liver Metastasis," MICCAI 2022, Singapore</li>
+        <li>"Leveraging Contrastive Learning with SimSiam for the Classification of Liver Cancers," MICCAI 2023, Vancouver</li>
+        <li>"Tumor Segmentation in Colorectal Liver Metastasis with Vision Transformer Patch Resolution," IMNO2024 Conference</li>
+        <li>"Application of Cross Frequency Coupling Measures," Young Iranian Researchers, 2017</li>
+        <li>"Real-time Human Tracking System," Iran University of Science and Technology, 2014</li>
+      </ul>
+      <p class="subsection-title">Posters</p>
+      <ul class="list-item">
+        <li>"Frequency-frequency Cross Frequency Coupling in Neuroscience," ISCELEC, 2017</li>
+        <li>"Effects of Electromagnetic Field on Primary Mouse Cortical Neurons," Royan Institute, 2017</li>
+        <li>"FPGA-based Real-time Human Tracking System," IUST ECE, 2015</li>
+      </ul>
+      <p class="subsection-title">Academic Reviewer</p>
+      <ul class="list-item">
+        <li>IEEE Journal of Biomedical and Health Informatics</li>
+        <li>European Journal of Neuroscience</li>
+        <li>MICCAI Conference</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- VOLUNTEER -->
+  <section id="volunteerSection">
+    <div class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="section-title">Volunteer, Membership & Hobbies</h2>
+      <p class="subsection-title">Professional Affiliation & Certificates</p>
+      <ul class="list-item">
+        <li>Member of IEEE</li>
+        <li>Member of Cognitive Sciences and Technologies Council</li>
+        <li>Member of the MICCAI Society</li>
+      </ul>
+      <p class="subsection-title">Volunteer Experience & Membership</p>
+      <ul class="list-item">
+        <li>Champion in the City of Kingston Climate Action Program</li>
+        <li>PhD Officer at Queen’s School of Computing Society</li>
+        <li>Peer Writing Assistant at Queen’s Student Academic Success Service</li>
+        <li>Volunteer for the AMS Queen’s Food Bank</li>
+        <li>Volunteer for the Queen's ASUS tutoring platform</li>
+        <li>Member of the Finance Committee, Queen’s SGPS</li>
+        <li>Volunteer at Queen’s SHRC</li>
+        <li>IMNO conference committee member and session chair</li>
+        <li>Judge at the Frontenac, Lennox, and Addington Science Fair</li>
+        <li>Judge at the i@Q conference, Queen's University</li>
+        <li>Web manager and community outreach at Kingston Rotaract</li>
+        <li>SGPS Liaison at Queen’s School of Computing</li>
+        <li>Mentor at the GirlSystem mentorship program</li>
+        <li>Member of the Queen’s PhD-Community Initiative (PhD-CI)</li>
+        <li>Member of the Canadian Cancer Research Community</li>
+      </ul>
+      <p class="subsection-title">Hobbies</p>
+      <ul class="list-item">
+        <li>Swimming (Bronze National Medal)</li>
+        <li>Culture and Finance</li>
+        <li>Playing guitar and Santoor</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section id="referencesSection">
+    <div class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="section-title">References</h2>
+      <ul class="list-item">
+        <li>Dr. Peyman Shokrollahi, Stanford University, <em>pshokrol@stanford.edu</em></li>
+        <li>Prof. Sattar Mirzakuchaki, IUST, <em>m_kuchaki@iust.ac.ir</em></li>
+        <li>Prof. Reza Faieghi, Toronto Metropolitan University, <em>Reza.Faieghi@TorontoMet.ca</em></li>
+        <li>Prof. Mohammadreza Daliri, IUST, <em>Daliri@iust.ac.ir</em></li>
+        <li>Prof. Baradaran Shokouhi, IUST, <em>BShokouhi@iust.ac.ir</em></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contactSection">
+    <div class="mt-5 container" data-aos="fade-up" data-aos-duration="1000">
+      <h2 class="section-title">Contact</h2>
+      <form>
+        <div class="mb-3">
+          <label for="nameInput" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nameInput"
+            placeholder="Enter your name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="emailInput" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="emailInput"
+            placeholder="Enter your email"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="messageInput" class="form-label">Message</label>
+          <textarea
+            class="form-control"
+            id="messageInput"
+            rows="4"
+            placeholder="Your message"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Send</button>
+      </form>
+      <div class="mt-3">
+        <p>Email: <a href="mailto:ramtin.mojtahedi@queensu.ca">ramtin.mojtahedi@queensu.ca</a></p>
+        <p>Phone: +1-647-818-1522</p>
+        <p>Location: Kingston, Ontario, Canada</p>
+      </div>
     </div>
   </section>
 
@@ -152,10 +676,100 @@
   <button id="backToTopBtn" title="Back to top">Top</button>
 
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+
   <!-- AOS JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
+
+  <!-- Typed.js Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      new Typed('#title-typed', {
+        strings: ["PhD Candidate in Medical AI", "Medical AI Enthusiast", "Deep Learning Vision Researcher"],
+        typeSpeed: 50,
+        backSpeed: 30,
+        loop: true,
+        showCursor: false
+      });
+    });
+  </script>
+
+  <!-- Show/Hide Sections -->
+  <script>
+    // Hide all sections
+    function hideAllSections() {
+      const allSections = document.querySelectorAll('section');
+      allSections.forEach(s => (s.style.display = 'none'));
+    }
+
+    // Show chosen section
+    function showSection(sectionId) {
+      hideAllSections();
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.style.display = 'block';
+        window.scrollTo(0, 0); // scroll to top
+      }
+      // If stats or skills are shown, run their animations
+      if (sectionId === 'statsSection') {
+        startCounters();
+      }
+      if (sectionId === 'skillsSection') {
+        animateSkillBars();
+      }
+    }
+  </script>
+
+  <!-- Counter Script -->
+  <script>
+    let countersStarted = false;
+    function startCounters() {
+      if (countersStarted) return;
+      countersStarted = true;
+      const counters = document.querySelectorAll('.counter');
+      counters.forEach(counter => {
+        const updateCount = () => {
+          const target = +counter.getAttribute('data-target');
+          const count = +counter.innerText;
+          const increment = Math.ceil(target / 80);
+          if (count < target) {
+            counter.innerText = count + increment;
+            setTimeout(updateCount, 30);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        updateCount();
+      });
+    }
+  </script>
+
+  <!-- Dynamic Skill Bars Script -->
+  <script>
+    let skillAnimationStarted = false;
+    function animateSkillBars() {
+      if (skillAnimationStarted) return;
+      skillAnimationStarted = true;
+      const skillProgressBars = document.querySelectorAll('.skill-progress');
+      skillProgressBars.forEach(bar => {
+        const scaleValue = +bar.getAttribute('data-scale'); // from 1 to 10
+        const targetPercent = Math.round((scaleValue / 10) * 100);
+        let currentWidth = 0;
+        const interval = setInterval(() => {
+          if (currentWidth >= targetPercent) {
+            clearInterval(interval);
+          } else {
+            currentWidth += 1;
+            bar.style.width = currentWidth + '%';
+          }
+        }, 10);
+      });
+    }
+  </script>
+
   <!-- Back to Top Script -->
   <script>
     const backToTopBtn = document.getElementById('backToTopBtn');
@@ -170,5 +784,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
+
 </body>
 </html>
