@@ -39,9 +39,7 @@
     nav.navbar:hover {
       background-color: #343a40cc;
     }
-    .nav-link {
-      cursor: pointer;
-    }
+    .nav-link { cursor: pointer; }
     .section-title {
       margin-top: 40px;
       margin-bottom: 20px;
@@ -55,17 +53,11 @@
       margin-bottom: 10px;
       color: #0d6efd;
     }
-    .list-item {
-      margin-bottom: 8px;
-      padding-left: 18px;
-    }
-    .mb-3,
-    .mb-4 {
-      margin-bottom: 1.5rem;
-    }
+    .list-item { margin-bottom: 8px; padding-left: 18px; }
+    .mb-3, .mb-4 { margin-bottom: 1.5rem; }
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     footer {
       background-color: #f8f9fa;
@@ -75,33 +67,17 @@
     }
 
     /* Hide all sections by default (we show #homeSection initially) */
-    section {
-      display: none;
-      padding: 0 0 60px 0;
-    }
-    #homeSection {
-      display: block;
-    }
+    section { display: none; padding: 0 0 60px 0; }
+    #homeSection { display: block; }
 
     /* Back to Top Button */
     #backToTopBtn {
-      position: fixed;
-      bottom: 40px;
-      right: 40px;
-      display: none;
-      font-size: 18px;
-      background-color: #0d6efd;
-      color: #fff;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: opacity 0.3s;
+      position: fixed; bottom: 40px; right: 40px; display: none;
+      font-size: 18px; background-color: #0d6efd; color: #fff; border: none;
+      padding: 10px 15px; border-radius: 5px; cursor: pointer; transition: opacity 0.3s;
       z-index: 999;
     }
-    #backToTopBtn:hover {
-      background-color: #0a58ca;
-    }
+    #backToTopBtn:hover { background-color: #0a58ca; }
 
     /* Hero Section with a dynamic overlay */
     .hero-section {
@@ -113,149 +89,65 @@
       overflow: hidden;
       background-attachment: fixed;
     }
-    /* Animated gradient overlay for a more "AI" or futuristic look */
     .hero-section::before {
       content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      /* A partial black gradient with animated color shifts */
-      background: linear-gradient(
-        120deg,
-        rgba(0, 0, 0, 0.3),
-        rgba(0, 0, 0, 0.6),
-        rgba(0, 0, 0, 0.3)
-      );
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(120deg, rgba(0,0,0,0.3), rgba(0,0,0,0.6), rgba(0,0,0,0.3));
       background-size: 200% 200%;
       animation: AnimatedOverlay 8s ease-in-out infinite;
     }
     @keyframes AnimatedOverlay {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 600px;
-      margin-left: 50px;
-    }
-    .hero-content h1 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-    .hero-content h3 {
-      font-size: 1.3rem;
-      margin-bottom: 10px;
-    }
+    .hero-content { position: relative; z-index: 2; max-width: 600px; margin-left: 50px; }
+    .hero-content h1 { font-size: 2rem; margin-bottom: 10px; }
+    .hero-content h3 { font-size: 1.3rem; margin-bottom: 10px; }
 
     /* Home "About" + Photo */
     .home-about {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 40px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: 30px; margin-top: 40px;
     }
     .home-about img {
-      width: 260px;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
+      width: 260px; height: 260px; object-fit: cover; border-radius: 50%;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2); transition: transform 0.3s ease;
     }
-    .home-about img:hover {
-      transform: scale(1.05);
-    }
-    .about-text {
-      max-width: 600px;
-    }
+    .home-about img:hover { transform: scale(1.05); }
+    .about-text { max-width: 600px; }
 
     /* Fancy Scrollable News */
-    .news-card {
-      max-width: 700px;
-      margin: 30px auto;
-    }
-    .news-list {
-      max-height: 250px; /* slightly taller scrollable area */
-      overflow-y: auto;
-    }
-    .news-list::-webkit-scrollbar {
-      width: 8px;
-    }
-    .news-list::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-    .news-list::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 4px;
-    }
-    .news-list::-webkit-scrollbar-thumb:hover {
-      background: #aaa;
-    }
+    .news-card { max-width: 700px; margin: 30px auto; }
+    .news-list { max-height: 250px; overflow-y: auto; }
+    .news-list::-webkit-scrollbar { width: 8px; }
+    .news-list::-webkit-scrollbar-track { background: #f1f1f1; }
+    .news-list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+    .news-list::-webkit-scrollbar-thumb:hover { background: #aaa; }
 
-    /* Stats Section (moved into Home) */
+    /* Stats Section (now inside Home) */
     .stats-section .counter {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #0d6efd;
-      display: block;
+      font-size: 2.5rem; font-weight: bold; color: #0d6efd; display: block;
     }
-    .counter-text {
-      font-size: 1rem;
-      margin-top: 8px;
-    }
-    .stats-col {
-      margin-bottom: 30px;
-      text-align: center;
-    }
+    .counter-text { font-size: 1rem; margin-top: 8px; }
+    .stats-col { margin-bottom: 30px; text-align: center; }
 
     /* Skills Section */
-    .skill-bar-wrapper {
-      margin-bottom: 20px;
-    }
+    .skill-bar-wrapper { margin-bottom: 20px; }
     .progress {
-      background-color: #e9ecef;
-      border-radius: 4px;
-      overflow: hidden;
-      height: 24px;
-      position: relative;
+      background-color: #e9ecef; border-radius: 4px; overflow: hidden; height: 24px; position: relative;
     }
     .progress-bar {
-      background-color: #0d6efd;
-      line-height: 24px;
-      color: #fff;
-      text-align: center;
-      width: 0%;
-      transition: width 0.6s ease;
-      position: relative;
+      background-color: #0d6efd; line-height: 24px; color: #fff; text-align: center;
+      width: 0%; transition: width 0.6s ease; position: relative;
     }
-    .progress-bar span {
-      position: absolute;
-      width: 100%;
-      left: 0;
-    }
+    .progress-bar span { position: absolute; width: 100%; left: 0; }
 
     /* Contact Icons */
     .contact-icons a {
-      margin-right: 15px;
-      color: #0d6efd;
-      text-decoration: none;
-      transition: color 0.3s;
+      margin-right: 15px; color: #0d6efd; text-decoration: none; transition: color 0.3s;
     }
-    .contact-icons a:hover {
-      color: #0a58ca;
-    }
+    .contact-icons a:hover { color: #0a58ca; }
   </style>
 </head>
 <body>
@@ -264,53 +156,23 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" data-aos="fade-down" data-aos-duration="800">
     <div class="container">
       <a class="navbar-brand" onclick="showSection('homeSection')">Ramtin Mojtahedi</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-      >
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="collapse navbar-collapse"
-        id="navbarNav"
-      >
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" onclick="showSection('homeSection')">Home</a>
-          </li>
-          <!-- Removed Stats nav item -->
-          <li class="nav-item">
-            <a class="nav-link" onclick="showSection('skillsSection')">Skills</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="showSection('educationSection')">Education</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="showSection('teachingSection')">Teaching</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="showSection('researchSection')">Research</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="showSection('honorsSection')">Honors</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="showSection('publicationsSection')">Publications</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="showSection('presentationsSection')">Presentations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="showSection('volunteerSection')">Volunteer</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="showSection('referencesSection')">References</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="showSection('contactSection')">Contact</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" onclick="showSection('homeSection')">Home</a></li>
+          <!-- Stats nav removed -->
+          <li class="nav-item"><a class="nav-link" onclick="showSection('skillsSection')">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" onclick="showSection('educationSection')">Education</a></li>
+          <li class="nav-item"><a class="nav-link" onclick="showSection('teachingSection')">Teaching</a></li>
+          <li class="nav-item"><a class="nav-link" onclick="showSection('researchSection')">Research</a></li>
+          <li class="nav-item"><a class="nav-link" onclick="showSection('honorsSection')">Honors</a></li>
+          <li class="nav-item"><a class="nav-link" onclick="showSection('publicationsSection')">Publications</a></li>
+          <li class="nav-item"><a class="nav-link" onclick="showSection('presentationsSection')">Presentations</a></li>
+          <li class="nav-item"><a class="nav-link" onclick="showSection('volunteerSection')">Volunteer</a></li>
+          <li class="nav-item"><a class="nav-link" onclick="showSection('referencesSection')">References</a></li>
+          <li class="nav-item"><a class="nav-link" onclick="showSection('contactSection')">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -343,7 +205,7 @@
       </div>
     </div>
 
-    <!-- ===== Key Stats (moved into Home, above News) ===== -->
+    <!-- ===== Key Stats (inside Home, above News) ===== -->
     <div class="stats-section container" data-aos="fade-up" data-aos-duration="1000">
       <h2 class="section-title">Key Stats</h2>
       <div class="row mt-4">
@@ -366,11 +228,9 @@
       </div>
     </div>
 
-    <!-- Fancy Latest News (scrollable list with dates) -->
+    <!-- Latest News -->
     <div class="news-card card" data-aos="fade-up" data-aos-duration="1000">
-      <div class="card-header bg-primary text-white">
-        Latest News & Updates
-      </div>
+      <div class="card-header bg-primary text-white">Latest News & Updates</div>
       <ul class="list-group list-group-flush news-list">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           Working on a new liver segmentation project
@@ -447,7 +307,7 @@
         </div>
         <!-- Right Column -->
         <div class="col-md-6">
-          <p class="subsection-title">Other Tools & Platforms</p>
+          <p class="subsection-title">Other Tools &amp; Platforms</p>
           <ul class="list-item">
             <li>MATLAB, LaTeX, Microsoft Office, Photoshop, 3D Max</li>
             <li>Quartus Prime, LabVIEW, ADS, OrCAD PSpice, ISE, Altium Designer</li>
@@ -482,7 +342,7 @@
       </div>
       <div>
         <p class="subsection-title">Bachelor of Science in Engineering (B.Sc.)</p>
-        <p><strong>Iran University of Science and Technology (IUST)</strong>, Tehran, Iran</p>
+        <p><strong>IUST</strong>, Tehran, Iran</p>
         <ul class="list-item">
           <li>Major GPA: 3.9/4 (Ranked 1st)</li>
           <li>FPGA-based Human Tracking System Using Particle Filter</li>
@@ -497,7 +357,7 @@
       <h2 class="section-title">Teaching Experience</h2>
       <div class="mb-3">
         <p class="subsection-title">Course Instructor</p>
-        <p><strong>Iran University of Science and Technology (IUST)</strong>, Tehran, Iran</p>
+        <p><strong>IUST</strong>, Tehran, Iran</p>
         <ul class="list-item">
           <li>Introduction to Microprocessor (ARM and AVR)</li>
           <li>FPGA (Xilinx and Altera)</li>
@@ -513,7 +373,7 @@
       </div>
       <div class="mb-3">
         <p class="subsection-title">Teaching Assistant</p>
-        <p><strong>Iran University of Science and Technology (IUST)</strong>, Tehran, Iran</p>
+        <p><strong>IUST</strong>, Tehran, Iran</p>
         <ul class="list-item">
           <li>Very High-Speed Integrated Circuits (VHDL)</li>
           <li>Electrical Circuits</li>
@@ -533,7 +393,7 @@
       <div class="mb-3">
         <p class="subsection-title">Private Tutor</p>
         <ul class="list-item">
-          <li>Electrical & Computer Engineering, Computer Science, Statistics, Mathematics</li>
+          <li>Electrical &amp; Computer Engineering, Computer Science, Statistics, Mathematics</li>
         </ul>
       </div>
     </div>
@@ -555,7 +415,7 @@
       </div>
       <div class="mb-3">
         <p class="subsection-title">Research Assistant</p>
-        <p><strong>Iran University of Science and Technology (IUST)</strong>, Tehran, Iran</p>
+        <p><strong>IUST</strong>, Tehran, Iran</p>
         <ul class="list-item">
           <li>Analyzed EEG signals for cross-frequency coupling</li>
           <li>Built a secure image encryption method using Wavelet transform</li>
@@ -722,45 +582,26 @@
       <form>
         <div class="mb-3">
           <label for="nameInput" class="form-label">Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="nameInput"
-            placeholder="Enter your name"
-          />
+          <input type="text" class="form-control" id="nameInput" placeholder="Enter your name" />
         </div>
         <div class="mb-3">
           <label for="emailInput" class="form-label">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="emailInput"
-            placeholder="Enter your email"
-          />
+          <input type="email" class="form-control" id="emailInput" placeholder="Enter your email" />
         </div>
         <div class="mb-3">
           <label for="messageInput" class="form-label">Message</label>
-          <textarea
-            class="form-control"
-            id="messageInput"
-            rows="4"
-            placeholder="Your message"
-          ></textarea>
+          <textarea class="form-control" id="messageInput" rows="4" placeholder="Your message"></textarea>
         </div>
         <button type="submit" class="btn btn-success">Send</button>
       </form>
 
-      <!-- Show text email, no email icon -->
       <div class="mt-3">
         <p>Email: Ramtin[dot]Mojtahedi[at]Queensu[dot]ca</p>
       </div>
 
-      <!-- Social Icons (LinkedIn, GitHub, X) -->
+      <!-- Social Icons -->
       <div class="contact-icons mt-4">
-        <a
-          href="https://www.linkedin.com/in/ramtin-mojtahedi/?originalSubdomain=ca"
-          target="_blank"
-        >
+        <a href="https://www.linkedin.com/in/ramtin-mojtahedi/?originalSubdomain=ca" target="_blank">
           <i class="fab fa-linkedin fa-2x"></i>
         </a>
         <a href="https://github.com/Ramtin-Mojtahedi" target="_blank">
@@ -784,84 +625,95 @@
   <button id="backToTopBtn" title="Back to top">Top</button>
 
   <!-- Bootstrap JS -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-  ></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- AOS JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init();</script>
 
-  <!-- Typed.js Script -->
+  <!-- ===== All site logic in one block (order-safe) ===== -->
   <script>
+    // Init AOS after DOM is ready
+    document.addEventListener('DOMContentLoaded', function(){ AOS.init(); });
+
+    // Typed.js headline
     document.addEventListener('DOMContentLoaded', function () {
-      new Typed('#title-typed', {
-        strings: [
-          "PhD Candidate in Medical AI",
-          "Medical AI Enthusiast",
-          "Deep Learning Vision Researcher"
-        ],
-        typeSpeed: 50,
-        backSpeed: 30,
-        loop: true,
-        showCursor: false,
-      });
+      if (window.Typed) {
+        new Typed('#title-typed', {
+          strings: [
+            "PhD Candidate in Medical AI",
+            "Medical AI Enthusiast",
+            "Deep Learning Vision Researcher"
+          ],
+          typeSpeed: 50,
+          backSpeed: 30,
+          loop: true,
+          showCursor: false,
+        });
+      } else {
+        // Fallback text if Typed not loaded
+        var el = document.getElementById('title-typed');
+        if (el) el.textContent = "PhD Candidate in Medical AI";
+      }
     });
-  </script>
 
-  <!-- Show/Hide Sections -->
-  <script>
+    // Section show/hide
     function hideAllSections() {
       const allSections = document.querySelectorAll('section');
       allSections.forEach((s) => (s.style.display = 'none'));
     }
-
     function showSection(sectionId) {
       hideAllSections();
       const target = document.getElementById(sectionId);
       if (target) {
         target.style.display = 'block';
-        window.scrollTo(0, 0); // scroll to top
+        window.scrollTo(0, 0);
       }
-      // Run animations for visible sections
+      // Trigger animations for the target section
       if (sectionId === 'homeSection') {
-        startCounters(); // counters now live in Home
+        runCounters();  // animate stats each time Home is opened
       }
       if (sectionId === 'skillsSection') {
         animateSkillBars();
       }
     }
 
-    // Start counters on first load too (Home is default)
-    document.addEventListener('DOMContentLoaded', startCounters);
-  </script>
+    // Smooth, reliable counter animation (restarts cleanly every time)
+    function animateCounter(el, target, duration) {
+      // Cancel any previous animation on this element
+      if (el._counterRAF) cancelAnimationFrame(el._counterRAF);
+      const startTime = performance.now();
+      const startVal = 0;
+      const endVal = Number(target) || 0;
+      const dur = Math.max(400, duration || 1600);
+      const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
 
-  <!-- Counter Script -->
-  <script>
-    let countersStarted = false;
-    function startCounters() {
-      if (countersStarted) return;
-      countersStarted = true;
+      function tick(now) {
+        const p = Math.min((now - startTime) / dur, 1);
+        const eased = easeOutCubic(p);
+        const val = Math.round(startVal + (endVal - startVal) * eased);
+        el.textContent = val.toString();
+        if (p < 1) {
+          el._counterRAF = requestAnimationFrame(tick);
+        } else {
+          el.textContent = endVal.toString();
+          el._counterRAF = null;
+        }
+      }
+      el.textContent = '0';
+      el._counterRAF = requestAnimationFrame(tick);
+    }
+
+    function runCounters() {
       const counters = document.querySelectorAll('.counter');
       counters.forEach((counter) => {
-        const updateCount = () => {
-          const target = +counter.getAttribute('data-target');
-          const count = +counter.innerText;
-          const increment = Math.ceil(target / 80);
-          if (count < target) {
-            counter.innerText = count + increment;
-            setTimeout(updateCount, 30);
-          } else {
-            counter.innerText = target;
-          }
-        };
-        updateCount();
+        const target = counter.getAttribute('data-target');
+        animateCounter(counter, target, 1400);
       });
     }
-  </script>
 
-  <!-- Dynamic Skill Bars Script -->
-  <script>
+    // Start counters on initial page load (Home is visible by default)
+    document.addEventListener('DOMContentLoaded', runCounters);
+
+    // Dynamic Skill Bars
     let skillAnimationStarted = false;
     function animateSkillBars() {
       if (skillAnimationStarted) return;
@@ -881,10 +733,8 @@
         }, 10);
       });
     }
-  </script>
 
-  <!-- Back to Top Script -->
-  <script>
+    // Back to Top
     const backToTopBtn = document.getElementById('backToTopBtn');
     window.addEventListener('scroll', () => {
       if (window.pageYOffset > 300) {
