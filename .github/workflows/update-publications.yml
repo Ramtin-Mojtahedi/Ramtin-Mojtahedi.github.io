@@ -10,6 +10,7 @@ on:
     paths:
       - ".github/workflows/update-publications.yml"
       - "scripts/update_publications.py"
+      - "scripts/clean_publications.py"
       - "scripts/requirements-publications.txt"
 
 permissions:
@@ -45,6 +46,9 @@ jobs:
           set -euo pipefail
           python scripts/update_publications.py | tee publication-sync-report.json
 
+      - name: Remove reviews and other non-publication artifacts
+        run: python scripts/clean_publications.py
+
       - name: Validate generated publication data
         run: |
           python - <<'PY'
@@ -62,6 +66,14 @@ jobs:
           assert feed["publication_count"] == len(publications)
           assert any(item.get("doi") == "10.1038/s41598-026-60860-9" for item in publications)
           assert all(item.get("title") and item.get("year") for item in publications)
+          assert not any(
+              (not item.get("manual"))
+              and (
+                  str(item.get("title", "")).lower().startswith("review for")
+                  or "/review" in str(item.get("doi", "")).lower()
+              )
+              for item in publications
+          ), "Peer-review artifacts must not be displayed as publications."
           print(f"Validated {len(publications)} publication records.")
           PY
 
@@ -95,6 +107,7 @@ jobs:
             echo "### Publication sync completed"
             echo "- Publications displayed: ${publication_count}"
             echo "- Curated CV baseline: preserved"
+            echo "- Non-publication review records: excluded"
             echo "- Sources checked: Google Scholar, ORCID/OpenAlex, Crossref, DBLP"
           } >> "$GITHUB_STEP_SUMMARY"
 
