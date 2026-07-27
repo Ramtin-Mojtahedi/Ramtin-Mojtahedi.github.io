@@ -74,32 +74,79 @@
         <div>
           <p class="kicker" style="color:#8ee1c5">Contact</p>
           <h2>Let’s connect.</h2>
-          <p>For research collaboration, academic service, speaking, reviewing, or professional inquiries, email me directly or use the form.</p>
+          <p>For research collaboration, academic service, speaking, reviewing, technical discussion, or other professional inquiries, email me directly or use the form.</p>
           <div class="social">
             <a data-public-email href="mailto:Ramtin.Mojtahedi@utoronto.ca">Ramtin.Mojtahedi@utoronto.ca</a>
             <a href="https://www.linkedin.com/in/ramtin-mojtahedi/" target="_blank" rel="noopener">LinkedIn</a>
             <a href="https://scholar.google.com/citations?user=KjUrlGUAAAAJ&amp;hl=en" target="_blank" rel="noopener">Scholar</a>
             <a href="https://github.com/Ramtin-Mojtahedi" target="_blank" rel="noopener">GitHub</a>
           </div>
+          <div class="contact-assurance" aria-label="Contact form information">
+            <span><b>Private</b> Same-page submission</span>
+            <span><b>Direct</b> Reply to the email you provide</span>
+            <span><b>Protected</b> Automated abuse controls</span>
+          </div>
         </div>
+
         <form class="form" id="form" action="https://email.gosecureserver.in/api/send.php" method="POST" accept-charset="UTF-8" autocomplete="on">
-          <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
+          <div class="contact-honeypot" aria-hidden="true">
             <label for="hp_email">Leave this field empty</label>
             <input id="hp_email" name="hp_email" type="text" tabindex="-1" autocomplete="off">
           </div>
-          <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div>
-          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-          <div class="field full"><label for="subject">Subject</label><input id="subject" name="subject" required></div>
-          <div class="field full"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
-          <button class="btn primary" type="submit">Send message →</button>
-          <p class="status" id="status" aria-live="polite"></p>
-          <noscript><p class="status">JavaScript is required for the embedded form. Please email Ramtin.Mojtahedi@utoronto.ca.</p></noscript>
+
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" autocomplete="name" minlength="2" maxlength="100" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
+          </div>
+
+          <div class="field full">
+            <label for="inquiryType">Inquiry category</label>
+            <div class="select-shell">
+              <select id="inquiryType" name="inquiry_type" required>
+                <option value="" selected disabled>Select the purpose of your message</option>
+                <option value="Research collaboration">Research collaboration</option>
+                <option value="Clinical or medical AI collaboration">Clinical or medical AI collaboration</option>
+                <option value="Speaking, seminar, or panel invitation">Speaking, seminar, or panel invitation</option>
+                <option value="Academic reviewing or editorial service">Academic reviewing or editorial service</option>
+                <option value="Student, mentorship, or supervision inquiry">Student, mentorship, or supervision inquiry</option>
+                <option value="Open-source or technical question">Open-source or technical question</option>
+                <option value="Consulting or professional opportunity">Consulting or professional opportunity</option>
+                <option value="Media or interview request">Media or interview request</option>
+                <option value="Other professional inquiry">Other professional inquiry</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" minlength="4" maxlength="160" placeholder="A concise description of your inquiry" required>
+          </div>
+
+          <div class="field full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" minlength="20" maxlength="5000" placeholder="Please include the relevant context, proposed next step, and any important timing." required></textarea>
+            <span class="field-help"><span id="messageCount">0</span>/5000 characters</span>
+          </div>
+
+          <div class="contact-form-actions full">
+            <button class="btn primary" type="submit"><span>Send message</span><span aria-hidden="true">→</span></button>
+            <p class="form-note">Please do not include patient-identifiable, confidential, or otherwise sensitive information.</p>
+          </div>
+
+          <p class="status full" id="status" aria-live="polite" aria-atomic="true"></p>
+          <noscript><p class="status full">JavaScript is required for the embedded form. Please email Ramtin.Mojtahedi@utoronto.ca.</p></noscript>
         </form>
       </div>
     </div>
   </div>
 </section>
 </main>
+
 <footer>
   <div class="wrap foot">
     <p>© <span id="currentYear"></span> Ramtin Mojtahedi. Content aligned with the CV updated June 2026.</p>
