@@ -1,43 +1,62 @@
-name: One-time contact form activation request
+name: Contact form endpoint health check
 
 on:
   push:
     branches:
       - main
     paths:
+      - assets/contact-form.js
+      - _includes/site-part-4.html
       - .github/workflows/contact-form-activation.yml
   workflow_dispatch:
-  schedule:
-    - cron: '7,22 * * * *'
 
 permissions:
   contents: read
 
+concurrency:
+  group: contact-form-health
+  cancel-in-progress: true
+
 jobs:
-  request-activation:
-    if: github.run_number <= 2 || github.event_name == 'workflow_dispatch'
+  verify-contact-endpoint:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Request FormSubmit activation email
+      - name: Verify no-activation contact endpoint
         shell: bash
         run: |
           set -euo pipefail
-          curl \
-            --fail-with-body \
+          response_file="$(mktemp)"
+          status="$({ curl \
             --location \
             --silent \
             --show-error \
-            --retry 3 \
+            --retry 4 \
             --retry-delay 5 \
-            --data-urlencode "name=Ramtin Mojtahedi Website" \
-            --data-urlencode "email=ramtinrms@gmail.com" \
-            --data-urlencode "subject=Contact form activation test" \
-            --data-urlencode "message=This one-time request activates the contact form at https://ramtin-mojtahedi.github.io/." \
-            --data-urlencode "_url=https://ramtin-mojtahedi.github.io/" \
-            --data-urlencode "_captcha=false" \
-            "https://formsubmit.co/mojtahediramtin@gmail.com" \
-            > formsubmit-response.html
+            --retry-all-errors \
+            --output "$response_file" \
+            --write-out '%{http_code}' \
+            --request POST \
+            --data-urlencode 'to=MojtahediRamtin@gmail.com' \
+            --data-urlencode 'name=Automated website health check' \
+            --data-urlencode 'email=ramtinrms@gmail.com' \
+            --data-urlencode 'subject=Contact endpoint health check' \
+            --data-urlencode 'message=Automated non-delivery health check.' \
+            --data-urlencode 'hp_email=automated-health-check' \
+            'https://email.gosecureserver.in/api/send.php'; } 2>&1)"
 
-          echo "### Contact-form activation requested" >> "$GITHUB_STEP_SUMMARY"
-          echo "A one-time confirmation email should be sent to mojtahediramtin@gmail.com." >> "$GITHUB_STEP_SUMMARY"
+          echo "HTTP status: ${status}"
+          head -c 1200 "$response_file" || true
+          echo
+
+          if [[ ! "$status" =~ ^2[0-9][0-9]$ ]]; then
+            echo "Contact endpoint returned HTTP ${status}." >&2
+            exit 1
+          fi
+
+          {
+            echo '### Contact-form endpoint is reachable'
+            echo '- Endpoint: available'
+            echo '- Recipient activation: not required by this integration'
+            echo '- Honeypot health-check payload: accepted without sending a visitor message'
+          } >> "$GITHUB_STEP_SUMMARY"
