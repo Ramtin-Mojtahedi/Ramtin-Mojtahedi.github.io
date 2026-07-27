@@ -1,100 +1,127 @@
 {
-  "checked_at": "2026-07-27T00:00:00+00:00",
+  "checked_at": "2026-07-27T16:50:35.204337+00:00",
   "orcid": "0000-0002-3953-3256",
   "profile": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en&pagesize=100&sortby=pubdate",
-  "publication_count": 10,
+  "publication_count": 13,
   "publications": [
     {
-      "authors": "Ramtin Mojtahedi, Mohammad Hamghalam, Jacob J. Peoples, Richard K. G. Do, Amber L. Simpson",
+      "authors": "Ramtin Mojtahedi, Mohammad Hamghalam, Jacob Peoples, Richard K. G. Do, Amber L. Simpson",
       "citations": 0,
-      "source": "Curated publisher verification",
-      "title": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
+      "source": "OpenAlex fallback",
+      "title": "Parameter-efficient fine-tuning of foundation models for liver tumor segmentation in CT",
       "url": "https://doi.org/10.1117/12.3087835",
-      "venue": "Medical Imaging 2026: Computer-Aided Diagnosis, Proc. SPIE 13926",
+      "venue": "",
       "year": 2026
     },
     {
-      "authors": "Ramtin Mojtahedi, Mohammad Hamghalam, Jacob J. Peoples, William R. Jarnagin, Richard K. G. Do, Amber L. Simpson",
+      "authors": "Ricky Hu, Ramtin Mojtahedi, Ergi Duli, Marie‐France Hétu, Laura Mantella, Amber L. Simpson, Michael J. Blaha, Taylor Barwell, Kiera Liblik, Jasjit S. Suri, Amer M. Johri",
       "citations": 0,
-      "source": "Curated publisher verification",
-      "title": "Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification",
-      "url": "https://doi.org/10.1200/CCI-25-00135",
-      "venue": "JCO Clinical Cancer Informatics 10, e2500135",
-      "year": 2026
-    },
-    {
-      "authors": "Ricky Hu, Ramtin Mojtahedi, Ergi Duli, Marie-France Hétu, Laura Mantella, Amber L. Simpson, Michael J. Blaha, Taylor Barwell, Kiera Liblik, Jasjit S. Suri, Amer M. Johri",
-      "citations": 0,
-      "source": "Curated publisher verification",
+      "source": "OpenAlex fallback",
       "title": "Radiomic Carotid Plaque Features Integrated into Machine Learning Models for Cardiovascular Risk Prediction",
       "url": "https://doi.org/10.1016/j.ultrasmedbio.2026.05.006",
-      "venue": "Ultrasound in Medicine & Biology, online ahead of print",
+      "venue": "Ultrasound in Medicine & Biology",
       "year": 2026
     },
     {
-      "authors": "Mane Piliposyan, Jacob J. Peoples, Mohammad Hamghalam, Ramtin Mojtahedi, Kaitlyn Kobayashi, E. Claire Bunker, Natalie Gangai, Hyunseon C. Kang, Yun Shin Chun, Christian Muise, Richard K. G. Do, Amber L. Simpson",
-      "citations": 0,
-      "source": "Curated publisher verification",
-      "title": "Radiomic Signatures from Baseline CT Predict Chemotherapy Response in Unresectable Colorectal Liver Metastases",
-      "url": "https://doi.org/10.1117/1.JMI.13.1.014505",
-      "venue": "Journal of Medical Imaging 13(1), 014505",
+      "authors": "Mane Piliposyan, Jacob Peoples, Mohammad Hamghalam, Ramtin Mojtahedi, Kaitlyn Kobayashi, E. Claire Bunker, Natalie Gangai, Hyunseon C. Kang, Yun Shin Chun, Christian Muise, Richard K. G. Do, Amber L. Simpson",
+      "citations": 1,
+      "source": "OpenAlex fallback",
+      "title": "Radiomic signatures from baseline CT predict chemotherapy response in unresectable colorectal liver metastases",
+      "url": "https://doi.org/10.1117/1.jmi.13.1.014505",
+      "venue": "Journal of medical imaging",
       "year": 2026
     },
     {
-      "authors": "Kaitlyn S. M. Kobayashi, Ramtin Mojtahedi, E. Claire Bunker, Joanne F. Chou, Michael I. D'Angelica, Natalie Gangai, Mithat Gönen, Mohammad Hamghalam, Anish Jain, HyunSeon Christine Kang, Erin Kwak, Jacob J. Peoples, Alexandra H. Robins, Katy L. Scott, Richard K. G. Do, Yun Shin Chun, Amber L. Simpson",
+      "authors": "Ramtin Mojtahedi, Mohammad Hamghalam, Jacob Peoples, William R. Jarnagin, Richard ev k, Amber L. Simpson",
       "citations": 0,
-      "source": "Curated publisher verification",
-      "title": "Improving Preoperative Risk Stratification in Colorectal Liver Metastases: A Multi-Institutional Evaluation of Multimodal Prediction Models",
-      "url": "https://doi.org/10.1038/s41598-026-60860-9",
-      "venue": "Scientific Reports, published online July 14, 2026",
+      "source": "OpenAlex fallback",
+      "title": "Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification",
+      "url": "https://doi.org/10.1200/cci-25-00135",
+      "venue": "JCO Clinical Cancer Informatics",
       "year": 2026
     },
     {
-      "authors": "Ramtin Mojtahedi, Mohammad Hamghalam, Jacob J. Peoples, William R. Jarnagin, Richard K. G. Do, Amber L. Simpson",
+      "authors": "Dashti Ali, Jacob Peoples, Ramtin Mojtahedi, Kaitlyn Kobayashi, William R. Jarnagin, Richard Kinh Gian, Amber L. Simpson",
       "citations": 0,
-      "source": "Curated publisher verification",
-      "title": "Parameter-Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Tumour Segmentation in CT",
-      "url": "https://doi.org/10.1117/12.3046253",
-      "venue": "Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407, 1340738",
-      "year": 2025
-    },
-    {
-      "authors": "Dashti A. Ali, Jacob J. Peoples, Ramtin Mojtahedi, Kaitlyn S. Kobayashi, William R. Jarnagin, Richard K. G. Do, Amber L. Simpson",
-      "citations": 0,
-      "source": "Curated publisher verification",
-      "title": "Leveraging Persistent Homology for Liver Tumour Classification",
+      "source": "OpenAlex fallback",
+      "title": "Leveraging persistent homology for liver tumour classification",
       "url": "https://doi.org/10.1117/12.3045640",
-      "venue": "Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407",
+      "venue": "",
       "year": 2025
     },
     {
-      "authors": "Kaitlyn S. Kobayashi, Dashti A. Ali, Ramtin Mojtahedi, Jacob J. Peoples, Mohammad Hamghalam, Natalie Gangai, Mithat Gönen, Richard K. G. Do, Yun Shin Chun, Hyun Seon Christine Kang, Amber L. Simpson",
+      "authors": "Ramtin Mojtahedi, Mohammad Hamghalam, Jacob Peoples, William R. Jarnagin, Richard Kinh Gian, Amber L. Simpson",
       "citations": 0,
-      "source": "Curated publisher verification",
-      "title": "The Search for CT Imaging Subtypes of Colorectal Liver Metastases and the Impacts of Slice Thickness",
-      "url": "https://doi.org/10.1117/12.3048815",
-      "venue": "Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407, 134071I",
+      "source": "OpenAlex fallback",
+      "title": "Parameter-efficient fine-tuning and few-shot learning of multiscale vision transformers for liver tumour segmentation in CT",
+      "url": "https://doi.org/10.1117/12.3046253",
+      "venue": "",
       "year": 2025
     },
     {
-      "authors": "Mane Piliposyan, Mohammad Hamghalam, Ramtin Mojtahedi, Jacob J. Peoples, Kaitlyn Kobayashi, E. Claire Bunker, Natalie Gangai, Yun Shin Chun, Richard K. G. Do, Christian Muise, Amber L. Simpson",
+      "authors": "Mane Piliposyan, Mohammad Hamghalam, Ramtin Mojtahedi, Jacob Peoples, Kaitlyn Kobayashi, E. Claire Bunker, Natalie Gangai, Yun Shin Chun, Richard Do, Christian Muise, Amber L. Simpson",
       "citations": 0,
-      "source": "Curated publisher verification",
-      "title": "Performance Evaluation of a Stacked Classifier for Predicting Treatment Response in Unresectable Colorectal Liver Metastases",
+      "source": "OpenAlex fallback",
+      "title": "Performance evaluation of a stacked classifier for predicting treatment response in unresectable colorectal liver metastases",
       "url": "https://doi.org/10.1117/12.3048943",
-      "venue": "Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407, 134071P",
+      "venue": "",
       "year": 2025
     },
     {
-      "authors": "John Zhou, Dashti A. Ali, Ramtin Mojtahedi, Ahmad Bashir Barekzai, Jayasree Chakraborty, Hala Khasawneh, Camila Vilela, Natally Horvat, João Miranda, Alice C. Wei, Amber L. Simpson",
+      "authors": "John L. Zhou, Dashti Ali, Ramtin Mojtahedi, Ahmad B. Barekzai, Jayasree Chakraborty, Hala Khasawneh, Camila Vilela, Natally Horvat, João Miranda, Alice C. Wei, Amber L. Simpson",
       "citations": 0,
-      "source": "Curated publisher verification",
-      "title": "Predicting Response to Therapy in Pancreatic Ductal Adenocarcinoma Using Convolutional Neural Networks",
+      "source": "OpenAlex fallback",
+      "title": "Predicting response to therapy in pancreatic ductal adenocarcinoma using convolutional neural networks",
       "url": "https://doi.org/10.1117/12.3048961",
-      "venue": "Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407, 134071C",
+      "venue": "",
       "year": 2025
+    },
+    {
+      "authors": "Kaitlyn S. Kobayashi, Dashti A. Ali, Ramtin Mojtahedi, Jacob Peoples, Mohammad Hamghalam, Natalie Gangai, Mithat Gönen, Richard Kinh Gian, Yun Shin Chun, Hyunseon C. Kang, Amber L. Simpson",
+      "citations": 0,
+      "source": "OpenAlex fallback",
+      "title": "The search for CT imaging subtypes of colorectal liver metastases and the impacts of slice thickness",
+      "url": "https://doi.org/10.1117/12.3048815",
+      "venue": "",
+      "year": 2025
+    },
+    {
+      "authors": "Ramtin Mojtahedi, Mohammad Hamghalam, William R. Jarnagin, Richard Kinh Gian, Amber L. Simpson",
+      "citations": 2,
+      "source": "OpenAlex fallback",
+      "title": "Leveraging Contrastive Learning with SimSiam for the Classification of Primary and Secondary Liver Cancers",
+      "url": "https://doi.org/10.1007/978-3-031-47425-5_28",
+      "venue": "Lecture notes in computer science",
+      "year": 2023
+    },
+    {
+      "authors": "Ramtin Mojtahedi, Mohammad Hamghalam, Amber L. Simpson",
+      "citations": 5,
+      "source": "OpenAlex fallback",
+      "title": "Multi-modal Brain Tumour Segmentation Using Transformer with Optimal Patch Size",
+      "url": "https://doi.org/10.1007/978-3-031-33842-7_17",
+      "venue": "Lecture notes in computer science",
+      "year": 2023
+    },
+    {
+      "authors": "Ramtin Mojtahedi, Mohammad Hamghalam, Richard Kinh Gian, Amber L. Simpson",
+      "citations": 12,
+      "source": "OpenAlex fallback",
+      "title": "Towards Optimal Patch Size in Vision Transformers for Tumor Segmentation",
+      "url": "https://doi.org/10.1007/978-3-031-18814-5_11",
+      "venue": "Lecture notes in computer science",
+      "year": 2022
+    },
+    {
+      "authors": "Ramtin Mojtahedi",
+      "citations": 0,
+      "source": "OpenAlex fallback",
+      "title": "Review for \"Neuromagnetic evidence of abnormal automatic inhibitory function in subjective memory complaint\"",
+      "url": "https://doi.org/10.1111/ejn.15196/v1/review3",
+      "venue": "",
+      "year": 2020
     }
   ],
   "scholar_user_id": "KjUrlGUAAAAJ",
-  "source_used": "Curated baseline pending automatic Google Scholar refresh"
+  "source_used": "OpenAlex fallback"
 }
