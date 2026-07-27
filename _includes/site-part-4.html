@@ -82,18 +82,18 @@
             <a href="https://github.com/Ramtin-Mojtahedi" target="_blank" rel="noopener">GitHub</a>
           </div>
         </div>
-        <form class="form" id="form" action="https://email.gosecureserver.in/api/send.php" method="POST" accept-charset="UTF-8">
-          <input type="hidden" name="to" value="MojtahediRamtn@gmail.com">
+        <form class="form" id="form" action="https://email.gosecureserver.in/api/send.php" method="POST" accept-charset="UTF-8" autocomplete="on">
           <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
             <label for="hp_email">Leave this field empty</label>
             <input id="hp_email" name="hp_email" type="text" tabindex="-1" autocomplete="off">
           </div>
-          <div class="field"><label for="name">Name</label><input id="name" name="name" required></div>
-          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+          <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
           <div class="field full"><label for="subject">Subject</label><input id="subject" name="subject" required></div>
           <div class="field full"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
           <button class="btn primary" type="submit">Send message →</button>
           <p class="status" id="status" aria-live="polite"></p>
+          <noscript><p class="status">JavaScript is required for the embedded form. Please email Ramtin.Mojtahedi@utoronto.ca.</p></noscript>
         </form>
       </div>
     </div>
