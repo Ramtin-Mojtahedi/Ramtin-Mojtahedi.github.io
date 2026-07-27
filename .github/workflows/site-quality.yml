@@ -1,0 +1,71 @@
+name: Validate portfolio website
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - index.html
+      - _includes/**
+      - _data/**
+      - assets/**
+      - scripts/validate_website.py
+      - .github/workflows/site-quality.yml
+  pull_request:
+    paths:
+      - index.html
+      - _includes/**
+      - _data/**
+      - assets/**
+      - scripts/validate_website.py
+  workflow_dispatch:
+  schedule:
+    - cron: '41 7 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-site-quality
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Check out website repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate website data, contact routing, and statistics
+        run: python scripts/validate_website.py
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check assets/site-2026.js
+          node --check assets/site-polish.js
+          node --check assets/site-pointer-scroll.js
+          node --check assets/publication-runtime.js
+          node --check assets/contact-form.js
+
+      - name: Record validation summary
+        run: |
+          {
+            echo '### Portfolio validation passed'
+            echo '- Animated statistics: numeric and NaN-safe'
+            echo '- Contact categories: complete'
+            echo '- Public/private email routing: validated'
+            echo '- Publication baseline and metrics: consistent'
+            echo '- JavaScript syntax: valid'
+          } >> "$GITHUB_STEP_SUMMARY"
