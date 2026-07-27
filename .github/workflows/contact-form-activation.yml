@@ -1,0 +1,41 @@
+name: One-time contact form activation request
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/contact-form-activation.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  request-activation:
+    if: github.run_number == 1 || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Request FormSubmit activation email
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl \
+            --fail-with-body \
+            --location \
+            --silent \
+            --show-error \
+            --retry 3 \
+            --retry-delay 5 \
+            --data-urlencode "name=Ramtin Mojtahedi Website" \
+            --data-urlencode "email=ramtinrms@gmail.com" \
+            --data-urlencode "subject=Contact form activation test" \
+            --data-urlencode "message=This one-time request activates the contact form at https://ramtin-mojtahedi.github.io/." \
+            --data-urlencode "_url=https://ramtin-mojtahedi.github.io/" \
+            --data-urlencode "_captcha=false" \
+            "https://formsubmit.co/mojtahediramtin@gmail.com" \
+            > formsubmit-response.html
+
+          echo "### Contact-form activation requested" >> "$GITHUB_STEP_SUMMARY"
+          echo "A one-time confirmation email should be sent to mojtahediramtin@gmail.com." >> "$GITHUB_STEP_SUMMARY"
