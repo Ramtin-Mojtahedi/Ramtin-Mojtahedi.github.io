@@ -1,9 +1,23 @@
 {
-  "checked_at": "2026-07-27T19:29:41Z",
+  "checked_at": "2026-07-27T19:32:44Z",
   "endpoint": "https://email.gosecureserver.in/api/send.php",
-  "test_recipient": "ramtinrms@gmail.com",
-  "http_status": 200,
-  "response_body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\"/>\n<title>Message Sent — HD Media Network</title>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/>\n<style>\n  *{margin:0;padding:0;box-sizing:border-box}\n  body{\n    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;\n    background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);\n    min-height:100vh;\n    display:flex;\n    align-items:center;\n    justify-content:center;\n    padding:1rem;\n    position:relative;\n    overflow:hidden;\n  }\n  body::before{\n    content:'';\n    position:absolute;\n    width:300px;\n    height:300px;\n    background:rgba(255,255,255,.1);\n    border-radius:50%;\n    top:-100px;\n    right:-100px;\n    animation:float 6s ease-in-out infinite;\n  }\n  body::after{\n    content:'';\n    position:absolute;\n    width:200px;\n    height:200px;\n    background:rgba(255,255,255,.08);\n    border-radius:50%;\n    bottom:-50px;\n    left:-50px;\n    animation:float 8s ease-in-out infinite reverse;\n  }\n  @keyframes float{\n    0%,100%{transform:translateY(0) scale(1)}\n    50%{transform:translateY(-20px) scale(1.05)}\n  }\n  @keyframes slideIn{\n    from{opacity:0;transform:translateY(30px) scale(.9)}\n    to{opacity:1;transform:translateY(0) scale(1)}\n  }\n  @keyframes checkmark{\n    0%{transform:scale(0) rotate(-45deg)}\n    50%{transform:scale(1.2) rotate(-45deg)}\n    100%{transform:scale(1) rotate(0)}\n  }\n  .card{\n    background:rgba(255,255,255,.95);\n    backdrop-filter:blur(20px);\n    padding:3rem 2rem;\n    border-radius:24px;\n    box-shadow:0 20px 60px rgba(0,0,0,.2);\n    max-width:420px;\n    width:100%;\n    text-align:center;\n    position:relative;\n    z-index:1;\n    animation:slideIn .6s cubic-bezier(.34,1.56,.64,1);\n  }\n  .icon-wrapper{\n    width:100px;\n    height:100px;\n    margin:0 auto 1.5rem;\n    background:linear-gradient(135deg,#10b981,#059669);\n    border-radius:50%;\n    display:flex;\n    align-items:center;\n    justify-content:center;\n    box-shadow:0 10px 30px rgba(16,185,129,.3);\n    animation:checkmark .8s cubic-bezier(.68,-.55,.265,1.55) .2s both;\n  }\n  .icon-wrapper svg{\n    width:50px;\n    height:50px;\n    stroke:#fff;\n    stroke-width:3;\n    stroke-linecap:round;\n    stroke-linejoin:round;\n    fill:none;\n    stroke-dasharray:60;\n    stroke-dashoffset:60;\n    animation:draw .6s ease-out .5s forwards;\n  }\n  @keyframes draw{\n    to{stroke-dashoffset:0}\n  }\n  h1{\n    color:#1f2937;\n    font-size:2rem;\n    font-weight:700;\n    margin-bottom:1rem;\n    letter-spacing:-.02em;\n  }\n  .message{\n    color:#6b7280;\n    font-size:1.1rem;\n    margin-bottom:2rem;\n    line-height:1.6;\n  }\n  .count{\n    color:#9ca3af;\n    font-size:.95rem;\n    margin-bottom:1.5rem;\n  }\n  #cd{\n    display:inline-block;\n    min-width:20px;\n    font-weight:600;\n    color:#667eea;\n  }\n  button{\n    width:100%;\n    padding:1rem 2rem;\n    background:linear-gradient(135deg,#667eea,#764ba2);\n    color:#fff;\n    border:none;\n    border-radius:12px;\n    font-size:1.05rem;\n    font-weight:600;\n    cursor:pointer;\n    transition:all .3s ease;\n    box-shadow:0 4px 15px rgba(102,126,234,.4);\n  }\n  button:hover{\n    transform:translateY(-2px);\n    box-shadow:0 6px 20px rgba(102,126,234,.5);\n  }\n  button:active{\n    transform:translateY(0);\n  }\n  @media(max-width:480px){\n    .card{padding:2rem 1.5rem}\n    h1{font-size:1.6rem}\n    .icon-wrapper{width:80px;height:80px}\n    .icon-wrapper svg{width:40px;height:40px}\n  }\n</style>\n<script>\nlet secs=5;\nfunction tick(){\n  document.getElementById(\"cd\").innerText=secs;\n  if(secs<=0){window.history.back();}\n  secs--;\n  setTimeout(tick,1000);\n}\nwindow.onload=tick;\n</script>\n</head>\n<body>\n  <div class=\"card\">\n    <div class=\"icon-wrapper\">\n      <svg viewBox=\"0 0 50 50\">\n        <path d=\"M10 25 L20 35 L40 15\"/>\n      </svg>\n    </div>\n    <h1>Message Sent!</h1>\n    <p class=\"message\">Your message has been delivered successfully. We'll get back to you soon.</p>\n    <p class=\"count\">Redirecting in <span id=\"cd\">5</span> seconds…</p>\n    <b",
-  "delivery_confirmed": false,
-  "note": "An HTTP/API acknowledgement is not proof that an email reached the recipient inbox."
+  "tests": {
+    "control": {
+      "http_status": 302,
+      "content_type": "text/html; charset=UTF-8",
+      "json_response": null,
+      "response_excerpt": "",
+      "api_acknowledged": false
+    },
+    "requested": {
+      "http_status": 302,
+      "content_type": "text/html; charset=UTF-8",
+      "json_response": null,
+      "response_excerpt": "",
+      "api_acknowledged": false
+    }
+  },
+  "control_inbox_verified": false,
+  "requested_inbox_verified": false,
+  "note": "API acknowledgement is recorded separately from inbox placement. The requested mailbox should check Inbox, Spam, and All Mail for the exact diagnostic subject."
 }
