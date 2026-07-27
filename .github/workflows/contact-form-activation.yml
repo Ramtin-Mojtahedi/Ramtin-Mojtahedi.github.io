@@ -40,9 +40,9 @@ jobs:
             --output "$response_file" \
             --write-out '%{http_code}' \
             --request POST \
-            --data-urlencode 'to=MojtahediRamtin@gmail.com' \
+            --data-urlencode 'to=MojtahediRamtn@gmail.com' \
             --data-urlencode 'name=Automated website health check' \
-            --data-urlencode 'email=ramtinrms@gmail.com' \
+            --data-urlencode 'email=Ramtin.Mojtahedi@utoronto.ca' \
             --data-urlencode 'subject=Contact endpoint health check' \
             --data-urlencode 'message=Automated non-delivery health check.' \
             --data-urlencode 'hp_email=automated-health-check' \
@@ -74,7 +74,8 @@ jobs:
             "status": "operational",
             "checked_at": "${checked_at}",
             "endpoint": "https://email.gosecureserver.in/api/send.php",
-            "recipient": "MojtahediRamtin@gmail.com",
+            "recipient": "MojtahediRamtn@gmail.com",
+            "public_email": "Ramtin.Mojtahedi@utoronto.ca",
             "recipient_activation_required": false
           }
           EOF
