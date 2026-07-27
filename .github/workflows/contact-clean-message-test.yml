@@ -1,0 +1,44 @@
+name: One-time clean contact message test
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/contact-clean-message-test.yml
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Send a clean categorized contact-form test
+        shell: bash
+        run: |
+          set -euo pipefail
+          status="$(curl \
+            --location \
+            --silent \
+            --show-error \
+            --output /tmp/contact-test-response.html \
+            --write-out '%{http_code}' \
+            --request POST \
+            --data-urlencode 'to=ramtinrms@gmail.com' \
+            --data-urlencode 'name=Ramtin Mojtahedi Website' \
+            --data-urlencode 'email=Ramtin.Mojtahedi@utoronto.ca' \
+            --data-urlencode 'reply_to=Ramtin.Mojtahedi@utoronto.ca' \
+            --data-urlencode 'inquiry_type=Research collaboration' \
+            --data-urlencode 'subject=Research collaboration — Contact form delivery validation' \
+            --data-urlencode 'message=This is a one-time categorized delivery test after the contact form and sender handling were improved.' \
+            --data-urlencode 'reference=RM-CLEAN-DELIVERY-TEST' \
+            --data-urlencode 'website=https://ramtin-mojtahedi.github.io/' \
+            --data-urlencode 'from_name=Ramtin Mojtahedi Website' \
+            --data-urlencode 'hp_email=' \
+            'https://email.gosecureserver.in/api/send.php')"
+          echo "HTTP status: ${status}"
+          if [[ ! "$status" =~ ^2[0-9][0-9]$ ]]; then
+            exit 1
+          fi
