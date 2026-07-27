@@ -1,0 +1,74 @@
+name: SEO indexing and health check
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '17 8 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seo-indexing
+  cancel-in-progress: true
+
+jobs:
+  verify-and-notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Wait for GitHub Pages publication
+        if: github.event_name == 'push'
+        run: sleep 75
+
+      - name: Verify public website and SEO files
+        shell: bash
+        run: |
+          set -euo pipefail
+          urls=(
+            "https://ramtin-mojtahedi.github.io/"
+            "https://ramtin-mojtahedi.github.io/robots.txt"
+            "https://ramtin-mojtahedi.github.io/sitemap.xml"
+            "https://ramtin-mojtahedi.github.io/898f0caec5d8b22a095db2a4afa88722.txt"
+          )
+
+          for url in "${urls[@]}"; do
+            echo "Checking ${url}"
+            curl \
+              --fail \
+              --location \
+              --silent \
+              --show-error \
+              --retry 8 \
+              --retry-delay 10 \
+              --retry-all-errors \
+              "${url}" > /dev/null
+          done
+
+          {
+            echo "### SEO health check passed"
+            echo "- Website: available"
+            echo "- robots.txt: available"
+            echo "- sitemap.xml: available"
+            echo "- IndexNow key: available"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Notify IndexNow search engines
+        if: github.event_name != 'schedule'
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl \
+            --fail \
+            --location \
+            --silent \
+            --show-error \
+            --retry 5 \
+            --retry-delay 10 \
+            --retry-all-errors \
+            "https://api.indexnow.org/indexnow?url=https%3A%2F%2Framtin-mojtahedi.github.io%2F&key=898f0caec5d8b22a095db2a4afa88722&keyLocation=https%3A%2F%2Framtin-mojtahedi.github.io%2F898f0caec5d8b22a095db2a4afa88722.txt"
+
+          echo "- IndexNow: homepage submitted" >> "$GITHUB_STEP_SUMMARY"
