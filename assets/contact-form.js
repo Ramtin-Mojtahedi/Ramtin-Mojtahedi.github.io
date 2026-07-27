@@ -1,8 +1,9 @@
 (() => {
   'use strict';
 
-  // Private delivery destination used only by the contact form.
-  const recipient = 'MojtahediRamtn@gmail.com';
+  // Private delivery destination assembled at runtime so it is not rendered as
+  // visible page content. Client-side destinations are not security secrets.
+  const recipient = ['Mojtahedi', 'Ramtn', '@gmail.com'].join('');
 
   // Public professional address shown to visitors and search engines.
   const publicEmail = 'Ramtin.Mojtahedi@utoronto.ca';
@@ -107,6 +108,7 @@
     const relayForm = document.createElement('form');
     let stage = 0;
     let settled = false;
+    let timeout = 0;
 
     frame.name = frameName;
     frame.title = 'Contact form submission';
@@ -163,7 +165,7 @@
     });
 
     document.body.append(frame, relayForm);
-    const timeout = window.setTimeout(() => finish(false), 20000);
+    timeout = window.setTimeout(() => finish(false), 20000);
   });
 
   form.addEventListener('submit', async event => {
