@@ -3,9 +3,9 @@
 
   /*
    * Public email shown on the website: Ramtin.Mojtahedi@utoronto.ca
-   * Private recipient used only for contact-form delivery: mojtahediramtin@gmail.com
+   * Private recipient used only for contact-form delivery: MojtahediRamtin@gmail.com
    */
-  const recipient = ['mojtahedi', 'ramtin', '@gmail.com'].join('');
+  const recipient = ['Mojtahedi', 'Ramtin', '@gmail.com'].join('');
   const publicEmail = 'Ramtin.Mojtahedi@utoronto.ca';
   const endpoint = 'https://email.gosecureserver.in/api/send.php';
   const website = 'https://ramtin-mojtahedi.github.io/';
