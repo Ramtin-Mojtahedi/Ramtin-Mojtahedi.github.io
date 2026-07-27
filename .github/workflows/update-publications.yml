@@ -11,6 +11,7 @@ on:
       - ".github/workflows/update-publications.yml"
       - "scripts/update_publications.py"
       - "scripts/clean_publications.py"
+      - "scripts/repair_site_stats.py"
       - "scripts/requirements-publications.txt"
 
 permissions:
@@ -49,15 +50,20 @@ jobs:
       - name: Remove reviews and other non-publication artifacts
         run: python scripts/clean_publications.py
 
-      - name: Validate generated publication data
+      - name: Repair and synchronize website statistics
+        run: python scripts/repair_site_stats.py
+
+      - name: Validate generated publication data and HTML
         run: |
           python - <<'PY'
           import json
+          import re
           from pathlib import Path
 
           publications = json.loads(Path("_data/publications.json").read_text(encoding="utf-8"))
           metrics = json.loads(Path("_data/site_metrics.json").read_text(encoding="utf-8"))
           feed = json.loads(Path("publications.json").read_text(encoding="utf-8"))
+          hero = Path("_includes/site-part-1.html").read_text(encoding="utf-8")
 
           assert isinstance(publications, list)
           assert len(publications) >= 18, "The curated CV baseline must never be reduced."
@@ -74,7 +80,16 @@ jobs:
               )
               for item in publications
           ), "Peer-review artifacts must not be displayed as publications."
-          print(f"Validated {len(publications)} publication records.")
+
+          expected = (
+              f"<b data-count='{metrics['publication_count']}'>"
+              f"{metrics['publication_count']}</b>"
+          )
+          assert expected in hero, "Publication statistic is malformed or out of sync."
+          assert "NaN" not in hero
+          assert "\x88" not in hero
+          assert re.search(r"data-count='\d+'", hero)
+          print(f"Validated {len(publications)} publication records and clean counter HTML.")
           PY
 
       - name: Commit verified updates
@@ -88,12 +103,13 @@ jobs:
           git add \
             _data/publications.json \
             _data/site_metrics.json \
+            _includes/site-part-1.html \
             publications.json \
             sitemap.xml
 
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "No publication metadata changes were detected." >> "$GITHUB_STEP_SUMMARY"
+            echo "No publication metadata or website-statistic changes were detected." >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
 
@@ -107,6 +123,7 @@ jobs:
             echo "### Publication sync completed"
             echo "- Publications displayed: ${publication_count}"
             echo "- Curated CV baseline: preserved"
+            echo "- Website counter: validated"
             echo "- Non-publication review records: excluded"
             echo "- Sources checked: Google Scholar, ORCID/OpenAlex, Crossref, DBLP"
           } >> "$GITHUB_STEP_SUMMARY"
