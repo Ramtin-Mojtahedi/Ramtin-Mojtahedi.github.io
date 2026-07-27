@@ -43,7 +43,7 @@
 
     const hasDepth = window.scrollY > 18;
     nav?.classList.toggle('rm-scroll-depth', hasDepth);
-    rail.classList.toggle('rm-visible', maxScroll > 240 && (hasDepth || progress > .015));
+    rail.classList.toggle('rm-visible', maxScroll > 240);
     shadowBand.style.opacity = hasDepth ? String(Math.min(.42, .12 + progress * .30)) : '0';
   }
 
