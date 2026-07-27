@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 PUBLIC_EMAIL = "Ramtin.Mojtahedi@utoronto.ca"
-PRIVATE_RECIPIENT = "".join(("mojtahedi", "ramtin", "@gmail.com"))
+PRIVATE_RECIPIENT = "".join(("Mojtahedi", "Ramtin", "@gmail.com"))
 MINIMUM_PUBLICATIONS = 18
 SUCCESS_MESSAGE = "Thanks for your message. We will contact you shortly. Thanks!"
 
@@ -66,10 +66,10 @@ def validate_contact(index: str, contact: str, script: str, style: str) -> None:
     if mailto_addresses != {PUBLIC_EMAIL.lower()}:
         fail(f"Unexpected visible mailto address(es): {sorted(mailto_addresses)}")
 
-    private_fragments = ("mojtahedi", "ramtin", "@gmail.com")
+    private_fragments = ("Mojtahedi", "Ramtin", "@gmail.com")
     if not all(f"'{fragment}'" in script for fragment in private_fragments):
         fail("The private contact-form destination is not assembled from the expected fragments.")
-    if PRIVATE_RECIPIENT in contact.lower() or PRIVATE_RECIPIENT in index.lower():
+    if PRIVATE_RECIPIENT.lower() in contact.lower() or PRIVATE_RECIPIENT.lower() in index.lower():
         fail("The private contact-form destination must not be rendered in page HTML.")
     if "Ramtn" in script or "MojtahediRamtn" in script:
         fail("The former misspelled recipient is still present in contact-form code.")
