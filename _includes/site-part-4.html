@@ -134,7 +134,6 @@
 
           <div class="contact-form-actions full">
             <button class="btn primary" type="submit"><span>Send message</span><span aria-hidden="true">→</span></button>
-            <p class="form-note">Please do not include patient-identifiable, confidential, or otherwise sensitive information.</p>
           </div>
 
           <p class="status full" id="status" aria-live="polite" aria-atomic="true"></p>
@@ -148,7 +147,17 @@
 
 <footer>
   <div class="wrap foot">
-    <p>© <span id="currentYear"></span> Ramtin Mojtahedi. Content aligned with the CV updated June 2026.</p>
+    <div class="footer-copy">
+      <p>© <span id="currentYear"></span> Ramtin Mojtahedi. Content aligned with the CV updated June 2026.</p>
+      <p class="maintenance-status">
+        <span class="maintenance-pulse" aria-hidden="true"></span>
+        <span>
+          <strong>Automatically maintained</strong> · Publications, public profile links, site integrity, and search metadata are checked {{ site.data.site_maintenance.frequency }}.
+          Last verified <time datetime="{{ site.data.site_maintenance.last_checked }}">{{ site.data.site_maintenance.last_checked_display }}</time>.
+          <a href="site-status.json" aria-label="Open the machine-readable website maintenance status">Status ↗</a>
+        </span>
+      </p>
+    </div>
     <p><a href="#home">Back to top ↑</a></p>
   </div>
 </footer>
