@@ -29,7 +29,7 @@
     "url": "https://doi.org/10.1016/j.ultrasmedbio.2026.05.006",
     "link_label": "DOI ↗",
     "manual": true,
-    "source": "CV; PubMed/publisher metadata",
+    "source": "CV; PubMed/publisher metadata; OpenAlex/ORCID",
     "last_verified": "2026-07-27",
     "title_aliases": []
   },
@@ -46,7 +46,7 @@
     "url": "https://doi.org/10.1117/12.3087835",
     "link_label": "DOI ↗",
     "manual": true,
-    "source": "CV; publisher metadata",
+    "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref",
     "last_verified": "2026-07-27",
     "title_aliases": []
   },
@@ -63,7 +63,7 @@
     "url": "https://doi.org/10.1200/CCI-25-00135",
     "link_label": "DOI ↗",
     "manual": true,
-    "source": "CV; publisher metadata",
+    "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref",
     "last_verified": "2026-07-27",
     "title_aliases": []
   },
@@ -80,7 +80,7 @@
     "url": "https://doi.org/10.1117/1.JMI.13.1.014505",
     "link_label": "DOI ↗",
     "manual": true,
-    "source": "CV; publisher metadata",
+    "source": "CV; publisher metadata; OpenAlex/ORCID",
     "last_verified": "2026-07-27",
     "title_aliases": []
   },
@@ -97,7 +97,7 @@
     "url": "https://doi.org/10.1117/12.3048815",
     "link_label": "DOI ↗",
     "manual": true,
-    "source": "CV; publisher metadata",
+    "source": "CV; publisher metadata; OpenAlex/ORCID",
     "last_verified": "2026-07-27",
     "title_aliases": []
   },
@@ -114,7 +114,7 @@
     "url": "https://doi.org/10.1117/12.3048961",
     "link_label": "DOI ↗",
     "manual": true,
-    "source": "CV; publisher metadata",
+    "source": "CV; publisher metadata; OpenAlex/ORCID",
     "last_verified": "2026-07-27",
     "title_aliases": []
   },
@@ -131,7 +131,7 @@
     "url": "https://doi.org/10.1117/12.3048943",
     "link_label": "DOI ↗",
     "manual": true,
-    "source": "CV; publisher metadata",
+    "source": "CV; publisher metadata; OpenAlex/ORCID",
     "last_verified": "2026-07-27",
     "title_aliases": []
   },
@@ -148,7 +148,7 @@
     "url": "https://doi.org/10.1117/12.3046253",
     "link_label": "DOI ↗",
     "manual": true,
-    "source": "CV; publisher metadata",
+    "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref",
     "last_verified": "2026-07-27",
     "title_aliases": []
   },
@@ -165,7 +165,7 @@
     "url": "https://doi.org/10.1117/12.3045640",
     "link_label": "DOI ↗",
     "manual": true,
-    "source": "CV; publisher metadata",
+    "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref",
     "last_verified": "2026-07-27",
     "title_aliases": []
   },
@@ -195,32 +195,13 @@
     "status": "Peer-reviewed",
     "authors_html": "<strong>R. Mojtahedi</strong>, M. Hamghalam, W. R. Jarnagin, R. K. G. Do, and A. L. Simpson.",
     "citation": "Proc. International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI), pp. 311–321.",
-    "doi": "",
-    "url": "https://github.com/Ramtin-Mojtahedi/SimSiam-LiverCancer-CL",
-    "link_label": "Code ↗",
+    "doi": "10.1007/978-3-031-47425-5_28",
+    "url": "https://doi.org/10.1007/978-3-031-47425-5_28",
+    "link_label": "DOI ↗",
     "manual": true,
-    "source": "CV; DBLP",
+    "source": "CV; DBLP; OpenAlex/ORCID; Crossref",
     "last_verified": "2026-07-27",
     "title_aliases": []
-  },
-  {
-    "id": "multimodal-brain-tumour-vit-patch-2022",
-    "title": "Towards an Optimal Patch Resolution in Vision Transformer for Multimodal Brain Tumour Segmentation",
-    "year": 2022,
-    "publication_date": "2022-09-01",
-    "group": "2022-24",
-    "status": "Peer-reviewed",
-    "authors_html": "<strong>R. Mojtahedi</strong>, M. Hamghalam, and A. L. Simpson.",
-    "citation": "Proc. International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI).",
-    "doi": "",
-    "url": "https://arxiv.org/abs/2308.16598",
-    "link_label": "Preprint ↗",
-    "manual": true,
-    "source": "CV; DBLP",
-    "last_verified": "2026-07-27",
-    "title_aliases": [
-      "Multi-modal Brain Tumour Segmentation Using Transformer with Optimal Patch Size"
-    ]
   },
   {
     "id": "crlm-optimal-vit-patch-resolution-2022",
@@ -231,15 +212,51 @@
     "status": "Peer-reviewed",
     "authors_html": "<strong>R. Mojtahedi</strong>, M. Hamghalam, and A. L. Simpson.",
     "citation": "Proc. International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI).",
-    "doi": "",
-    "url": "https://github.com/Ramtin-Mojtahedi/OVTPS",
-    "link_label": "Code ↗",
+    "doi": "10.1007/978-3-031-18814-5_11",
+    "url": "https://doi.org/10.1007/978-3-031-18814-5_11",
+    "link_label": "DOI ↗",
     "manual": true,
-    "source": "CV; DBLP",
+    "source": "CV; DBLP; OpenAlex/ORCID; Crossref",
     "last_verified": "2026-07-27",
     "title_aliases": [
       "Towards Optimal Patch Size in Vision Transformers for Tumor Segmentation"
     ]
+  },
+  {
+    "id": "multimodal-brain-tumour-vit-patch-2022",
+    "title": "Towards an Optimal Patch Resolution in Vision Transformer for Multimodal Brain Tumour Segmentation",
+    "year": 2022,
+    "publication_date": "2022-09-01",
+    "group": "2022-24",
+    "status": "Peer-reviewed",
+    "authors_html": "<strong>R. Mojtahedi</strong>, M. Hamghalam, and A. L. Simpson.",
+    "citation": "Proc. International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI).",
+    "doi": "10.1007/978-3-031-33842-7_17",
+    "url": "https://doi.org/10.1007/978-3-031-33842-7_17",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "CV; DBLP; OpenAlex/ORCID; Crossref",
+    "last_verified": "2026-07-27",
+    "title_aliases": [
+      "Multi-modal Brain Tumour Segmentation Using Transformer with Optimal Patch Size"
+    ]
+  },
+  {
+    "id": "review-for-neuromagnetic-evidence-of-abnormal-automatic-inhibitory-function-in-subjective-memory-com-2020",
+    "title": "Review for \"Neuromagnetic evidence of abnormal automatic inhibitory function in subjective memory complaint\"",
+    "year": 2020,
+    "publication_date": "2020-04-07",
+    "group": "earlier",
+    "status": "Peer-reviewed",
+    "authors_html": "<strong>Ramtin Mojtahedi</strong>.",
+    "citation": "2020",
+    "doi": "10.1111/ejn.15196/v1/review3",
+    "url": "https://doi.org/10.1111/ejn.15196/v1/review3",
+    "link_label": "DOI ↗",
+    "manual": false,
+    "source": "OpenAlex/ORCID",
+    "last_verified": "2026-07-27",
+    "title_aliases": []
   },
   {
     "id": "smart-package-liquid-flow-meters-2017",
@@ -259,8 +276,8 @@
     "title_aliases": []
   },
   {
-    "id": "fpga-human-tracking-particle-filter-2016",
-    "title": "A Novel FPGA Design of a High Dynamic Human Tracking System Using Particle Filter",
+    "id": "dwt-logistic-map-image-encryption-2016",
+    "title": "A Novel Image Encryption Algorithm Based on Discrete Wavelet Transform Using Two-Dimensional Logistic Map",
     "year": 2016,
     "publication_date": "2016-01-01",
     "group": "earlier",
@@ -276,8 +293,8 @@
     "title_aliases": []
   },
   {
-    "id": "dwt-logistic-map-image-encryption-2016",
-    "title": "A Novel Image Encryption Algorithm Based on Discrete Wavelet Transform Using Two-Dimensional Logistic Map",
+    "id": "fpga-human-tracking-particle-filter-2016",
+    "title": "A Novel FPGA Design of a High Dynamic Human Tracking System Using Particle Filter",
     "year": 2016,
     "publication_date": "2016-01-01",
     "group": "earlier",
