@@ -1,15 +1,20 @@
 (() => {
   'use strict';
 
-  const recipient = 'MojtahediRamtin@gmail.com';
+  // Private delivery destination used only by the contact form.
+  const recipient = 'MojtahediRamtn@gmail.com';
+
+  // Public professional address shown to visitors and search engines.
+  const publicEmail = 'Ramtin.Mojtahedi@utoronto.ca';
   const endpoint = 'https://email.gosecureserver.in/api/send.php';
   const form = document.getElementById('form');
-  const directEmailUrl = `mailto:${recipient}`;
+  const publicEmailUrl = `mailto:${publicEmail}`;
 
-  document.querySelectorAll('.social a[href^="mailto:"]').forEach(link => {
-    link.href = directEmailUrl;
-    link.setAttribute('aria-label', `Email ${recipient}`);
-    link.title = recipient;
+  document.querySelectorAll('.social a[href^="mailto:"], [data-public-email]').forEach(link => {
+    link.href = publicEmailUrl;
+    link.textContent = publicEmail;
+    link.setAttribute('aria-label', `Email ${publicEmail}`);
+    link.title = publicEmail;
   });
 
   if (!form) return;
@@ -33,6 +38,8 @@
     return field;
   };
 
+  // This value is intentionally not shown on the page. It is the mailbox that
+  // receives contact-form submissions.
   ensureHiddenField('to', recipient);
 
   let honeypot = form.querySelector('[name="hp_email"]');
@@ -70,13 +77,13 @@
   const createPayload = () => {
     const data = new FormData(form);
     const subject = String(data.get('subject') || 'New website inquiry').trim();
-    const email = String(data.get('email') || '').trim();
+    const senderEmail = String(data.get('email') || '').trim();
     const payload = new URLSearchParams();
 
     payload.set('to', recipient);
     payload.set('name', String(data.get('name') || '').trim());
-    payload.set('email', email);
-    payload.set('reply_to', email);
+    payload.set('email', senderEmail);
+    payload.set('reply_to', senderEmail);
     payload.set('subject', `Website inquiry: ${subject}`);
     payload.set('message', String(data.get('message') || '').trim());
     payload.set('website', 'https://ramtin-mojtahedi.github.io/');
