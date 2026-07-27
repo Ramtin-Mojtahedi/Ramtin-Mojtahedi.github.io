@@ -1,0 +1,16 @@
+---
+layout: null
+permalink: /publications.json
+---
+{
+  "schema_version": 1,
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "updated_at": {{ site.data.site_metrics.publication_sync_timestamp | jsonify }},
+  "publication_count": {{ site.data.site_metrics.publication_count }},
+  "publications": {{ site.data.publications | jsonify }}
+}
