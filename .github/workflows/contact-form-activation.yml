@@ -42,7 +42,7 @@ jobs:
             --output "$response_file" \
             --write-out '%{http_code}' \
             --request POST \
-            --data-urlencode 'to=mojtahediramtin@gmail.com' \
+            --data-urlencode 'to=MojtahediRamtin@gmail.com' \
             --data-urlencode 'name=Automated website reachability check' \
             --data-urlencode 'email=Ramtin.Mojtahedi@utoronto.ca' \
             --data-urlencode 'subject=Contact relay reachability check' \
@@ -62,7 +62,7 @@ jobs:
           {
             echo '### Contact relay is reachable'
             echo '- Endpoint request: accepted'
-            echo '- Recipient spelling: mojtahediramtin@gmail.com'
+            echo '- Recipient spelling: MojtahediRamtin@gmail.com'
             echo '- Test payload: blocked by the honeypot and not delivered'
             echo '- Inbox delivery: not asserted by this health check'
           } >> "$GITHUB_STEP_SUMMARY"
@@ -77,7 +77,7 @@ jobs:
             "status": "reachable",
             "checked_at": "${checked_at}",
             "endpoint": "https://email.gosecureserver.in/api/send.php",
-            "recipient": "mojtahediramtin@gmail.com",
+            "recipient": "MojtahediRamtin@gmail.com",
             "public_email": "Ramtin.Mojtahedi@utoronto.ca",
             "recipient_activation_required": false,
             "inbox_delivery_verified": false,
