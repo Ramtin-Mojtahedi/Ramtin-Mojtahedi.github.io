@@ -1,0 +1,111 @@
+name: Update scholarly publications
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 10 * * 1"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/update-publications.yml"
+      - "scripts/update_publications.py"
+      - "scripts/requirements-publications.txt"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scholarly-publication-sync
+  cancel-in-progress: true
+
+jobs:
+  update-publications:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements-publications.txt
+
+      - name: Install publication-sync dependencies
+        run: python -m pip install --disable-pip-version-check -r scripts/requirements-publications.txt
+
+      - name: Check Google Scholar, ORCID/OpenAlex, Crossref, and DBLP
+        run: |
+          set -euo pipefail
+          python scripts/update_publications.py | tee publication-sync-report.json
+
+      - name: Validate generated publication data
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          publications = json.loads(Path("_data/publications.json").read_text(encoding="utf-8"))
+          metrics = json.loads(Path("_data/site_metrics.json").read_text(encoding="utf-8"))
+          feed = json.loads(Path("publications.json").read_text(encoding="utf-8"))
+
+          assert isinstance(publications, list)
+          assert len(publications) >= 18, "The curated CV baseline must never be reduced."
+          assert sum(bool(item.get("manual")) for item in publications) >= 18
+          assert metrics["publication_count"] == len(publications)
+          assert feed["publication_count"] == len(publications)
+          assert any(item.get("doi") == "10.1038/s41598-026-60860-9" for item in publications)
+          assert all(item.get("title") and item.get("year") for item in publications)
+          print(f"Validated {len(publications)} publication records.")
+          PY
+
+      - name: Commit verified updates
+        id: commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            _data/publications.json \
+            _data/site_metrics.json \
+            publications.json \
+            sitemap.xml
+
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No publication metadata changes were detected." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          publication_count="$(python -c 'import json; print(len(json.load(open("_data/publications.json", encoding="utf-8"))))')"
+          git commit -m "Automatically refresh scholarly publications (${publication_count})"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+          {
+            echo "### Publication sync completed"
+            echo "- Publications displayed: ${publication_count}"
+            echo "- Curated CV baseline: preserved"
+            echo "- Sources checked: Google Scholar, ORCID/OpenAlex, Crossref, DBLP"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Notify participating search engines
+        if: steps.commit.outputs.changed == 'true'
+        run: |
+          curl \
+            --fail \
+            --location \
+            --silent \
+            --show-error \
+            --retry 4 \
+            --retry-delay 5 \
+            "https://api.indexnow.org/indexnow?url=https%3A%2F%2Framtin-mojtahedi.github.io%2F&key=898f0caec5d8b22a095db2a4afa88722&keyLocation=https%3A%2F%2Framtin-mojtahedi.github.io%2F898f0caec5d8b22a095db2a4afa88722.txt"
