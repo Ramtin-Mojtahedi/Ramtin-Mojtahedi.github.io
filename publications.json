@@ -6,8 +6,8 @@
     "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
     "website": "https://ramtin-mojtahedi.github.io/"
   },
-  "updated_at": "2026-07-27T16:50:07Z",
-  "publication_count": 19,
+  "updated_at": "2026-07-27T16:54:32Z",
+  "publication_count": 18,
   "publications": [
     {
       "id": "multimodal-preoperative-risk-stratification-2026",
@@ -250,23 +250,6 @@
       "title_aliases": [
         "Multi-modal Brain Tumour Segmentation Using Transformer with Optimal Patch Size"
       ]
-    },
-    {
-      "id": "review-for-neuromagnetic-evidence-of-abnormal-automatic-inhibitory-function-in-subjective-memory-com-2020",
-      "title": "Review for \"Neuromagnetic evidence of abnormal automatic inhibitory function in subjective memory complaint\"",
-      "year": 2020,
-      "publication_date": "2020-04-07",
-      "group": "earlier",
-      "status": "Peer-reviewed",
-      "authors_html": "<strong>Ramtin Mojtahedi</strong>.",
-      "citation": "2020",
-      "doi": "10.1111/ejn.15196/v1/review3",
-      "url": "https://doi.org/10.1111/ejn.15196/v1/review3",
-      "link_label": "DOI ↗",
-      "manual": false,
-      "source": "OpenAlex/ORCID",
-      "last_verified": "2026-07-27",
-      "title_aliases": []
     },
     {
       "id": "smart-package-liquid-flow-meters-2017",
