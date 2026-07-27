@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - scripts/sync_google_scholar.py
+      - scripts/sync_google_scholar_runner.py
       - .github/workflows/google-scholar-sync.yml
       - _includes/site-part-2.html
 
@@ -42,8 +43,10 @@ jobs:
 
       - name: Validate and refresh publication records
         run: |
-          python -m py_compile scripts/sync_google_scholar.py
-          python scripts/sync_google_scholar.py
+          python -m py_compile \
+            scripts/sync_google_scholar.py \
+            scripts/sync_google_scholar_runner.py
+          python scripts/sync_google_scholar_runner.py
 
       - name: Commit verified publication changes
         shell: bash
