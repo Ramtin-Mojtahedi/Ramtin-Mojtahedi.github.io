@@ -61,7 +61,11 @@ def is_publication(record: dict[str, Any]) -> bool:
     # with no DOI and only a university as its venue is not treated as a
     # peer-reviewed publication unless it is already part of the curated CV.
     university_only = bool(
-        re.fullmatch(r"[^,]*(?:university|college|institute)\s*,?\s*\d{4}(?:\s*,\s*\d{4})?", citation, re.I)
+        re.fullmatch(
+            r"[^,]*(?:university|college|institute)\s*,?\s*\d{4}(?:\s*,\s*\d{4})?",
+            citation,
+            re.I,
+        )
     )
     if source == "google scholar" and not identifier and university_only:
         return False
@@ -111,6 +115,7 @@ def main() -> int:
     records = deduplicate([record for record in records if is_publication(record)])
 
     manual_count = sum(bool(record.get("manual")) for record in records)
+    automatic_count = len(records) - manual_count
     if manual_count < MINIMUM:
         raise RuntimeError("Publication cleanup would reduce the curated CV baseline.")
 
@@ -128,6 +133,8 @@ def main() -> int:
     metrics["publication_count"] = len(records)
     metrics["peer_reviewed_or_accepted_count"] = peer_count
     metrics["submitted_count"] = len(records) - peer_count
+    metrics["auto_added_count"] = automatic_count
+    metrics["minimum_preserved_records"] = manual_count
     metrics["invalid_nonpublication_records_removed"] = before - len(records)
 
     feed = {
@@ -147,7 +154,10 @@ def main() -> int:
     PUBS.write_text(json.dumps(records, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     METRICS.write_text(json.dumps(metrics, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     FEED.write_text(json.dumps(feed, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Publication cleanup: {before} -> {len(records)} records; manual baseline {manual_count}.")
+    print(
+        f"Publication cleanup: {before} -> {len(records)} records; "
+        f"manual baseline {manual_count}; automatic additions {automatic_count}."
+    )
     return 0
 
 
