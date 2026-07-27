@@ -1,1 +1,153 @@
-(()=>{const root=document.documentElement,theme=document.getElementById('theme'),menu=document.getElementById('menu'),links=document.getElementById('links');let saved;try{saved=localStorage.getItem('rmTheme')}catch(e){}const initial=saved||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');function setTheme(t){root.dataset.theme=t;theme.textContent=t==='dark'?'☀':'◐';try{localStorage.setItem('rmTheme',t)}catch(e){}}setTheme(initial);theme.onclick=()=>setTheme(root.dataset.theme==='dark'?'light':'dark');menu.onclick=()=>{const open=links.classList.toggle('open');menu.textContent=open?'×':'☰';menu.setAttribute('aria-expanded',open)};links.querySelectorAll('a').forEach(a=>a.onclick=()=>{links.classList.remove('open');menu.textContent='☰';menu.setAttribute('aria-expanded','false')});const progress=document.getElementById('progress');addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max?scrollY/max*100:0)+'%'},{passive:true});const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');ro.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll('.reveal').forEach(e=>ro.observe(e));function count(el){if(el.dataset.done)return;el.dataset.done=1;const target=+el.dataset.count,suffix=el.dataset.suffix||'',start=performance.now(),duration=Math.min(1800,850+target*2);el.textContent='0'+suffix;function tick(now){const p=Math.min((now-start)/duration,1),v=Math.round(target*(1-Math.pow(1-p,3)));el.textContent=v.toLocaleString()+suffix;if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)}const co=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){count(e.target);co.unobserve(e.target)}}),{threshold:.5});document.querySelectorAll('[data-count]').forEach(e=>co.observe(e));document.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.filter;document.querySelectorAll('.pub').forEach(p=>p.hidden=f!=='all'&&p.dataset.group!==f)});const awardBtn=document.getElementById('awardBtn'),awards=document.getElementById('awards');awardBtn.onclick=()=>{const open=awards.classList.toggle('open');awardBtn.setAttribute('aria-expanded',open);awardBtn.textContent=open?'Show fewer distinctions ↑':'Show all 25 distinctions ↓';if(open)awards.querySelectorAll('.extra').forEach(e=>e.classList.add('show'))};document.getElementById('form').onsubmit=e=>{e.preventDefault();const d=new FormData(e.target),body='Name: '+d.get('name')+'\nEmail: '+d.get('email')+'\n\n'+d.get('message');document.getElementById('status').textContent='Preparing a fallback email…';location.href='mailto:MojtahediRamtin@gmail.com?subject='+encodeURIComponent(d.get('subject'))+'&body='+encodeURIComponent(body)};document.getElementById('currentYear').textContent=new Date().getFullYear()})();
+(() => {
+  'use strict';
+
+  const root = document.documentElement;
+  const theme = document.getElementById('theme');
+  const menu = document.getElementById('menu');
+  const links = document.getElementById('links');
+
+  let savedTheme = '';
+  try {
+    savedTheme = localStorage.getItem('rmTheme') || '';
+  } catch (_) {}
+
+  const initialTheme = savedTheme || (
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  );
+
+  const setTheme = value => {
+    root.dataset.theme = value;
+    if (theme) theme.textContent = value === 'dark' ? '☀' : '◐';
+    try {
+      localStorage.setItem('rmTheme', value);
+    } catch (_) {}
+  };
+
+  setTheme(initialTheme);
+  theme?.addEventListener('click', () => {
+    setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+
+  if (menu && links) {
+    menu.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      menu.textContent = open ? '×' : '☰';
+      menu.setAttribute('aria-expanded', String(open));
+    });
+
+    links.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        links.classList.remove('open');
+        menu.textContent = '☰';
+        menu.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  const progress = document.getElementById('progress');
+  const updateProgress = () => {
+    if (!progress) return;
+    const maximum = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = `${maximum > 0 ? (window.scrollY / maximum) * 100 : 0}%`;
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  updateProgress();
+
+  const publicationItems = [...document.querySelectorAll('#publications .pub')];
+  const publicationTotal = publicationItems.length;
+  const publicationCounter = document.querySelector('.stats .stat:first-child b[data-count]');
+  const publicationLabel = publicationCounter?.closest('.stat')?.querySelector('span');
+  const allPublicationsFilter = document.querySelector('.filter[data-filter="all"]');
+  const scholarFilter = document.querySelector('.filter[data-filter="scholar-auto"]');
+  const scholarItems = publicationItems.filter(item =>
+    String(item.dataset.group || '').split(/\s+/).includes('scholar-auto')
+  );
+
+  if (publicationCounter && publicationTotal) {
+    publicationCounter.dataset.count = String(publicationTotal);
+    publicationCounter.textContent = String(publicationTotal);
+  }
+  if (publicationLabel) {
+    publicationLabel.textContent = 'Peer-reviewed, accepted, and published works';
+  }
+  if (allPublicationsFilter && publicationTotal) {
+    allPublicationsFilter.textContent = `All ${publicationTotal}`;
+  }
+  if (scholarFilter && scholarItems.length === 0) {
+    scholarFilter.hidden = true;
+  }
+
+  const revealElements = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('show');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.08 });
+    revealElements.forEach(element => revealObserver.observe(element));
+  } else {
+    revealElements.forEach(element => element.classList.add('show'));
+  }
+
+  const animateCounter = element => {
+    if (element.dataset.done) return;
+    element.dataset.done = 'true';
+    const target = Number(element.dataset.count || 0);
+    const suffix = element.dataset.suffix || '';
+    const start = performance.now();
+    const duration = Math.min(1800, 850 + target * 2);
+    element.textContent = `0${suffix}`;
+
+    const tick = now => {
+      const proportion = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - proportion, 3);
+      element.textContent = `${Math.round(target * eased).toLocaleString()}${suffix}`;
+      if (proportion < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+
+  const counterElements = document.querySelectorAll('[data-count]');
+  if ('IntersectionObserver' in window) {
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+    counterElements.forEach(element => counterObserver.observe(element));
+  } else {
+    counterElements.forEach(animateCounter);
+  }
+
+  document.querySelectorAll('.filter').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.filter').forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      const selected = button.dataset.filter || 'all';
+
+      document.querySelectorAll('#publications .pub').forEach(publication => {
+        const groups = String(publication.dataset.group || '').split(/\s+/).filter(Boolean);
+        publication.hidden = selected !== 'all' && !groups.includes(selected);
+      });
+    });
+  });
+
+  const awardButton = document.getElementById('awardBtn');
+  const awards = document.getElementById('awards');
+  if (awardButton && awards) {
+    awardButton.addEventListener('click', () => {
+      const open = awards.classList.toggle('open');
+      awardButton.setAttribute('aria-expanded', String(open));
+      awardButton.textContent = open ? 'Show fewer distinctions ↑' : 'Show all 25 distinctions ↓';
+      if (open) awards.querySelectorAll('.extra').forEach(item => item.classList.add('show'));
+    });
+  }
+
+  const currentYear = document.getElementById('currentYear');
+  if (currentYear) currentYear.textContent = String(new Date().getFullYear());
+})();
