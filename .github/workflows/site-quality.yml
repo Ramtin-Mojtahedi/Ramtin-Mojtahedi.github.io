@@ -6,18 +6,24 @@ on:
       - main
     paths:
       - index.html
+      - site-status.json
+      - sitemap.xml
       - _includes/**
       - _data/**
       - assets/**
       - scripts/validate_website.py
+      - scripts/refresh_site_maintenance.py
       - .github/workflows/site-quality.yml
   pull_request:
     paths:
       - index.html
+      - site-status.json
+      - sitemap.xml
       - _includes/**
       - _data/**
       - assets/**
       - scripts/validate_website.py
+      - scripts/refresh_site_maintenance.py
   workflow_dispatch:
   schedule:
     - cron: '41 7 * * 1'
@@ -48,11 +54,14 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Validate website data, contact routing, and statistics
+      - name: Validate website data, contact routing, and maintenance status
         run: python scripts/validate_website.py
 
-      - name: Validate JavaScript syntax
+      - name: Validate Python and JavaScript syntax
         run: |
+          python -m py_compile \
+            scripts/validate_website.py \
+            scripts/refresh_site_maintenance.py
           node --check assets/site-2026.js
           node --check assets/site-polish.js
           node --check assets/site-pointer-scroll.js
@@ -65,7 +74,9 @@ jobs:
             echo '### Portfolio validation passed'
             echo '- Animated statistics: numeric and NaN-safe'
             echo '- Contact categories: complete'
+            echo '- Contact disclaimer: removed'
             echo '- Public/private email routing: validated'
             echo '- Publication baseline and metrics: consistent'
-            echo '- JavaScript syntax: valid'
+            echo '- Automatic maintenance status: connected'
+            echo '- JavaScript and Python syntax: valid'
           } >> "$GITHUB_STEP_SUMMARY"
