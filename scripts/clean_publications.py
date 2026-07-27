@@ -21,6 +21,17 @@ EXCLUDED_TITLE_PATTERNS = (
     r"^reviewer report\b",
     r"^editorial decision\b",
     r"^author response\b",
+    r"\bdoctoral dissertation\b",
+    r"\bph\.?d\.? thesis\b",
+    r"\bmaster'?s thesis\b",
+)
+
+EXCLUDED_CITATION_PATTERNS = (
+    r"\bdoctoral dissertation\b",
+    r"\bph\.?d\.? thesis\b",
+    r"\bmaster'?s thesis\b",
+    r"^queen[’']s university\b",
+    r"^proquest dissertations?\b",
 )
 
 
@@ -29,40 +40,68 @@ def clean(value: Any) -> str:
 
 
 def is_publication(record: dict[str, Any]) -> bool:
+    # Every manually curated CV record is authoritative and must be preserved.
     if record.get("manual"):
         return True
+
     title = clean(record.get("title")).lower()
     identifier = clean(record.get("doi")).lower()
+    citation = clean(record.get("citation")).lower()
+    source = clean(record.get("source")).lower()
+
     if any(re.search(pattern, title, re.I) for pattern in EXCLUDED_TITLE_PATTERNS):
+        return False
+    if any(re.search(pattern, citation, re.I) for pattern in EXCLUDED_CITATION_PATTERNS):
         return False
     if "/review" in identifier or identifier.endswith("/review"):
         return False
+
+    # Google Scholar also indexes theses, institutional repository records,
+    # review reports, and other profile items. An automatically discovered item
+    # with no DOI and only a university as its venue is not treated as a
+    # peer-reviewed publication unless it is already part of the curated CV.
+    university_only = bool(
+        re.fullmatch(r"[^,]*(?:university|college|institute)\s*,?\s*\d{4}(?:\s*,\s*\d{4})?", citation, re.I)
+    )
+    if source == "google scholar" and not identifier and university_only:
+        return False
+
     return True
 
 
 def deduplicate(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    output = []
-    seen_doi, seen_title = set(), set()
+    output: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+
     for record in records:
         identifier = clean(record.get("doi")).lower()
         title = re.sub(r"[^a-z0-9]+", " ", clean(record.get("title")).lower()).strip()
         key = ("doi", identifier) if identifier else ("title", title)
-        if key in seen_doi or key in seen_title:
+
+        if key in seen:
             if record.get("manual"):
                 output = [
-                    existing for existing in output
+                    existing
+                    for existing in output
                     if not (
                         (identifier and clean(existing.get("doi")).lower() == identifier)
                         or (
                             not identifier
-                            and re.sub(r"[^a-z0-9]+", " ", clean(existing.get("title")).lower()).strip() == title
+                            and re.sub(
+                                r"[^a-z0-9]+",
+                                " ",
+                                clean(existing.get("title")).lower(),
+                            ).strip()
+                            == title
                         )
                     )
                 ]
             else:
                 continue
+
         output.append(record)
-        (seen_doi if identifier else seen_title).add(key)
+        seen.add(key)
+
     return output
 
 
@@ -70,6 +109,7 @@ def main() -> int:
     records = json.loads(PUBS.read_text(encoding="utf-8"))
     before = len(records)
     records = deduplicate([record for record in records if is_publication(record)])
+
     manual_count = sum(bool(record.get("manual")) for record in records)
     if manual_count < MINIMUM:
         raise RuntimeError("Publication cleanup would reduce the curated CV baseline.")
