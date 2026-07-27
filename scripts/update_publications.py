@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Weekly publication sync. Curated CV records are never deleted."""
+"""Twice-weekly publication sync. Curated CV records are never deleted."""
 
 from __future__ import annotations
 
@@ -451,7 +451,7 @@ def main() -> int:
         "submitted_count": submitted_count,
         "publication_sync_date": checked,
         "publication_sync_timestamp": now.isoformat().replace("+00:00", "Z"),
-        "publication_source_note": "CV baseline preserved; external scholarly sources checked weekly.",
+        "publication_source_note": "CV baseline preserved; external scholarly sources checked twice weekly.",
         "google_scholar_profile": SCHOLAR_URL,
         "orcid": ORCID_URL,
         "sources": ["Google Scholar", "ORCID/OpenAlex", "Crossref", "DBLP"],
