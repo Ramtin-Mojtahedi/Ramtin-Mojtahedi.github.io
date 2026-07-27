@@ -2,13 +2,10 @@
   'use strict';
 
   /*
-   * Contact form delivery
-   * ---------------------
-   * The public professional address is displayed on the page. The private Gmail
-   * destination is assembled at runtime and is used only for form submissions.
-   * Client-side destination values are routing information, not secrets.
+   * Public email shown on the website: Ramtin.Mojtahedi@utoronto.ca
+   * Private recipient used only for contact-form delivery: mojtahediramtin@gmail.com
    */
-  const recipient = ['Mojtahedi', 'Ramtn', '@gmail.com'].join('');
+  const recipient = ['mojtahedi', 'ramtin', '@gmail.com'].join('');
   const publicEmail = 'Ramtin.Mojtahedi@utoronto.ca';
   const endpoint = 'https://email.gosecureserver.in/api/send.php';
   const website = 'https://ramtin-mojtahedi.github.io/';
@@ -41,14 +38,12 @@
   const button = form.querySelector('button[type="submit"]');
   const status = document.getElementById('status');
   const categoryField = document.getElementById('inquiryType');
-  const messageField = document.getElementById('message');
-  const messageCount = document.getElementById('messageCount');
   const formOpenedAt = Date.now();
 
-  const minimumCompletionMs = 2500;
+  const minimumCompletionMs = 1800;
   const rateLimitWindowMs = 5 * 60 * 1000;
-  const maximumSubmissionsPerWindow = 3;
-  const rateLimitStorageKey = 'rm-contact-submissions-v3';
+  const maximumSubmissionsPerWindow = 4;
+  const rateLimitStorageKey = 'rm-contact-submissions-v4';
 
   form.action = endpoint;
   form.method = 'POST';
@@ -83,15 +78,8 @@
     form.appendChild(honeypot);
   }
 
-  const updateCharacterCount = () => {
-    if (!messageField || !messageCount) return;
-    messageCount.textContent = String(messageField.value.length);
-  };
-  messageField?.addEventListener('input', updateCharacterCount);
-  updateCharacterCount();
-
   if (button) {
-    button.setAttribute('aria-label', 'Submit this professional inquiry to Ramtin Mojtahedi');
+    button.setAttribute('aria-label', 'Send this professional inquiry to Ramtin Mojtahedi');
   }
 
   const setStatus = (message, type = '', options = {}) => {
@@ -121,21 +109,19 @@
     button.setAttribute('aria-busy', String(busy));
 
     const label = button.querySelector('span');
-    if (label) label.textContent = busy ? 'Submitting' : 'Send message';
+    if (label) label.textContent = busy ? 'Sending' : 'Send message';
   };
 
-  const cleanSingleLine = (value, maximumLength) =>
+  const cleanSingleLine = value =>
     String(value || '')
       .replace(/[\r\n\t]+/g, ' ')
       .replace(/\s{2,}/g, ' ')
-      .trim()
-      .slice(0, maximumLength);
+      .trim();
 
   const cleanMessage = value =>
     String(value || '')
       .replace(/\r\n?/g, '\n')
-      .trim()
-      .slice(0, 5000);
+      .trim();
 
   const makeReference = () => {
     const timestamp = new Date()
@@ -188,12 +174,11 @@
 
   const createPayload = reference => {
     const data = new FormData(form);
-    const name = cleanSingleLine(data.get('name'), 100);
-    const senderEmail = cleanSingleLine(data.get('email'), 254);
-    const category = cleanSingleLine(data.get('inquiry_type'), 100);
-    const subject = cleanSingleLine(data.get('subject'), 160);
+    const name = cleanSingleLine(data.get('name'));
+    const senderEmail = cleanSingleLine(data.get('email'));
+    const category = cleanSingleLine(data.get('inquiry_type'));
+    const subject = cleanSingleLine(data.get('subject'));
     const message = cleanMessage(data.get('message'));
-    const submittedAt = new Date().toISOString();
 
     if (!allowedCategories.has(category)) {
       throw new Error('Please select a valid inquiry category.');
@@ -208,19 +193,16 @@
     payload.set('subject', `${category} — ${subject}`);
     payload.set('message', message);
     payload.set('reference', reference);
-    payload.set('submitted_at', submittedAt);
+    payload.set('submitted_at', new Date().toISOString());
     payload.set('website', website);
     payload.set('from_name', 'Ramtin Mojtahedi Website');
-    payload.set('hp_email', cleanSingleLine(data.get('hp_email'), 200));
-
+    payload.set('hp_email', cleanSingleLine(data.get('hp_email')));
     return payload;
   };
 
   const submitToRelay = payload =>
     new Promise((resolve, reject) => {
-      const frameName = `rm-contact-${Date.now()}-${Math.random()
-        .toString(36)
-        .slice(2)}`;
+      const frameName = `rm-contact-${Date.now()}-${Math.random().toString(36).slice(2)}`;
       const frame = document.createElement('iframe');
       const relayForm = document.createElement('form');
       let stage = 0;
@@ -259,7 +241,6 @@
         settled = true;
         window.clearTimeout(timeout);
         cleanup();
-
         if (accepted) resolve();
         else reject(error || new Error('The email relay did not respond before the timeout.'));
       };
@@ -277,10 +258,6 @@
           return;
         }
 
-        /*
-         * A completed response confirms that the relay accepted the request.
-         * Final inbox placement is controlled by the recipient's mail provider.
-         */
         finish(true);
       });
 
@@ -290,13 +267,12 @@
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
-
     setStatus('');
+
     if (!form.reportValidity()) return;
 
     if (honeypot.value) {
       form.reset();
-      updateCharacterCount();
       return;
     }
 
@@ -319,24 +295,20 @@
     }
 
     setBusy(true);
-    setStatus(`Submitting your inquiry… Reference ${reference}`, 'pending');
+    setStatus('Sending your message…', 'pending');
 
     try {
       await submitToRelay(payload);
       recordSubmission();
       form.reset();
-      updateCharacterCount();
       ensureHiddenField('to', recipient);
       ensureHiddenField('website', website);
       ensureHiddenField('from_name', 'Ramtin Mojtahedi Website');
-      setStatus(
-        `Your inquiry was accepted by the secure mail relay. Reference ${reference}.`,
-        'success'
-      );
+      setStatus('Thanks for your message. We will contact you shortly. Thanks!', 'success');
     } catch (error) {
       console.error('Contact-form submission failed:', error);
       setStatus(
-        'The mail relay did not confirm this submission. Please send the message directly to',
+        'The message could not be sent. Please email',
         'error',
         { emailLink: true }
       );
