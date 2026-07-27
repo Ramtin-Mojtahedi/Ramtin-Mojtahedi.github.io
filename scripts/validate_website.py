@@ -11,8 +11,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 PUBLIC_EMAIL = "Ramtin.Mojtahedi@utoronto.ca"
-PRIVATE_RECIPIENT = "".join(("Mojtahedi", "Ramtn", "@gmail.com"))
+PRIVATE_RECIPIENT = "".join(("mojtahedi", "ramtin", "@gmail.com"))
 MINIMUM_PUBLICATIONS = 18
+SUCCESS_MESSAGE = "Thanks for your message. We will contact you shortly. Thanks!"
 
 INDEX = ROOT / "index.html"
 HERO = ROOT / "_includes" / "site-part-1.html"
@@ -65,11 +66,20 @@ def validate_contact(index: str, contact: str, script: str, style: str) -> None:
     if mailto_addresses != {PUBLIC_EMAIL.lower()}:
         fail(f"Unexpected visible mailto address(es): {sorted(mailto_addresses)}")
 
-    private_fragments = ("Mojtahedi", "Ramtn", "@gmail.com")
+    private_fragments = ("mojtahedi", "ramtin", "@gmail.com")
     if not all(f"'{fragment}'" in script for fragment in private_fragments):
         fail("The private contact-form destination is not assembled from the expected fragments.")
-    if PRIVATE_RECIPIENT in contact or PRIVATE_RECIPIENT in index:
+    if PRIVATE_RECIPIENT in contact.lower() or PRIVATE_RECIPIENT in index.lower():
         fail("The private contact-form destination must not be rendered in page HTML.")
+    if "Ramtn" in script or "MojtahediRamtn" in script:
+        fail("The former misspelled recipient is still present in contact-form code.")
+
+    if re.search(r"\b(?:minlength|maxlength)\s*=", contact, flags=re.I):
+        fail("The contact form must not impose character-count limits.")
+    if "messageCount" in contact or "messageCount" in script or "/5000" in contact:
+        fail("A legacy message character counter is still present.")
+    if ".slice(0," in script:
+        fail("The contact-form JavaScript must not truncate visitor text.")
 
     option_values = {
         value
@@ -91,11 +101,11 @@ def validate_contact(index: str, contact: str, script: str, style: str) -> None:
         "hp_email",
         "rateLimitStorageKey",
         "minimumCompletionMs",
-        "accepted by the secure mail relay",
+        SUCCESS_MESSAGE,
     )
     absent = [token for token in required_tokens if token not in script]
     if absent:
-        fail(f"Contact JavaScript is missing required delivery safeguards: {absent}")
+        fail(f"Contact JavaScript is missing required delivery safeguards or wording: {absent}")
 
     if "contact-form-polish.css" not in index:
         fail("The contact-form stylesheet is not linked from index.html.")
@@ -149,7 +159,9 @@ def main() -> int:
     publications = json.loads(read(PUBLICATIONS))
     print("Website validation passed.")
     print(f"- Public email: {PUBLIC_EMAIL}")
+    print(f"- Private form recipient: {PRIVATE_RECIPIENT}")
     print(f"- Contact categories: {len(EXPECTED_CATEGORIES)}")
+    print("- Character limits: none")
     print(f"- Publications: {len(publications)}")
     return 0
 
