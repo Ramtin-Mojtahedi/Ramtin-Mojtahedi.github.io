@@ -1,0 +1,333 @@
+/* Professional pointer and scroll-depth enhancement — July 2026.
+   This layer is intentionally visual only and does not alter portfolio content. */
+:root {
+  --rm-cursor-line: rgba(37, 104, 176, .62);
+  --rm-cursor-glow: rgba(37, 104, 176, .24);
+  --rm-cursor-core: #1d5f9f;
+  --rm-scroll-a: #1d6aa6;
+  --rm-scroll-b: #b78a49;
+  --rm-scroll-track: rgba(20, 42, 62, .13);
+  --rm-scroll-panel: rgba(255, 255, 255, .78);
+  --rm-scroll-text: #243d54;
+  --rm-scroll-progress: 0;
+}
+
+html[data-theme="dark"] {
+  --rm-cursor-line: rgba(143, 190, 255, .78);
+  --rm-cursor-glow: rgba(96, 160, 255, .30);
+  --rm-cursor-core: #a8ccff;
+  --rm-scroll-a: #8cbcff;
+  --rm-scroll-b: #e0bc78;
+  --rm-scroll-track: rgba(232, 244, 255, .16);
+  --rm-scroll-panel: rgba(8, 19, 29, .78);
+  --rm-scroll-text: #e7f2ff;
+}
+
+/* A refined browser scrollbar that remains familiar and accessible. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rm-scroll-a) transparent;
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: color-mix(in srgb, var(--bg) 92%, var(--ink));
+}
+
+body::-webkit-scrollbar-thumb {
+  min-height: 56px;
+  border: 3px solid var(--bg);
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--rm-scroll-a), var(--rm-scroll-b));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--rm-scroll-a) 30%, transparent),
+    0 0 18px color-mix(in srgb, var(--rm-scroll-a) 32%, transparent);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--rm-scroll-a) 84%, white),
+    color-mix(in srgb, var(--rm-scroll-b) 86%, white));
+}
+
+/* Strengthen the existing top progress line with a restrained glow. */
+.progress {
+  height: 4px !important;
+  background: linear-gradient(90deg, var(--rm-scroll-a), var(--rm-scroll-b)) !important;
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--rm-scroll-a) 66%, transparent),
+    0 3px 16px color-mix(in srgb, var(--rm-scroll-b) 28%, transparent);
+  transform-origin: left center;
+}
+
+/* Scroll depth produces a natural navigation shadow rather than a decorative effect. */
+.nav.rm-scroll-depth,
+.nav.rm-scrolled {
+  box-shadow:
+    0 16px 44px rgba(16, 32, 46, .12),
+    0 1px 0 color-mix(in srgb, var(--line) 82%, transparent);
+}
+
+html[data-theme="dark"] .nav.rm-scroll-depth,
+html[data-theme="dark"] .nav.rm-scrolled {
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, .40),
+    0 1px 0 rgba(255, 255, 255, .07);
+}
+
+.rm-scroll-shadow-band {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 190;
+  height: 92px;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--ink) 10%, transparent),
+    transparent 82%);
+  transition: opacity .24s ease;
+}
+
+html[data-theme="dark"] .rm-scroll-shadow-band {
+  background: linear-gradient(180deg, rgba(0, 0, 0, .34), transparent 84%);
+}
+
+/* Desktop scroll-depth indicator. */
+.rm-scroll-rail {
+  position: fixed;
+  top: 50%;
+  right: 16px;
+  z-index: 185;
+  display: grid;
+  justify-items: center;
+  gap: 9px;
+  width: 46px;
+  padding: 12px 8px 10px;
+  border: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+  border-radius: 18px;
+  color: var(--rm-scroll-text);
+  background: var(--rm-scroll-panel);
+  box-shadow:
+    0 18px 48px rgba(18, 40, 58, .14),
+    0 0 0 1px rgba(255, 255, 255, .22) inset;
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  backdrop-filter: blur(16px) saturate(130%);
+  transform: translate3d(14px, -50%, 0);
+  opacity: 0;
+  transition: opacity .28s ease, transform .34s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease;
+}
+
+html[data-theme="dark"] .rm-scroll-rail {
+  box-shadow:
+    0 20px 56px rgba(0, 0, 0, .40),
+    0 0 0 1px rgba(255, 255, 255, .055) inset;
+}
+
+.rm-scroll-rail.rm-visible {
+  opacity: 1;
+  transform: translate3d(0, -50%, 0);
+}
+
+.rm-scroll-rail:hover {
+  box-shadow:
+    0 22px 62px rgba(18, 40, 58, .19),
+    0 0 22px color-mix(in srgb, var(--rm-scroll-a) 22%, transparent);
+}
+
+.rm-scroll-rail-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: var(--muted);
+  font-size: .55rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.rm-scroll-track {
+  position: relative;
+  width: 4px;
+  height: 126px;
+  overflow: visible;
+  border-radius: 999px;
+  background: var(--rm-scroll-track);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 48%, transparent) inset;
+}
+
+.rm-scroll-fill {
+  position: absolute;
+  inset: auto 0 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, var(--rm-scroll-a), var(--rm-scroll-b));
+  box-shadow:
+    0 0 13px color-mix(in srgb, var(--rm-scroll-a) 70%, transparent),
+    0 0 25px color-mix(in srgb, var(--rm-scroll-b) 28%, transparent);
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  will-change: transform;
+}
+
+.rm-scroll-marker {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--card);
+  border-radius: 50%;
+  background: var(--rm-scroll-a);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--rm-scroll-a) 14%, transparent),
+    0 5px 16px color-mix(in srgb, var(--rm-scroll-a) 42%, transparent);
+  transform: translate(-50%, 50%);
+  will-change: bottom;
+}
+
+.rm-scroll-value {
+  min-width: 30px;
+  color: var(--rm-scroll-text);
+  font-variant-numeric: tabular-nums;
+  font-size: .62rem;
+  font-weight: 850;
+  line-height: 1;
+  text-align: center;
+}
+
+/* Native cursor remains visible; these layers add depth around it. */
+.rm-cursor-shadow,
+.rm-cursor-core {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform, width, height, opacity;
+}
+
+.rm-cursor-shadow {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--rm-cursor-line);
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--rm-cursor-glow) 30%, transparent) 0,
+    transparent 68%);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--rm-cursor-glow) 16%, transparent),
+    0 8px 24px var(--rm-cursor-glow),
+    0 0 36px color-mix(in srgb, var(--rm-cursor-glow) 72%, transparent);
+  -webkit-backdrop-filter: blur(.7px);
+  backdrop-filter: blur(.7px);
+  transition:
+    width .18s cubic-bezier(.2, .8, .2, 1),
+    height .18s cubic-bezier(.2, .8, .2, 1),
+    border-color .18s ease,
+    background .18s ease,
+    opacity .18s ease;
+}
+
+.rm-cursor-core {
+  width: 6px;
+  height: 6px;
+  background: var(--rm-cursor-core);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--rm-cursor-core) 15%, transparent),
+    0 0 14px color-mix(in srgb, var(--rm-cursor-core) 64%, transparent);
+  transition: width .16s ease, height .16s ease, opacity .15s ease;
+}
+
+.rm-cursor-shadow.rm-visible,
+.rm-cursor-core.rm-visible {
+  opacity: 1;
+}
+
+.rm-cursor-shadow.rm-hover {
+  width: 58px;
+  height: 58px;
+  border-color: color-mix(in srgb, var(--rm-cursor-line) 80%, white);
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--rm-cursor-glow) 48%, transparent) 0,
+    transparent 69%);
+  box-shadow:
+    0 0 0 7px color-mix(in srgb, var(--rm-cursor-glow) 14%, transparent),
+    0 12px 34px color-mix(in srgb, var(--rm-cursor-glow) 94%, transparent),
+    0 0 50px color-mix(in srgb, var(--rm-cursor-glow) 84%, transparent);
+}
+
+.rm-cursor-shadow.rm-pressed {
+  width: 29px;
+  height: 29px;
+}
+
+.rm-cursor-core.rm-pressed {
+  width: 9px;
+  height: 9px;
+}
+
+/* Give existing cards a subtle, pointer-position-aware shadow without changing layout. */
+.expert,
+.present,
+.teach,
+.repo,
+.panel {
+  isolation: isolate;
+}
+
+.expert::after,
+.present::after,
+.teach::after,
+.repo::after,
+.panel::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(220px circle at var(--rm-x, 50%) var(--rm-y, 50%),
+    color-mix(in srgb, var(--rm-cursor-glow) 44%, transparent),
+    transparent 72%);
+  box-shadow: 0 18px 46px color-mix(in srgb, var(--rm-cursor-glow) 18%, transparent);
+  transition: opacity .22s ease;
+}
+
+.expert:hover::after,
+.present:hover::after,
+.teach:hover::after,
+.repo:hover::after,
+.panel:hover::after {
+  opacity: 1;
+}
+
+@media (max-width: 1180px) {
+  .rm-scroll-rail {
+    right: 8px;
+  }
+}
+
+@media (max-width: 900px), (hover: none), (pointer: coarse) {
+  .rm-scroll-rail,
+  .rm-cursor-shadow,
+  .rm-cursor-core {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rm-scroll-rail,
+  .rm-cursor-shadow,
+  .rm-cursor-core,
+  .rm-scroll-shadow-band {
+    display: none !important;
+  }
+
+  .progress {
+    box-shadow: none;
+  }
+}
