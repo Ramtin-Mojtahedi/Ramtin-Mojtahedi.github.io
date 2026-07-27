@@ -94,8 +94,23 @@
 
   const animateCounter = element => {
     if (element.dataset.done) return;
+
+    const parsedTarget = Number(element.dataset.count);
+    const target = Number.isFinite(parsedTarget) && parsedTarget >= 0
+      ? parsedTarget
+      : Number.parseInt(String(element.textContent || '').replace(/[^0-9]/g, ''), 10);
+
+    // A malformed statistic must never become the literal text "NaN". When no
+    // valid number can be recovered, leave a safe zero and report the source in
+    // the browser console for maintainers.
+    if (!Number.isFinite(target) || target < 0) {
+      element.dataset.done = 'true';
+      element.textContent = element.dataset.suffix ? `0${element.dataset.suffix}` : '0';
+      console.error('Invalid data-count value prevented from rendering:', element.dataset.count);
+      return;
+    }
+
     element.dataset.done = 'true';
-    const target = Number(element.dataset.count || 0);
     const suffix = element.dataset.suffix || '';
     const start = performance.now();
     const duration = Math.min(1800, 850 + target * 2);
@@ -104,7 +119,8 @@
     const tick = now => {
       const proportion = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - proportion, 3);
-      element.textContent = `${Math.round(target * eased).toLocaleString()}${suffix}`;
+      const value = Math.round(target * eased);
+      element.textContent = `${Number.isFinite(value) ? value.toLocaleString() : '0'}${suffix}`;
       if (proportion < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
