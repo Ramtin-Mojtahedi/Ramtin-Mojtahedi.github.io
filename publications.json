@@ -6,8 +6,8 @@
     "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
     "website": "https://ramtin-mojtahedi.github.io/"
   },
-  "updated_at": "2026-07-27T16:54:32Z",
-  "publication_count": 18,
+  "updated_at": "2026-07-27T19:22:04Z",
+  "publication_count": 19,
   "publications": [
     {
       "id": "multimodal-preoperative-risk-stratification-2026",
@@ -22,7 +22,7 @@
       "url": "https://doi.org/10.1038/s41598-026-60860-9",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; publisher metadata",
+      "source": "CV; publisher metadata; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -39,7 +39,7 @@
       "url": "https://doi.org/10.1016/j.ultrasmedbio.2026.05.006",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; PubMed/publisher metadata; OpenAlex/ORCID",
+      "source": "CV; PubMed/publisher metadata; OpenAlex/ORCID; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -56,7 +56,7 @@
       "url": "https://doi.org/10.1117/12.3087835",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref",
+      "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -73,7 +73,7 @@
       "url": "https://doi.org/10.1200/CCI-25-00135",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref",
+      "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -90,7 +90,7 @@
       "url": "https://doi.org/10.1117/1.JMI.13.1.014505",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; publisher metadata; OpenAlex/ORCID",
+      "source": "CV; publisher metadata; OpenAlex/ORCID; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -107,7 +107,7 @@
       "url": "https://doi.org/10.1117/12.3048815",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; publisher metadata; OpenAlex/ORCID",
+      "source": "CV; publisher metadata; OpenAlex/ORCID; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -124,7 +124,7 @@
       "url": "https://doi.org/10.1117/12.3048961",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; publisher metadata; OpenAlex/ORCID",
+      "source": "CV; publisher metadata; OpenAlex/ORCID; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -141,7 +141,7 @@
       "url": "https://doi.org/10.1117/12.3048943",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; publisher metadata; OpenAlex/ORCID",
+      "source": "CV; publisher metadata; OpenAlex/ORCID; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -158,7 +158,7 @@
       "url": "https://doi.org/10.1117/12.3046253",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref",
+      "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -175,7 +175,24 @@
       "url": "https://doi.org/10.1117/12.3045640",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref",
+      "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref; Google Scholar",
+      "last_verified": "2026-07-27",
+      "title_aliases": []
+    },
+    {
+      "id": "deep-learning-approaches-for-multitask-analysis-of-liver-cancer-in-ct-segmentation-classification-an-2025",
+      "title": "Deep Learning Approaches for Multitask Analysis of Liver Cancer in CT: Segmentation, Classification, and Survival Prediction",
+      "year": 2025,
+      "publication_date": "2025-01-01",
+      "group": "2025",
+      "status": "Peer-reviewed",
+      "authors_html": "<strong>R Mojtahedi</strong> Saffari.",
+      "citation": "Queen’s University , 2025, 2025",
+      "doi": "",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&oe=ASCII&user=KjUrlGUAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=KjUrlGUAAAAJ:hqOjcs7Dif8C",
+      "link_label": "View ↗",
+      "manual": false,
+      "source": "Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -209,7 +226,7 @@
       "url": "https://doi.org/10.1007/978-3-031-47425-5_28",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; DBLP; OpenAlex/ORCID; Crossref",
+      "source": "CV; DBLP; OpenAlex/ORCID; Crossref; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -226,7 +243,7 @@
       "url": "https://doi.org/10.1007/978-3-031-18814-5_11",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; DBLP; OpenAlex/ORCID; Crossref",
+      "source": "CV; DBLP; OpenAlex/ORCID; Crossref; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": [
         "Towards Optimal Patch Size in Vision Transformers for Tumor Segmentation"
@@ -245,7 +262,7 @@
       "url": "https://doi.org/10.1007/978-3-031-33842-7_17",
       "link_label": "DOI ↗",
       "manual": true,
-      "source": "CV; DBLP; OpenAlex/ORCID; Crossref",
+      "source": "CV; DBLP; OpenAlex/ORCID; Crossref; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": [
         "Multi-modal Brain Tumour Segmentation Using Transformer with Optimal Patch Size"
@@ -261,10 +278,10 @@
       "authors_html": "<strong>R. Mojtahedi</strong> and S. Mirzakuchaki.",
       "citation": "International IEEE Conference on Electrical Engineering (ICEE), pp. 2–4.",
       "doi": "",
-      "url": "",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&oe=ASCII&user=KjUrlGUAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=KjUrlGUAAAAJ:qjMakFHDy7sC",
       "link_label": "",
       "manual": true,
-      "source": "CV",
+      "source": "CV; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -278,10 +295,10 @@
       "authors_html": "<strong>R. Mojtahedi</strong> and S. Mirzakuchaki.",
       "citation": "International IEEE Conference on Electrical Engineering (ICEE), pp. 10–12.",
       "doi": "",
-      "url": "",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&oe=ASCII&user=KjUrlGUAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=KjUrlGUAAAAJ:u-x6o8ySG0sC",
       "link_label": "",
       "manual": true,
-      "source": "CV",
+      "source": "CV; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
@@ -295,10 +312,10 @@
       "authors_html": "<strong>R. Mojtahedi</strong> and S. Mirzakuchaki.",
       "citation": "International IEEE Conference on Electrical Engineering (ICEE), pp. 10–12.",
       "doi": "",
-      "url": "",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&oe=ASCII&user=KjUrlGUAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=KjUrlGUAAAAJ:u5HHmVD_uO8C",
       "link_label": "",
       "manual": true,
-      "source": "CV",
+      "source": "CV; Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },

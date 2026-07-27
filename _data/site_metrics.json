@@ -1,9 +1,9 @@
 {
-  "publication_count": 18,
-  "peer_reviewed_or_accepted_count": 18,
+  "publication_count": 19,
+  "peer_reviewed_or_accepted_count": 19,
   "submitted_count": 0,
   "publication_sync_date": "2026-07-27",
-  "publication_sync_timestamp": "2026-07-27T16:54:32Z",
+  "publication_sync_timestamp": "2026-07-27T19:22:04Z",
   "publication_source_note": "CV baseline preserved; external scholarly sources checked weekly.",
   "google_scholar_profile": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
   "orcid": "https://orcid.org/0000-0002-3953-3256",
@@ -15,13 +15,13 @@
   ],
   "source_status": {
     "cv_baseline": "preserved 18 records",
-    "google_scholar": "unavailable: 403 Client Error: Forbidden for url: https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en&view_op=list_works&sortby=pubdate&pagesize=100",
-    "openalex_orcid": "ok (13 records)",
+    "google_scholar": "ok (17 records)",
+    "openalex_orcid": "unavailable: 429 Client Error: Too Many Requests for url: https://api.openalex.org/authors/https://orcid.org/0000-0002-3953-3256?mailto=Ramtin.Mojtahedi%40utoronto.ca",
     "crossref": "ok (7 records)",
     "dblp": "ok (0 records)"
   },
-  "auto_added_count": 0,
-  "enriched_record_count": 0,
+  "auto_added_count": 1,
+  "enriched_record_count": 16,
   "minimum_preserved_records": 18,
-  "invalid_nonpublication_records_removed": 1
+  "invalid_nonpublication_records_removed": 0
 }
