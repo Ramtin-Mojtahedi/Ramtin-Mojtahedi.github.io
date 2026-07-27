@@ -6,8 +6,8 @@
     "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
     "website": "https://ramtin-mojtahedi.github.io/"
   },
-  "updated_at": "2026-07-27T19:22:04Z",
-  "publication_count": 19,
+  "updated_at": "2026-07-27T19:24:13Z",
+  "publication_count": 18,
   "publications": [
     {
       "id": "multimodal-preoperative-risk-stratification-2026",
@@ -176,23 +176,6 @@
       "link_label": "DOI ↗",
       "manual": true,
       "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref; Google Scholar",
-      "last_verified": "2026-07-27",
-      "title_aliases": []
-    },
-    {
-      "id": "deep-learning-approaches-for-multitask-analysis-of-liver-cancer-in-ct-segmentation-classification-an-2025",
-      "title": "Deep Learning Approaches for Multitask Analysis of Liver Cancer in CT: Segmentation, Classification, and Survival Prediction",
-      "year": 2025,
-      "publication_date": "2025-01-01",
-      "group": "2025",
-      "status": "Peer-reviewed",
-      "authors_html": "<strong>R Mojtahedi</strong> Saffari.",
-      "citation": "Queen’s University , 2025, 2025",
-      "doi": "",
-      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&oe=ASCII&user=KjUrlGUAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=KjUrlGUAAAAJ:hqOjcs7Dif8C",
-      "link_label": "View ↗",
-      "manual": false,
-      "source": "Google Scholar",
       "last_verified": "2026-07-27",
       "title_aliases": []
     },
