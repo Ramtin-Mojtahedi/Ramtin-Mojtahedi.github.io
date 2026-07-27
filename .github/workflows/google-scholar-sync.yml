@@ -1,0 +1,67 @@
+name: Refresh Google Scholar publications
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 9 * * 1,4'
+  push:
+    branches:
+      - main
+    paths:
+      - scripts/sync_google_scholar.py
+      - .github/workflows/google-scholar-sync.yml
+      - _includes/site-part-2.html
+
+permissions:
+  contents: write
+
+concurrency:
+  group: google-scholar-publication-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh-publications:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - name: Check out website repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install publication-sync dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'requests>=2.32,<3' 'beautifulsoup4>=4.12,<5'
+
+      - name: Validate and refresh publication records
+        run: |
+          python -m py_compile scripts/sync_google_scholar.py
+          python scripts/sync_google_scholar.py
+
+      - name: Commit verified publication changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          git add \
+            _includes/google-scholar-auto-items.html \
+            _includes/site-part-1.html \
+            _includes/site-part-2.html \
+            data/google-scholar-publications.json
+
+          if git diff --cached --quiet; then
+            echo 'No publication changes were detected.'
+            exit 0
+          fi
+
+          git commit -m 'Refresh publications from Google Scholar monitor'
+          git pull --rebase origin main
+          git push
