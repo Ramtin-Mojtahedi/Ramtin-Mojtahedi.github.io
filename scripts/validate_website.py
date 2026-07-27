@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import datetime as dt
 import json
 import re
 import sys
@@ -14,14 +15,21 @@ PUBLIC_EMAIL = "Ramtin.Mojtahedi@utoronto.ca"
 PRIVATE_RECIPIENT = "".join(("Mojtahedi", "Ramtin", "@gmail.com"))
 MINIMUM_PUBLICATIONS = 18
 SUCCESS_MESSAGE = "Thanks for your message. We will contact you shortly. Thanks!"
+REMOVED_CONTACT_SENTENCE = (
+    "Please do not include patient-identifiable, confidential, or otherwise sensitive information."
+)
 
 INDEX = ROOT / "index.html"
 HERO = ROOT / "_includes" / "site-part-1.html"
 CONTACT = ROOT / "_includes" / "site-part-4.html"
 CONTACT_JS = ROOT / "assets" / "contact-form.js"
 CONTACT_CSS = ROOT / "assets" / "contact-form-polish.css"
+MAINTENANCE_CSS = ROOT / "assets" / "site-maintenance.css"
 PUBLICATIONS = ROOT / "_data" / "publications.json"
 METRICS = ROOT / "_data" / "site_metrics.json"
+MAINTENANCE = ROOT / "_data" / "site_maintenance.json"
+PUBLIC_STATUS = ROOT / "site-status.json"
+SITEMAP = ROOT / "sitemap.xml"
 
 EXPECTED_CATEGORIES = {
     "Research collaboration",
@@ -46,6 +54,10 @@ def read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
+def read_json(path: Path):
+    return json.loads(read(path))
+
+
 def validate_statistics(hero: str) -> None:
     counters = re.findall(r"data-count=(?:'|\")([^'\"]+)(?:'|\")", hero)
     if not counters:
@@ -53,6 +65,8 @@ def validate_statistics(hero: str) -> None:
     invalid = [value for value in counters if not re.fullmatch(r"\d+", value)]
     if invalid:
         fail(f"Animated statistics contain non-numeric values: {invalid}")
+    if "NaN" in hero or "\x88" in hero:
+        fail("The hero statistics contain a legacy invalid-number artifact.")
 
 
 def validate_contact(index: str, contact: str, script: str, style: str) -> None:
@@ -73,6 +87,11 @@ def validate_contact(index: str, contact: str, script: str, style: str) -> None:
         fail("The private contact-form destination must not be rendered in page HTML.")
     if "Ramtn" in script or "MojtahediRamtn" in script:
         fail("The former misspelled recipient is still present in contact-form code.")
+
+    if REMOVED_CONTACT_SENTENCE in contact or REMOVED_CONTACT_SENTENCE in index:
+        fail("The removed contact-form disclaimer is still visible.")
+    if '<p class="form-note">' in contact:
+        fail("The removed contact-form note container is still present.")
 
     if re.search(r"\b(?:minlength|maxlength)\s*=", contact, flags=re.I):
         fail("The contact form must not impose character-count limits.")
@@ -115,9 +134,9 @@ def validate_contact(index: str, contact: str, script: str, style: str) -> None:
         fail("The inquiry-category select does not have dedicated styling.")
 
 
-def validate_publications() -> None:
-    publications = json.loads(read(PUBLICATIONS))
-    metrics = json.loads(read(METRICS))
+def validate_publications() -> list[dict]:
+    publications = read_json(PUBLICATIONS)
+    metrics = read_json(METRICS)
 
     if not isinstance(publications, list):
         fail("_data/publications.json must contain a list.")
@@ -144,6 +163,57 @@ def validate_publications() -> None:
     if invalid_years:
         fail(f"Invalid publication year values were detected: {invalid_years}")
 
+    return publications
+
+
+def validate_maintenance(index: str, contact: str, publication_count: int) -> None:
+    maintenance = read_json(MAINTENANCE)
+    public_status = read_json(PUBLIC_STATUS)
+    maintenance_style = read(MAINTENANCE_CSS)
+    sitemap = read(SITEMAP)
+
+    for payload_name, payload in (
+        ("site maintenance data", maintenance),
+        ("public site status", public_status),
+    ):
+        if payload.get("status") != "current":
+            fail(f"{payload_name} is not marked current.")
+        if int(payload.get("publication_count", -1)) != publication_count:
+            fail(f"{payload_name} publication count is inconsistent.")
+        try:
+            dt.date.fromisoformat(str(payload.get("last_checked", "")))
+        except ValueError as error:
+            fail(f"{payload_name} has an invalid last_checked date: {error}")
+
+    if maintenance.get("frequency") != "twice weekly":
+        fail("The automatic maintenance frequency must be twice weekly.")
+    if len(maintenance.get("automated_checks") or []) < 6:
+        fail("The automatic maintenance scope is incomplete.")
+
+    required_index_tokens = (
+        "site-status.json",
+        "site-maintenance.css",
+        "site.data.site_maintenance.last_checked",
+    )
+    missing_index_tokens = [token for token in required_index_tokens if token not in index]
+    if missing_index_tokens:
+        fail(f"Maintenance metadata is not fully connected in index.html: {missing_index_tokens}")
+
+    required_contact_tokens = (
+        "Automatically maintained",
+        "site.data.site_maintenance.frequency",
+        "site.data.site_maintenance.last_checked_display",
+        'href="site-status.json"',
+    )
+    missing_contact_tokens = [token for token in required_contact_tokens if token not in contact]
+    if missing_contact_tokens:
+        fail(f"The visible maintenance status is incomplete: {missing_contact_tokens}")
+
+    if ".maintenance-status" not in maintenance_style or ".maintenance-pulse" not in maintenance_style:
+        fail("The visible maintenance status does not have dedicated styling.")
+    if "https://ramtin-mojtahedi.github.io/site-status.json" not in sitemap:
+        fail("The public maintenance status is missing from sitemap.xml.")
+
 
 def main() -> int:
     index = read(INDEX)
@@ -154,14 +224,16 @@ def main() -> int:
 
     validate_statistics(hero)
     validate_contact(index, contact, script, style)
-    validate_publications()
+    publications = validate_publications()
+    validate_maintenance(index, contact, len(publications))
 
-    publications = json.loads(read(PUBLICATIONS))
     print("Website validation passed.")
     print(f"- Public email: {PUBLIC_EMAIL}")
     print(f"- Private form recipient: {PRIVATE_RECIPIENT}")
     print(f"- Contact categories: {len(EXPECTED_CATEGORIES)}")
     print("- Character limits: none")
+    print("- Contact disclaimer: removed")
+    print("- Automatic maintenance: twice weekly")
     print(f"- Publications: {len(publications)}")
     return 0
 
