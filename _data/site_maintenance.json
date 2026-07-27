@@ -3,7 +3,7 @@
   "status": "current",
   "last_checked": "2026-07-27",
   "last_checked_display": "July 27, 2026",
-  "last_checked_at": "2026-07-27T00:00:00Z",
+  "last_checked_at": "2026-07-27T23:13:30Z",
   "frequency": "twice weekly",
   "schedule_display": "Every Monday and Thursday",
   "publication_count": 18,
@@ -16,6 +16,49 @@
     "Website source and JavaScript validation"
   ],
   "curated_content_policy": "Verified CV biography, education, experience, awards, teaching, and service are preserved and are not rewritten from unverified search results.",
-  "profile_checks": {},
-  "source_status": {}
+  "profile_checks": {
+    "google_scholar": {
+      "url": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+      "status": "available-protected",
+      "http_status": 403,
+      "final_url": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en"
+    },
+    "orcid": {
+      "url": "https://orcid.org/0000-0002-3953-3256",
+      "status": "available",
+      "http_status": 200,
+      "final_url": "https://orcid.org/0000-0002-3953-3256"
+    },
+    "github": {
+      "url": "https://github.com/Ramtin-Mojtahedi",
+      "status": "available",
+      "http_status": 200,
+      "final_url": "https://github.com/Ramtin-Mojtahedi"
+    },
+    "linkedin": {
+      "url": "https://www.linkedin.com/in/ramtin-mojtahedi/",
+      "status": "available-protected",
+      "http_status": 999,
+      "final_url": "https://www.linkedin.com/in/ramtin-mojtahedi"
+    },
+    "university_health_network": {
+      "url": "https://www.uhn.ca/",
+      "status": "available",
+      "http_status": 200,
+      "final_url": "https://www.uhn.ca/"
+    },
+    "university_of_toronto": {
+      "url": "https://www.utoronto.ca/",
+      "status": "available",
+      "http_status": 200,
+      "final_url": "https://www.utoronto.ca/"
+    }
+  },
+  "source_status": {
+    "cv_baseline": "preserved 18 records",
+    "google_scholar": "unavailable: 403 Client Error: Forbidden for url: https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en&view_op=list_works&sortby=pubdate&pagesize=100",
+    "openalex_orcid": "ok (13 records)",
+    "crossref": "ok (7 records)",
+    "dblp": "ok (0 records)"
+  }
 }

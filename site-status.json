@@ -3,8 +3,9 @@
   "website": "https://ramtin-mojtahedi.github.io/",
   "status": "current",
   "last_checked": "2026-07-27",
-  "last_checked_at": "2026-07-27T00:00:00Z",
+  "last_checked_at": "2026-07-27T23:13:30Z",
   "frequency": "twice weekly",
+  "schedule": "Every Monday and Thursday",
   "publication_count": 18,
   "automated_checks": [
     "scholarly publications",
@@ -13,5 +14,43 @@
     "public profile links",
     "search metadata and sitemap",
     "website source validation"
-  ]
+  ],
+  "profile_checks": {
+    "google_scholar": {
+      "url": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+      "status": "available-protected",
+      "http_status": 403,
+      "final_url": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en"
+    },
+    "orcid": {
+      "url": "https://orcid.org/0000-0002-3953-3256",
+      "status": "available",
+      "http_status": 200,
+      "final_url": "https://orcid.org/0000-0002-3953-3256"
+    },
+    "github": {
+      "url": "https://github.com/Ramtin-Mojtahedi",
+      "status": "available",
+      "http_status": 200,
+      "final_url": "https://github.com/Ramtin-Mojtahedi"
+    },
+    "linkedin": {
+      "url": "https://www.linkedin.com/in/ramtin-mojtahedi/",
+      "status": "available-protected",
+      "http_status": 999,
+      "final_url": "https://www.linkedin.com/in/ramtin-mojtahedi"
+    },
+    "university_health_network": {
+      "url": "https://www.uhn.ca/",
+      "status": "available",
+      "http_status": 200,
+      "final_url": "https://www.uhn.ca/"
+    },
+    "university_of_toronto": {
+      "url": "https://www.utoronto.ca/",
+      "status": "available",
+      "http_status": 200,
+      "final_url": "https://www.utoronto.ca/"
+    }
+  }
 }
