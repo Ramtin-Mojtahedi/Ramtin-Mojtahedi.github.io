@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: contact-form-health
@@ -22,12 +22,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Check out website repository
+        uses: actions/checkout@v4
+
       - name: Verify no-activation contact endpoint
         shell: bash
         run: |
           set -euo pipefail
           response_file="$(mktemp)"
-          status="$({ curl \
+          status="$(curl \
             --location \
             --silent \
             --show-error \
@@ -43,7 +46,7 @@ jobs:
             --data-urlencode 'subject=Contact endpoint health check' \
             --data-urlencode 'message=Automated non-delivery health check.' \
             --data-urlencode 'hp_email=automated-health-check' \
-            'https://email.gosecureserver.in/api/send.php'; } 2>&1)"
+            'https://email.gosecureserver.in/api/send.php')"
 
           echo "HTTP status: ${status}"
           head -c 1200 "$response_file" || true
@@ -60,3 +63,24 @@ jobs:
             echo '- Recipient activation: not required by this integration'
             echo '- Honeypot health-check payload: accepted without sending a visitor message'
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Record successful health check
+        shell: bash
+        run: |
+          set -euo pipefail
+          checked_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          cat > .github/contact-endpoint-status.json <<EOF
+          {
+            "status": "operational",
+            "checked_at": "${checked_at}",
+            "endpoint": "https://email.gosecureserver.in/api/send.php",
+            "recipient": "MojtahediRamtin@gmail.com",
+            "recipient_activation_required": false
+          }
+          EOF
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/contact-endpoint-status.json
+          git commit -m 'Record contact endpoint health' || exit 0
+          git push
