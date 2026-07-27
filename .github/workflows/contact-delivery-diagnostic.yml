@@ -9,14 +9,22 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: contact-delivery-diagnostic
+  cancel-in-progress: true
 
 jobs:
   send-diagnostic:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
       - name: Send a real diagnostic message through the current form endpoint
+        id: request
         shell: bash
         run: |
           set -euo pipefail
@@ -32,16 +40,44 @@ jobs:
             --data-urlencode 'name=Ramtin website diagnostic' \
             --data-urlencode 'email=Ramtin.Mojtahedi@utoronto.ca' \
             --data-urlencode 'reply_to=Ramtin.Mojtahedi@utoronto.ca' \
-            --data-urlencode 'subject=RM-WEBSITE-DIAGNOSTIC-20260727-1925Z' \
+            --data-urlencode 'subject=RM-WEBSITE-DIAGNOSTIC-20260727-1938Z' \
             --data-urlencode 'message=This is a one-time real delivery test for the website contact form endpoint.' \
             --data-urlencode 'website=https://ramtin-mojtahedi.github.io/' \
             --data-urlencode 'hp_email=' \
             'https://email.gosecureserver.in/api/send.php')"
 
-          echo "HTTP status: ${status}"
-          cat "$response_file"
-          echo
+          body="$(cat "$response_file")"
+          printf 'HTTP status: %s\n%s\n' "$status" "$body"
 
-          if [[ ! "$status" =~ ^2[0-9][0-9]$ ]]; then
-            exit 1
-          fi
+          python - "$status" "$response_file" <<'PY'
+          import json
+          import sys
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          status = int(sys.argv[1])
+          body = Path(sys.argv[2]).read_text(encoding='utf-8', errors='replace')
+          payload = {
+              'checked_at': datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z'),
+              'endpoint': 'https://email.gosecureserver.in/api/send.php',
+              'test_recipient': 'ramtinrms@gmail.com',
+              'http_status': status,
+              'response_body': body[:4000],
+              'delivery_confirmed': False,
+              'note': 'An HTTP/API acknowledgement is not proof that an email reached the recipient inbox.'
+          }
+          Path('.github/contact-delivery-diagnostic-result.json').write_text(
+              json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+          PY
+
+      - name: Commit diagnostic response
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/contact-delivery-diagnostic-result.json
+          git commit -m 'Record contact delivery diagnostic response' || exit 0
+          git pull --rebase origin main
+          git push origin HEAD:main
