@@ -23,51 +23,105 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Send a real diagnostic message through the current form endpoint
-        id: request
+      - name: Test JSON delivery to a monitored control mailbox and the requested mailbox
         shell: bash
         run: |
           set -euo pipefail
-          response_file="$(mktemp)"
-          status="$(curl \
-            --location \
-            --silent \
-            --show-error \
-            --output "$response_file" \
-            --write-out '%{http_code}' \
-            --request POST \
-            --data-urlencode 'to=ramtinrms@gmail.com' \
-            --data-urlencode 'name=Ramtin website diagnostic' \
-            --data-urlencode 'email=Ramtin.Mojtahedi@utoronto.ca' \
-            --data-urlencode 'reply_to=Ramtin.Mojtahedi@utoronto.ca' \
-            --data-urlencode 'subject=RM-WEBSITE-DIAGNOSTIC-20260727-1938Z' \
-            --data-urlencode 'message=This is a one-time real delivery test for the website contact form endpoint.' \
-            --data-urlencode 'website=https://ramtin-mojtahedi.github.io/' \
-            --data-urlencode 'hp_email=' \
-            'https://email.gosecureserver.in/api/send.php')"
 
-          body="$(cat "$response_file")"
-          printf 'HTTP status: %s\n%s\n' "$status" "$body"
+          python - <<'PY'
+          import json
+          from pathlib import Path
 
-          python - "$status" "$response_file" <<'PY'
+          payloads = {
+              'control': {
+                  'to': 'ramtinrms@gmail.com',
+                  'name': 'Ramtin website diagnostic',
+                  'email': 'Ramtin.Mojtahedi@utoronto.ca',
+                  'reply_to': 'Ramtin.Mojtahedi@utoronto.ca',
+                  'subject': 'RM-WEBSITE-JSON-DIAGNOSTIC-20260727-1945Z',
+                  'message': 'Control delivery test for the website contact form.',
+                  'website': 'https://ramtin-mojtahedi.github.io/',
+                  'hp_email': '',
+              },
+              'requested': {
+                  'to': 'MojtahediRamtn@gmail.com',
+                  'name': 'Ramtin website diagnostic',
+                  'email': 'Ramtin.Mojtahedi@utoronto.ca',
+                  'reply_to': 'Ramtin.Mojtahedi@utoronto.ca',
+                  'subject': 'Ramtin website contact-form delivery test — 2026-07-27',
+                  'message': 'This is a one-time delivery test for the contact form on ramtin-mojtahedi.github.io.',
+                  'website': 'https://ramtin-mojtahedi.github.io/',
+                  'hp_email': '',
+              },
+          }
+          Path('/tmp/contact-payloads.json').write_text(json.dumps(payloads), encoding='utf-8')
+          PY
+
+          result_dir="$(mktemp -d)"
+          for label in control requested; do
+            payload="$(python - "$label" <<'PY'
+          import json, sys
+          data = json.load(open('/tmp/contact-payloads.json', encoding='utf-8'))
+          print(json.dumps(data[sys.argv[1]], ensure_ascii=False))
+          PY
+          )"
+
+            headers="$result_dir/${label}-headers.txt"
+            body="$result_dir/${label}-body.txt"
+            status="$(curl \
+              --silent \
+              --show-error \
+              --dump-header "$headers" \
+              --output "$body" \
+              --write-out '%{http_code}' \
+              --request POST \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --data "$payload" \
+              'https://email.gosecureserver.in/api/send.php')"
+            printf '%s HTTP status: %s\n' "$label" "$status"
+            cat "$body"
+            echo
+            printf '%s' "$status" > "$result_dir/${label}-status.txt"
+          done
+
+          python - "$result_dir" <<'PY'
           import json
           import sys
           from datetime import datetime, timezone
           from pathlib import Path
 
-          status = int(sys.argv[1])
-          body = Path(sys.argv[2]).read_text(encoding='utf-8', errors='replace')
-          payload = {
+          root = Path(sys.argv[1])
+          tests = {}
+          for label in ('control', 'requested'):
+              body = (root / f'{label}-body.txt').read_text(encoding='utf-8', errors='replace')
+              headers = (root / f'{label}-headers.txt').read_text(encoding='utf-8', errors='replace')
+              status = int((root / f'{label}-status.txt').read_text())
+              try:
+                  parsed = json.loads(body)
+              except json.JSONDecodeError:
+                  parsed = None
+              tests[label] = {
+                  'http_status': status,
+                  'content_type': next(
+                      (line.split(':', 1)[1].strip() for line in headers.splitlines() if line.lower().startswith('content-type:')),
+                      '',
+                  ),
+                  'json_response': parsed,
+                  'response_excerpt': body[:1200],
+                  'api_acknowledged': 200 <= status < 300,
+              }
+
+          result = {
               'checked_at': datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z'),
               'endpoint': 'https://email.gosecureserver.in/api/send.php',
-              'test_recipient': 'ramtinrms@gmail.com',
-              'http_status': status,
-              'response_body': body[:4000],
-              'delivery_confirmed': False,
-              'note': 'An HTTP/API acknowledgement is not proof that an email reached the recipient inbox.'
+              'tests': tests,
+              'control_inbox_verified': False,
+              'requested_inbox_verified': False,
+              'note': 'API acknowledgement is recorded separately from inbox placement. The requested mailbox should check Inbox, Spam, and All Mail for the exact diagnostic subject.'
           }
           Path('.github/contact-delivery-diagnostic-result.json').write_text(
-              json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+              json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
           )
           PY
 
@@ -78,6 +132,6 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .github/contact-delivery-diagnostic-result.json
-          git commit -m 'Record contact delivery diagnostic response' || exit 0
+          git commit -m 'Record JSON contact delivery diagnostic' || exit 0
           git pull --rebase origin main
           git push origin HEAD:main
