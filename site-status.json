@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "website": "https://ramtin-mojtahedi.github.io/",
+  "status": "current",
+  "last_checked": "2026-07-27",
+  "last_checked_at": "2026-07-27T00:00:00Z",
+  "frequency": "twice weekly",
+  "publication_count": 18,
+  "automated_checks": [
+    "scholarly publications",
+    "publication data quality",
+    "website statistics",
+    "public profile links",
+    "search metadata and sitemap",
+    "website source validation"
+  ]
+}
