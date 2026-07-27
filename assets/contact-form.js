@@ -72,6 +72,7 @@
     const subject = String(data.get('subject') || 'New website inquiry').trim();
     const email = String(data.get('email') || '').trim();
     const payload = new URLSearchParams();
+
     payload.set('to', recipient);
     payload.set('name', String(data.get('name') || '').trim());
     payload.set('email', email);
@@ -80,6 +81,7 @@
     payload.set('message', String(data.get('message') || '').trim());
     payload.set('website', 'https://ramtin-mojtahedi.github.io/');
     payload.set('hp_email', String(data.get('hp_email') || ''));
+
     return payload;
   };
 
@@ -87,10 +89,12 @@
     const frameName = `rm-contact-${Date.now()}-${Math.random().toString(36).slice(2)}`;
     const frame = document.createElement('iframe');
     const fallbackForm = document.createElement('form');
-    let submitted = false;
+    let stage = 0;
     let settled = false;
+    let timer = 0;
 
     frame.name = frameName;
+    frame.src = 'about:blank';
     frame.title = 'Contact form submission';
     frame.hidden = true;
     frame.setAttribute('aria-hidden', 'true');
@@ -113,28 +117,34 @@
       window.setTimeout(() => {
         fallbackForm.remove();
         frame.remove();
-      }, 800);
+      }, 700);
     };
 
-    const finish = success => {
+    const finish = (success, error) => {
       if (settled) return;
       settled = true;
       window.clearTimeout(timer);
       cleanup();
-      success ? resolve() : reject(new Error('The background submission timed out.'));
+      if (success) resolve();
+      else reject(error || new Error('The background submission timed out.'));
     };
 
     frame.addEventListener('load', () => {
-      if (submitted) finish(true);
+      if (settled) return;
+      if (stage === 0) {
+        stage = 1;
+        try {
+          HTMLFormElement.prototype.submit.call(fallbackForm);
+        } catch (error) {
+          finish(false, error);
+        }
+        return;
+      }
+      finish(true);
     });
 
     document.body.append(frame, fallbackForm);
-
-    const timer = window.setTimeout(() => finish(false), 15000);
-    window.requestAnimationFrame(() => {
-      submitted = true;
-      HTMLFormElement.prototype.submit.call(fallbackForm);
-    });
+    timer = window.setTimeout(() => finish(false), 15000);
   });
 
   form.onsubmit = async event => {
@@ -143,6 +153,7 @@
 
     if (honeypot.value) {
       form.reset();
+      ensureHiddenField('to', recipient);
       setStatus('Thank you — your message has been sent.', 'success');
       return;
     }
