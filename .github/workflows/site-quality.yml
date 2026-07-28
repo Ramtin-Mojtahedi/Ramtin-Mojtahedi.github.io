@@ -98,6 +98,7 @@ jobs:
           node --check assets/contact-form.js
           node --check assets/layout-safety.js
           node --check scripts/visual_layout_audit.mjs
+          node --check scripts/visual_heading_audit.mjs
 
       - name: Install Chromium for rendered layout audit
         run: |
@@ -148,6 +149,8 @@ jobs:
 
           VISUAL_AUDIT_URL=http://127.0.0.1:4173/visual-audit.html \
             node scripts/visual_layout_audit.mjs
+          VISUAL_AUDIT_URL=http://127.0.0.1:4173/visual-audit.html \
+            node scripts/visual_heading_audit.mjs
 
       - name: Upload visual layout evidence
         if: always()
@@ -157,6 +160,7 @@ jobs:
           path: |
             render-audit-report.txt
             visual-audit-report.json
+            visual-heading-audit-report.json
             visual-audit-artifacts
           if-no-files-found: warn
           retention-days: 7
@@ -173,6 +177,7 @@ jobs:
             echo "- Visitor-facing implementation markers: absent"
             echo "- Responsive and reduced-motion behavior: valid"
             echo "- Rendered browser overlap audit: passed at 320–1600 px"
+            echo "- Heading words: intact at desktop, tablet, and mobile widths"
             echo "- Mobile menu, expanded awards, and dark theme: verified"
             echo "- Daily maintenance configuration: valid"
             echo "- JavaScript and Python syntax: valid"
