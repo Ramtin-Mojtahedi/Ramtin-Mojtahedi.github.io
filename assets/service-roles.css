@@ -1,0 +1,34 @@
+.serviceGrid > div,
+.leadGrid {
+  min-width: 0;
+}
+
+.leadGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  column-gap: 28px;
+}
+
+.leadGrid .lead {
+  grid-template-columns: 92px minmax(0, 1fr);
+  min-width: 0;
+}
+
+.leadGrid .lead p {
+  line-height: 1.48;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1120px) {
+  .leadGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .leadGrid .lead {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+}
