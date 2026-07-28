@@ -156,10 +156,17 @@
   const awardButton = document.getElementById('awardBtn');
   const awards = document.getElementById('awards');
   if (awardButton && awards) {
+    const awardTotal = awards.querySelectorAll('.award').length;
+    if (awardTotal > 0) {
+      awardButton.textContent = `Show all ${awardTotal} distinctions ↓`;
+    }
+
     awardButton.addEventListener('click', () => {
       const open = awards.classList.toggle('open');
       awardButton.setAttribute('aria-expanded', String(open));
-      awardButton.textContent = open ? 'Show fewer distinctions ↑' : 'Show all 25 distinctions ↓';
+      awardButton.textContent = open
+        ? 'Show fewer distinctions ↑'
+        : `Show all ${awardTotal} distinctions ↓`;
       if (open) awards.querySelectorAll('.extra').forEach(item => item.classList.add('show'));
     });
   }
