@@ -69,6 +69,7 @@ jobs:
         run: |
           set -euo pipefail
           python scripts/validate_website.py
+          python scripts/validate_service_roles.py
           python -m py_compile scripts/*.py
           node --check assets/site-2026.js
           node --check assets/site-polish.js
@@ -111,6 +112,7 @@ jobs:
             echo "- Last checked: ${checked_date}"
             echo "- Publications displayed: ${publication_count}"
             echo "- Public-section counters and headings: synchronized"
+            echo "- Leadership and volunteer roles: complete and unique"
             echo "- Curated CV content: preserved"
             echo "- Public profile links: checked"
             echo "- Sitemap and search metadata: refreshed"
