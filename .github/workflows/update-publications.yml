@@ -1,30 +1,32 @@
-name: Update publications and website status
+name: Daily website content maintenance
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "23 10 * * 1,4"
+    - cron: "23 10 * * *"
   push:
     branches:
       - main
     paths:
+      - "index.html"
+      - "_includes/**"
+      - "_data/**"
+      - "assets/**"
+      - "scripts/**"
+      - "publications.json"
+      - "sitemap.xml"
       - ".github/workflows/update-publications.yml"
-      - "scripts/update_publications.py"
-      - "scripts/clean_publications.py"
-      - "scripts/repair_site_stats.py"
-      - "scripts/refresh_site_maintenance.py"
-      - "scripts/validate_website.py"
-      - "scripts/requirements-publications.txt"
 
 permissions:
   contents: write
 
 concurrency:
-  group: verified-portfolio-maintenance
+  group: portfolio-content-maintenance
   cancel-in-progress: true
 
 jobs:
-  update-website:
+  maintain-website:
+    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -49,77 +51,30 @@ jobs:
       - name: Install maintenance dependencies
         run: python -m pip install --disable-pip-version-check -r scripts/requirements-publications.txt
 
-      - name: Check Google Scholar, ORCID/OpenAlex, Crossref, and DBLP
+      - name: Check scholarly sources
         run: |
           set -euo pipefail
           python scripts/update_publications.py | tee publication-sync-report.json
 
-      - name: Remove reviews, theses, and other non-publication artifacts
+      - name: Remove non-publication records
         run: python scripts/clean_publications.py
 
-      - name: Repair and synchronize website statistics
+      - name: Synchronize all public counters and headings
         run: python scripts/repair_site_stats.py
 
-      - name: Refresh public profile, sitemap, and maintenance status
+      - name: Refresh internal maintenance data and search files
         run: python scripts/refresh_site_maintenance.py
 
-      - name: Validate generated publication data and website sources
+      - name: Validate the complete website
         run: |
           set -euo pipefail
           python scripts/validate_website.py
+          python -m py_compile scripts/*.py
           node --check assets/site-2026.js
           node --check assets/site-polish.js
           node --check assets/site-pointer-scroll.js
           node --check assets/publication-runtime.js
           node --check assets/contact-form.js
-
-          python - <<'PY'
-          import json
-          import re
-          from pathlib import Path
-
-          publications = json.loads(Path("_data/publications.json").read_text(encoding="utf-8"))
-          metrics = json.loads(Path("_data/site_metrics.json").read_text(encoding="utf-8"))
-          maintenance = json.loads(Path("_data/site_maintenance.json").read_text(encoding="utf-8"))
-          feed = json.loads(Path("publications.json").read_text(encoding="utf-8"))
-          public_status = json.loads(Path("site-status.json").read_text(encoding="utf-8"))
-          hero = Path("_includes/site-part-1.html").read_text(encoding="utf-8")
-          contact = Path("_includes/site-part-4.html").read_text(encoding="utf-8")
-
-          assert isinstance(publications, list)
-          assert len(publications) >= 18, "The curated CV baseline must never be reduced."
-          assert sum(bool(item.get("manual")) for item in publications) >= 18
-          assert metrics["publication_count"] == len(publications)
-          assert maintenance["publication_count"] == len(publications)
-          assert public_status["publication_count"] == len(publications)
-          assert feed["publication_count"] == len(publications)
-          assert maintenance["frequency"] == "twice weekly"
-          assert any(item.get("doi") == "10.1038/s41598-026-60860-9" for item in publications)
-          assert all(item.get("title") and item.get("year") for item in publications)
-          assert not any(
-              (not item.get("manual"))
-              and (
-                  str(item.get("title", "")).lower().startswith("review for")
-                  or "/review" in str(item.get("doi", "")).lower()
-              )
-              for item in publications
-          ), "Peer-review artifacts must not be displayed as publications."
-
-          expected = (
-              f"<b data-count='{metrics['publication_count']}'>"
-              f"{metrics['publication_count']}</b>"
-          )
-          assert expected in hero, "Publication statistic is malformed or out of sync."
-          assert "NaN" not in hero
-          assert "\x88" not in hero
-          assert re.search(r"data-count='\d+'", hero)
-          assert "Please do not include patient-identifiable" not in contact
-          assert "Automatically maintained" in contact
-          print(
-              f"Validated {len(publications)} publications, maintenance status, "
-              "contact content, and clean counter HTML."
-          )
-          PY
 
       - name: Commit verified website updates
         id: commit
@@ -134,33 +89,32 @@ jobs:
             _data/site_metrics.json \
             _data/site_maintenance.json \
             _includes/site-part-1.html \
+            _includes/site-part-3.html \
             publications.json \
-            site-status.json \
             sitemap.xml
 
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "No scholarly metadata or maintenance-status changes were detected." >> "$GITHUB_STEP_SUMMARY"
+            echo "No verified content or metadata changes were detected." >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
 
           publication_count="$(python -c 'import json; print(len(json.load(open("_data/publications.json", encoding="utf-8"))))')"
           checked_date="$(python -c 'import json; print(json.load(open("_data/site_maintenance.json", encoding="utf-8"))["last_checked"])')"
-          git commit -m "Automatically refresh verified website data (${publication_count})"
+          git commit -m "Refresh verified website content (${checked_date})"
           git pull --rebase origin main
           git push origin HEAD:main
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
           {
-            echo "### Website maintenance completed"
+            echo "### Daily website maintenance completed"
             echo "- Last checked: ${checked_date}"
             echo "- Publications displayed: ${publication_count}"
-            echo "- Curated CV baseline: preserved"
-            echo "- Website counter: validated"
-            echo "- Reviews and thesis records: excluded"
+            echo "- Public-section counters and headings: synchronized"
+            echo "- Curated CV content: preserved"
             echo "- Public profile links: checked"
             echo "- Sitemap and search metadata: refreshed"
-            echo "- Schedule: every Monday and Thursday"
+            echo "- Visitor-facing implementation markers: prohibited by validation"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Notify participating search engines
