@@ -13,6 +13,19 @@ HERO_PATH = ROOT / "_includes" / "site-part-1.html"
 ACTIVITY_PATH = ROOT / "_includes" / "site-part-3.html"
 SERVICE_PATH = ROOT / "_includes" / "site-part-4.html"
 
+NUMBER_WORDS = {
+    0: "zero", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
+    6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten",
+    11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen",
+    15: "fifteen", 16: "sixteen", 17: "seventeen", 18: "eighteen",
+    19: "nineteen", 20: "twenty",
+}
+
+
+def display_count(value: int) -> str:
+    return NUMBER_WORDS.get(value, str(value))
+
+
 STAT_LABELS = {
     "publication_count": "Peer-reviewed, accepted, and published works",
     "presentation_count": "Oral and poster presentations",
@@ -100,7 +113,8 @@ def main() -> int:
     activity = replace_heading(
         activity,
         r"<section id='presentations'>",
-        f"{oral_count} oral and {poster_count} poster presentations.",
+        f"{display_count(oral_count).capitalize()} oral and "
+        f"{display_count(poster_count)} poster presentations.",
     )
     activity = replace_heading(
         activity,
