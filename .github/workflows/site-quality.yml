@@ -58,7 +58,10 @@ jobs:
         shell: bash
         run: |
           set +e
-          python scripts/validate_website.py > validation-report.txt 2>&1
+          {
+            python scripts/validate_website.py
+            python scripts/validate_service_roles.py
+          } > validation-report.txt 2>&1
           exit_code=$?
           cat validation-report.txt
           echo "exit_code=${exit_code}" >> "$GITHUB_OUTPUT"
@@ -91,6 +94,7 @@ jobs:
             echo "### Portfolio validation passed"
             echo "- Required public sections and internal links: valid"
             echo "- Publication data and all public counters: synchronized"
+            echo "- Leadership and volunteer roles: complete and unique"
             echo "- Contact routing and safeguards: valid"
             echo "- Visitor-facing implementation markers: absent"
             echo "- Daily maintenance configuration: valid"
