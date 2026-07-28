@@ -3,7 +3,7 @@
   "status": "current",
   "last_checked": "2026-07-28",
   "last_checked_display": "July 28, 2026",
-  "last_checked_at": "2026-07-28T07:55:38Z",
+  "last_checked_at": "2026-07-28T08:09:04Z",
   "frequency": "daily",
   "schedule_display": "Every day",
   "publication_count": 18,
@@ -19,8 +19,8 @@
   "profile_checks": {
     "google_scholar": {
       "url": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
-      "status": "available",
-      "http_status": 200,
+      "status": "available-protected",
+      "http_status": 403,
       "final_url": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en"
     },
     "orcid": {
@@ -39,7 +39,7 @@
       "url": "https://www.linkedin.com/in/ramtin-mojtahedi/",
       "status": "available-protected",
       "http_status": 999,
-      "final_url": "https://www.linkedin.com/in/ramtin-mojtahedi/"
+      "final_url": "https://www.linkedin.com/in/ramtin-mojtahedi"
     },
     "university_health_network": {
       "url": "https://www.uhn.ca/",
@@ -56,8 +56,8 @@
   },
   "source_status": {
     "cv_baseline": "preserved 18 records",
-    "google_scholar": "ok (17 records)",
-    "openalex_orcid": "ok (13 records)",
+    "google_scholar": "unavailable: 403 Client Error: Forbidden for url: https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en&view_op=list_works&sortby=pubdate&pagesize=100",
+    "openalex_orcid": "unavailable: 429 Client Error: Too Many Requests for url: https://api.openalex.org/authors/https://orcid.org/0000-0002-3953-3256?mailto=Ramtin.Mojtahedi%40utoronto.ca",
     "crossref": "ok (7 records)",
     "dblp": "unavailable: 500 Server Error: Internal Server Error for url: https://dblp.org/search/publ/api?q=author%3A%22Ramtin+Mojtahedi%22&format=json&h=1000"
   }
