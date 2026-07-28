@@ -16,6 +16,9 @@ INDEX = ROOT / "index.html"
 INCLUDES = ROOT / "_includes"
 METRICS = ROOT / "_data" / "site_metrics.json"
 PUBLICATIONS = ROOT / "_data" / "publications.json"
+METRIC_PATTERN = re.compile(
+    r"{{\s*site\.data\.site_metrics\.([A-Za-z0-9_]+)\s*}}"
+)
 
 
 def read(path: Path) -> str:
@@ -53,6 +56,16 @@ def replace_delimited_block(
         raise RuntimeError(f"Could not locate the end of {label}: {end_marker}")
     end += len(end_marker)
     return source[:start] + replacement + source[end:]
+
+
+def render_metrics(source: str, metrics: dict[str, Any]) -> str:
+    def replacement(match: re.Match[str]) -> str:
+        key = match.group(1)
+        if key not in metrics:
+            raise KeyError(f"Unknown site metric in website template: {key}")
+        return html.escape(str(metrics[key]))
+
+    return METRIC_PATTERN.sub(replacement, source)
 
 
 def render_publication(publication: dict[str, Any]) -> str:
@@ -94,19 +107,7 @@ def render_publications_section(
     metrics: dict[str, Any],
     publications: list[dict[str, Any]],
 ) -> str:
-    source = read(INCLUDES / "site-part-2.html")
-
-    def metric_replacement(match: re.Match[str]) -> str:
-        key = match.group(1)
-        if key not in metrics:
-            raise KeyError(f"Unknown site metric in publication template: {key}")
-        return html.escape(str(metrics[key]))
-
-    source = re.sub(
-        r"{{\s*site\.data\.site_metrics\.([A-Za-z0-9_]+)\s*}}",
-        metric_replacement,
-        source,
-    )
+    source = render_metrics(read(INCLUDES / "site-part-2.html"), metrics)
 
     submitted_start = "{% if site.data.site_metrics.submitted_count > 0 %}"
     submitted_end = "{% endif %}"
@@ -166,6 +167,7 @@ def render_site(output: Path) -> None:
             f"include {include_name}",
         )
 
+    source = render_metrics(source, metrics)
     remaining_liquid = re.findall(r"{{.*?}}|{%.*?%}", source, flags=re.DOTALL)
     if remaining_liquid:
         raise RuntimeError(f"Unrendered Liquid syntax remains: {remaining_liquid[:5]}")
