@@ -66,6 +66,19 @@ FORBIDDEN_PUBLIC_MARKERS = {
     "chatgpt-generated",
 }
 
+NUMBER_WORDS = {
+    0: "zero", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
+    6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten",
+    11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen",
+    15: "fifteen", 16: "sixteen", 17: "seventeen", 18: "eighteen",
+    19: "nineteen", 20: "twenty",
+}
+
+
+def display_count(value: int) -> str:
+    return NUMBER_WORDS.get(value, str(value))
+
+
 STAT_LABELS = {
     "publication_count": "Peer-reviewed, accepted, and published works",
     "presentation_count": "Oral and poster presentations",
@@ -162,7 +175,11 @@ def validate_counts(hero: str, activity: str, service: str, metrics: dict) -> di
         if int(metrics.get(key, -1)) != value:
             fail(f"Site metric is out of sync: {key}")
 
-    if f"{oral} oral and {poster} poster presentations." not in activity:
+    presentation_heading = (
+        f"{display_count(oral).capitalize()} oral and "
+        f"{display_count(poster)} poster presentations."
+    )
+    if presentation_heading not in activity:
         fail("Presentation heading is out of sync.")
     if f"{expected['recognition_count']} honours, awards, grants, and distinctions." not in activity:
         fail("Recognition heading is out of sync.")
