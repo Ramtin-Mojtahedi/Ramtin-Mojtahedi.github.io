@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh the portfolio's visible and machine-readable maintenance status.
-
-This script is intentionally conservative. It updates publication-derived metadata,
-checks public profile links, refreshes the sitemap, and records when validation ran.
-Verified CV biography, education, experience, awards, teaching, and service are not
-rewritten from arbitrary web search results.
-"""
+"""Refresh internal daily maintenance metadata and search files."""
 
 from __future__ import annotations
 
@@ -22,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLICATIONS = ROOT / "_data" / "publications.json"
 METRICS = ROOT / "_data" / "site_metrics.json"
 MAINTENANCE = ROOT / "_data" / "site_maintenance.json"
-PUBLIC_STATUS = ROOT / "site-status.json"
+PUBLICATION_FEED = ROOT / "publications.json"
 SITEMAP = ROOT / "sitemap.xml"
 
 WEBSITE = "https://ramtin-mojtahedi.github.io/"
@@ -36,10 +30,10 @@ PROFILE_URLS = {
     "university_of_toronto": "https://www.utoronto.ca/",
 }
 
-AUTOMATED_CHECKS = [
+DAILY_CHECKS = [
     "Scholarly publication discovery and metadata enrichment",
     "Duplicate, thesis, review-report, and non-publication filtering",
-    "Animated statistics and publication-count consistency",
+    "Public-section structure and count consistency",
     "Public profile link availability",
     "Search metadata and sitemap freshness",
     "Website source and JavaScript validation",
@@ -47,7 +41,7 @@ AUTOMATED_CHECKS = [
 
 CURATED_CONTENT_POLICY = (
     "Verified CV biography, education, experience, awards, teaching, and service "
-    "are preserved and are not rewritten from unverified search results."
+    "remain authoritative and are not rewritten from unverified search results."
 )
 
 PROTECTED_HTTP_CODES = {401, 403, 405, 406, 418, 429, 999}
@@ -74,7 +68,7 @@ def check_public_profiles() -> dict[str, dict[str, Any]]:
     session.headers.update(
         {
             "User-Agent": (
-                "Ramtin-Mojtahedi-Portfolio-Maintenance/1.0 "
+                "Ramtin-Mojtahedi-Portfolio/2.0 "
                 "(+https://ramtin-mojtahedi.github.io/)"
             ),
             "Accept-Language": "en-CA,en;q=0.9",
@@ -98,7 +92,6 @@ def check_public_profiles() -> dict[str, dict[str, Any]]:
             if 200 <= code < 400 and "/sorry/" not in final_url:
                 status = "available"
             elif code in PROTECTED_HTTP_CODES or "/sorry/" in final_url:
-                # A protected/challenged page can still be a valid public profile.
                 status = "available-protected"
             else:
                 status = "unavailable"
@@ -118,29 +111,39 @@ def check_public_profiles() -> dict[str, dict[str, Any]]:
     return results
 
 
+def normalize_publication_sources(publications: list[dict[str, Any]]) -> bool:
+    changed = False
+    for publication in publications:
+        source = str(publication.get("source") or "")
+        normalized = source.replace("Automated scholarly source", "Verified scholarly source")
+        if normalized != source:
+            publication["source"] = normalized
+            changed = True
+    return changed
+
+
 def refresh_sitemap(checked: str) -> None:
     if not SITEMAP.exists():
         return
 
     text = SITEMAP.read_text(encoding="utf-8")
     text = re.sub(
+        r"\s*<url>\s*<loc>https://ramtin-mojtahedi\.github\.io/site-status\.json</loc>.*?</url>",
+        "",
+        text,
+        flags=re.DOTALL,
+    )
+    text = re.sub(
         r"<lastmod>\d{4}-\d{2}-\d{2}</lastmod>",
         f"<lastmod>{checked}</lastmod>",
         text,
     )
-
-    if f"{WEBSITE}site-status.json" not in text:
-        entry = (
-            "  <url>\n"
-            f"    <loc>{WEBSITE}site-status.json</loc>\n"
-            f"    <lastmod>{checked}</lastmod>\n"
-            "    <changefreq>weekly</changefreq>\n"
-            "    <priority>0.4</priority>\n"
-            "  </url>\n"
-        )
-        text = text.replace("</urlset>", entry + "</urlset>")
-
-    SITEMAP.write_text(text, encoding="utf-8")
+    text = re.sub(
+        r"<changefreq>[^<]+</changefreq>",
+        "<changefreq>daily</changefreq>",
+        text,
+    )
+    SITEMAP.write_text(text.rstrip() + "\n", encoding="utf-8")
 
 
 def main() -> int:
@@ -157,46 +160,39 @@ def main() -> int:
     if int(metrics.get("publication_count", -1)) != len(publications):
         raise RuntimeError("Publication metrics do not match the publication data.")
 
+    normalize_publication_sources(publications)
+    write_json(PUBLICATIONS, publications)
+
+    if PUBLICATION_FEED.exists():
+        feed = read_json(PUBLICATION_FEED)
+        feed["publication_count"] = len(publications)
+        feed["publications"] = publications
+        write_json(PUBLICATION_FEED, feed)
+
+    metrics["publication_source_note"] = (
+        "CV baseline preserved; external scholarly sources checked daily."
+    )
+    metrics["maintenance_frequency"] = "daily"
+    write_json(METRICS, metrics)
+
     profile_checks = check_public_profiles()
     source_status = metrics.get("source_status") or {}
 
     maintenance = {
-        "schema_version": 1,
+        "schema_version": 2,
         "status": "current",
         "last_checked": checked,
         "last_checked_display": display_date(now.date()),
         "last_checked_at": now.isoformat().replace("+00:00", "Z"),
-        "frequency": "twice weekly",
-        "schedule_display": "Every Monday and Thursday",
+        "frequency": "daily",
+        "schedule_display": "Every day",
         "publication_count": len(publications),
-        "automated_checks": AUTOMATED_CHECKS,
+        "checks": DAILY_CHECKS,
         "curated_content_policy": CURATED_CONTENT_POLICY,
         "profile_checks": profile_checks,
         "source_status": source_status,
     }
-
-    public_status = {
-        "schema_version": 1,
-        "website": WEBSITE,
-        "status": maintenance["status"],
-        "last_checked": maintenance["last_checked"],
-        "last_checked_at": maintenance["last_checked_at"],
-        "frequency": maintenance["frequency"],
-        "schedule": maintenance["schedule_display"],
-        "publication_count": maintenance["publication_count"],
-        "automated_checks": [
-            "scholarly publications",
-            "publication data quality",
-            "website statistics",
-            "public profile links",
-            "search metadata and sitemap",
-            "website source validation",
-        ],
-        "profile_checks": profile_checks,
-    }
-
     write_json(MAINTENANCE, maintenance)
-    write_json(PUBLIC_STATUS, public_status)
     refresh_sitemap(checked)
 
     print(
@@ -204,6 +200,7 @@ def main() -> int:
             {
                 "status": maintenance["status"],
                 "last_checked": checked,
+                "frequency": maintenance["frequency"],
                 "publication_count": len(publications),
                 "profile_checks": {
                     key: value.get("status") for key, value in profile_checks.items()
