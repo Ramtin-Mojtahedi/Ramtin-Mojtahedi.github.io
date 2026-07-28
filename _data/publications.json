@@ -30,7 +30,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; PubMed/publisher metadata; OpenAlex/ORCID; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": []
   },
   {
@@ -47,7 +47,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": []
   },
   {
@@ -64,7 +64,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": []
   },
   {
@@ -81,7 +81,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; publisher metadata; OpenAlex/ORCID; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": []
   },
   {
@@ -98,7 +98,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; publisher metadata; OpenAlex/ORCID; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": []
   },
   {
@@ -115,7 +115,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; publisher metadata; OpenAlex/ORCID; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": []
   },
   {
@@ -132,7 +132,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; publisher metadata; OpenAlex/ORCID; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": []
   },
   {
@@ -149,7 +149,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": []
   },
   {
@@ -166,7 +166,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; publisher metadata; OpenAlex/ORCID; Crossref; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": []
   },
   {
@@ -200,7 +200,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; DBLP; OpenAlex/ORCID; Crossref; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": []
   },
   {
@@ -217,7 +217,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; DBLP; OpenAlex/ORCID; Crossref; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": [
       "Towards Optimal Patch Size in Vision Transformers for Tumor Segmentation"
     ]
@@ -236,7 +236,7 @@
     "link_label": "DOI ↗",
     "manual": true,
     "source": "CV; DBLP; OpenAlex/ORCID; Crossref; Google Scholar",
-    "last_verified": "2026-07-27",
+    "last_verified": "2026-07-28",
     "title_aliases": [
       "Multi-modal Brain Tumour Segmentation Using Transformer with Optimal Patch Size"
     ]
