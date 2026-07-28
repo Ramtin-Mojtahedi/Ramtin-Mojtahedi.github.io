@@ -7,6 +7,7 @@ import argparse
 import html
 import json
 import re
+import traceback
 from pathlib import Path
 from typing import Any
 
@@ -18,11 +19,40 @@ PUBLICATIONS = ROOT / "_data" / "publications.json"
 
 
 def read(path: Path) -> str:
+    if not path.is_file():
+        raise FileNotFoundError(f"Required audit source is missing: {path.relative_to(ROOT)}")
     return path.read_text(encoding="utf-8")
 
 
 def strip_front_matter(source: str) -> str:
-    return re.sub(r"\A---\s*\n---\s*\n", "", source, count=1)
+    stripped, replacements = re.subn(r"\A---\s*\n---\s*\n", "", source, count=1)
+    if replacements != 1:
+        raise RuntimeError("index.html does not contain the expected Jekyll front matter.")
+    return stripped
+
+
+def replace_exact_once(source: str, marker: str, replacement: str, label: str) -> str:
+    occurrences = source.count(marker)
+    if occurrences != 1:
+        raise RuntimeError(f"Expected one {label} marker, found {occurrences}: {marker}")
+    return source.replace(marker, replacement, 1)
+
+
+def replace_delimited_block(
+    source: str,
+    start_marker: str,
+    end_marker: str,
+    replacement: str,
+    label: str,
+) -> str:
+    start = source.find(start_marker)
+    if start < 0:
+        raise RuntimeError(f"Could not locate the start of {label}: {start_marker}")
+    end = source.find(end_marker, start + len(start_marker))
+    if end < 0:
+        raise RuntimeError(f"Could not locate the end of {label}: {end_marker}")
+    end += len(end_marker)
+    return source[:start] + replacement + source[end:]
 
 
 def render_publication(publication: dict[str, Any]) -> str:
@@ -60,7 +90,10 @@ def render_publication(publication: dict[str, Any]) -> str:
     )
 
 
-def render_publications_section(metrics: dict[str, Any], publications: list[dict[str, Any]]) -> str:
+def render_publications_section(
+    metrics: dict[str, Any],
+    publications: list[dict[str, Any]],
+) -> str:
     source = read(INCLUDES / "site-part-2.html")
 
     def metric_replacement(match: re.Match[str]) -> str:
@@ -75,26 +108,39 @@ def render_publications_section(metrics: dict[str, Any], publications: list[dict
         source,
     )
 
-    submitted_pattern = re.compile(
-        r"{%\s*if\s+site\.data\.site_metrics\.submitted_count\s*>\s*0\s*%}"
-        r"(.*?)"
-        r"{%\s*endif\s*%}",
-        flags=re.DOTALL,
-    )
+    submitted_start = "{% if site.data.site_metrics.submitted_count > 0 %}"
+    submitted_end = "{% endif %}"
     submitted_count = int(metrics.get("submitted_count", 0))
-    source = submitted_pattern.sub(lambda match: match.group(1) if submitted_count > 0 else "", source)
-
-    loop_pattern = re.compile(
-        r"{%\s*for\s+pub\s+in\s+site\.data\.publications\s*%}"
-        r".*?"
-        r"{%\s*endfor\s*%}",
-        flags=re.DOTALL,
+    submitted_start_index = source.find(submitted_start)
+    if submitted_start_index < 0:
+        raise RuntimeError("Could not locate the submitted-publication conditional.")
+    submitted_end_index = source.find(
+        submitted_end,
+        submitted_start_index + len(submitted_start),
     )
-    rendered_records = "\n".join(render_publication(publication) for publication in publications)
-    source, replacements = loop_pattern.subn(rendered_records, source, count=1)
-    if replacements != 1:
-        raise RuntimeError("Could not locate the publication loop in site-part-2.html.")
+    if submitted_end_index < 0:
+        raise RuntimeError("Could not locate the end of the submitted-publication conditional.")
+    submitted_inner = source[
+        submitted_start_index + len(submitted_start):submitted_end_index
+    ]
+    source = replace_delimited_block(
+        source,
+        submitted_start,
+        submitted_end,
+        submitted_inner if submitted_count > 0 else "",
+        "submitted-publication conditional",
+    )
 
+    rendered_records = "\n".join(
+        render_publication(publication) for publication in publications
+    )
+    source = replace_delimited_block(
+        source,
+        "{% for pub in site.data.publications %}",
+        "{% endfor %}",
+        rendered_records,
+        "publication loop",
+    )
     return source
 
 
@@ -113,24 +159,24 @@ def render_site(output: Path) -> None:
     }
 
     for include_name, include_source in rendered_includes.items():
-        source, replacements = re.subn(
-            rf"{{%\s*include\s+{re.escape(include_name)}\s*%}}",
-            include_source,
+        source = replace_exact_once(
             source,
-            count=1,
+            f"{{% include {include_name} %}}",
+            include_source,
+            f"include {include_name}",
         )
-        if replacements != 1:
-            raise RuntimeError(f"Could not replace include: {include_name}")
 
     remaining_liquid = re.findall(r"{{.*?}}|{%.*?%}", source, flags=re.DOTALL)
     if remaining_liquid:
         raise RuntimeError(f"Unrendered Liquid syntax remains: {remaining_liquid[:5]}")
 
-    source = source.replace(
-        "<html lang=\"en-CA\"",
-        "<html lang=\"en-CA\" data-visual-audit=\"true\"",
-        1,
+    source = replace_exact_once(
+        source,
+        '<html lang="en-CA" data-theme="light">',
+        '<html lang="en-CA" data-theme="light" data-visual-audit="true">',
+        "root HTML element",
     )
+    output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(source.rstrip() + "\n", encoding="utf-8")
 
 
@@ -144,8 +190,18 @@ def main() -> int:
     )
     args = parser.parse_args()
     output = args.output if args.output.is_absolute() else ROOT / args.output
-    render_site(output)
-    print(f"Rendered visual audit page: {output.relative_to(ROOT)}")
+
+    try:
+        render_site(output)
+    except Exception:  # CI must retain the complete rendering failure context.
+        traceback.print_exc()
+        return 1
+
+    try:
+        display_path = output.relative_to(ROOT)
+    except ValueError:
+        display_path = output
+    print(f"Rendered visual audit page: {display_path}")
     return 0
 
 
