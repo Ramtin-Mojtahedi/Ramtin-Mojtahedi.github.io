@@ -12,8 +12,10 @@ INDEX = ROOT / "index.html"
 SERVICE = ROOT / "_includes" / "site-part-4.html"
 STYLE = ROOT / "assets" / "layout-safety.css"
 SCRIPT = ROOT / "assets" / "layout-safety.js"
+SITE_SCRIPT = ROOT / "assets" / "site-2026.js"
 RENDERER = ROOT / "scripts" / "render_visual_audit.py"
 BROWSER_AUDIT = ROOT / "scripts" / "visual_layout_audit.mjs"
+HEADING_AUDIT = ROOT / "scripts" / "visual_heading_audit.mjs"
 SITE_QUALITY = ROOT / ".github" / "workflows" / "site-quality.yml"
 DAILY_MAINTENANCE = ROOT / ".github" / "workflows" / "update-publications.yml"
 
@@ -47,12 +49,25 @@ def main() -> int:
     service = read(SERVICE)
     style = read(STYLE)
     script = read(SCRIPT)
+    site_script = read(SITE_SCRIPT)
     renderer = read(RENDERER)
     browser_audit = read(BROWSER_AUDIT)
+    heading_audit = read(HEADING_AUDIT)
     site_quality = read(SITE_QUALITY)
     daily = read(DAILY_MAINTENANCE)
 
     validate_asset_order(index)
+
+    require_tokens(
+        index,
+        (
+            ".statsSec{overflow:visible}",
+            ":where(.brand,h1,h2,h3){overflow-wrap:break-word;word-break:normal;hyphens:none}",
+            ".profileGrid .sticky .title{font-size:clamp(2.55rem,3.5vw,3.75rem)}",
+            ".contact .section-heading-enhanced h2{font-size:clamp(2.45rem,3.5vw,3.55rem)}",
+        ),
+        "index.html heading and snapshot polish",
+    )
 
     require_tokens(
         style,
@@ -89,10 +104,22 @@ def main() -> int:
     )
 
     require_tokens(
+        site_script,
+        (
+            "const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;",
+            "if (reduceMotion)",
+            "const finalValue = `${target.toLocaleString()}${suffix}`;",
+            "else element.textContent = finalValue;",
+        ),
+        "assets/site-2026.js reduced-motion statistics",
+    )
+
+    require_tokens(
         renderer,
         (
             "render_publications_section",
             "render_publication",
+            "render_metrics",
             "visual-audit.html",
             "Unrendered Liquid syntax remains",
         ),
@@ -119,15 +146,30 @@ def main() -> int:
     )
 
     require_tokens(
+        heading_audit,
+        (
+            "split-heading-word",
+            "heading-hyphenation-enabled",
+            "desktop-wide",
+            "mobile-minimum",
+            "width: 320",
+            "visual-heading-audit-report.json",
+        ),
+        "scripts/visual_heading_audit.mjs",
+    )
+
+    require_tokens(
         site_quality,
         (
             "python scripts/validate_layout_safety.py",
             "playwright@1.52.0",
             "python scripts/render_visual_audit.py",
             "node scripts/visual_layout_audit.mjs",
+            "node scripts/visual_heading_audit.mjs",
             "visual-layout-audit",
             "node --check assets/layout-safety.js",
             "node --check scripts/visual_layout_audit.mjs",
+            "node --check scripts/visual_heading_audit.mjs",
         ),
         ".github/workflows/site-quality.yml",
     )
@@ -138,6 +180,7 @@ def main() -> int:
             "python scripts/validate_layout_safety.py",
             "node --check assets/layout-safety.js",
             "node --check scripts/visual_layout_audit.mjs",
+            "node --check scripts/visual_heading_audit.mjs",
         ),
         ".github/workflows/update-publications.yml",
     )
@@ -175,6 +218,8 @@ def main() -> int:
     print("- Responsive hardening: connected last")
     print("- Browser viewport coverage: 320–1600 px")
     print("- Horizontal overflow, clipping, and sibling overlap checks: configured")
+    print("- Major-heading word integrity: browser-audited")
+    print("- Reduced-motion statistics: immediate and exact")
     print("- Mobile navigation and expanded-recognition states: covered")
     print("- Removed contact elements and website-authorship markers: absent")
     return 0
