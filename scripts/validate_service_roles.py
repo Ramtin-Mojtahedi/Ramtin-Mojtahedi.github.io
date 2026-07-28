@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the portfolio's leadership and volunteer role list."""
+"""Validate the portfolio's public identity and leadership/volunteer role list."""
 
 from __future__ import annotations
 
@@ -10,8 +10,13 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+INDEX_FILE = ROOT / "index.html"
+HERO_FILE = ROOT / "_includes" / "site-part-1.html"
 SERVICE_FILE = ROOT / "_includes" / "site-part-4.html"
+CONTACT_SENT_FILE = ROOT / "contact-sent.html"
 MINIMUM_ROLE_COUNT = 28
+PUBLIC_NAME = "Dr. Ramtin Mojtahedi"
+PUBLIC_NAME_WITH_CREDENTIAL = "Dr. Ramtin Mojtahedi, Ph.D."
 
 REQUIRED_ROLES = {
     "Volunteer and committee contributor, UHN Postdoctoral Association.",
@@ -63,7 +68,76 @@ def fail(message: str) -> None:
     raise AssertionError(message)
 
 
+def require_tokens(source: str, tokens: tuple[str, ...], location: str) -> None:
+    missing = [token for token in tokens if token not in source]
+    if missing:
+        fail(f"Required doctor-title identity text is missing from {location}: {missing}")
+
+
+def validate_public_identity() -> None:
+    index = INDEX_FILE.read_text(encoding="utf-8")
+    hero = HERO_FILE.read_text(encoding="utf-8")
+    service = SERVICE_FILE.read_text(encoding="utf-8")
+    contact_sent = CONTACT_SENT_FILE.read_text(encoding="utf-8")
+
+    require_tokens(
+        index,
+        (
+            f"<title>{PUBLIC_NAME_WITH_CREDENTIAL} | Medical AI Researcher</title>",
+            f'<meta name="author" content="{PUBLIC_NAME}">',
+            f'<meta property="og:title" content="{PUBLIC_NAME_WITH_CREDENTIAL} | Medical AI Researcher">',
+            f'<meta name="twitter:title" content="{PUBLIC_NAME_WITH_CREDENTIAL} | Medical AI Researcher">',
+            f'"name": "{PUBLIC_NAME}"',
+            '"honorificPrefix": "Dr."',
+            '"honorificSuffix": "Ph.D."',
+        ),
+        "index.html",
+    )
+    require_tokens(
+        hero,
+        (
+            "<span>Dr. Ramtin Mojtahedi<small>Medical AI Researcher</small></span>",
+            "<h1>Dr. Ramtin<span>Mojtahedi, Ph.D.</span></h1>",
+            "alt='Dr. Ramtin Mojtahedi in Queen’s University doctoral regalia holding his diploma'",
+        ),
+        "the navigation and hero",
+    )
+    require_tokens(
+        service,
+        ("Dr. Ramtin Mojtahedi. Medical AI research in Toronto, Canada.",),
+        "the footer",
+    )
+    require_tokens(
+        contact_sent,
+        (
+            f"<title>Message Sent | {PUBLIC_NAME}</title>",
+            f"submitted directly to {PUBLIC_NAME}.",
+        ),
+        "the contact confirmation page",
+    )
+
+    legacy_tokens = {
+        "hero": ("<h1>Ramtin<span>", "<span>Ramtin Mojtahedi<small>"),
+        "footer": ("> Ramtin Mojtahedi. Medical AI research",),
+        "contact confirmation": (
+            "<title>Message Sent | Ramtin Mojtahedi</title>",
+            "submitted directly to Ramtin Mojtahedi.",
+        ),
+    }
+    sources = {"hero": hero, "footer": service, "contact confirmation": contact_sent}
+    remaining = [
+        f"{location}: {token}"
+        for location, tokens in legacy_tokens.items()
+        for token in tokens
+        if token in sources[location]
+    ]
+    if remaining:
+        fail(f"Legacy untitled public-name text remains: {remaining}")
+
+
 def main() -> int:
+    validate_public_identity()
+
     source = SERVICE_FILE.read_text(encoding="utf-8")
     if 'class="leadGrid"' not in source:
         fail("The responsive leadership-role grid is missing.")
@@ -92,9 +166,11 @@ def main() -> int:
     if len(roles) != len(set(roles)):
         fail("The leadership and volunteer role list is not unique.")
 
-    print("Service-role validation passed.")
+    print("Public-identity and service-role validation passed.")
+    print(f"- Public name: {PUBLIC_NAME_WITH_CREDENTIAL}")
     print(f"- Unique leadership and volunteer roles: {len(roles)}")
     print(f"- Required supplied roles present: {len(REQUIRED_ROLES)}")
+    print("- Legacy untitled name text: none")
     print("- Legacy duplicate entries: none")
     return 0
 
@@ -103,5 +179,5 @@ if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except (AssertionError, OSError) as error:
-        print(f"Service-role validation failed: {error}", file=sys.stderr)
+        print(f"Public-identity or service-role validation failed: {error}", file=sys.stderr)
         raise SystemExit(1)
