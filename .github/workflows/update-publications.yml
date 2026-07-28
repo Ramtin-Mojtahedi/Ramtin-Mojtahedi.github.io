@@ -82,6 +82,7 @@ jobs:
           node --check assets/contact-form.js
           node --check assets/layout-safety.js
           node --check scripts/visual_layout_audit.mjs
+          node --check scripts/visual_heading_audit.mjs
 
       - name: Commit verified website updates
         id: commit
@@ -121,6 +122,7 @@ jobs:
             echo "- Statistics and section hierarchy: clear and interactive"
             echo "- Leadership and volunteer roles: complete and unique"
             echo "- Responsive layout safeguards: preserved"
+            echo "- Major-heading word integrity: preserved"
             echo "- Curated CV content: preserved"
             echo "- Public profile links: checked"
             echo "- Sitemap and search metadata: refreshed"
