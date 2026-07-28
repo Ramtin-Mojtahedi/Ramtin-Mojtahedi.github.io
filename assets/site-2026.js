@@ -5,6 +5,7 @@
   const theme = document.getElementById('theme');
   const menu = document.getElementById('menu');
   const links = document.getElementById('links');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let savedTheme = '';
   try {
@@ -112,8 +113,15 @@
 
     element.dataset.done = 'true';
     const suffix = element.dataset.suffix || '';
+    const finalValue = `${target.toLocaleString()}${suffix}`;
+
+    if (reduceMotion) {
+      element.textContent = finalValue;
+      return;
+    }
+
     const start = performance.now();
-    const duration = Math.min(1800, 850 + target * 2);
+    const duration = Math.min(1600, 760 + target * 1.6);
     element.textContent = `0${suffix}`;
 
     const tick = now => {
@@ -122,6 +130,7 @@
       const value = Math.round(target * eased);
       element.textContent = `${Number.isFinite(value) ? value.toLocaleString() : '0'}${suffix}`;
       if (proportion < 1) requestAnimationFrame(tick);
+      else element.textContent = finalValue;
     };
     requestAnimationFrame(tick);
   };
