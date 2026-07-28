@@ -71,6 +71,7 @@ jobs:
           python scripts/validate_website.py
           python scripts/validate_service_roles.py
           python scripts/validate_site_impact.py
+          python scripts/validate_layout_safety.py
           python -m py_compile scripts/*.py
           node --check assets/site-2026.js
           node --check assets/site-polish.js
@@ -79,6 +80,9 @@ jobs:
           node --check assets/programming-languages.js
           node --check assets/site-impact.js
           node --check assets/contact-form.js
+          node --check assets/layout-safety.js
+          node --check scripts/visual_layout_audit.mjs
+          node --check scripts/visual_heading_audit.mjs
 
       - name: Commit verified website updates
         id: commit
@@ -117,6 +121,8 @@ jobs:
             echo "- Public-section counters and headings: synchronized"
             echo "- Statistics and section hierarchy: clear and interactive"
             echo "- Leadership and volunteer roles: complete and unique"
+            echo "- Responsive layout safeguards: preserved"
+            echo "- Major-heading word integrity: preserved"
             echo "- Curated CV content: preserved"
             echo "- Public profile links: checked"
             echo "- Sitemap and search metadata: refreshed"

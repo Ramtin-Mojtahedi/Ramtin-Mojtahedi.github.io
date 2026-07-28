@@ -37,7 +37,7 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
 
     steps:
       - name: Check out website repository
@@ -64,8 +64,10 @@ jobs:
           service_exit=$?
           python scripts/validate_site_impact.py >> validation-report.txt 2>&1
           impact_exit=$?
+          python scripts/validate_layout_safety.py >> validation-report.txt 2>&1
+          layout_exit=$?
           exit_code=0
-          if [[ "$website_exit" -ne 0 || "$service_exit" -ne 0 || "$impact_exit" -ne 0 ]]; then
+          if [[ "$website_exit" -ne 0 || "$service_exit" -ne 0 || "$impact_exit" -ne 0 || "$layout_exit" -ne 0 ]]; then
             exit_code=1
           fi
           cat validation-report.txt
@@ -94,6 +96,74 @@ jobs:
           node --check assets/programming-languages.js
           node --check assets/site-impact.js
           node --check assets/contact-form.js
+          node --check assets/layout-safety.js
+          node --check scripts/visual_layout_audit.mjs
+          node --check scripts/visual_heading_audit.mjs
+
+      - name: Install Chromium for rendered layout audit
+        run: |
+          npm install --no-save --no-package-lock playwright@1.52.0
+          npx playwright install --with-deps chromium
+
+      - name: Render website for browser audit
+        id: render_audit
+        shell: bash
+        run: |
+          set +e
+          python scripts/render_visual_audit.py > render-audit-report.txt 2>&1
+          exit_code=$?
+          cat render-audit-report.txt
+          echo "exit_code=${exit_code}" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload render diagnostics
+        if: steps.render_audit.outputs.exit_code != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-audit-render-report
+          path: render-audit-report.txt
+          retention-days: 7
+
+      - name: Enforce audit-page rendering
+        if: steps.render_audit.outputs.exit_code != '0'
+        run: exit 1
+
+      - name: Run rendered multi-viewport layout audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m http.server 4173 --bind 127.0.0.1 > /tmp/visual-audit-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/visual-audit.html > /dev/null; then
+              break
+            fi
+            if [[ "$attempt" -eq 30 ]]; then
+              cat /tmp/visual-audit-server.log
+              exit 1
+            fi
+            sleep 1
+          done
+
+          VISUAL_AUDIT_URL=http://127.0.0.1:4173/visual-audit.html \
+            node scripts/visual_layout_audit.mjs
+          VISUAL_AUDIT_URL=http://127.0.0.1:4173/visual-audit.html \
+            node scripts/visual_heading_audit.mjs
+
+      - name: Upload visual layout evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-layout-audit
+          path: |
+            render-audit-report.txt
+            visual-audit-report.json
+            visual-heading-audit-report.json
+            visual-audit-artifacts
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Record validation summary
         run: |
@@ -106,6 +176,9 @@ jobs:
             echo "- Contact routing and safeguards: valid"
             echo "- Visitor-facing implementation markers: absent"
             echo "- Responsive and reduced-motion behavior: valid"
+            echo "- Rendered browser overlap audit: passed at 320–1600 px"
+            echo "- Heading words: intact at desktop, tablet, and mobile widths"
+            echo "- Mobile menu, expanded awards, and dark theme: verified"
             echo "- Daily maintenance configuration: valid"
             echo "- JavaScript and Python syntax: valid"
           } >> "$GITHUB_STEP_SUMMARY"
