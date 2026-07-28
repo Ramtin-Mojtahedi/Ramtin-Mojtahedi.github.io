@@ -3,7 +3,7 @@
   "peer_reviewed_or_accepted_count": 18,
   "submitted_count": 0,
   "publication_sync_date": "2026-07-28",
-  "publication_sync_timestamp": "2026-07-28T07:28:16Z",
+  "publication_sync_timestamp": "2026-07-28T07:46:17Z",
   "publication_source_note": "CV baseline preserved; external scholarly sources checked daily.",
   "google_scholar_profile": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
   "orcid": "https://orcid.org/0000-0002-3953-3256",
@@ -18,7 +18,7 @@
     "google_scholar": "unavailable: 403 Client Error: Forbidden for url: https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en&view_op=list_works&sortby=pubdate&pagesize=100",
     "openalex_orcid": "ok (13 records)",
     "crossref": "ok (7 records)",
-    "dblp": "ok (0 records)"
+    "dblp": "unavailable: 500 Server Error: Internal Server Error for url: https://dblp.org/search/publ/api?q=author%3A%22Ramtin+Mojtahedi%22&format=json&h=1000"
   },
   "auto_added_count": 0,
   "enriched_record_count": 0,
