@@ -31,5 +31,18 @@
   "teaching_topic_count": 9,
   "reviewer_venue_count": 5,
   "leadership_role_count": 28,
+  "programming_language_count": 10,
+  "programming_languages": [
+    "Python",
+    "MATLAB",
+    "C",
+    "C++",
+    "C#",
+    "Java",
+    "Julia",
+    "R",
+    "SQL",
+    "Bash"
+  ],
   "maintenance_frequency": "daily"
 }
