@@ -1,21 +1,21 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "status": "current",
   "last_checked": "2026-07-27",
   "last_checked_display": "July 27, 2026",
   "last_checked_at": "2026-07-27T23:14:14Z",
-  "frequency": "twice weekly",
-  "schedule_display": "Every Monday and Thursday",
+  "frequency": "daily",
+  "schedule_display": "Every day",
   "publication_count": 18,
-  "automated_checks": [
+  "checks": [
     "Scholarly publication discovery and metadata enrichment",
     "Duplicate, thesis, review-report, and non-publication filtering",
-    "Animated statistics and publication-count consistency",
+    "Public-section structure and count consistency",
     "Public profile link availability",
     "Search metadata and sitemap freshness",
     "Website source and JavaScript validation"
   ],
-  "curated_content_policy": "Verified CV biography, education, experience, awards, teaching, and service are preserved and are not rewritten from unverified search results.",
+  "curated_content_policy": "Verified CV biography, education, experience, awards, teaching, and service remain authoritative and are not rewritten from unverified search results.",
   "profile_checks": {
     "google_scholar": {
       "url": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",

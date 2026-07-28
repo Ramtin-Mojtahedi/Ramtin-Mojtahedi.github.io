@@ -6,7 +6,7 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    - cron: '17 8 * * 1'
+    - cron: "17 12 * * *"
 
 permissions:
   contents: read
@@ -32,6 +32,7 @@ jobs:
             "https://ramtin-mojtahedi.github.io/"
             "https://ramtin-mojtahedi.github.io/robots.txt"
             "https://ramtin-mojtahedi.github.io/sitemap.xml"
+            "https://ramtin-mojtahedi.github.io/publications.json"
             "https://ramtin-mojtahedi.github.io/898f0caec5d8b22a095db2a4afa88722.txt"
           )
 
@@ -53,6 +54,7 @@ jobs:
             echo "- Website: available"
             echo "- robots.txt: available"
             echo "- sitemap.xml: available"
+            echo "- publications.json: available"
             echo "- IndexNow key: available"
           } >> "$GITHUB_STEP_SUMMARY"
 

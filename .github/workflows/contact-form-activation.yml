@@ -10,10 +10,10 @@ on:
       - .github/workflows/contact-form-activation.yml
   workflow_dispatch:
   schedule:
-    - cron: '11 11 * * 1'
+    - cron: "11 13 * * *"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: contact-relay-health
@@ -24,9 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Check out website repository
-        uses: actions/checkout@v4
-
       - name: Verify relay endpoint reachability without sending a visitor message
         shell: bash
         run: |
@@ -43,11 +40,11 @@ jobs:
             --write-out '%{http_code}' \
             --request POST \
             --data-urlencode 'to=MojtahediRamtin@gmail.com' \
-            --data-urlencode 'name=Automated website reachability check' \
+            --data-urlencode 'name=Website reachability check' \
             --data-urlencode 'email=Ramtin.Mojtahedi@utoronto.ca' \
             --data-urlencode 'subject=Contact relay reachability check' \
             --data-urlencode 'message=This honeypot request checks endpoint availability and must not be delivered.' \
-            --data-urlencode 'hp_email=automated-health-check' \
+            --data-urlencode 'hp_email=endpoint-health-check' \
             'https://email.gosecureserver.in/api/send.php')"
 
           echo "HTTP status: ${status}"
@@ -60,34 +57,9 @@ jobs:
           fi
 
           {
-            echo '### Contact relay is reachable'
-            echo '- Endpoint request: accepted'
-            echo '- Recipient spelling: MojtahediRamtin@gmail.com'
-            echo '- Test payload: blocked by the honeypot and not delivered'
-            echo '- Inbox delivery: not asserted by this health check'
+            echo "### Contact relay is reachable"
+            echo "- Endpoint request: accepted"
+            echo "- Recipient spelling: MojtahediRamtin@gmail.com"
+            echo "- Test payload: blocked by the honeypot and not delivered"
+            echo "- Inbox delivery: not asserted by this health check"
           } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Record reachability status
-        shell: bash
-        run: |
-          set -euo pipefail
-          checked_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          cat > .github/contact-endpoint-status.json <<EOF
-          {
-            "status": "reachable",
-            "checked_at": "${checked_at}",
-            "endpoint": "https://email.gosecureserver.in/api/send.php",
-            "recipient": "MojtahediRamtin@gmail.com",
-            "public_email": "Ramtin.Mojtahedi@utoronto.ca",
-            "recipient_activation_required": false,
-            "inbox_delivery_verified": false,
-            "note": "This monitor confirms endpoint reachability only. Inbox placement is controlled by the recipient email provider."
-          }
-          EOF
-
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .github/contact-endpoint-status.json
-          git commit -m 'Record contact relay reachability' || exit 0
-          git pull --rebase origin main
-          git push origin HEAD:main

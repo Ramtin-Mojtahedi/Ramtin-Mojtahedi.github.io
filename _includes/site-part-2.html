@@ -3,11 +3,10 @@
     <div class="head reveal">
       <div>
         <p class="kicker">Publications</p>
-        <h2 class="title">Complete publication record.</h2>
+        <h2 class="title">Peer-reviewed research and scholarly work.</h2>
       </div>
       <p>
-        {{ site.data.site_metrics.peer_reviewed_or_accepted_count }} peer-reviewed, accepted, or in-press publications.
-        The June 2026 CV record is preserved, and scholarly sources are checked automatically twice weekly.
+        {{ site.data.site_metrics.peer_reviewed_or_accepted_count }} peer-reviewed, accepted, or in-press publications across medical imaging, clinical prediction, and biomedical engineering.
       </p>
     </div>
 
@@ -30,7 +29,6 @@
       class="pubList"
       id="publicationList"
       data-publication-count="{{ site.data.site_metrics.publication_count }}"
-      data-last-checked="{{ site.data.site_metrics.publication_sync_date }}"
     >
       {% for pub in site.data.publications %}
       <article
@@ -56,13 +54,6 @@
         {% endif %}
       </article>
       {% endfor %}
-    </div>
-
-    <div class="publication-sync-note reveal" role="note">
-      <strong>Automatic scholarly update:</strong>
-      checked {{ site.data.site_metrics.publication_sync_date }} using Google Scholar, ORCID/OpenAlex, Crossref, and DBLP.
-      New verified records are added without deleting the CV baseline.
-      <a href="{{ site.data.site_metrics.google_scholar_profile }}" target="_blank" rel="noopener noreferrer">Open Google Scholar ↗</a>
     </div>
   </div>
 </section>
