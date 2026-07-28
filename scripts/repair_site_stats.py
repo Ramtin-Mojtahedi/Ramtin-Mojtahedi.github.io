@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Repair and synchronize the portfolio statistics markup.
-
-The publication counter is sourced from _data/site_metrics.json. This script
-replaces the complete first statistic element rather than editing an attribute
-with regex backreferences, preventing malformed HTML and NaN counters.
-"""
+"""Synchronize public counters and count-based headings with the site content."""
 
 from __future__ import annotations
 
@@ -15,43 +10,124 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 METRICS_PATH = ROOT / "_data" / "site_metrics.json"
 HERO_PATH = ROOT / "_includes" / "site-part-1.html"
+ACTIVITY_PATH = ROOT / "_includes" / "site-part-3.html"
+SERVICE_PATH = ROOT / "_includes" / "site-part-4.html"
+
+STAT_LABELS = {
+    "publication_count": "Peer-reviewed, accepted, and published works",
+    "presentation_count": "Oral and poster presentations",
+    "recognition_count": "Honours, awards, and distinctions",
+    "reviewer_venue_count": "Reviewer and service venues",
+    "leadership_role_count": "Leadership and volunteer roles",
+}
+
+
+def count(pattern: str, source: str) -> int:
+    return len(re.findall(pattern, source, flags=re.IGNORECASE | re.DOTALL))
+
+
+def reviewer_venue_count(source: str) -> int:
+    match = re.search(
+        r"<h3>Reviewer and professional service</h3>\s*<ul class=\"clean\">(.*?)</ul>",
+        source,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if not match:
+        raise RuntimeError("Could not locate the reviewer and professional service list.")
+    return count(r"<li(?:\s|>)", match.group(1))
+
+
+def replace_stat(source: str, label: str, value: int) -> str:
+    pattern = re.compile(
+        rf"<div class='stat'>\s*<b[^>]*>[^<]*</b>\s*"
+        rf"<span>{re.escape(label)}</span>\s*</div>"
+    )
+    replacement = (
+        "<div class='stat'>"
+        f"<b data-count='{value}'>{value}</b>"
+        f"<span>{label}</span>"
+        "</div>"
+    )
+    updated, replacements = pattern.subn(replacement, source, count=1)
+    if replacements != 1:
+        raise RuntimeError(f"Could not synchronize the statistic labelled: {label}")
+    return updated
+
+
+def replace_heading(source: str, section_pattern: str, text: str) -> str:
+    pattern = re.compile(
+        rf"({section_pattern}.*?<h2 class='title'>).*?(</h2>)",
+        flags=re.DOTALL,
+    )
+    updated, replacements = pattern.subn(rf"\g<1>{text}\g<2>", source, count=1)
+    if replacements != 1:
+        raise RuntimeError(f"Could not synchronize the heading for: {section_pattern}")
+    return updated
 
 
 def main() -> int:
     metrics = json.loads(METRICS_PATH.read_text(encoding="utf-8"))
+    hero = HERO_PATH.read_text(encoding="utf-8")
+    activity = ACTIVITY_PATH.read_text(encoding="utf-8")
+    service = SERVICE_PATH.read_text(encoding="utf-8")
+
+    oral_count = count(r"<small>Oral\s*·", activity)
+    poster_count = count(r"<small>Poster\s*·", activity)
+    presentation_count = oral_count + poster_count
+    recognition_count = count(r"<article class='award[^']*'>", activity)
+    teaching_topic_count = count(r"<article class='teach[^']*'>", activity)
+    leadership_role_count = count(r"<article class=\"lead[^\"]*\">", service)
+    service_venue_count = reviewer_venue_count(service)
     publication_count = int(metrics.get("publication_count", 0))
-    if publication_count < 1:
-        raise RuntimeError("Publication count must be a positive integer.")
 
-    source = HERO_PATH.read_text(encoding="utf-8")
-    pattern = re.compile(
-        r"(<section class='statsSec'>.*?<div class='stat'>)"
-        r"<b.*?</b><span>Peer-reviewed, accepted, and published works</span>",
-        flags=re.DOTALL,
+    section_counts = {
+        "publication_count": publication_count,
+        "presentation_count": presentation_count,
+        "oral_presentation_count": oral_count,
+        "poster_presentation_count": poster_count,
+        "recognition_count": recognition_count,
+        "teaching_topic_count": teaching_topic_count,
+        "reviewer_venue_count": service_venue_count,
+        "leadership_role_count": leadership_role_count,
+    }
+    invalid = {key: value for key, value in section_counts.items() if value < 1}
+    if invalid:
+        raise RuntimeError(f"One or more public sections appear empty: {invalid}")
+
+    for metric_name, label in STAT_LABELS.items():
+        hero = replace_stat(hero, label, section_counts[metric_name])
+
+    activity = replace_heading(
+        activity,
+        r"<section id='presentations'>",
+        f"{oral_count} oral and {poster_count} poster presentations.",
     )
+    activity = replace_heading(
+        activity,
+        r"<section class='surface' id='recognition'>",
+        f"{recognition_count} honours, awards, grants, and distinctions.",
+    )
+    activity, button_replacements = re.subn(
+        r"Show all \d+ distinctions ↓",
+        f"Show all {recognition_count} distinctions ↓",
+        activity,
+        count=1,
+    )
+    if button_replacements != 1:
+        raise RuntimeError("Could not synchronize the recognition expansion button.")
 
-    def replacement(match: re.Match[str]) -> str:
-        return (
-            match.group(1)
-            + f"<b data-count='{publication_count}'>{publication_count}</b>"
-            + "<span>Peer-reviewed, accepted, and published works</span>"
-        )
+    if "NaN" in hero or "\x88" in hero:
+        raise RuntimeError("Invalid counter text remains after synchronization.")
 
-    repaired, replacements = pattern.subn(replacement, source, count=1)
-    if replacements != 1:
-        raise RuntimeError(
-            "Could not locate exactly one publication statistic in site-part-1.html."
-        )
+    metrics.update(section_counts)
+    METRICS_PATH.write_text(
+        json.dumps(metrics, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    HERO_PATH.write_text(hero, encoding="utf-8")
+    ACTIVITY_PATH.write_text(activity, encoding="utf-8")
 
-    if "NaN" in repaired or "\x88" in repaired:
-        raise RuntimeError("Invalid counter text remains after repair.")
-
-    expected = f"<b data-count='{publication_count}'>{publication_count}</b>"
-    if expected not in repaired:
-        raise RuntimeError("The publication counter was not written correctly.")
-
-    HERO_PATH.write_text(repaired, encoding="utf-8")
-    print(f"Publication counter repaired and synchronized to {publication_count}.")
+    print(json.dumps(section_counts, indent=2, ensure_ascii=False))
     return 0
 
 
