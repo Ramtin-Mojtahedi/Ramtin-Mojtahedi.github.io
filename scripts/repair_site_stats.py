@@ -21,6 +21,19 @@ NUMBER_WORDS = {
     19: "nineteen", 20: "twenty",
 }
 
+PROGRAMMING_LANGUAGES = (
+    "Python",
+    "MATLAB",
+    "C",
+    "C++",
+    "C#",
+    "Java",
+    "Julia",
+    "R",
+    "SQL",
+    "Bash",
+)
+
 
 def display_count(value: int) -> str:
     return NUMBER_WORDS.get(value, str(value))
@@ -102,6 +115,7 @@ def main() -> int:
         "teaching_topic_count": teaching_topic_count,
         "reviewer_venue_count": service_venue_count,
         "leadership_role_count": leadership_role_count,
+        "programming_language_count": len(PROGRAMMING_LANGUAGES),
     }
     invalid = {key: value for key, value in section_counts.items() if value < 1}
     if invalid:
@@ -134,6 +148,7 @@ def main() -> int:
         raise RuntimeError("Invalid counter text remains after synchronization.")
 
     metrics.update(section_counts)
+    metrics["programming_languages"] = list(PROGRAMMING_LANGUAGES)
     METRICS_PATH.write_text(
         json.dumps(metrics, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
@@ -141,7 +156,7 @@ def main() -> int:
     HERO_PATH.write_text(hero, encoding="utf-8")
     ACTIVITY_PATH.write_text(activity, encoding="utf-8")
 
-    print(json.dumps(section_counts, indent=2, ensure_ascii=False))
+    print(json.dumps({**section_counts, "programming_languages": PROGRAMMING_LANGUAGES}, indent=2, ensure_ascii=False))
     return 0
 
 
