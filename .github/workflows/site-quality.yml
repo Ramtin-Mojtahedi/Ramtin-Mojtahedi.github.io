@@ -62,8 +62,10 @@ jobs:
           website_exit=$?
           python scripts/validate_service_roles.py >> validation-report.txt 2>&1
           service_exit=$?
+          python scripts/validate_site_impact.py >> validation-report.txt 2>&1
+          impact_exit=$?
           exit_code=0
-          if [[ "$website_exit" -ne 0 || "$service_exit" -ne 0 ]]; then
+          if [[ "$website_exit" -ne 0 || "$service_exit" -ne 0 || "$impact_exit" -ne 0 ]]; then
             exit_code=1
           fi
           cat validation-report.txt
@@ -89,6 +91,8 @@ jobs:
           node --check assets/site-polish.js
           node --check assets/site-pointer-scroll.js
           node --check assets/publication-runtime.js
+          node --check assets/programming-languages.js
+          node --check assets/site-impact.js
           node --check assets/contact-form.js
 
       - name: Record validation summary
@@ -97,9 +101,11 @@ jobs:
             echo "### Portfolio validation passed"
             echo "- Required public sections and internal links: valid"
             echo "- Publication data and all public counters: synchronized"
+            echo "- Statistics and section hierarchy: clear and interactive"
             echo "- Leadership and volunteer roles: complete and unique"
             echo "- Contact routing and safeguards: valid"
             echo "- Visitor-facing implementation markers: absent"
+            echo "- Responsive and reduced-motion behavior: valid"
             echo "- Daily maintenance configuration: valid"
             echo "- JavaScript and Python syntax: valid"
           } >> "$GITHUB_STEP_SUMMARY"
