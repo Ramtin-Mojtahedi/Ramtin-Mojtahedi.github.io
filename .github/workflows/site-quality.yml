@@ -58,11 +58,14 @@ jobs:
         shell: bash
         run: |
           set +e
-          {
-            python scripts/validate_website.py
-            python scripts/validate_service_roles.py
-          } > validation-report.txt 2>&1
-          exit_code=$?
+          python scripts/validate_website.py > validation-report.txt 2>&1
+          website_exit=$?
+          python scripts/validate_service_roles.py >> validation-report.txt 2>&1
+          service_exit=$?
+          exit_code=0
+          if [[ "$website_exit" -ne 0 || "$service_exit" -ne 0 ]]; then
+            exit_code=1
+          fi
           cat validation-report.txt
           echo "exit_code=${exit_code}" >> "$GITHUB_OUTPUT"
           exit 0
