@@ -6,39 +6,38 @@ on:
       - main
     paths:
       - index.html
-      - site-status.json
       - sitemap.xml
+      - publications.json
       - _includes/**
       - _data/**
       - assets/**
-      - scripts/validate_website.py
-      - scripts/refresh_site_maintenance.py
+      - scripts/**
       - .github/workflows/site-quality.yml
   pull_request:
     paths:
       - index.html
-      - site-status.json
       - sitemap.xml
+      - publications.json
       - _includes/**
       - _data/**
       - assets/**
-      - scripts/validate_website.py
-      - scripts/refresh_site_maintenance.py
+      - scripts/**
+      - .github/workflows/site-quality.yml
   workflow_dispatch:
   schedule:
-    - cron: '41 7 * * 1'
+    - cron: "47 11 * * *"
 
 permissions:
   contents: read
 
 concurrency:
-  group: portfolio-site-quality
+  group: portfolio-site-quality-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
 
     steps:
       - name: Check out website repository
@@ -47,21 +46,19 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
 
-      - name: Validate website data, contact routing, and maintenance status
+      - name: Validate website structure, content, and data
         run: python scripts/validate_website.py
 
       - name: Validate Python and JavaScript syntax
         run: |
-          python -m py_compile \
-            scripts/validate_website.py \
-            scripts/refresh_site_maintenance.py
+          python -m py_compile scripts/*.py
           node --check assets/site-2026.js
           node --check assets/site-polish.js
           node --check assets/site-pointer-scroll.js
@@ -71,12 +68,11 @@ jobs:
       - name: Record validation summary
         run: |
           {
-            echo '### Portfolio validation passed'
-            echo '- Animated statistics: numeric and NaN-safe'
-            echo '- Contact categories: complete'
-            echo '- Contact disclaimer: removed'
-            echo '- Public/private email routing: validated'
-            echo '- Publication baseline and metrics: consistent'
-            echo '- Automatic maintenance status: connected'
-            echo '- JavaScript and Python syntax: valid'
+            echo "### Portfolio validation passed"
+            echo "- Required public sections and internal links: valid"
+            echo "- Publication data and all public counters: synchronized"
+            echo "- Contact routing and safeguards: valid"
+            echo "- Visitor-facing implementation markers: absent"
+            echo "- Daily maintenance configuration: valid"
+            echo "- JavaScript and Python syntax: valid"
           } >> "$GITHUB_STEP_SUMMARY"
