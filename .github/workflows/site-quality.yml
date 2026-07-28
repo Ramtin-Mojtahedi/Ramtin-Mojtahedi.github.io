@@ -105,7 +105,27 @@ jobs:
           npx playwright install --with-deps chromium
 
       - name: Render website for browser audit
-        run: python scripts/render_visual_audit.py
+        id: render_audit
+        shell: bash
+        run: |
+          set +e
+          python scripts/render_visual_audit.py > render-audit-report.txt 2>&1
+          exit_code=$?
+          cat render-audit-report.txt
+          echo "exit_code=${exit_code}" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload render diagnostics
+        if: steps.render_audit.outputs.exit_code != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-audit-render-report
+          path: render-audit-report.txt
+          retention-days: 7
+
+      - name: Enforce audit-page rendering
+        if: steps.render_audit.outputs.exit_code != '0'
+        run: exit 1
 
       - name: Run rendered multi-viewport layout audit
         shell: bash
@@ -135,6 +155,7 @@ jobs:
         with:
           name: visual-layout-audit
           path: |
+            render-audit-report.txt
             visual-audit-report.json
             visual-audit-artifacts
           if-no-files-found: warn
