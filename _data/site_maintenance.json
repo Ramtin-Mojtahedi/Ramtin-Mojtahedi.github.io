@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
   "status": "current",
-  "last_checked": "2026-07-31",
-  "last_checked_display": "July 31, 2026",
-  "last_checked_at": "2026-07-31T12:23:44Z",
+  "last_checked": "2026-08-01",
+  "last_checked_display": "August 1, 2026",
+  "last_checked_at": "2026-08-01T11:37:54Z",
   "frequency": "daily",
   "schedule_display": "Every day",
   "publication_count": 18,
@@ -19,8 +19,8 @@
   "profile_checks": {
     "google_scholar": {
       "url": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
-      "status": "available-protected",
-      "http_status": 403,
+      "status": "available",
+      "http_status": 200,
       "final_url": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en"
     },
     "orcid": {
@@ -39,7 +39,7 @@
       "url": "https://www.linkedin.com/in/ramtin-mojtahedi/",
       "status": "available-protected",
       "http_status": 999,
-      "final_url": "https://www.linkedin.com/in/ramtin-mojtahedi"
+      "final_url": "https://www.linkedin.com/in/ramtin-mojtahedi/"
     },
     "university_health_network": {
       "url": "https://www.uhn.ca/",
@@ -56,7 +56,7 @@
   },
   "source_status": {
     "cv_baseline": "preserved 18 records",
-    "google_scholar": "unavailable: 403 Client Error: Forbidden for url: https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en&view_op=list_works&sortby=pubdate&pagesize=100",
+    "google_scholar": "ok (17 records)",
     "openalex_orcid": "ok (13 records)",
     "crossref": "ok (7 records)",
     "dblp": "ok (0 records)"
