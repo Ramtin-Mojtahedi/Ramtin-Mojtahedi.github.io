@@ -6,7 +6,7 @@
         <h2 class="title">Peer-reviewed publications and scholarly work.</h2>
       </div>
       <p>
-        {{ site.data.site_metrics.peer_reviewed_or_accepted_count }} peer-reviewed, accepted, or in-press works spanning medical imaging, clinical prediction, segmentation, and biomedical engineering.
+        {{ site.data.site_metrics.peer_reviewed_or_accepted_count }} peer-reviewed papers and {{ site.data.site_metrics.non_peer_reviewed_scholarly_output_count }} additional scholarly records, each linked to verified citation and access information.
       </p>
     </div>
 
@@ -23,6 +23,8 @@
         Submitted {{ site.data.site_metrics.submitted_count }}
       </button>
       {% endif %}
+      <a class="pub-index-link" href="/publications/">Publication index</a>
+      <a class="pub-index-link" href="/publications.bib" download>BibTeX</a>
     </div>
 
     <div
@@ -40,18 +42,25 @@
         <span class="year">{{ pub.year }}</span>
         <div>
           <span class="tag">{{ pub.status }}</span>
-          <h3>{{ pub.title }}</h3>
+          <h3><a class="pub-title-link" href="{{ pub.detail_url }}">{{ pub.title }}</a></h3>
           <p class="pub-authors">{{ pub.authors_html }}</p>
           <p>{{ pub.citation }}</p>
           {% if pub.note and pub.note != "" %}
           <p class="pub-note">{{ pub.note }}</p>
           {% endif %}
         </div>
-        {% if pub.url and pub.url != "" %}
-        <a href="{{ pub.url }}" target="_blank" rel="noopener noreferrer">
-          {{ pub.link_label | default: "View ↗" }}
-        </a>
-        {% endif %}
+        <div class="pub-links">
+          <a href="{{ pub.detail_url }}">Details</a>
+          {% if pub.url and pub.url != "" %}
+          <a href="{{ pub.url }}" target="_blank" rel="noopener noreferrer">DOI ↗</a>
+          {% endif %}
+          {% if pub.open_access_url and pub.open_access_url != "" %}
+          <a href="{{ pub.open_access_url }}" target="_blank" rel="noopener noreferrer">Public text ↗</a>
+          {% endif %}
+          {% if pub.code_url and pub.code_url != "" %}
+          <a href="{{ pub.code_url }}" target="_blank" rel="noopener noreferrer">{{ pub.code_label | default: "Code" }} ↗</a>
+          {% endif %}
+        </div>
       </article>
       {% endfor %}
     </div>

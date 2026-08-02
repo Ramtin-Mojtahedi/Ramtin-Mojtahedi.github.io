@@ -20,6 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Check out indexing manifest
+        uses: actions/checkout@v4
+
       - name: Wait for GitHub Pages publication
         if: github.event_name == 'push'
         run: sleep 75
@@ -33,6 +36,9 @@ jobs:
             "https://ramtin-mojtahedi.github.io/robots.txt"
             "https://ramtin-mojtahedi.github.io/sitemap.xml"
             "https://ramtin-mojtahedi.github.io/publications.json"
+            "https://ramtin-mojtahedi.github.io/publications/"
+            "https://ramtin-mojtahedi.github.io/publications.bib"
+            "https://ramtin-mojtahedi.github.io/scholarly-pages.json"
             "https://ramtin-mojtahedi.github.io/898f0caec5d8b22a095db2a4afa88722.txt"
           )
 
@@ -55,6 +61,7 @@ jobs:
             echo "- robots.txt: available"
             echo "- sitemap.xml: available"
             echo "- publications.json: available"
+            echo "- publication index and BibTeX: available"
             echo "- IndexNow key: available"
           } >> "$GITHUB_STEP_SUMMARY"
 
@@ -71,6 +78,8 @@ jobs:
             --retry 5 \
             --retry-delay 10 \
             --retry-all-errors \
-            "https://api.indexnow.org/indexnow?url=https%3A%2F%2Framtin-mojtahedi.github.io%2F&key=898f0caec5d8b22a095db2a4afa88722&keyLocation=https%3A%2F%2Framtin-mojtahedi.github.io%2F898f0caec5d8b22a095db2a4afa88722.txt"
+            --header "Content-Type: application/json; charset=utf-8" \
+            --data-binary @indexnow.json \
+            https://api.indexnow.org/indexnow
 
-          echo "- IndexNow: homepage submitted" >> "$GITHUB_STEP_SUMMARY"
+          echo "- IndexNow: homepage and all scholarly pages submitted" >> "$GITHUB_STEP_SUMMARY"

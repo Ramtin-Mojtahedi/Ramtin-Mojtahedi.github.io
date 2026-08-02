@@ -1,9 +1,9 @@
 {
-  "publication_count": 18,
-  "peer_reviewed_or_accepted_count": 18,
+  "publication_count": 19,
+  "peer_reviewed_or_accepted_count": 17,
   "submitted_count": 0,
   "publication_sync_date": "2026-08-02",
-  "publication_sync_timestamp": "2026-08-02T11:38:45Z",
+  "publication_sync_timestamp": "2026-08-02T19:00:00Z",
   "publication_source_note": "CV baseline preserved; external scholarly sources checked daily.",
   "google_scholar_profile": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
   "orcid": "https://orcid.org/0000-0002-3953-3256",
@@ -14,7 +14,7 @@
     "DBLP"
   ],
   "source_status": {
-    "cv_baseline": "preserved 18 records",
+    "cv_baseline": "preserved 19 curated records",
     "google_scholar": "unavailable: 403 Client Error: Forbidden for url: https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en&view_op=list_works&sortby=pubdate&pagesize=100",
     "openalex_orcid": "ok (13 records)",
     "crossref": "ok (7 records)",
@@ -22,7 +22,7 @@
   },
   "auto_added_count": 0,
   "enriched_record_count": 0,
-  "minimum_preserved_records": 18,
+  "minimum_preserved_records": 19,
   "invalid_nonpublication_records_removed": 1,
   "presentation_count": 9,
   "oral_presentation_count": 5,
@@ -44,5 +44,7 @@
     "SQL",
     "Bash"
   ],
-  "maintenance_frequency": "daily"
+  "maintenance_frequency": "daily",
+  "scholarly_output_count": 19,
+  "non_peer_reviewed_scholarly_output_count": 2
 }

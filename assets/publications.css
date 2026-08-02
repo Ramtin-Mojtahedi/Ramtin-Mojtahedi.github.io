@@ -6,3 +6,38 @@
 .pub-note {
   font-style: italic;
 }
+
+.pub-title-link {
+  color: inherit;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: .16em;
+}
+
+.pub-links {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+  min-width: 7.5rem;
+}
+
+.pub-links a,
+.pub-index-link {
+  font-size: .76rem;
+  font-weight: 750;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+
+.pub-index-link {
+  align-self: center;
+  margin-left: .2rem;
+}
+
+@media (max-width: 760px) {
+  .pub-links {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

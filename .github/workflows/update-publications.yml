@@ -14,6 +14,10 @@ on:
       - "assets/**"
       - "scripts/**"
       - "publications.json"
+      - "publications.bib"
+      - "publications/**"
+      - "scholarly-pages.json"
+      - "indexnow.json"
       - "sitemap.xml"
       - ".github/workflows/update-publications.yml"
 
@@ -59,6 +63,9 @@ jobs:
       - name: Remove non-publication records
         run: python scripts/clean_publications.py
 
+      - name: Build scholarly citation pages and exports
+        run: python scripts/build_scholarly_pages.py
+
       - name: Synchronize all public counters and headings
         run: python scripts/repair_site_stats.py
 
@@ -99,6 +106,10 @@ jobs:
             _includes/site-part-1.html \
             _includes/site-part-3.html \
             publications.json \
+            publications.bib \
+            publications/ \
+            scholarly-pages.json \
+            indexnow.json \
             sitemap.xml
 
           if git diff --cached --quiet; then
@@ -139,4 +150,6 @@ jobs:
             --show-error \
             --retry 4 \
             --retry-delay 5 \
-            "https://api.indexnow.org/indexnow?url=https%3A%2F%2Framtin-mojtahedi.github.io%2F&key=898f0caec5d8b22a095db2a4afa88722&keyLocation=https%3A%2F%2Framtin-mojtahedi.github.io%2F898f0caec5d8b22a095db2a4afa88722.txt"
+            --header "Content-Type: application/json; charset=utf-8" \
+            --data-binary @indexnow.json \
+            https://api.indexnow.org/indexnow
