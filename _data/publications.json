@@ -584,7 +584,7 @@
     "detail_url": "/publications/optimal-vit-patch-size-tumor-segmentation-2022/"
   },
   {
-    "id": "multimodal-brain-tumour-vit-patch-2023",
+    "id": "multimodal-brain-tumour-vit-patch-2022",
     "title": "Multi-modal Brain Tumour Segmentation Using Transformer with Optimal Patch Size",
     "year": 2023,
     "publication_date": "2023-07-18",
@@ -622,7 +622,7 @@
       "multimodal MRI"
     ],
     "note": "",
-    "detail_url": "/publications/multimodal-brain-tumour-vit-patch-2023/"
+    "detail_url": "/publications/multimodal-brain-tumour-vit-patch-2022/"
   },
   {
     "id": "smart-package-liquid-flow-meters-2017",
