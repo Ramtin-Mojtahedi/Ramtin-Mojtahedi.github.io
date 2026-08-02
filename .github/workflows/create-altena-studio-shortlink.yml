@@ -1,190 +1,67 @@
 name: Create Altena Studio branded short URL
 
 on:
-  issues:
-    types:
-      - opened
   pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
-  contents: write
-  issues: write
-  pull-requests: write
+  contents: read
 
 jobs:
   create-short-link:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'issues' && github.event.issue.title == 'Create Altena Studio branded short URL') ||
-      (github.event_name == 'pull_request' && github.event.pull_request.title == 'Trigger Altena Studio branded URL creation')
     runs-on: ubuntu-latest
     steps:
-      - name: Check out website repository
-        uses: actions/checkout@v4
-
-      - name: Create and verify permanent branded redirect
-        id: shorten
+      - name: Create and verify branded redirect
         shell: bash
         run: |
-          set -euo pipefail
+          set -u
 
           destination="https://ramtin-mojtahedi.github.io/altena-studio/"
-          chosen=""
-          service=""
 
-          verify_redirect() {
+          verify_url() {
             local short_url="$1"
             local final_url
             final_url="$(curl --location --silent --show-error --output /dev/null --write-out '%{url_effective}' "${short_url}" || true)"
-            echo "Verification for ${short_url}: ${final_url}"
+            echo "VERIFY ${short_url} -> ${final_url}"
             [[ "${final_url}" == "${destination}" || "${final_url}" == "${destination%/}" ]]
           }
 
-          echo "Trying is.gd aliases"
-          for alias in AltenaStudio AltenaStudioOfficial AltenaStudioLinks; do
-            existing="$(curl --silent --show-error --get \
-              --data-urlencode "format=simple" \
-              --data-urlencode "shorturl=${alias}" \
-              https://is.gd/forward.php || true)"
-            echo "is.gd lookup ${alias}: ${existing}"
+          for alias in AltenaStudio AltenaStudioHQ AltenaStudioGo AltenaLinks StudioAltena; do
+            payload="{\"long_url\":\"${destination}\",\"alias\":\"${alias}\"}"
+            response="$(curl --silent --show-error --write-out $'\n%{http_code}' \
+              --request POST \
+              --header 'Content-Type: application/json' \
+              --data "${payload}" \
+              https://spoo.me/api/v1/shorten || true)"
+            status="$(printf '%s\n' "${response}" | tail -n 1)"
+            body="$(printf '%s\n' "${response}" | sed '$d')"
+            echo "SPOO ${alias} HTTP ${status}: ${body}"
 
-            if [[ "${existing}" == "${destination}" || "${existing}" == "${destination%/}" ]]; then
-              chosen="https://is.gd/${alias}"
-              service="is.gd"
-              break
-            fi
-
-            if [[ "${existing}" == Error:* ]]; then
-              created="$(curl --silent --show-error --get \
-                --data-urlencode "format=simple" \
-                --data-urlencode "url=${destination}" \
-                --data-urlencode "shorturl=${alias}" \
-                https://is.gd/create.php || true)"
-              echo "is.gd create ${alias}: ${created}"
-              if [[ "${created}" == https://is.gd/* ]]; then
-                chosen="${created}"
-                service="is.gd"
-                break
+            if [[ "${status}" == "201" ]]; then
+              short_url="$(printf '%s' "${body}" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("short_url",""))')"
+              if [[ "${short_url}" == https://spoo.me/* ]] && verify_url "${short_url}"; then
+                echo "VERIFIED_ALTENA_STUDIO_URL=${short_url}"
+                exit 0
               fi
             fi
           done
 
-          if [[ -z "${chosen}" ]]; then
-            echo "Trying spoo.me aliases"
-            for alias in AltenaStudio Altena_Studio AltenaOfficial AltenaLinks; do
-              candidate="https://spoo.me/${alias}"
-              if verify_redirect "${candidate}"; then
-                chosen="${candidate}"
-                service="spoo.me"
-                break
-              fi
-
-              payload="$(printf '{\"long_url\":\"%s\",\"alias\":\"%s\"}' "${destination}" "${alias}")"
-              response="$(curl --silent --show-error \
-                --request POST \
-                --header 'Content-Type: application/json' \
-                --data "${payload}" \
-                https://spoo.me/api/v1/shorten || true)"
-              echo "spoo.me create ${alias}: ${response}"
-              short_url="$(python3 -c 'import json,sys
-try:
- d=json.load(sys.stdin); print(d.get("short_url", ""))
-except Exception:
- print("")' <<< "${response}")"
-              if [[ "${short_url}" == https://spoo.me/* ]] && verify_redirect "${short_url}"; then
-                chosen="${short_url}"
-                service="spoo.me"
-                break
-              fi
-            done
-          fi
-
-          if [[ -z "${chosen}" ]]; then
-            echo "Trying ulvis.net aliases"
-            for alias in AltenaStudio AltenaStudioOfficial AltenaStudioLinks; do
+          for host in v.gd is.gd; do
+            for alias in AltenaStudio AltenaStudioHQ AltenaStudioGo AltenaLinks StudioAltena; do
               response="$(curl --silent --show-error --get \
+                --data-urlencode 'format=simple' \
                 --data-urlencode "url=${destination}" \
-                --data-urlencode "custom=${alias}" \
-                --data-urlencode "private=1" \
-                --data-urlencode "type=json" \
-                https://ulvis.net/api.php || true)"
-              echo "ulvis.net create ${alias}: ${response}"
-              short_url="$(python3 -c 'import json,sys
-try:
- d=json.load(sys.stdin); print((d.get("data") or {}).get("url", ""))
-except Exception:
- print("")' <<< "${response}")"
-              if [[ "${short_url}" == https://ulvis.net/* ]] && verify_redirect "${short_url}"; then
-                chosen="${short_url}"
-                service="ulvis.net"
-                break
+                --data-urlencode "shorturl=${alias}" \
+                "https://${host}/create.php" || true)"
+              echo "${host} ${alias}: ${response}"
+
+              if [[ "${response}" == "https://${host}/"* ]] && verify_url "${response}"; then
+                echo "VERIFIED_ALTENA_STUDIO_URL=${response}"
+                exit 0
               fi
             done
-          fi
+          done
 
-          if [[ -z "${chosen}" ]]; then
-            echo "No approved branded alias could be created and verified." >&2
-            exit 1
-          fi
-
-          verified_destination="$(curl --location --fail --silent --show-error --output /dev/null --write-out '%{url_effective}' "${chosen}")"
-          if [[ "${verified_destination}" != "${destination}" && "${verified_destination}" != "${destination%/}" ]]; then
-            echo "Final redirect verification failed: ${verified_destination}" >&2
-            exit 1
-          fi
-
-          {
-            echo "${chosen}"
-            echo "Destination: ${destination}"
-            echo "Service: ${service}"
-            echo "Verified on $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          } > altena-studio-short-url.txt
-
-          echo "url=${chosen}" >> "${GITHUB_OUTPUT}"
-          echo "destination=${verified_destination}" >> "${GITHUB_OUTPUT}"
-          echo "VERIFIED ALTENA STUDIO URL: ${chosen}"
-          echo "VERIFIED DESTINATION: ${verified_destination}"
-
-      - name: Report the verified address on the trigger issue
-        if: github.event_name == 'issues'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          SHORT_URL: ${{ steps.shorten.outputs.url }}
-          DESTINATION: ${{ steps.shorten.outputs.destination }}
-        shell: bash
-        run: |
-          gh issue comment "${{ github.event.issue.number }}" \
-            --repo "${{ github.repository }}" \
-            --body "VERIFIED ALTENA STUDIO URL: ${SHORT_URL}\n\nVerified destination: ${DESTINATION}"
-
-      - name: Report the verified address on the trigger pull request
-        if: github.event_name == 'pull_request'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          SHORT_URL: ${{ steps.shorten.outputs.url }}
-          DESTINATION: ${{ steps.shorten.outputs.destination }}
-        shell: bash
-        run: |
-          gh pr comment "${{ github.event.pull_request.number }}" \
-            --repo "${{ github.repository }}" \
-            --body "VERIFIED ALTENA STUDIO URL: ${SHORT_URL}\n\nVerified destination: ${DESTINATION}"
-
-      - name: Record the verified address
-        if: github.event_name != 'pull_request'
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add altena-studio-short-url.txt
-          if git diff --cached --quiet; then
-            echo "Verified address is already recorded."
-          else
-            git commit -m "Record verified Altena Studio short URL"
-            git push
-          fi
+          echo "No branded redirect could be created and verified." >&2
+          exit 1
