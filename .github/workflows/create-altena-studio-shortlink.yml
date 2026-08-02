@@ -1,0 +1,87 @@
+name: Create Altena Studio branded short URL
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/create-altena-studio-shortlink.yml
+
+permissions:
+  contents: write
+
+jobs:
+  create-short-link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website repository
+        uses: actions/checkout@v4
+
+      - name: Create and verify permanent branded redirect
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          destination="https://ramtin-mojtahedi.github.io/altena-studio/"
+          aliases=("AltenaStudio" "AltenaStudioOfficial" "AltenaStudioLinks")
+          chosen=""
+
+          for alias in "${aliases[@]}"; do
+            existing="$(curl --silent --show-error --get \
+              --data-urlencode "format=simple" \
+              --data-urlencode "shorturl=${alias}" \
+              https://is.gd/forward.php || true)"
+
+            if [[ "${existing}" == "${destination}" || "${existing}" == "${destination%/}" ]]; then
+              chosen="https://is.gd/${alias}"
+              break
+            fi
+
+            if [[ "${existing}" == Error:* ]]; then
+              created="$(curl --silent --show-error --get \
+                --data-urlencode "format=simple" \
+                --data-urlencode "url=${destination}" \
+                --data-urlencode "shorturl=${alias}" \
+                https://is.gd/create.php || true)"
+
+              if [[ "${created}" == https://is.gd/* ]]; then
+                chosen="${created}"
+                break
+              fi
+            fi
+          done
+
+          if [[ -z "${chosen}" ]]; then
+            echo "No approved branded alias was available." >&2
+            exit 1
+          fi
+
+          verified_destination="$(curl --fail --silent --show-error --get \
+            --data-urlencode "format=simple" \
+            --data-urlencode "shorturl=${chosen}" \
+            https://is.gd/forward.php)"
+
+          if [[ "${verified_destination}" != "${destination}" && "${verified_destination}" != "${destination%/}" ]]; then
+            echo "Redirect verification failed: ${verified_destination}" >&2
+            exit 1
+          fi
+
+          {
+            echo "${chosen}"
+            echo "Destination: ${destination}"
+            echo "Verified by the is.gd lookup API on $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } > altena-studio-short-url.txt
+
+      - name: Record the verified address
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add altena-studio-short-url.txt
+          if git diff --cached --quiet; then
+            echo "Verified address is already recorded."
+          else
+            git commit -m "Record verified Altena Studio short URL"
+            git push
+          fi
