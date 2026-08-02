@@ -1,1 +1,2 @@
 One-time trigger for creation and verification of the permanent Altena Studio branded redirect.
+Fallback verification run: 2026-08-02T10:37Z
