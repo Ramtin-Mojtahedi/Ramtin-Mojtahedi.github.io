@@ -4,15 +4,22 @@ on:
   issues:
     types:
       - opened
+  pull_request:
+    types:
+      - opened
   workflow_dispatch:
 
 permissions:
   contents: write
   issues: write
+  pull-requests: write
 
 jobs:
   create-short-link:
-    if: github.event_name == 'workflow_dispatch' || github.event.issue.title == 'Create Altena Studio branded short URL'
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' && github.event.issue.title == 'Create Altena Studio branded short URL') ||
+      (github.event_name == 'pull_request' && github.event.pull_request.title == 'Trigger Altena Studio branded URL creation')
     runs-on: ubuntu-latest
     steps:
       - name: Check out website repository
@@ -76,6 +83,8 @@ jobs:
 
           echo "url=${chosen}" >> "${GITHUB_OUTPUT}"
           echo "destination=${verified_destination}" >> "${GITHUB_OUTPUT}"
+          echo "VERIFIED ALTENA STUDIO URL: ${chosen}"
+          echo "VERIFIED DESTINATION: ${verified_destination}"
 
       - name: Report the verified address on the trigger issue
         if: github.event_name == 'issues'
@@ -89,7 +98,20 @@ jobs:
             --repo "${{ github.repository }}" \
             --body "VERIFIED ALTENA STUDIO URL: ${SHORT_URL}\n\nVerified destination: ${DESTINATION}"
 
+      - name: Report the verified address on the trigger pull request
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHORT_URL: ${{ steps.shorten.outputs.url }}
+          DESTINATION: ${{ steps.shorten.outputs.destination }}
+        shell: bash
+        run: |
+          gh pr comment "${{ github.event.pull_request.number }}" \
+            --repo "${{ github.repository }}" \
+            --body "VERIFIED ALTENA STUDIO URL: ${SHORT_URL}\n\nVerified destination: ${DESTINATION}"
+
       - name: Record the verified address
+        if: github.event_name != 'pull_request'
         shell: bash
         run: |
           set -euo pipefail
