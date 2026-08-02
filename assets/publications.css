@@ -7,37 +7,42 @@
   font-style: italic;
 }
 
-.pub-title-link {
-  color: inherit;
-  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
-  text-underline-offset: .16em;
+.publication-index-link {
+  display: block;
+  margin-top: .65rem;
+  color: var(--a);
+  font-weight: 800;
+  text-decoration: none;
 }
 
-.pub-links {
-  align-items: flex-end;
+.pub {
+  grid-template-columns: 65px minmax(0, 1fr) minmax(132px, auto);
+}
+
+.pubLinks {
   display: flex;
-  flex-direction: column;
-  gap: .45rem;
-  min-width: 7.5rem;
+  flex-wrap: wrap;
+  align-content: start;
+  justify-content: flex-end;
+  gap: .55rem .8rem;
 }
 
-.pub-links a,
-.pub-index-link {
-  font-size: .76rem;
-  font-weight: 750;
-  text-decoration-thickness: 1px;
-  text-underline-offset: .18em;
+.pubLinks a {
+  justify-self: auto;
+  white-space: nowrap;
 }
 
-.pub-index-link {
-  align-self: center;
-  margin-left: .2rem;
+.pubLinks .publication-record-link {
+  color: var(--ink);
 }
 
-@media (max-width: 760px) {
-  .pub-links {
-    align-items: flex-start;
-    flex-direction: row;
-    flex-wrap: wrap;
+@media (max-width: 560px) {
+  .pub {
+    grid-template-columns: 50px minmax(0, 1fr);
+  }
+
+  .pubLinks {
+    grid-column: 2;
+    justify-content: flex-start;
   }
 }

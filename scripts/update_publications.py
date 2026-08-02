@@ -21,9 +21,9 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBS = ROOT / "_data/publications.json"
 METRICS = ROOT / "_data/site_metrics.json"
 FEED = ROOT / "publications.json"
-SITEMAP = ROOT / "sitemap.xml"
 
 NAME = "Ramtin Mojtahedi"
+EMAIL = "Ramtin.Mojtahedi@utoronto.ca"
 SCHOLAR_ID = "KjUrlGUAAAAJ"
 SCHOLAR_URL = f"https://scholar.google.com/citations?user={SCHOLAR_ID}&hl=en"
 ORCID = "0000-0002-3953-3256"
@@ -35,7 +35,7 @@ session.headers.update(
     {
         "User-Agent": (
             "Ramtin-Mojtahedi-Portfolio-Sync/1.0 "
-            "(+https://ramtin-mojtahedi.github.io/)"
+            f"(+https://ramtin-mojtahedi.github.io/; mailto:{EMAIL})"
         ),
         "Accept-Language": "en-CA,en;q=0.9",
     }
@@ -194,6 +194,7 @@ def fetch_scholar() -> list[dict[str, Any]]:
 def fetch_openalex() -> list[dict[str, Any]]:
     author = get_json(
         f"https://api.openalex.org/authors/https://orcid.org/{ORCID}",
+        params={"mailto": EMAIL},
     )
     author_id = clean(author.get("id")).rsplit("/", 1)[-1]
     if not author_id:
@@ -204,6 +205,7 @@ def fetch_openalex() -> list[dict[str, Any]]:
             "filter": f"authorships.author.id:{author_id}",
             "per-page": 200,
             "sort": "publication_date:desc",
+            "mailto": EMAIL,
         },
     )
     records = []
@@ -239,6 +241,7 @@ def fetch_crossref() -> list[dict[str, Any]]:
             "filter": "from-pub-date:2000-01-01",
             "rows": 100,
             "select": "DOI,title,author,published-print,published-online,issued,container-title,URL",
+            "mailto": EMAIL,
         },
     )
     records = []
@@ -355,6 +358,7 @@ def enrich(publication: dict[str, Any], candidate: dict[str, Any], checked: str)
             changed = True
     if clean(publication.get("status")).lower() in {"submitted", "in preparation"}:
         publication["status"] = candidate.get("status") or "Peer-reviewed"
+        publication["peer_reviewed"] = True
         publication["group"] = group(int(candidate.get("year") or publication.get("year")), publication["status"])
         changed = True
     sources = [value.strip() for value in clean(publication.get("source")).split(";") if value.strip()]
@@ -369,30 +373,19 @@ def enrich(publication: dict[str, Any], candidate: dict[str, Any], checked: str)
 def new_record(candidate: dict[str, Any], checked: str) -> dict[str, Any]:
     identifier = doi(candidate.get("doi"))
     pub_year = int(candidate["year"])
-    publication_id = f"{re.sub(r'[^a-z0-9]+', '-', normalize(candidate['title'])).strip('-')[:100]}-{pub_year}"
-    authors = [clean(author) for author in candidate.get("authors", []) if clean(author)]
-    citation = candidate.get("citation") or str(pub_year)
     return {
-        "id": publication_id,
+        "id": f"{re.sub(r'[^a-z0-9]+', '-', normalize(candidate['title'])).strip('-')[:100]}-{pub_year}",
         "title": candidate["title"],
         "year": pub_year,
-        "publication_date": candidate.get("publication_date") or f"{pub_year:04d}-01-01",
+        "publication_date": candidate.get("publication_date") or str(pub_year),
         "group": group(pub_year),
         "status": "Peer-reviewed",
-        "type": "scholarly-article",
         "peer_reviewed": True,
-        "authors": authors,
-        "authors_html": candidate.get("authors_html") or render_authors(authors),
-        "citation": citation,
-        "citation_plain": re.sub(r"<[^>]+>", "", citation),
-        "venue": citation,
+        "authors_html": candidate.get("authors_html") or render_authors(candidate.get("authors", [])),
+        "citation": candidate.get("citation") or str(pub_year),
         "doi": identifier,
         "url": f"https://doi.org/{identifier}" if identifier else candidate.get("url", ""),
         "link_label": "DOI ↗" if identifier else "View ↗",
-        "detail_url": f"/publications/{publication_id}/",
-        "bibtex_type": "misc",
-        "bibtex_key": f"Mojtahedi{pub_year}{publication_id.split('-')[0].title()}",
-        "keywords": [],
         "manual": False,
         "source": candidate.get("source", "Automated scholarly source"),
         "last_verified": checked,
@@ -452,16 +445,17 @@ def main() -> int:
         raise RuntimeError("The curated publication baseline was unexpectedly reduced.")
 
     peer_count = sum(
-        bool(record.get("peer_reviewed", clean(record.get("status")).lower() != "submitted"))
+        bool(record.get("peer_reviewed"))
+        if isinstance(record.get("peer_reviewed"), bool)
+        else clean(record.get("status")).lower() != "submitted"
         for record in publications
     )
-    additional_count = len(publications) - peer_count
-    submitted_count = sum(clean(record.get("status")).lower() == "submitted" for record in publications)
+    submitted_count = sum(
+        clean(record.get("status")).lower() == "submitted" for record in publications
+    )
     metrics = {
         "publication_count": len(publications),
         "peer_reviewed_or_accepted_count": peer_count,
-        "scholarly_output_count": len(publications),
-        "non_peer_reviewed_scholarly_output_count": additional_count,
         "submitted_count": submitted_count,
         "publication_sync_date": checked,
         "publication_sync_timestamp": now.isoformat().replace("+00:00", "Z"),
@@ -475,10 +469,9 @@ def main() -> int:
         "minimum_preserved_records": MINIMUM,
     }
     feed = {
-        "schema_version": 2,
+        "schema_version": 1,
         "profile": {
             "name": NAME,
-            "published_names": ["Ramtin Mojtahedi", "Ramtin Mojtahedi Saffari", "R. M. Saffari"],
             "orcid": ORCID_URL,
             "google_scholar": SCHOLAR_URL,
             "website": "https://ramtin-mojtahedi.github.io/",
@@ -490,13 +483,6 @@ def main() -> int:
     write(PUBS, publications)
     write(METRICS, metrics)
     write(FEED, feed)
-
-    if SITEMAP.exists():
-        sitemap = SITEMAP.read_text(encoding="utf-8")
-        SITEMAP.write_text(
-            re.sub(r"<lastmod>\d{4}-\d{2}-\d{2}</lastmod>", f"<lastmod>{checked}</lastmod>", sitemap),
-            encoding="utf-8",
-        )
 
     print(
         json.dumps(

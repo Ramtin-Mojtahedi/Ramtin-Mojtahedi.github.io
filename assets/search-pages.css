@@ -1,0 +1,48 @@
+:root{color-scheme:light dark;--ink:#163229;--muted:#607068;--paper:#f6f2e9;--surface:#fffdf8;--accent:#0e7a5f;--line:rgba(22,50,41,.16);--shadow:0 18px 60px rgba(15,48,38,.10)}
+*{box-sizing:border-box}
+html{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+body{margin:0}
+a{color:var(--accent);text-underline-offset:.2em}
+.skip-link{position:fixed;z-index:10;top:.5rem;left:.5rem;padding:.65rem .9rem;border-radius:.6rem;background:var(--ink);color:var(--surface);font-weight:750;transform:translateY(-160%)}
+.skip-link:focus{transform:translateY(0)}
+.site-header{display:flex;align-items:center;justify-content:space-between;gap:2rem;max-width:1120px;margin:auto;padding:1.2rem 1.5rem;border-bottom:1px solid var(--line)}
+.identity{display:flex;align-items:center;gap:.7rem;color:var(--ink);font-weight:800;text-decoration:none}
+.identity::first-letter{display:grid;place-items:center}
+.identity span{font-weight:650}
+nav{display:flex;flex-wrap:wrap;gap:1rem}
+nav a{color:var(--ink);font-weight:650;text-decoration:none}
+main{max-width:980px;margin:auto;padding:clamp(3rem,8vw,7rem) 1.5rem}
+.eyebrow{margin:0 0 1rem;color:var(--accent);font-size:.78rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+h1{max-width:900px;margin:0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.5rem,7vw,5.2rem);font-weight:500;letter-spacing:-.045em;line-height:1.02}
+.lede,.record>.authors,.record>.citation{max-width:780px;font-size:clamp(1.05rem,2vw,1.3rem)}
+.lede{color:var(--muted)}
+.paper-list{display:grid;gap:1rem;margin:3rem 0 0;padding:0;list-style:none}
+.paper{padding:clamp(1.2rem,3vw,2rem);border:1px solid var(--line);border-radius:1.25rem;background:var(--surface);box-shadow:var(--shadow)}
+.paper-meta{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:.7rem}
+.paper-meta span{padding:.2rem .65rem;border-radius:999px;background:rgba(14,122,95,.1);color:var(--accent);font-size:.78rem;font-weight:750}
+.paper h2{margin:.2rem 0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.35rem,3vw,2rem);font-weight:600;line-height:1.2}
+.paper h2 a{color:var(--ink);text-decoration-thickness:.07em}
+.paper p{margin:.6rem 0 0;color:var(--muted)}
+.paper .authors{color:var(--ink)}
+.record{padding:clamp(1.4rem,4vw,3rem);border:1px solid var(--line);border-radius:1.5rem;background:var(--surface);box-shadow:var(--shadow)}
+.record h1{font-size:clamp(2.2rem,6vw,4.5rem)}
+.record>.citation{color:var(--muted)}
+.contribution-note,.record-note{max-width:780px;color:var(--muted);font-size:.95rem}
+.record-note{padding:.8rem 1rem;border-left:3px solid var(--accent);background:rgba(14,122,95,.07)}
+.actions{display:flex;flex-wrap:wrap;gap:.8rem;margin:2rem 0}
+.button{display:inline-flex;padding:.85rem 1.1rem;border-radius:.8rem;font-weight:750;text-decoration:none}
+.button.primary{background:var(--ink);color:white}
+.record-details{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+.record-details h2{font-family:Georgia,"Times New Roman",serif;font-size:1.8rem}
+dl{display:grid;gap:.6rem}
+dl div{display:grid;grid-template-columns:minmax(110px,.35fr) 1fr;gap:1rem;padding:.55rem 0;border-bottom:1px solid var(--line)}
+dt{color:var(--muted);font-weight:700}
+dd{margin:0}
+.topics{margin-top:2rem}
+.topics h2{font-family:Georgia,"Times New Roman",serif;font-size:1.8rem}
+.topics ul{display:flex;flex-wrap:wrap;gap:.55rem;margin:0;padding:0;list-style:none}
+.topics li{padding:.35rem .7rem;border-radius:999px;background:rgba(14,122,95,.1);color:var(--accent);font-size:.86rem;font-weight:700}
+.portfolio-note{margin-top:2rem;padding:1rem;border-radius:.8rem;background:rgba(14,122,95,.08)}
+footer{max-width:980px;margin:auto;padding:1.5rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+@media(max-width:700px){.site-header{align-items:flex-start;flex-direction:column;gap:.8rem}nav{gap:.75rem}dl div{grid-template-columns:1fr;gap:.2rem}}
+@media(prefers-color-scheme:dark){:root{--ink:#e4f4ed;--muted:#a7bcb3;--paper:#07110e;--surface:#0d1d18;--accent:#75d9b9;--line:rgba(220,244,235,.14);--shadow:none}.button.primary{background:#d8efe7;color:#0b211a}}

@@ -7,11 +7,11 @@ on:
     paths:
       - index.html
       - sitemap.xml
+      - robots.txt
       - publications.json
-      - publications.bib
       - publications/**
-      - scholarly-pages.json
       - indexnow.json
+      - 898f0caec5d8b22a095db2a4afa88722.txt
       - _includes/**
       - _data/**
       - assets/**
@@ -21,11 +21,11 @@ on:
     paths:
       - index.html
       - sitemap.xml
+      - robots.txt
       - publications.json
-      - publications.bib
       - publications/**
-      - scholarly-pages.json
       - indexnow.json
+      - 898f0caec5d8b22a095db2a4afa88722.txt
       - _includes/**
       - _data/**
       - assets/**
@@ -74,18 +74,15 @@ jobs:
           impact_exit=$?
           python scripts/validate_layout_safety.py >> validation-report.txt 2>&1
           layout_exit=$?
+          python scripts/build_search_pages.py --check >> validation-report.txt 2>&1
+          search_exit=$?
           exit_code=0
-          if [[ "$website_exit" -ne 0 || "$service_exit" -ne 0 || "$impact_exit" -ne 0 || "$layout_exit" -ne 0 ]]; then
+          if [[ "$website_exit" -ne 0 || "$service_exit" -ne 0 || "$impact_exit" -ne 0 || "$layout_exit" -ne 0 || "$search_exit" -ne 0 ]]; then
             exit_code=1
           fi
           cat validation-report.txt
           echo "exit_code=${exit_code}" >> "$GITHUB_OUTPUT"
           exit 0
-
-      - name: Verify scholarly pages and citation exports
-        run: |
-          python scripts/build_scholarly_pages.py
-          git diff --exit-code -- publications publications.bib scholarly-pages.json indexnow.json sitemap.xml
 
       - name: Upload failure report
         if: steps.website_validation.outputs.exit_code != '0'
@@ -187,6 +184,7 @@ jobs:
             echo "- Statistics and section hierarchy: clear and interactive"
             echo "- Leadership and volunteer roles: complete and unique"
             echo "- Contact routing and safeguards: valid"
+            echo "- Crawlable publication pages and sitemap: synchronized"
             echo "- Visitor-facing implementation markers: absent"
             echo "- Responsive and reduced-motion behavior: valid"
             echo "- Rendered browser overlap audit: passed at 320–1600 px"

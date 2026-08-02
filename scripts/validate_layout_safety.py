@@ -34,7 +34,7 @@ def require_tokens(source: str, tokens: tuple[str, ...], location: str) -> None:
 
 def validate_asset_order(index: str) -> None:
     contact_style = 'href="assets/contact-form-polish.css?v=20260727-1"'
-    safety_style = 'href="assets/layout-safety.css?v=20260728-1"'
+    safety_style = 'href="assets/layout-safety.css?v=20260802"'
     contact_script = 'src="assets/contact-form.js?v=20260727-4"'
     safety_script = 'src="assets/layout-safety.js?v=20260728-1"'
     require_tokens(index, (contact_style, safety_style, contact_script, safety_script), "index.html")

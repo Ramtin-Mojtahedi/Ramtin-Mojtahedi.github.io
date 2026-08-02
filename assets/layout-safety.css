@@ -686,6 +686,12 @@ html.nav-layout-compact .links a {
     text-align: left;
   }
 
+  .pubLinks {
+    grid-column: 1;
+    justify-content: flex-start;
+    justify-self: start;
+  }
+
   .date {
     max-width: none;
   }

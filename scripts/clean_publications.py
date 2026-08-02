@@ -130,23 +130,23 @@ def main() -> int:
 
     metrics = json.loads(METRICS.read_text(encoding="utf-8"))
     peer_count = sum(
-        bool(record.get("peer_reviewed", clean(record.get("status")).lower() != "submitted"))
+        bool(record.get("peer_reviewed"))
+        if isinstance(record.get("peer_reviewed"), bool)
+        else clean(record.get("status")).lower() != "submitted"
         for record in records
     )
+    submitted_count = sum(clean(record.get("status")).lower() == "submitted" for record in records)
     metrics["publication_count"] = len(records)
     metrics["peer_reviewed_or_accepted_count"] = peer_count
-    metrics["scholarly_output_count"] = len(records)
-    metrics["non_peer_reviewed_scholarly_output_count"] = len(records) - peer_count
-    metrics["submitted_count"] = sum(clean(record.get("status")).lower() == "submitted" for record in records)
+    metrics["submitted_count"] = submitted_count
     metrics["auto_added_count"] = automatic_count
     metrics["minimum_preserved_records"] = manual_count
     metrics["invalid_nonpublication_records_removed"] = before - len(records)
 
     feed = {
-        "schema_version": 2,
+        "schema_version": 1,
         "profile": {
             "name": "Ramtin Mojtahedi",
-            "published_names": ["Ramtin Mojtahedi", "Ramtin Mojtahedi Saffari", "R. M. Saffari"],
             "orcid": "https://orcid.org/0000-0002-3953-3256",
             "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
             "website": "https://ramtin-mojtahedi.github.io/",

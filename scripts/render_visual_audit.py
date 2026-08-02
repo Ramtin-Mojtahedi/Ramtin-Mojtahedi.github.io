@@ -77,21 +77,21 @@ def render_publication(publication: dict[str, Any]) -> str:
     authors = str(publication.get("authors_html") or "")
     citation = str(publication.get("citation") or "")
     note = str(publication.get("note") or "")
-    detail_url = html.escape(str(publication.get("detail_url") or "/publications/"), quote=True)
     url = html.escape(str(publication.get("url") or ""), quote=True)
-    open_access_url = html.escape(str(publication.get("open_access_url") or ""), quote=True)
-    code_url = html.escape(str(publication.get("code_url") or ""), quote=True)
-    code_label = html.escape(str(publication.get("code_label") or "Code"))
+    link_label = html.escape(str(publication.get("link_label") or "View ↗"))
 
     note_html = f'<p class="pub-note">{note}</p>' if note else ""
-    links = [f'<a href="{detail_url}">Details</a>']
-    if url:
-        links.append(f'<a href="{url}" target="_blank" rel="noopener noreferrer">DOI ↗</a>')
-    if open_access_url:
-        links.append(f'<a href="{open_access_url}" target="_blank" rel="noopener noreferrer">Public text ↗</a>')
-    if code_url:
-        links.append(f'<a href="{code_url}" target="_blank" rel="noopener noreferrer">{code_label} ↗</a>')
-    link_html = f'<div class="pub-links">{"".join(links)}</div>'
+    external_link = (
+        f'<a href="{url}" target="_blank" rel="noopener noreferrer">{link_label}</a>'
+        if url
+        else ""
+    )
+    links_html = (
+        '<div class="pubLinks">'
+        f'<a class="publication-record-link" href="/publications/{publication_id}/">Record →</a>'
+        f'{external_link}'
+        '</div>'
+    )
 
     return (
         f'<article class="pub reveal" data-group="{group}" '
@@ -99,12 +99,12 @@ def render_publication(publication: dict[str, Any]) -> str:
         f'<span class="year">{year}</span>'
         '<div>'
         f'<span class="tag">{status}</span>'
-        f'<h3><a class="pub-title-link" href="{detail_url}">{title}</a></h3>'
+        f'<h3>{title}</h3>'
         f'<p class="pub-authors">{authors}</p>'
         f'<p>{citation}</p>'
         f'{note_html}'
         '</div>'
-        f'{link_html}'
+        f'{links_html}'
         '</article>'
     )
 
