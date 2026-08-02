@@ -40,7 +40,7 @@ def display_count(value: int) -> str:
 
 
 STAT_LABELS = {
-    "publication_count": "Peer-reviewed, accepted, and published works",
+    "publication_count": "Publications and scholarly records",
     "presentation_count": "Oral and poster presentations",
     "recognition_count": "Honours, awards, and distinctions",
     "reviewer_venue_count": "Reviewer and service venues",
@@ -64,9 +64,15 @@ def reviewer_venue_count(source: str) -> int:
 
 
 def replace_stat(source: str, label: str, value: int) -> str:
+    label_pattern = re.escape(label)
+    if label == "Publications and scholarly records":
+        label_pattern = (
+            r"(?:Publications and scholarly records|"
+            r"Peer-reviewed, accepted, and published works)"
+        )
     pattern = re.compile(
         rf"<div class='stat'>\s*<b[^>]*>[^<]*</b>\s*"
-        rf"<span>{re.escape(label)}</span>\s*</div>"
+        rf"<span>{label_pattern}</span>\s*</div>"
     )
     replacement = (
         "<div class='stat'>"

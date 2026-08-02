@@ -3,10 +3,10 @@
   "status": "current",
   "last_checked": "2026-08-02",
   "last_checked_display": "August 2, 2026",
-  "last_checked_at": "2026-08-02T11:38:53Z",
+  "last_checked_at": "2026-08-02T19:54:03Z",
   "frequency": "daily",
   "schedule_display": "Every day",
-  "publication_count": 18,
+  "publication_count": 19,
   "checks": [
     "Scholarly publication discovery and metadata enrichment",
     "Duplicate, thesis, review-report, and non-publication filtering",
@@ -19,8 +19,8 @@
   "profile_checks": {
     "google_scholar": {
       "url": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
-      "status": "available-protected",
-      "http_status": 403,
+      "status": "available",
+      "http_status": 200,
       "final_url": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en"
     },
     "orcid": {
@@ -55,7 +55,7 @@
     }
   },
   "source_status": {
-    "cv_baseline": "preserved 18 records",
+    "cv_baseline": "preserved 19 curated records",
     "google_scholar": "unavailable: 403 Client Error: Forbidden for url: https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en&view_op=list_works&sortby=pubdate&pagesize=100",
     "openalex_orcid": "ok (13 records)",
     "crossref": "ok (7 records)",

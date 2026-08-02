@@ -138,11 +138,6 @@ def refresh_sitemap(checked: str) -> None:
         f"<lastmod>{checked}</lastmod>",
         text,
     )
-    text = re.sub(
-        r"<changefreq>[^<]+</changefreq>",
-        "<changefreq>daily</changefreq>",
-        text,
-    )
     SITEMAP.write_text(text.rstrip() + "\n", encoding="utf-8")
 
 

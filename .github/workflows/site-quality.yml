@@ -8,6 +8,10 @@ on:
       - index.html
       - sitemap.xml
       - publications.json
+      - publications.bib
+      - publications/**
+      - scholarly-pages.json
+      - indexnow.json
       - _includes/**
       - _data/**
       - assets/**
@@ -18,6 +22,10 @@ on:
       - index.html
       - sitemap.xml
       - publications.json
+      - publications.bib
+      - publications/**
+      - scholarly-pages.json
+      - indexnow.json
       - _includes/**
       - _data/**
       - assets/**
@@ -73,6 +81,11 @@ jobs:
           cat validation-report.txt
           echo "exit_code=${exit_code}" >> "$GITHUB_OUTPUT"
           exit 0
+
+      - name: Verify scholarly pages and citation exports
+        run: |
+          python scripts/build_scholarly_pages.py
+          git diff --exit-code -- publications publications.bib scholarly-pages.json indexnow.json sitemap.xml
 
       - name: Upload failure report
         if: steps.website_validation.outputs.exit_code != '0'
