@@ -81,10 +81,16 @@ def render_publication(publication: dict[str, Any]) -> str:
     link_label = html.escape(str(publication.get("link_label") or "View ↗"))
 
     note_html = f'<p class="pub-note">{note}</p>' if note else ""
-    link_html = (
+    external_link = (
         f'<a href="{url}" target="_blank" rel="noopener noreferrer">{link_label}</a>'
         if url
         else ""
+    )
+    links_html = (
+        '<div class="pubLinks">'
+        f'<a class="publication-record-link" href="/publications/{publication_id}/">Record →</a>'
+        f'{external_link}'
+        '</div>'
     )
 
     return (
@@ -98,7 +104,7 @@ def render_publication(publication: dict[str, Any]) -> str:
         f'<p>{citation}</p>'
         f'{note_html}'
         '</div>'
-        f'{link_html}'
+        f'{links_html}'
         '</article>'
     )
 

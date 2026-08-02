@@ -6,3 +6,43 @@
 .pub-note {
   font-style: italic;
 }
+
+.publication-index-link {
+  display: block;
+  margin-top: .65rem;
+  color: var(--a);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.pub {
+  grid-template-columns: 65px minmax(0, 1fr) minmax(132px, auto);
+}
+
+.pubLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  justify-content: flex-end;
+  gap: .55rem .8rem;
+}
+
+.pubLinks a {
+  justify-self: auto;
+  white-space: nowrap;
+}
+
+.pubLinks .publication-record-link {
+  color: var(--ink);
+}
+
+@media (max-width: 560px) {
+  .pub {
+    grid-template-columns: 50px minmax(0, 1fr);
+  }
+
+  .pubLinks {
+    grid-column: 2;
+    justify-content: flex-start;
+  }
+}

@@ -14,14 +14,11 @@ on:
       - "assets/**"
       - "scripts/**"
       - "publications.json"
-      - "publications/**"
-      - "indexnow.json"
       - "sitemap.xml"
       - ".github/workflows/update-publications.yml"
 
 permissions:
   contents: write
-  pages: write
 
 concurrency:
   group: portfolio-content-maintenance
@@ -31,7 +28,7 @@ jobs:
   maintain-website:
     if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 20
 
     steps:
       - name: Check out website
@@ -68,8 +65,78 @@ jobs:
       - name: Refresh internal maintenance data and search files
         run: python scripts/refresh_site_maintenance.py
 
-      - name: Build crawler-readable publication pages
-        run: python scripts/build_search_pages.py
-
       - name: Validate the complete website
-        ru×MwöÚ$z{-®éÜj×7G"’Óâ–çC Ð¢&WGW&âÆVâ‡&Ræf–æFÆÂ‡GFW&âÂ6÷W&6RÂfÆw3×&Rä”täõ$T44RÂ&RäDõDÄÂ’Ð Ð Ð¦FVb&Wf–WvW%ö6÷VçB‡6W'f–6S¢7G"’Óâ–çC Ð¢ÖF6‚Ò&Rç6V&6‚€Ð¢"sÆƒ3å&Wf–WvW"æB&öfW76–öæÂ6W'f–6SÂöƒ3åÇ2£ÇVÂ6Æ73Ò&6ÆVâ#â‚â£ò“Â÷VÃârÀÐ¢6W'f–6RÀÐ¢fÆw3×&Rä”täõ$T44RÂ&RäDõDÄÂÀÐ¢Ð¢–bæ÷BÖF6ƒ Ð¢f–Â‚%&Wf–WvW"×6W'f–6RÆ—7B—2Ö—76–ærâ"Ð¢&WGW&â6÷VçB‡"#ÆÆ’ƒó¥Ç7Ãâ’"ÂÖF6‚æw&÷Wƒ’Ð Ð Ð¦FVb7FE÷fÇVR††W&ó¢7G"ÂÆ&VÃ¢7G"’Óâ–çC Ð¢ÖF6‚Ò&Rç6V&6‚€Ð¢&b#ÆF—b6Æ73Òw7FBsåÇ2£Æ%µãåÒ¦FFÖ6÷VçCÒr…ÆB²’uµãåÒ£åµãÅÒ£Âö#åÇ2¢ Ð¢&b#Ç7ãç·&RæW66R†Æ&VÂ—ÓÂ÷7ãåÇ2£ÂöF—câ"ÀÐ¢†W&òÀÐ¢Ð¢–bæ÷BÖF6ƒ Ð¢f–Â†b%7FF—7F–2—2Ö—76–æs¢¶Æ&VÇÒ"Ð¢&WGW&â–çB†ÖF6‚æw&÷Wƒ’Ð Ð Ð¦FVbfÆ–FFU÷V&Æ–6F–öç2‚’ÓâGWÆU¶Æ—7E¶F–7EÒÂF–7EÓ Ð¢V&Æ–6F–öç2Ò&VEö§6öâ„d”ÄU5²'V&Æ–6F–öç2%ÒÐ¢ÖWG&–72Ò&VEö§6öâ„d”ÄU5²&ÖWG&–72%ÒÐ¢–bæ÷B—6–ç7Fæ6R‡V&Æ–6F–öç2ÂÆ—7B’÷"ÆVâ‡V&Æ–6F–öç2’ÂÔ”ä”ÕTÕõT$Ä”4D”ôå3 Ð¢f–Â‚%F†R7W&FVBV&Æ–6F–öâ&6VÆ–æR—2–æ6ö×ÆWFRâ"Ð Ð¢F—FÆW2Ò·7G"†—FVÒævWB‚'F—FÆR"’÷"""’ç7G&—‚’f÷"—FVÒ–âV&Æ–6F–öç5ÐÐ¢–bç’†æ÷BF—FÆRf÷"F—FÆR–âF—FÆW2’÷"ÆVâ‡·F—FÆRæ66VföÆB‚’f÷"F—FÆR–âF—FÆW7Ò’ÒÆVâ‡F—FÆW2“ Ð¢f–Â‚%V&Æ–6F–öâF—FÆW2&RÖ—76–ær÷"GWÆ–6FVBâ"Ð¢–b–çB†ÖWG&–72ævWB‚'V&Æ–6F–öåö6÷VçB"ÂÓ’’ÒÆVâ‡V&Æ–6F–öç2“ ¢f–Â‚%V&Æ–6F–öâ6÷VçBæBV&Æ–6F–öâFFF–ffW"â"¢–bç’†æ÷B—6–ç7Fæ6R†—FVÒævWB‚'VW%÷&Wf–WvVB"’Â&ööÂ’f÷"—FVÒ–âV&Æ–6F–öç2“ ¢f–Â‚$WfW'’V&Æ–6F–öâ×W7BW‡Æ–6—FÇ’–FVçF–g’—G2VW"×&Wf–Wr7FGW2â"¢VW%ö6÷VçBÒ7VÒ†—FVÒævWB‚'VW%÷&Wf–WvVB"’—2G'VRf÷"—FVÒ–âV&Æ–6F–öç2¢7V&Ö—GFVEö6÷VçBÒ7VÒ‡7G"†—FVÒævWB‚'7FGW2"’÷"""’ç7G&—‚’æ66VföÆB‚’ÓÒ'7V&Ö—GFVB"f÷"—FVÒ–âV&Æ–6F–öç2¢–b–çB†ÖWG&–72ævWB‚'VW%÷&Wf–WvVEö÷%ö66WFVEö6÷VçB"ÂÓ’’ÒVW%ö6÷VçC ¢f–Â‚%VW"×&Wf–WvVBV&Æ–6F–öâ6÷VçBæBV&Æ–6F–öâFFF–ffW"â"¢–b–çB†ÖWG&–72ævWB‚'7V&Ö—GFVEö6÷VçB"ÂÓ’’Ò7V&Ö—GFVEö6÷VçC ¢f–Â‚%7V&Ö—GFVBV&Æ–6F–öâ6÷VçBæBV&Æ–6F–öâFFF–ffW"â"¢–bç’†æ÷B—6–ç7Fæ6R†—FVÒævWB‚'–V""’Â–çB’÷"æ÷B“ÃÒ—FVÕ²'–V"%ÒÃÒ#f÷"—FVÒ–âV&Æ–6F–öç2“ Ð¢f–Â‚$V&Æ–6F–öâ–V"—2–çfÆ–Bâ"Ð¢–bç’‚$WFöÖFVB66†öÆ&Ç’6÷W&6R"–â7G"†—FVÒævWB‚'6÷W&6R"’÷"""’f÷"—FVÒ–âV&Æ–6F–öç2“ ¢f–Â‚$ÆVv7’V&Æ–6F–öâ×6÷W&6RÆ&VÂ&VÖ–ç2â"¢f÷"—FVÒ–âV&Æ–6F–öç3 ¢&–&Æ–öw&†–5÷FW‡BÒ""æ¦ö–â€¢7G"†—FVÒævWB†f–VÆB’÷"""¢f÷"f–VÆB–â‚'7FGW2"Â'fVçVR"Â&6—FF–öâ"Â&6—FF–öå÷Æ–â"¢¢–b&Rç6V&6‚‡""ƒó¥Ç5ÃõÇ7ÅÆEÃõÆB’"Â&–&Æ–öw&†–5÷FW‡B“ ¢f–Â†b%V&Æ–6F–öâVæ7GVF–öâV'26÷''WFVC¢¶—FVÒævWB‚v–Br—Ò"¢&WGW&âV&Æ–6F–öç2ÂÖWG&–70 Ð Ð¦FVbfÆ–FFUö6÷VçG2††W&ó¢7G"Â7F—f—G“¢7G"Â6W'f–6S¢7G"ÂÖWG&–73¢F–7B’ÓâF–7E·7G"Â–çEÓ Ð¢6÷VçFW'2Ò&Ræf–æFÆÂ‡"&FFÖ6÷VçCÒƒó¢wÅÂ"’…µâuÂ%Ò²’ƒó¢wÅÂ"’"Â†W&òÐ¢–bæ÷B6÷VçFW'2÷"ç’†æ÷B&RægVÆÆÖF6‚‡"%ÆB²"ÂfÇVR’f÷"fÇVR–â6÷VçFW'2“ Ð¢f–Â‚$V&Æ–27FF—7F–2—2Ö—76–ær÷"æöâÖçVÖW&–2â"Ð¢–b$æâ"–â†W&ò÷"%Çƒƒ‚"–â†W&ó Ð¢f–Â‚$â–çfÆ–BÖçVÖ&W"'F–f7B&VÖ–ç2â"Ð Ð¢÷&ÂÒ6÷VçB‡"#Ç6ÖÆÃä÷&ÅÇ2¬+r"Â7F—f—G’Ð¢÷7FW"Ò6÷VçB‡"#Ç6ÖÆÃå÷7FW%Ç2¬+r"Â7F—f—G’Ð¢W‡V7FVBÒ°Ð¢'V&Æ–6F–öåö6÷VçB#¢–çB†ÖWG&–72ævWB‚'V&Æ–6F–öåö6÷VçB"Â’’ÀÐ¢'&W6VçFF–öåö6÷VçB#¢÷&Â²÷7FW"ÀÐ¢&÷&Å÷&W6VçFF–öåö6÷VçB#¢÷&ÂÀÐ¢'÷7FW%÷&W6VçFF–öåö6÷VçB#¢÷7FW"ÀÐ¢'&V6övæ—F–öåö6÷VçB#¢6÷VçB‡"#Æ'F–6ÆR6Æ73Òvv&EµâuÒ¢sâ"Â7F—f—G’’ÀÐ¢'FV6†–æu÷F÷–5ö6÷VçB#¢6÷VçB‡"#Æ'F–6ÆR6Æ73ÒwFV6…µâuÒ¢sâ"Â7F—f—G’’ÀÐ¢'&Wf–WvW%÷fVçVUö6÷VçB#¢&Wf–WvW%ö6÷VçB‡6W'f–6R’ÀÐ¢&ÆVFW'6†—÷&öÆUö6÷VçB#¢6÷VçB‡"sÆ'F–6ÆR6Æ73Ò&ÆVEµåÂ%Ò¢#ârÂ6W'f–6R’ÀÐ¢ÐÐ¢–bç’‡fÇVRÂf÷"fÇVR–âW‡V7FVBçfÇVW2‚’“ Ð¢f–Â†b$öæR÷"Ö÷&RV&Æ–26V7F–öç2&RV×G“¢¶W‡V7FVGÒ"Ð Ð¢f÷"¶W’ÂÆ&VÂ–â5DEôÄ$TÅ2æ—FV×2‚“ Ð¢–b7FE÷fÇVR††W&òÂÆ&VÂ’ÒW‡V7FVE¶¶W•Ó Ð¢f–Â†b%V&Æ–27FF—7F–2—2÷WBöb7–æ3¢¶Æ&VÇÒ"Ð¢f÷"¶W’ÂfÇVR–âW‡V7FVBæ—FV×2‚“ Ð¢–b–çB†ÖWG&–72ævWB†¶W’ÂÓ’’ÒfÇVS Ð¢f–Â†b%6—FRÖWG&–2—2÷WBöb7–æ3¢¶¶W—Ò"Ð Ð¢&W6VçFF–öåö†VF–ærÒ€Ð¢b'¶F—7Æ•ö6÷VçB†÷&Â’æ6—FÆ—¦R‚—Ò÷&ÂæB Ð¢b'¶F—7Æ•ö6÷VçB‡÷7FW"—Ò÷7FW"&W6VçFF–öç2â Ð¢Ð¢–b&W6VçFF–öåö†VF–æræ÷B–â7F—f—G“ Ð¢f–Â‚%&W6VçFF–öâ†VF–ær—2÷WBöb7–æ2â"Ð¢–bb'¶W‡V7FVE²w&V6övæ—F–öåö6÷VçBu×Ò†öæ÷W'2Âv&G2Âw&çG2ÂæBF—7F–æ7F–öç2â"æ÷B–â7F—f—G“ Ð¢f–Â‚%&V6övæ—F–öâ†VF–ær—2÷WBöb7–æ2â"Ð¢–bb%6†÷rÆÂ¶W‡V7FVE²w&V6övæ—F–öåö6÷VçBu×ÒF—7F–æ7F–öç2(i2"æ÷B–â7F—f—G“ Ð¢f–Â‚%&V6övæ—F–öâ'WGFöâ—2÷WBöb7–æ2â"Ð¢&WGW&âW‡V7FV@Ð Ð Ð¦FVbfÆ–FFU÷7G'V7GW&R†–æFWƒ¢7G"Â'G3¢7G"’ÓâæöæS Ð¢6÷W&6RÒ–æFW‚²%Æâ"²'G0Ð¢–G2Ò&Ræf–æFÆÂ‡"%Æ&–CÒƒó¢wÅÂ"’…µâuÂ%Ò²’ƒó¢wÅÂ"’"Â6÷W&6RÐ¢GWÆ–6FW2Ò6÷'FVB‡fÇVRf÷"fÇVRÂF÷FÂ–â6÷VçFW"†–G2’æ—FV×2‚’–bF÷FÂâÐ¢–bGWÆ–6FW3 Ð¢f–Â†b$GWÆ–6FR…DÔÂ–G3¢¶GWÆ–6FW7Ò"Ð¢Ö—76–ærÒ6÷'FVB…$UT•$TEô”E2Ò6WB†–G2’Ð¢–bÖ—76–æs Ð¢f–Â†b%&WV—&VBV&Æ–26V7F–öç2&RÖ—76–æs¢¶Ö—76–æwÒ"Ð¢F&vWG2Ò6WB‡&Ræf–æFÆÂ‡"&‡&VcÒƒó¢wÅÂ"’2…µâuÂ%Ò²’ƒó¢wÅÂ"’"Â6÷W&6R’Ð¢'&ö¶VâÒ6÷'FVB‡F&vWG2Ò6WB†–G2’Ð¢–b'&ö¶Vã Ð¢f–Â†b$'&ö¶Vâ–çFW&æÂÆ–æ·3¢¶'&ö¶VçÒ"Ð¢W‡FW&æÂÒ&Ræf–æFÆÂ‡"#ÆÆ%µãåÒ§F&vWCÒƒó¢wÅÂ"•ö&Ææ²ƒó¢wÅÂ"•µãåÒ£â"Â6÷W&6RÐ¢–bç’‚&æö÷VæW""æ÷B–âFrf÷"Fr–âW‡FW&æÂ“ Ð¢f–Â‚$WfW'’æWr×v–æF÷rÆ–æ²×W7BW6R&VÃÖæö÷VæW"â"Ð Ð Ð¦FVbfÆ–FFU÷V&Æ–5ö6÷’†–æFWƒ¢7G"Â'G3¢7G"’ÓâæöæS Ð¢6÷W&6RÒ†–æFW‚²%Æâ"²'G2’æ66VföÆB‚Ð¢f÷VæBÒ6÷'FVB†Ö&¶W"f÷"Ö&¶W"–âdõ$$”DDTåõT$Ä”5ôÔ$´U%2–bÖ&¶W"–â6÷W&6RÐ¢–bf÷VæC Ð¢f–Â†b%f—6—F÷"Öf6–ær–×ÆVÖVçFF–öâÖ&¶W'2&VÖ–ã¢¶f÷VæGÒ"Ð¢–b&76WG2÷V&Æ–6F–öç2æ772"æ÷B–â–æFW‚÷"æ÷Bd”ÄU5²'V&Æ–6F–öç5ö772%Òæ—5öf–ÆR‚“ Ð¢f–Â‚%F†RV&Æ–6F–öç27G–ÆW6†VWB—2æ÷B6öææV7FVBâ"Ð¢–b…$ôõBò&76WG2÷V&Æ–6F–öâÖWFòæ772"’æW†—7G2‚’÷"…$ôõBò&76WG2÷6—FRÖÖ–çFVææ6Ræ772"’æW†—7G2‚“ Ð¢f–Â‚$ÆVv7’f—6–&ÆRÖÖ–çFVææ6R7G–ÆW6†VWG2&VÖ–ââ"Ð Ð Ð¦FVbfÆ–FFUö6öçF7B†–æFWƒ¢7G"Â6öçF7C¢7G"Â67&—C¢7G"Â7G–ÆS¢7G"’ÓâæöæS Ð¢–bT$Ä”5ôTÔ”Âæ÷B–â6öçF7B÷"b&Ö–ÇFó§µT$Ä”5ôTÔ”ÇÒ"æ÷B–â6öçF7C Ð¢f–Â‚%F†RV&Æ–26öçF7BVÖ–Â—2Ö—76–ærâ"Ð¢Ö–ÇF÷2Ò°Ð¢fÇVRæÆ÷vW"‚Ð¢f÷"fÇVR–â&Ræf–æFÆÂ‡"&Ö–ÇFó¢…µåÂ"sÃåÇ5Ò²’"Â–æFW‚²%Æâ"²6öçF7BÂfÆw3×&Rä’Ð¢ÐÐ¢–bÖ–ÇF÷2ÒµT$Ä”5ôTÔ”ÂæÆ÷vW"‚—Ó Ð¢f–Â†b%VæW‡V7FVBf—6–&ÆRÖ–ÇFòFG&W76W3¢·6÷'FVB†Ö–ÇF÷2—Ò"Ð¢–bæ÷BÆÂ†b"w·–V6WÒr"–â67&—Bf÷"–V6R–â‚$Öö§F†VF’"Â%&×F–â"Â$vÖ–Âæ6öÒ"’“ Ð¢f–Â‚%F†R&—fFRf÷&Ò&V6—–VçB—2æ÷B76VÖ&ÆVB6÷'&V7FÇ’â"Ð¢–b$•dDUõ$T4•”TåBæÆ÷vW"‚’–â†–æFW‚²6öçF7B’æÆ÷vW"‚’÷"%&×Fâ"–â67&—C Ð¢f–Â‚%&—fFR÷"Ö—77VÆÆVB&V6—–VçBFF—2f—6–&ÆRâ"Ð¢–b%ÆV6RFòæ÷B–æ6ÇVFRF–VçBÖ–FVçF–f–&ÆR"–â–æFW‚²6öçF7C Ð¢f–Â‚%F†R&VÖ÷fVB6öçF7BF—66Æ–ÖW"&VÖ–ç2â"Ð¢–b&Rç6V&6‚‡"%Æ"ƒó¦Ö–æÆVæwF‡ÆÖ†ÆVæwF‚•Ç2£Ò"Â6öçF7BÂfÆw3×&Rä’“ Ð¢f–Â‚%F†R6öçF7Bf÷&Ò†26†&7FW"Æ–Ö—Bâ"Ð¢–b&ÖW76vT6÷VçB"–â6öçF7B²67&—B÷""ç6Æ–6RƒÂ"–â67&—C Ð¢f–Â‚$ÆVv7’6öçF7BG'Væ6F–öâ&VÖ–ç2â"Ð Ð¢÷F–öç2Ò·fÇVRf÷"fÇVR–â&Ræf–æFÆÂ‡"sÆ÷F–öåÇ2·fÇVSÒ"…µâ%Ò¢’"rÂ6öçF7B’–bfÇVWÐÐ¢–b÷F–öç2ÒU…T5DTEô4DTtõ$”U3 Ð¢f–Â‚$6öçF7B–çV—'’6FVv÷&–W2F–ffW"g&öÒF†R&÷fVB6WBâ"Ð¢–bç’‡&W"†6FVv÷'’’æ÷B–â67&—Bf÷"6FVv÷'’–âU…T5DTEô4DTtõ$”U2“ Ð¢f–Â‚$6öçF7B¦f67&—B—2Ö—76–ærâ&÷fVB6FVv÷'’â"Ð¢&WV—&VBÒ‚&–çV—'•÷G—R"Â'&WÇ•÷Fò"Â&‡öVÖ–Â"Â'&FTÆ–Ö—E7F÷&vT¶W’"Â&Ö–æ–×VÔ6ö×ÆWF–öä×2"Â5T44U55ôÔU54tRÐ¢–bç’‡Fö¶Vâæ÷B–â67&—Bf÷"Fö¶Vâ–â&WV—&VB“ Ð¢f–Â‚$6öçF7B¦f67&—B—2Ö—76–ærFVÆ—fW'’6fVwV&Bâ"Ð¢–b&6öçF7BÖf÷&Ò×öÆ—6‚æ772"æ÷B–â–æFW‚÷"&6öçF7BÖf÷&Òæ§2"æ÷B–â–æFWƒ Ð¢f–Â‚$6öçF7B76WG2&Ræ÷B6öææV7FVBâ"Ð¢–b"æ6öçF7Bæf–VÆB6VÆV7B"æ÷B–â7G–ÆS Ð¢f–Â‚%F†R6öçF7BÖ6FVv÷'’6öçG&öÂÆ6·2FVF–6FVB7G–Æ–ærâ"Ð Ð Ð¦FVbfÆ–FFUöÖ–çFVææ6R‡V&Æ–6F–öç3¢Æ—7E¶F–7EÒÂÖWG&–73¢F–7B’ÓâæöæS ¢Ö–çFVææ6RÒ&VEö§6öâ„d”ÄU5²&Ö–çFVææ6R%Ò¢6—FVÖÒ&VB„d”ÄU5²'6—FVÖ%Ò¢V&Æ–6F–öåö6÷VçBÒÆVâ‡V&Æ–6F–öç2¢–bÖ–çFVææ6RævWB‚'7FGW2"’Ò&7W'&VçB"÷"–çB†Ö–çFVææ6RævWB‚'V&Æ–6F–öåö6÷VçB"ÂÓ’’ÒV&Æ–6F–öåö6÷VçC ¢f–Â‚$–çFW&æÂÖ–çFVææ6RFF—2–æ6öç6—7FVçBâ"Ð¢G'“ Ð¢GBæFFRæg&öÖ—6öf÷&ÖB‡7G"†Ö–çFVææ6RævWB‚&Æ7Eö6†V6¶VB"Â""’’Ð¢W†6WBfÇVTW'&÷"2W'&÷# Ð¢f–Â†b$–çFW&æÂÖ–çFVææ6RFFR—2–çfÆ–C¢¶W'&÷'Ò"Ð¢–bÖ–çFVææ6RævWB‚&g&WVVæ7’"’Ò&F–Ç’"÷"Ö–çFVææ6RævWB‚'66†VGVÆUöF—7Æ’"’Ò$WfW'’F’# Ð¢f–Â‚$Ö–çFVææ6R—2æ÷B6öæf–wW&VBf÷"WfW'’F’â"Ð¢–bÆVâ†Ö–çFVææ6RævWB‚&6†V6·2"’÷"µÒ’Âc Ð¢f–Â‚%F†RF–Ç’Ö–çFVææ6R66÷R—2–æ6ö×ÆWFRâ"Ð¢–bÖWG&–72ævWB‚&Ö–çFVææ6Uög&WVVæ7’"’Ò&F–Ç’"÷"&6†V6¶VBF–Ç’"æ÷B–â7G"†ÖWG&–72ævWB‚'V&Æ–6F–öå÷6÷W&6Uöæ÷FR"’÷"""’æÆ÷vW"‚“ Ð¢f–Â‚$F–Ç’Ö–çFVææ6RÖWFFF—2–æ6öç6—7FVçBâ"Ð¢–b…$ôõBò'6—FR×7FGW2æ§6öâ"’æW†—7G2‚’÷"'6—FR×7FGW2æ§6öâ"–â6—FVÖ Ð¢f–Â‚%F†Rö'6öÆWFRV&Æ–27FGW2VæGö–çB&VÖ–ç2â"Ð¢&WV—&VE÷W&Ç2Ò°¢&‡GG3¢ò÷&×F–âÖÖö§F†VF’æv—F‡V"æ–òò"À¢&‡GG3¢ò÷&×F–âÖÖö§F†VF’æv—F‡V"æ–ò÷V&Æ–6F–öç2ò"À¢¢€¢b&‡GG3¢ò÷&×F–âÖÖö§F†VF’æv—F‡V"æ–ò÷V&Æ–6F–öç2÷·V&Æ–6F–öå²v–Bu×Òò ¢f÷"V&Æ–6F–öâ–âV&Æ–6F–öç0¢’À¢Ð¢6—FVÖöÆö6F–öç2Ò&Ræf–æFÆÂ‡"#ÆÆö3â…µãÅÒ²“ÂöÆö3â"Â6—FVÖ¢Ö—76–æu÷W&Ç2Ò6÷'FVB‡6WB‡&WV—&VE÷W&Ç2’Ò6WB‡6—FVÖöÆö6F–öç2’¢–bÖ—76–æu÷W&Ç3 ¢f–Â†b%6—FVÖVçG&–W2&RÖ—76–æs¢¶Ö—76–æu÷W&Ç7Ò"¢VæW‡V7FVE÷W&Ç2Ò6÷'FVB‡6WB‡6—FVÖöÆö6F–öç2’Ò6WB‡&WV—&VE÷W&Ç2’¢–bVæW‡V7FVE÷W&Ç3 ¢f–Â†b%6—FVÖ6öçF–ç2æöâÖ6æöæ–6Â÷"æöâÔ…DÔÂU$Ç3¢·VæW‡V7FVE÷W&Ç7Ò"¢–b&Rç6V&6‚‡"#ÆÆ7FÖöCâ"Â6—FVÖÂfÆw3×&Rä”täõ$T44R“ ¢f–Â‚%6—FVÖÆ7BÖÖöF–f–VBfÇVW2×W7B&RöÖ—GFVBVçF–ÂÖVæ–ævgVÂvRÖ6†ævRFFW2&RG&6¶VBâ" ¢&ö&÷G2Ò&VB„d”ÄU5²'&ö&÷G2%Ò¢–bæ÷B&Rç6V&6‚‡""ƒöÖ’•åW6W"ÖvVçC¥Ç2¥Â¢B"Â&ö&÷G2’÷"æ÷B&Rç6V&6‚‡""ƒöÖ’•äÆÆ÷s¥Ç2¢òB"Â&ö&÷G2“ ¢f–Â‚'&ö&÷G2çG‡BFöW2æ÷BW‡Æ–6—FÇ’W&Ö—B7&vÆ–ærâ"¢–b%6—FVÖ¢‡GG3¢ò÷&×F–âÖÖö§F†VF’æv—F‡V"æ–ò÷6—FVÖç†ÖÂ"æ÷B–â&ö&÷G3 ¢f–Â‚'&ö&÷G2çG‡BFöW2æ÷BGfW'F—6RF†R6æöæ–6Â6—FVÖâ" ¢¶W’Ò&VB„d”ÄU5²&–æFW†æ÷uö¶W’%Ò’ç7G&—‚¢Öæ–fW7BÒ&VEö§6öâ„d”ÄU5²&–æFW†æ÷r%Ò¢–bÖæ–fW7BævWB‚&¶W’"’Ò¶W’÷"Öæ–fW7BævWB‚&¶W”Æö6F–öâ"’Òb&‡GG3¢ò÷&×F–âÖÖö§F†VF’æv—F‡V"æ–ò÷¶¶W—ÒçG‡B# ¢f–Â‚$–æFW„æ÷r¶W’f–ÆRæBÖæ–fW7BF–ffW"â"¢–b6WB†Öæ–fW7BævWB‚'W&ÄÆ—7B"’÷"µÒ’Ò6WB‡&WV—&VE÷W&Ç2“ ¢f–Â‚$–æFW„æ÷rU$Ç2æB6æöæ–6Â6—FVÖU$Ç2F–ffW"â" Ð Ð¦FVbÖ–â‚’Óâ–çC Ð¢6÷W&6W2Ò¶æÖS¢&VB‡F‚’f÷"æÖRÂF‚–âd”ÄU2æ—FV×2‚’–bæÖRæ÷B–â²'V&Æ–6F–öç2"Â&ÖWG&–72"Â&Ö–çFVææ6R'×ÐÐ¢'G2Ò%Æâ"æ¦ö–â‡6÷W&6W5¶æÖUÒf÷"æÖR–â‚&†W&ò"Â'V&Æ–6F–öç5÷6V7F–öâ"Â&7F—f—G’"Â&6öçF7B"’Ð¢V&Æ–6F–öç2ÂÖWG&–72ÒfÆ–FFU÷V&Æ–6F–öç2‚Ð¢6÷VçG2ÒfÆ–FFUö6÷VçG2‡6÷W&6W5²&†W&ò%ÒÂ6÷W&6W5²&7F—f—G’%ÒÂ6÷W&6W5²&6öçF7B%ÒÂÖWG&–72Ð¢fÆ–FFU÷7G'V7GW&R‡6÷W&6W5²&–æFW‚%ÒÂ'G2Ð¢fÆ–FFU÷V&Æ–5ö6÷’‡6÷W&6W5²&–æFW‚%ÒÂ'G2Ð¢fÆ–FFUö6öçF7B‡6÷W&6W5²&–æFW‚%ÒÂ6÷W&6W5²&6öçF7B%ÒÂ6÷W&6W5²&6öçF7Eö§2%ÒÂ6÷W&6W5²&6öçF7Eö772%ÒÐ¢fÆ–FFUöÖ–çFVææ6R‡V&Æ–6F–öç2ÂÖWG&–72 Ð¢&–çB‚%vV'6—FRfÆ–FF–öâ76VBâ"Ð¢&–çB†b"ÒV&Æ–26V7F–öç3¢¶ÆVâ…$UT•$TEô”E2’ÒÒ"Ð¢&–çB†b"ÒV&Æ–6F–öç3¢¶ÆVâ‡V&Æ–6F–öç2—Ò"Ð¢&–çB†b"Ò&W6VçFF–öç3¢¶6÷VçG5²w&W6VçFF–öåö6÷VçBu×Ò"Ð¢&–çB†b"Ò&V6övæ—F–öâVçG&–W3¢¶6÷VçG5²w&V6övæ—F–öåö6÷VçBu×Ò"Ð¢&–çB†b"ÒÆVFW'6†—&öÆW3¢¶6÷VçG5²vÆVFW'6†—÷&öÆUö6÷VçBu×Ò"Ð¢&–çB‚"Òf—6—F÷"Öf6–ær–×ÆVÖVçFF–öâÖ&¶W'3¢æöæR"Ð¢&–çB‚"ÒÖ–çFVææ6R66†VGVÆS¢F–Ç’"Ð¢&WGW&â Ð Ð Ð¦–bõöæÖUõòÓÒ%õöÖ–åõò# Ð¢G'“ Ð¢&—6R7—7FVÔW†—B†Ö–â‚’Ð¢W†6WB„76W'F–öäW'&÷"Â§6öâä¥4ôäFV6öFTW'&÷"’2W'&÷# Ð¢&–çB†b%vV'6—FRfÆ–FF–öâf–ÆVC¢¶W'&÷'Ò"Âf–ÆS×7—2ç7FFW'"Ð¢&—6R7—7FVÔW†—BƒÐ
+        run: |
+          set -euo pipefail
+          python scripts/validate_website.py
+          python scripts/validate_service_roles.py
+          python scripts/validate_site_impact.py
+          python scripts/validate_layout_safety.py
+          python -m py_compile scripts/*.py
+          node --check assets/site-2026.js
+          node --check assets/site-polish.js
+          node --check assets/site-pointer-scroll.js
+          node --check assets/publication-runtime.js
+          node --check assets/programming-languages.js
+          node --check assets/site-impact.js
+          node --check assets/contact-form.js
+          node --check assets/layout-safety.js
+          node --check scripts/visual_layout_audit.mjs
+          node --check scripts/visual_heading_audit.mjs
+
+      - name: Commit verified website updates
+        id: commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            _data/publications.json \
+            _data/site_metrics.json \
+            _data/site_maintenance.json \
+            _includes/site-part-1.html \
+            _includes/site-part-3.html \
+            publications.json \
+            sitemap.xml
+
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No verified content or metadata changes were detected." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          publication_count="$(python -c 'import json; print(len(json.load(open("_data/publications.json", encoding="utf-8"))))')"
+          checked_date="$(python -c 'import json; print(json.load(open("_data/site_maintenance.json", encoding="utf-8"))["last_checked"])')"
+          git commit -m "Refresh verified website content (${checked_date})"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+          {
+            echo "### Daily website maintenance completed"
+            echo "- Last checked: ${checked_date}"
+            echo "- Publications displayed: ${publication_count}"
+            echo "- Public-section counters and headings: synchronized"
+            echo "- Statistics and section hierarchy: clear and interactive"
+            echo "- Leadership and volunteer roles: complete and unique"
+            echo "- Responsive layout safeguards: preserved"
+            echo "- Major-heading word integrity: preserved"
+            echo "- Curated CV content: preserved"
+            echo "- Public profile links: checked"
+            echo "- Sitemap and search metadata: refreshed"
+            echo "- Visitor-facing implementation markers: prohibited by validation"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Notify participating search engines
+        if: steps.commit.outputs.changed == 'true'
+        run: |
+          curl \
+            --fail \
+            --location \
+            --silent \
+            --show-error \
+            --retry 4 \
+            --retry-delay 5 \
+            "https://api.indexnow.org/indexnow?url=https%3A%2F%2Framtin-mojtahedi.github.io%2F&key=898f0caec5d8b22a095db2a4afa88722&keyLocation=https%3A%2F%2Framtin-mojtahedi.github.io%2F898f0caec5d8b22a095db2a4afa88722.txt"

@@ -7,6 +7,7 @@
       </div>
       <p>
         {{ site.data.site_metrics.peer_reviewed_or_accepted_count }} peer-reviewed, accepted, or in-press works spanning medical imaging, clinical prediction, segmentation, and biomedical engineering.
+        <a class="publication-index-link" href="/publications/">Browse all publication records →</a>
       </p>
     </div>
 
@@ -47,11 +48,14 @@
           <p class="pub-note">{{ pub.note }}</p>
           {% endif %}
         </div>
-        {% if pub.url and pub.url != "" %}
-        <a href="{{ pub.url }}" target="_blank" rel="noopener noreferrer">
-          {{ pub.link_label | default: "View ↗" }}
-        </a>
-        {% endif %}
+        <div class="pubLinks">
+          <a class="publication-record-link" href="/publications/{{ pub.id }}/">Record →</a>
+          {% if pub.url and pub.url != "" %}
+          <a href="{{ pub.url }}" target="_blank" rel="noopener noreferrer">
+            {{ pub.link_label | default: "View ↗" }}
+          </a>
+          {% endif %}
+        </div>
       </article>
       {% endfor %}
     </div>

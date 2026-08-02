@@ -21,7 +21,6 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBS = ROOT / "_data/publications.json"
 METRICS = ROOT / "_data/site_metrics.json"
 FEED = ROOT / "publications.json"
-SITEMAP = ROOT / "sitemap.xml"
 
 NAME = "Ramtin Mojtahedi"
 EMAIL = "Ramtin.Mojtahedi@utoronto.ca"
@@ -359,6 +358,7 @@ def enrich(publication: dict[str, Any], candidate: dict[str, Any], checked: str)
             changed = True
     if clean(publication.get("status")).lower() in {"submitted", "in preparation"}:
         publication["status"] = candidate.get("status") or "Peer-reviewed"
+        publication["peer_reviewed"] = True
         publication["group"] = group(int(candidate.get("year") or publication.get("year")), publication["status"])
         changed = True
     sources = [value.strip() for value in clean(publication.get("source")).split(";") if value.strip()]
@@ -377,9 +377,10 @@ def new_record(candidate: dict[str, Any], checked: str) -> dict[str, Any]:
         "id": f"{re.sub(r'[^a-z0-9]+', '-', normalize(candidate['title'])).strip('-')[:100]}-{pub_year}",
         "title": candidate["title"],
         "year": pub_year,
-        "publication_date": candidate.get("publication_date") or f"{pub_year:04d}-01-01",
+        "publication_date": candidate.get("publication_date") or str(pub_year),
         "group": group(pub_year),
         "status": "Peer-reviewed",
+        "peer_reviewed": True,
         "authors_html": candidate.get("authors_html") or render_authors(candidate.get("authors", [])),
         "citation": candidate.get("citation") or str(pub_year),
         "doi": identifier,
@@ -443,8 +444,15 @@ def main() -> int:
     if sum(bool(record.get("manual")) for record in publications) < MINIMUM:
         raise RuntimeError("The curated publication baseline was unexpectedly reduced.")
 
-    peer_count = sum(clean(record.get("status")).lower() != "submitted" for record in publications)
-    submitted_count = len(publications) - peer_count
+    peer_count = sum(
+        bool(record.get("peer_reviewed"))
+        if isinstance(record.get("peer_reviewed"), bool)
+        else clean(record.get("status")).lower() != "submitted"
+        for record in publications
+    )
+    submitted_count = sum(
+        clean(record.get("status")).lower() == "submitted" for record in publications
+    )
     metrics = {
         "publication_count": len(publications),
         "peer_reviewed_or_accepted_count": peer_count,
@@ -475,13 +483,6 @@ def main() -> int:
     write(PUBS, publications)
     write(METRICS, metrics)
     write(FEED, feed)
-
-    if SITEMAP.exists():
-        sitemap = SITEMAP.read_text(encoding="utf-8")
-        SITEMAP.write_text(
-            re.sub(r"<lastmod>\d{4}-\d{2}-\d{2}</lastmod>", f"<lastmod>{checked}</lastmod>", sitemap),
-            encoding="utf-8",
-        )
 
     print(
         json.dumps(

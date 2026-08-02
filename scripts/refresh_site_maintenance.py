@@ -17,7 +17,6 @@ PUBLICATIONS = ROOT / "_data" / "publications.json"
 METRICS = ROOT / "_data" / "site_metrics.json"
 MAINTENANCE = ROOT / "_data" / "site_maintenance.json"
 PUBLICATION_FEED = ROOT / "publications.json"
-SITEMAP = ROOT / "sitemap.xml"
 
 WEBSITE = "https://ramtin-mojtahedi.github.io/"
 MINIMUM_PUBLICATIONS = 18
@@ -122,30 +121,6 @@ def normalize_publication_sources(publications: list[dict[str, Any]]) -> bool:
     return changed
 
 
-def refresh_sitemap(checked: str) -> None:
-    if not SITEMAP.exists():
-        return
-
-    text = SITEMAP.read_text(encoding="utf-8")
-    text = re.sub(
-        r"\s*<url>\s*<loc>https://ramtin-mojtahedi\.github\.io/site-status\.json</loc>.*?</url>",
-        "",
-        text,
-        flags=re.DOTALL,
-    )
-    text = re.sub(
-        r"<lastmod>\d{4}-\d{2}-\d{2}</lastmod>",
-        f"<lastmod>{checked}</lastmod>",
-        text,
-    )
-    text = re.sub(
-        r"<changefreq>[^<]+</changefreq>",
-        "<changefreq>daily</changefreq>",
-        text,
-    )
-    SITEMAP.write_text(text.rstrip() + "\n", encoding="utf-8")
-
-
 def main() -> int:
     now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
     checked = now.date().isoformat()
@@ -193,8 +168,6 @@ def main() -> int:
         "source_status": source_status,
     }
     write_json(MAINTENANCE, maintenance)
-    refresh_sitemap(checked)
-
     print(
         json.dumps(
             {

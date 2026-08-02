@@ -29,6 +29,9 @@ FILES = {
     "metrics": ROOT / "_data/site_metrics.json",
     "maintenance": ROOT / "_data/site_maintenance.json",
     "sitemap": ROOT / "sitemap.xml",
+    "robots": ROOT / "robots.txt",
+    "indexnow": ROOT / "indexnow.json",
+    "indexnow_key": ROOT / "898f0caec5d8b22a095db2a4afa88722.txt",
 }
 
 EXPECTED_CATEGORIES = {
@@ -80,7 +83,7 @@ def display_count(value: int) -> str:
 
 
 STAT_LABELS = {
-    "publication_count": "Peer-reviewed, accepted, and published works",
+    "publication_count": "Publications and scholarly works",
     "presentation_count": "Oral and poster presentations",
     "recognition_count": "Honours, awards, and distinctions",
     "reviewer_venue_count": "Reviewer and service venues",
@@ -139,10 +142,25 @@ def validate_publications() -> tuple[list[dict], dict]:
         fail("Publication titles are missing or duplicated.")
     if int(metrics.get("publication_count", -1)) != len(publications):
         fail("Publication count and publication data differ.")
+    if any(not isinstance(item.get("peer_reviewed"), bool) for item in publications):
+        fail("Every publication must explicitly identify its peer-review status.")
+    peer_count = sum(item.get("peer_reviewed") is True for item in publications)
+    submitted_count = sum(str(item.get("status") or "").strip().casefold() == "submitted" for item in publications)
+    if int(metrics.get("peer_reviewed_or_accepted_count", -1)) != peer_count:
+        fail("Peer-reviewed publication count and publication data differ.")
+    if int(metrics.get("submitted_count", -1)) != submitted_count:
+        fail("Submitted publication count and publication data differ.")
     if any(not isinstance(item.get("year"), int) or not 1900 <= item["year"] <= 2100 for item in publications):
         fail("A publication year is invalid.")
     if any("Automated scholarly source" in str(item.get("source") or "") for item in publications):
         fail("A legacy publication-source label remains.")
+    for item in publications:
+        bibliographic_text = " ".join(
+            str(item.get(field) or "")
+            for field in ("status", "venue", "citation", "citation_plain")
+        )
+        if re.search(r"(?:\s\?\s|\d\?\d)", bibliographic_text):
+            fail(f"Publication punctuation appears corrupted: {item.get('id')}")
     return publications, metrics
 
 
@@ -251,9 +269,10 @@ def validate_contact(index: str, contact: str, script: str, style: str) -> None:
         fail("The contact-category control lacks dedicated styling.")
 
 
-def validate_maintenance(publication_count: int, metrics: dict) -> None:
+def validate_maintenance(publications: list[dict], metrics: dict) -> None:
     maintenance = read_json(FILES["maintenance"])
     sitemap = read(FILES["sitemap"])
+    publication_count = len(publications)
     if maintenance.get("status") != "current" or int(maintenance.get("publication_count", -1)) != publication_count:
         fail("Internal maintenance data is inconsistent.")
     try:
@@ -268,12 +287,36 @@ def validate_maintenance(publication_count: int, metrics: dict) -> None:
         fail("Daily maintenance metadata is inconsistent.")
     if (ROOT / "site-status.json").exists() or "site-status.json" in sitemap:
         fail("The obsolete public status endpoint remains.")
-    for url in ("https://ramtin-mojtahedi.github.io/", "https://ramtin-mojtahedi.github.io/publications.json"):
-        if url not in sitemap:
-            fail(f"Sitemap entry is missing: {url}")
-    frequencies = re.findall(r"<changefreq>([^<]+)</changefreq>", sitemap)
-    if not frequencies or any(value != "daily" for value in frequencies):
-        fail("Every sitemap entry must use daily frequency.")
+    required_urls = [
+        "https://ramtin-mojtahedi.github.io/",
+        "https://ramtin-mojtahedi.github.io/publications/",
+        *(
+            f"https://ramtin-mojtahedi.github.io/publications/{publication['id']}/"
+            for publication in publications
+        ),
+    ]
+    sitemap_locations = re.findall(r"<loc>([^<]+)</loc>", sitemap)
+    missing_urls = sorted(set(required_urls) - set(sitemap_locations))
+    if missing_urls:
+        fail(f"Sitemap entries are missing: {missing_urls}")
+    unexpected_urls = sorted(set(sitemap_locations) - set(required_urls))
+    if unexpected_urls:
+        fail(f"Sitemap contains non-canonical or non-HTML URLs: {unexpected_urls}")
+    if re.search(r"<lastmod>", sitemap, flags=re.IGNORECASE):
+        fail("Sitemap last-modified values must be omitted until meaningful page-change dates are tracked.")
+
+    robots = read(FILES["robots"])
+    if not re.search(r"(?mi)^User-agent:\s*\*$", robots) or not re.search(r"(?mi)^Allow:\s*/$", robots):
+        fail("robots.txt does not explicitly permit crawling.")
+    if "Sitemap: https://ramtin-mojtahedi.github.io/sitemap.xml" not in robots:
+        fail("robots.txt does not advertise the canonical sitemap.")
+
+    key = read(FILES["indexnow_key"]).strip()
+    manifest = read_json(FILES["indexnow"])
+    if manifest.get("key") != key or manifest.get("keyLocation") != f"https://ramtin-mojtahedi.github.io/{key}.txt":
+        fail("IndexNow key file and manifest differ.")
+    if set(manifest.get("urlList") or []) != set(required_urls):
+        fail("IndexNow URLs and canonical sitemap URLs differ.")
 
 
 def main() -> int:
@@ -284,7 +327,7 @@ def main() -> int:
     validate_structure(sources["index"], parts)
     validate_public_copy(sources["index"], parts)
     validate_contact(sources["index"], sources["contact"], sources["contact_js"], sources["contact_css"])
-    validate_maintenance(len(publications), metrics)
+    validate_maintenance(publications, metrics)
 
     print("Website validation passed.")
     print(f"- Public sections: {len(REQUIRED_IDS) - 1}")

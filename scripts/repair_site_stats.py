@@ -40,7 +40,7 @@ def display_count(value: int) -> str:
 
 
 STAT_LABELS = {
-    "publication_count": "Peer-reviewed, accepted, and published works",
+    "publication_count": "Publications and scholarly works",
     "presentation_count": "Oral and poster presentations",
     "recognition_count": "Honours, awards, and distinctions",
     "reviewer_venue_count": "Reviewer and service venues",

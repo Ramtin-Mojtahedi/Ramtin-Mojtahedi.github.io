@@ -129,10 +129,16 @@ def main() -> int:
     )
 
     metrics = json.loads(METRICS.read_text(encoding="utf-8"))
-    peer_count = sum(clean(record.get("status")).lower() != "submitted" for record in records)
+    peer_count = sum(
+        bool(record.get("peer_reviewed"))
+        if isinstance(record.get("peer_reviewed"), bool)
+        else clean(record.get("status")).lower() != "submitted"
+        for record in records
+    )
+    submitted_count = sum(clean(record.get("status")).lower() == "submitted" for record in records)
     metrics["publication_count"] = len(records)
     metrics["peer_reviewed_or_accepted_count"] = peer_count
-    metrics["submitted_count"] = len(records) - peer_count
+    metrics["submitted_count"] = submitted_count
     metrics["auto_added_count"] = automatic_count
     metrics["minimum_preserved_records"] = manual_count
     metrics["invalid_nonpublication_records_removed"] = before - len(records)
