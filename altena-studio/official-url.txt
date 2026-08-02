@@ -1,0 +1,7 @@
+Altena Studio official branded URL
+https://spoo.me/AltenaStudio
+
+Redirect destination
+https://ramtin-mojtahedi.github.io/altena-studio/
+
+Verified successfully on 2026-08-02 at 10:43:56 UTC.
