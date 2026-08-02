@@ -1,40 +1,25 @@
-name: Daily website content maintenance
+name: Daily website content maintenance check
 
 on:
   workflow_dispatch:
   schedule:
     - cron: "23 10 * * *"
-  push:
-    branches:
-      - main
-    paths:
-      - "index.html"
-      - "_includes/**"
-      - "_data/**"
-      - "assets/**"
-      - "scripts/**"
-      - "publications.json"
-      - "sitemap.xml"
-      - ".github/workflows/update-publications.yml"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: portfolio-content-maintenance
+  group: portfolio-content-maintenance-check
   cancel-in-progress: true
 
 jobs:
-  maintain-website:
-    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
+  audit-website:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
       - name: Check out website
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -51,27 +36,25 @@ jobs:
       - name: Install maintenance dependencies
         run: python -m pip install --disable-pip-version-check -r scripts/requirements-publications.txt
 
-      - name: Check scholarly sources
+      - name: Build a temporary candidate refresh
+        shell: bash
         run: |
           set -euo pipefail
           python scripts/update_publications.py | tee publication-sync-report.json
+          python scripts/clean_publications.py
+          python scripts/repair_site_stats.py
+          python scripts/refresh_site_maintenance.py
+          python scripts/build_search_pages.py
 
-      - name: Remove non-publication records
-        run: python scripts/clean_publications.py
-
-      - name: Synchronize all public counters and headings
-        run: python scripts/repair_site_stats.py
-
-      - name: Refresh internal maintenance data and search files
-        run: python scripts/refresh_site_maintenance.py
-
-      - name: Validate the complete website
+      - name: Validate the candidate website
+        shell: bash
         run: |
           set -euo pipefail
           python scripts/validate_website.py
           python scripts/validate_service_roles.py
           python scripts/validate_site_impact.py
           python scripts/validate_layout_safety.py
+          python scripts/build_search_pages.py --check
           python -m py_compile scripts/*.py
           node --check assets/site-2026.js
           node --check assets/site-polish.js
@@ -84,59 +67,31 @@ jobs:
           node --check scripts/visual_layout_audit.mjs
           node --check scripts/visual_heading_audit.mjs
 
-      - name: Commit verified website updates
-        id: commit
+      - name: Record candidate changes without modifying production
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add \
-            _data/publications.json \
-            _data/site_metrics.json \
-            _data/site_maintenance.json \
-            _includes/site-part-1.html \
-            _includes/site-part-3.html \
-            publications.json \
-            sitemap.xml
-
-          if git diff --cached --quiet; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "No verified content or metadata changes were detected." >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
-
-          publication_count="$(python -c 'import json; print(len(json.load(open("_data/publications.json", encoding="utf-8"))))')"
-          checked_date="$(python -c 'import json; print(json.load(open("_data/site_maintenance.json", encoding="utf-8"))["last_checked"])')"
-          git commit -m "Refresh verified website content (${checked_date})"
-          git pull --rebase origin main
-          git push origin HEAD:main
-          echo "changed=true" >> "$GITHUB_OUTPUT"
-
+          git status --short > maintenance-changes.txt
           {
-            echo "### Daily website maintenance completed"
-            echo "- Last checked: ${checked_date}"
-            echo "- Publications displayed: ${publication_count}"
-            echo "- Public-section counters and headings: synchronized"
-            echo "- Statistics and section hierarchy: clear and interactive"
-            echo "- Leadership and volunteer roles: complete and unique"
-            echo "- Responsive layout safeguards: preserved"
-            echo "- Major-heading word integrity: preserved"
-            echo "- Curated CV content: preserved"
-            echo "- Public profile links: checked"
-            echo "- Sitemap and search metadata: refreshed"
-            echo "- Visitor-facing implementation markers: prohibited by validation"
+            echo "### Daily website maintenance check completed"
+            if [[ -s maintenance-changes.txt ]]; then
+              echo "Candidate updates were found. Review the attached report before applying them."
+              echo '~~~text'
+              cat maintenance-changes.txt
+              echo '~~~'
+            else
+              echo "No verified content or metadata changes were detected."
+            fi
+            echo "The scheduled check is read-only and did not commit or push files."
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Notify participating search engines
-        if: steps.commit.outputs.changed == 'true'
-        run: |
-          curl \
-            --fail \
-            --location \
-            --silent \
-            --show-error \
-            --retry 4 \
-            --retry-delay 5 \
-            "https://api.indexnow.org/indexnow?url=https%3A%2F%2Framtin-mojtahedi.github.io%2F&key=898f0caec5d8b22a095db2a4afa88722&keyLocation=https%3A%2F%2Framtin-mojtahedi.github.io%2F898f0caec5d8b22a095db2a4afa88722.txt"
+      - name: Upload maintenance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-maintenance-check
+          path: |
+            publication-sync-report.json
+            maintenance-changes.txt
+          if-no-files-found: warn
+          retention-days: 14
