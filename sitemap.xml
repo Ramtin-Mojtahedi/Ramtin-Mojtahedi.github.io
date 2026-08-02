@@ -2,14 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ramtin-mojtahedi.github.io/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ramtin-mojtahedi.github.io/publications.json</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
+    <loc>https://ramtin-mojtahedi.github.io/publications/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/multimodal-preoperative-risk-stratification-2026/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/carotid-plaque-radiomics-risk-2026/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/self-supervised-transformer-liver-tumor-2026/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/radiomic-signatures-chemotherapy-response-2026/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/ct-imaging-subtypes-slice-thickness-2025/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/pdac-treatment-response-cnn-2025/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/stacked-classifier-treatment-response-2025/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/peft-few-shot-multiscale-vit-2025/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/persistent-homology-liver-tumor-classification-2025/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/dilated-transformer-liver-cancers-2024/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/simsiam-liver-cancer-classification-2023/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/optimal-vit-patch-size-tumor-segmentation-2022/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/multimodal-brain-tumour-vit-patch-2023/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/smart-package-liquid-flow-meters-2017/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/dwt-logistic-map-image-encryption-2016/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/fpga-human-tracking-particle-filter-2016/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/carrier-synchronization-bayesian-filtering-2015/</loc>
   </url>
 </urlset>
