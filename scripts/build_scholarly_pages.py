@@ -272,17 +272,23 @@ def main() -> int:
     for publication in publications:
         directory = OUTPUT / publication["id"]
         directory.mkdir(parents=True, exist_ok=True)
-        (directory / "index.html").write_text(page(publication, entries[publication["id"]]), encoding="utf-8")
-    (OUTPUT / "index.html").write_text(index_page(publications), encoding="utf-8")
-    (ROOT / "publications.bib").write_text("\n\n".join(entries.values()) + "\n", encoding="utf-8")
-    (ROOT / "sitemap.xml").write_text(sitemap(publications), encoding="utf-8")
+        (directory / "index.html").write_text(
+            page(publication, entries[publication["id"]]), encoding="utf-8", newline="\n"
+        )
+    (OUTPUT / "index.html").write_text(index_page(publications), encoding="utf-8", newline="\n")
+    (ROOT / "publications.bib").write_text(
+        "\n\n".join(entries.values()) + "\n", encoding="utf-8", newline="\n"
+    )
+    (ROOT / "sitemap.xml").write_text(sitemap(publications), encoding="utf-8", newline="\n")
     manifest = {
         "schema_version": 1,
         "generated_at": "2026-08-02",
         "count": len(publications),
         "pages": [publication["detail_url"] for publication in publications],
     }
-    (ROOT / "scholarly-pages.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    (ROOT / "scholarly-pages.json").write_text(
+        json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n"
+    )
     indexnow = {
         "host": "ramtin-mojtahedi.github.io",
         "key": "898f0caec5d8b22a095db2a4afa88722",
@@ -293,7 +299,9 @@ def main() -> int:
             *(f"{BASE_URL}{publication['detail_url']}" for publication in publications),
         ],
     }
-    (ROOT / "indexnow.json").write_text(json.dumps(indexnow, indent=2) + "\n", encoding="utf-8")
+    (ROOT / "indexnow.json").write_text(
+        json.dumps(indexnow, indent=2) + "\n", encoding="utf-8", newline="\n"
+    )
     print(f"Built {len(publications)} publication pages and publications.bib")
     return 0
 
