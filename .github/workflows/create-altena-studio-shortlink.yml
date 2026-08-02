@@ -7,6 +7,8 @@ on:
   pull_request:
     types:
       - opened
+      - synchronize
+      - reopened
   workflow_dispatch:
 
 permissions:
@@ -32,17 +34,28 @@ jobs:
           set -euo pipefail
 
           destination="https://ramtin-mojtahedi.github.io/altena-studio/"
-          aliases=("AltenaStudio" "AltenaStudioOfficial" "AltenaStudioLinks")
           chosen=""
+          service=""
 
-          for alias in "${aliases[@]}"; do
+          verify_redirect() {
+            local short_url="$1"
+            local final_url
+            final_url="$(curl --location --silent --show-error --output /dev/null --write-out '%{url_effective}' "${short_url}" || true)"
+            echo "Verification for ${short_url}: ${final_url}"
+            [[ "${final_url}" == "${destination}" || "${final_url}" == "${destination%/}" ]]
+          }
+
+          echo "Trying is.gd aliases"
+          for alias in AltenaStudio AltenaStudioOfficial AltenaStudioLinks; do
             existing="$(curl --silent --show-error --get \
               --data-urlencode "format=simple" \
               --data-urlencode "shorturl=${alias}" \
               https://is.gd/forward.php || true)"
+            echo "is.gd lookup ${alias}: ${existing}"
 
             if [[ "${existing}" == "${destination}" || "${existing}" == "${destination%/}" ]]; then
               chosen="https://is.gd/${alias}"
+              service="is.gd"
               break
             fi
 
@@ -52,33 +65,84 @@ jobs:
                 --data-urlencode "url=${destination}" \
                 --data-urlencode "shorturl=${alias}" \
                 https://is.gd/create.php || true)"
-
+              echo "is.gd create ${alias}: ${created}"
               if [[ "${created}" == https://is.gd/* ]]; then
                 chosen="${created}"
+                service="is.gd"
                 break
               fi
             fi
           done
 
           if [[ -z "${chosen}" ]]; then
-            echo "No approved branded alias was available." >&2
+            echo "Trying spoo.me aliases"
+            for alias in AltenaStudio Altena_Studio AltenaOfficial AltenaLinks; do
+              candidate="https://spoo.me/${alias}"
+              if verify_redirect "${candidate}"; then
+                chosen="${candidate}"
+                service="spoo.me"
+                break
+              fi
+
+              payload="$(printf '{\"long_url\":\"%s\",\"alias\":\"%s\"}' "${destination}" "${alias}")"
+              response="$(curl --silent --show-error \
+                --request POST \
+                --header 'Content-Type: application/json' \
+                --data "${payload}" \
+                https://spoo.me/api/v1/shorten || true)"
+              echo "spoo.me create ${alias}: ${response}"
+              short_url="$(python3 -c 'import json,sys
+try:
+ d=json.load(sys.stdin); print(d.get("short_url", ""))
+except Exception:
+ print("")' <<< "${response}")"
+              if [[ "${short_url}" == https://spoo.me/* ]] && verify_redirect "${short_url}"; then
+                chosen="${short_url}"
+                service="spoo.me"
+                break
+              fi
+            done
+          fi
+
+          if [[ -z "${chosen}" ]]; then
+            echo "Trying ulvis.net aliases"
+            for alias in AltenaStudio AltenaStudioOfficial AltenaStudioLinks; do
+              response="$(curl --silent --show-error --get \
+                --data-urlencode "url=${destination}" \
+                --data-urlencode "custom=${alias}" \
+                --data-urlencode "private=1" \
+                --data-urlencode "type=json" \
+                https://ulvis.net/api.php || true)"
+              echo "ulvis.net create ${alias}: ${response}"
+              short_url="$(python3 -c 'import json,sys
+try:
+ d=json.load(sys.stdin); print((d.get("data") or {}).get("url", ""))
+except Exception:
+ print("")' <<< "${response}")"
+              if [[ "${short_url}" == https://ulvis.net/* ]] && verify_redirect "${short_url}"; then
+                chosen="${short_url}"
+                service="ulvis.net"
+                break
+              fi
+            done
+          fi
+
+          if [[ -z "${chosen}" ]]; then
+            echo "No approved branded alias could be created and verified." >&2
             exit 1
           fi
 
-          verified_destination="$(curl --fail --silent --show-error --get \
-            --data-urlencode "format=simple" \
-            --data-urlencode "shorturl=${chosen}" \
-            https://is.gd/forward.php)"
-
+          verified_destination="$(curl --location --fail --silent --show-error --output /dev/null --write-out '%{url_effective}' "${chosen}")"
           if [[ "${verified_destination}" != "${destination}" && "${verified_destination}" != "${destination%/}" ]]; then
-            echo "Redirect verification failed: ${verified_destination}" >&2
+            echo "Final redirect verification failed: ${verified_destination}" >&2
             exit 1
           fi
 
           {
             echo "${chosen}"
             echo "Destination: ${destination}"
-            echo "Verified by the is.gd lookup API on $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "Service: ${service}"
+            echo "Verified on $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           } > altena-studio-short-url.txt
 
           echo "url=${chosen}" >> "${GITHUB_OUTPUT}"
