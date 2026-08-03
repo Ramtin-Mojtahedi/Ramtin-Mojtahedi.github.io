@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://ramtin-mojtahedi.github.io/</loc>
+    <image:image>
+      <image:loc>https://ramtin-mojtahedi.github.io/assets/ramtin-graduation.svg</image:loc>
+      <image:title>Ramtin Mojtahedi at Queen's University convocation</image:title>
+      <image:caption>Dr. Ramtin Mojtahedi in Queen's University doctoral regalia holding his diploma</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/about/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/research/</loc>
   </url>
   <url>
     <loc>https://ramtin-mojtahedi.github.io/publications/</loc>
@@ -11,6 +22,9 @@
   </url>
   <url>
     <loc>https://ramtin-mojtahedi.github.io/publications.bib</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications.atom.xml</loc>
   </url>
   <url>
     <loc>https://ramtin-mojtahedi.github.io/scholarly-pages.json</loc>
@@ -29,9 +43,6 @@
   </url>
   <url>
     <loc>https://ramtin-mojtahedi.github.io/publications/radiomic-signatures-chemotherapy-response-2026/</loc>
-  </url>
-  <url>
-    <loc>https://ramtin-mojtahedi.github.io/publications/doctoral-dissertation-liver-cancer-2025/</loc>
   </url>
   <url>
     <loc>https://ramtin-mojtahedi.github.io/publications/ct-imaging-subtypes-slice-thickness-2025/</loc>

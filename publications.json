@@ -7,7 +7,7 @@
     "website": "https://ramtin-mojtahedi.github.io/"
   },
   "updated_at": "2026-08-02T21:15:14Z",
-  "publication_count": 19,
+  "publication_count": 18,
   "publications": [
     {
       "id": "multimodal-preoperative-risk-stratification-2026",
@@ -297,54 +297,6 @@
       "citation_pdf_url": "",
       "bibtex_type": "article",
       "bibtex_key": "Piliposyan2026RadiomicSignatures"
-    },
-    {
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "article_number": "",
-      "doi": "",
-      "url": "",
-      "publisher": "Queen’s University",
-      "open_access_url": "",
-      "open_access_label": "",
-      "open_access_license": "",
-      "preprint_url": "",
-      "code_url": "",
-      "code_label": "Code",
-      "pubmed_url": "",
-      "pmc_url": "",
-      "citation_pdf_url": "",
-      "note": "Included because it appears on the author’s Google Scholar profile. No QSpace, Library and Archives Canada, ProQuest, DOI, or handle record was located as of 2 August 2026; do not cite a repository URL until Queen’s confirms it.",
-      "title_aliases": [],
-      "manual": true,
-      "source": "Google Scholar profile; Queen’s University degree evidence; title supplied by author",
-      "last_verified": "2026-08-02",
-      "id": "doctoral-dissertation-liver-cancer-2025",
-      "title": "Deep Learning Approaches for Multitask Analysis of Liver Cancer in CT: Segmentation, Classification, and Survival Prediction",
-      "year": 2025,
-      "publication_date": "2025",
-      "group": "2025",
-      "status": "Doctoral dissertation · Record pending",
-      "type": "dissertation",
-      "peer_reviewed": false,
-      "authors": [
-        "Ramtin Mojtahedi Saffari"
-      ],
-      "authors_html": "<strong>Ramtin Mojtahedi Saffari</strong>",
-      "citation": "Doctoral dissertation, Queen’s University (2025). Repository record pending verification.",
-      "citation_plain": "Doctoral dissertation, Queen’s University (2025). Repository record pending verification.",
-      "venue": "Queen’s University",
-      "bibtex_type": "phdthesis",
-      "bibtex_key": "MojtahediSaffari2025Dissertation",
-      "keywords": [
-        "liver cancer",
-        "medical image segmentation",
-        "tumor classification",
-        "survival prediction"
-      ],
-      "detail_url": "/publications/doctoral-dissertation-liver-cancer-2025/",
-      "link_label": "Details ↗"
     },
     {
       "id": "ct-imaging-subtypes-slice-thickness-2025",

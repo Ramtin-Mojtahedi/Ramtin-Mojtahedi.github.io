@@ -11,7 +11,12 @@ const viewports = [
   { name: 'mobile-minimum', width: 320, height: 700 }
 ];
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({
+  headless: true,
+  ...(process.env.PLAYWRIGHT_EXECUTABLE_PATH
+    ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH }
+    : {})
+});
 const report = {
   url: auditUrl,
   createdAt: new Date().toISOString(),

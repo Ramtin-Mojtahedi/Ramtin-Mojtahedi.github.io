@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: >-
+  If you use the curated publication metadata or website source, please cite
+  this portfolio and cite the relevant scholarly publications directly.
+title: Ramtin Mojtahedi — Medical AI Research Portfolio
+type: dataset
+authors:
+  - family-names: Mojtahedi
+    given-names: Ramtin
+    orcid: https://orcid.org/0000-0002-3953-3256
+version: 2026.08.02
+date-released: 2026-08-02
+url: https://ramtin-mojtahedi.github.io/
+repository-code: https://github.com/Ramtin-Mojtahedi/Ramtin-Mojtahedi.github.io
+keywords:
+  - medical artificial intelligence
+  - medical imaging
+  - scholarly metadata
+  - publication portfolio
