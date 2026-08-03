@@ -9,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 METRICS_PATH = ROOT / "_data" / "site_metrics.json"
+PUBLICATIONS_PATH = ROOT / "_data" / "publications.json"
 HERO_PATH = ROOT / "_includes" / "site-part-1.html"
 ACTIVITY_PATH = ROOT / "_includes" / "site-part-3.html"
 SERVICE_PATH = ROOT / "_includes" / "site-part-4.html"
@@ -93,6 +94,9 @@ def replace_heading(source: str, section_pattern: str, text: str) -> str:
 
 def main() -> int:
     metrics = json.loads(METRICS_PATH.read_text(encoding="utf-8"))
+    publications = json.loads(PUBLICATIONS_PATH.read_text(encoding="utf-8"))
+    if not isinstance(publications, list) or len(publications) < 19:
+        raise RuntimeError("The curated publication baseline must contain at least 19 records.")
     hero = HERO_PATH.read_text(encoding="utf-8")
     activity = ACTIVITY_PATH.read_text(encoding="utf-8")
     service = SERVICE_PATH.read_text(encoding="utf-8")
@@ -104,7 +108,7 @@ def main() -> int:
     teaching_topic_count = count(r"<article class='teach[^']*'>", activity)
     leadership_role_count = count(r"<article class=\"lead[^\"]*\">", service)
     service_venue_count = reviewer_venue_count(service)
-    publication_count = int(metrics.get("publication_count", 0))
+    publication_count = len(publications)
 
     section_counts = {
         "publication_count": publication_count,

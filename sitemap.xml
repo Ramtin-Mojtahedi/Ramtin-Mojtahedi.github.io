@@ -7,6 +7,15 @@
     <loc>https://ramtin-mojtahedi.github.io/publications/</loc>
   </url>
   <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications.json</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications.bib</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/scholarly-pages.json</loc>
+  </url>
+  <url>
     <loc>https://ramtin-mojtahedi.github.io/publications/multimodal-preoperative-risk-stratification-2026/</loc>
   </url>
   <url>
@@ -20,6 +29,9 @@
   </url>
   <url>
     <loc>https://ramtin-mojtahedi.github.io/publications/radiomic-signatures-chemotherapy-response-2026/</loc>
+  </url>
+  <url>
+    <loc>https://ramtin-mojtahedi.github.io/publications/doctoral-dissertation-liver-cancer-2025/</loc>
   </url>
   <url>
     <loc>https://ramtin-mojtahedi.github.io/publications/ct-imaging-subtypes-slice-thickness-2025/</loc>

@@ -90,6 +90,9 @@ jobs:
           set -euo pipefail
           manifest="$RUNNER_TEMP/indexnow-${EXPECTED_SHA}.json"
           deployed_sitemap="$RUNNER_TEMP/sitemap-${EXPECTED_SHA}.xml"
+          deployed_publications="$RUNNER_TEMP/publications-${EXPECTED_SHA}.json"
+          deployed_bibtex="$RUNNER_TEMP/publications-${EXPECTED_SHA}.bib"
+          deployed_scholarly_pages="$RUNNER_TEMP/scholarly-pages-${EXPECTED_SHA}.json"
           deployed=false
 
           for attempt in $(seq 1 20); do
@@ -107,8 +110,32 @@ jobs:
                 --show-error \
                 --output "$deployed_sitemap" \
                 "https://ramtin-mojtahedi.github.io/sitemap.xml" \
+              && curl \
+                --fail \
+                --location \
+                --silent \
+                --show-error \
+                --output "$deployed_publications" \
+                "https://ramtin-mojtahedi.github.io/publications.json" \
+              && curl \
+                --fail \
+                --location \
+                --silent \
+                --show-error \
+                --output "$deployed_bibtex" \
+                "https://ramtin-mojtahedi.github.io/publications.bib" \
+              && curl \
+                --fail \
+                --location \
+                --silent \
+                --show-error \
+                --output "$deployed_scholarly_pages" \
+                "https://ramtin-mojtahedi.github.io/scholarly-pages.json" \
               && cmp --silent indexnow.json "$manifest" \
-              && cmp --silent sitemap.xml "$deployed_sitemap"; then
+              && cmp --silent sitemap.xml "$deployed_sitemap" \
+              && cmp --silent publications.json "$deployed_publications" \
+              && cmp --silent publications.bib "$deployed_bibtex" \
+              && cmp --silent scholarly-pages.json "$deployed_scholarly_pages"; then
               deployed=true
               break
             fi
@@ -123,7 +150,7 @@ jobs:
           echo "manifest_path=${manifest}" >> "$GITHUB_OUTPUT"
           {
             echo "- GitHub Pages revision: ${EXPECTED_SHA}"
-            echo "- Deployed sitemap and IndexNow manifest: exact"
+            echo "- Deployed sitemap, IndexNow manifest, and citation exports: exact"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Verify public website and SEO files
@@ -136,6 +163,9 @@ jobs:
             "https://ramtin-mojtahedi.github.io/robots.txt"
             "https://ramtin-mojtahedi.github.io/sitemap.xml"
             "https://ramtin-mojtahedi.github.io/indexnow.json"
+            "https://ramtin-mojtahedi.github.io/publications.json"
+            "https://ramtin-mojtahedi.github.io/publications.bib"
+            "https://ramtin-mojtahedi.github.io/scholarly-pages.json"
             "https://ramtin-mojtahedi.github.io/898f0caec5d8b22a095db2a4afa88722.txt"
           )
 
@@ -159,6 +189,7 @@ jobs:
             echo "- robots.txt: available"
             echo "- sitemap.xml: available"
             echo "- IndexNow manifest: available"
+            echo "- Publication JSON, BibTeX, and scholarly-page manifest: available"
             echo "- IndexNow key: available"
           } >> "$GITHUB_STEP_SUMMARY"
 

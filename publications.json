@@ -7,7 +7,7 @@
     "website": "https://ramtin-mojtahedi.github.io/"
   },
   "updated_at": "2026-08-02T21:15:14Z",
-  "publication_count": 18,
+  "publication_count": 19,
   "publications": [
     {
       "id": "multimodal-preoperative-risk-stratification-2026",
@@ -61,7 +61,18 @@
       ],
       "note": "Nature currently provides an unedited early-access version; volume and article number have not yet been assigned.",
       "contribution_note": "Kaitlyn S. M. Kobayashi and Ramtin Mojtahedi contributed equally.",
-      "detail_url": "/publications/multimodal-preoperative-risk-stratification-2026/"
+      "detail_url": "/publications/multimodal-preoperative-risk-stratification-2026/",
+      "open_access_url": "https://www.nature.com/articles/s41598-026-60860-9",
+      "open_access_label": "Open article",
+      "open_access_license": "CC BY-NC-ND 4.0",
+      "preprint_url": "",
+      "code_url": "https://github.com/kaitlyn-kobayashi/CRLM_Clinical_Radiomics_Analysis",
+      "code_label": "Code",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42448749/",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "article",
+      "bibtex_key": "Kobayashi2026PreoperativeRisk"
     },
     {
       "id": "carotid-plaque-radiomics-risk-2026",
@@ -109,7 +120,18 @@
       ],
       "note": "Issue, volume, and page range have not yet been assigned by the journal.",
       "contribution_note": "Ricky Hu and Ramtin Mojtahedi are co-first authors.",
-      "detail_url": "/publications/carotid-plaque-radiomics-risk-2026/"
+      "detail_url": "/publications/carotid-plaque-radiomics-risk-2026/",
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "https://github.com/Ramtin-Mojtahedi/AI-Radiomics-Carotid",
+      "code_label": "Code",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42285860/",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "article",
+      "bibtex_key": "Hu2026CarotidRadiomics"
     },
     {
       "id": "foundation-models-liver-tumor-segmentation-2026",
@@ -138,7 +160,7 @@
       "venue": "Medical Imaging 2026: Computer-Aided Diagnosis",
       "volume": "13926",
       "issue": "",
-      "pages": "",
+      "pages": "260-268",
       "article_number": "1392612",
       "type": "conference-paper",
       "peer_reviewed": true,
@@ -150,7 +172,19 @@
         "computed tomography"
       ],
       "note": "",
-      "detail_url": "/publications/foundation-models-liver-tumor-segmentation-2026/"
+      "detail_url": "/publications/foundation-models-liver-tumor-segmentation-2026/",
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "https://github.com/Ramtin-Mojtahedi/peft-sam-liver-ct",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "abstract": "State-of-the-art interactive segmentation with foundation models remains constrained by compute and the need for annotations. We evaluated parameter-efficient fine-tuning (PEFT) of the Segment Anything Model (SAM) by inserting baseline adapters, Low-Rank Adaptation (LoRA), 4-bit Quantized Low-Rank Adaptation (QLoRA), and a convolutional adapter (Conv-Adapter), as well as our proposed Directional Spectral Top-K adapter (DiSCo), training only the adapters while keeping the SAM backbone frozen. DiSCo performs singular value decomposition of row-normalized weights to obtain spectral bases, then learns rank-gated spectral coefficients, per-output magnitude offsets, and a spectral gain; it supports optional Top-K rank selection at inference while keeping only 0.14 M parameters trainable. We benchmarked five prompting regimes, none, single-point, multi-point, and bounding boxes at an intersection over union (IoU) of 0.50 and 0.75, applied to abdominal CT scans of colorectal liver metastases, and reported segmentation metrics (Dice and the 95th-percentile Hausdorff distance (HD95)) and compute metrics (trainable parameters, latency, memory, throughput). Conv-Adapter and LoRA achieved the highest accuracy (overall Dice 0.793 and 0.792; single-point 0.795 and 0.792; HD95 32 mm). QLoRA was close (overall 0.766; single-point 0.768; HD95 36.41 mm) while offering the most favorable compute profile (0.91 M trainable parameters, 120 ms latency, 4.9 GB peak memory). DiSCo maximized parameter efficiency, achieving the highest Dice per million trainable parameters (4.66), showing an accuracy-efficiency trade-off (overall Dice 0.653; single-point 0.698; HD95 49.53 mm). These results indicate that PEFT on foundation models enables more accurate liver tumor segmentation with reduced adaptation costs, supporting rapid scanner-specific tuning, point- or box-prompt workflows, and broader deployability for preoperative volumetrics when compute and labeled data are limited.",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Mojtahedi2026PEFTFoundation"
     },
     {
       "id": "self-supervised-transformer-liver-tumor-2026",
@@ -191,8 +225,19 @@
         "liver tumor segmentation",
         "tumor classification"
       ],
-      "note": "",
-      "detail_url": "/publications/self-supervised-transformer-liver-tumor-2026/"
+      "note": "The public PMC copy is the NIH author manuscript; no Creative Commons licence is asserted here.",
+      "detail_url": "/publications/self-supervised-transformer-liver-tumor-2026/",
+      "open_access_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12866948/",
+      "open_access_label": "Free NIH manuscript",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41616240/",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12866948/",
+      "citation_pdf_url": "",
+      "bibtex_type": "article",
+      "bibtex_key": "Mojtahedi2026SelfSupervised"
     },
     {
       "id": "radiomic-signatures-chemotherapy-response-2026",
@@ -239,8 +284,67 @@
         "colorectal liver metastases",
         "computed tomography"
       ],
-      "note": "",
-      "detail_url": "/publications/radiomic-signatures-chemotherapy-response-2026/"
+      "note": "The publisher article is currently open under CC BY 4.0. The assigned PubMed Central record is not yet publicly released and is therefore not linked as available full text.",
+      "detail_url": "/publications/radiomic-signatures-chemotherapy-response-2026/",
+      "open_access_url": "https://doi.org/10.1117/1.JMI.13.1.014505",
+      "open_access_label": "Open article",
+      "open_access_license": "CC BY 4.0",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41536565/",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "article",
+      "bibtex_key": "Piliposyan2026RadiomicSignatures"
+    },
+    {
+      "volume": "",
+      "issue": "",
+      "pages": "",
+      "article_number": "",
+      "doi": "",
+      "url": "",
+      "publisher": "Queen’s University",
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "note": "Included because it appears on the author’s Google Scholar profile. No QSpace, Library and Archives Canada, ProQuest, DOI, or handle record was located as of 2 August 2026; do not cite a repository URL until Queen’s confirms it.",
+      "title_aliases": [],
+      "manual": true,
+      "source": "Google Scholar profile; Queen’s University degree evidence; title supplied by author",
+      "last_verified": "2026-08-02",
+      "id": "doctoral-dissertation-liver-cancer-2025",
+      "title": "Deep Learning Approaches for Multitask Analysis of Liver Cancer in CT: Segmentation, Classification, and Survival Prediction",
+      "year": 2025,
+      "publication_date": "2025",
+      "group": "2025",
+      "status": "Doctoral dissertation · Record pending",
+      "type": "dissertation",
+      "peer_reviewed": false,
+      "authors": [
+        "Ramtin Mojtahedi Saffari"
+      ],
+      "authors_html": "<strong>Ramtin Mojtahedi Saffari</strong>",
+      "citation": "Doctoral dissertation, Queen’s University (2025). Repository record pending verification.",
+      "citation_plain": "Doctoral dissertation, Queen’s University (2025). Repository record pending verification.",
+      "venue": "Queen’s University",
+      "bibtex_type": "phdthesis",
+      "bibtex_key": "MojtahediSaffari2025Dissertation",
+      "keywords": [
+        "liver cancer",
+        "medical image segmentation",
+        "tumor classification",
+        "survival prediction"
+      ],
+      "detail_url": "/publications/doctoral-dissertation-liver-cancer-2025/",
+      "link_label": "Details ↗"
     },
     {
       "id": "ct-imaging-subtypes-slice-thickness-2025",
@@ -275,7 +379,7 @@
       "venue": "Medical Imaging 2025: Computer-Aided Diagnosis",
       "volume": "13407",
       "issue": "",
-      "pages": "",
+      "pages": "356-362",
       "article_number": "134071I",
       "type": "conference-paper",
       "peer_reviewed": true,
@@ -287,7 +391,18 @@
         "computed tomography"
       ],
       "note": "",
-      "detail_url": "/publications/ct-imaging-subtypes-slice-thickness-2025/"
+      "detail_url": "/publications/ct-imaging-subtypes-slice-thickness-2025/",
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Kobayashi2025CTSubtypes"
     },
     {
       "id": "pdac-treatment-response-cnn-2025",
@@ -322,7 +437,7 @@
       "venue": "Medical Imaging 2025: Computer-Aided Diagnosis",
       "volume": "13407",
       "issue": "",
-      "pages": "",
+      "pages": "319-325",
       "article_number": "134071C",
       "type": "conference-paper",
       "peer_reviewed": true,
@@ -334,7 +449,18 @@
         "computed tomography"
       ],
       "note": "",
-      "detail_url": "/publications/pdac-treatment-response-cnn-2025/"
+      "detail_url": "/publications/pdac-treatment-response-cnn-2025/",
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Zhou2025PDACResponse"
     },
     {
       "id": "stacked-classifier-treatment-response-2025",
@@ -369,7 +495,7 @@
       "venue": "Medical Imaging 2025: Computer-Aided Diagnosis",
       "volume": "13407",
       "issue": "",
-      "pages": "",
+      "pages": "397-406",
       "article_number": "134071P",
       "type": "conference-paper",
       "peer_reviewed": true,
@@ -381,7 +507,18 @@
         "machine learning"
       ],
       "note": "",
-      "detail_url": "/publications/stacked-classifier-treatment-response-2025/"
+      "detail_url": "/publications/stacked-classifier-treatment-response-2025/",
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Piliposyan2025StackedClassifier"
     },
     {
       "id": "peft-few-shot-multiscale-vit-2025",
@@ -411,7 +548,7 @@
       "venue": "Medical Imaging 2025: Computer-Aided Diagnosis",
       "volume": "13407",
       "issue": "",
-      "pages": "",
+      "pages": "801-810",
       "article_number": "1340738",
       "type": "conference-paper",
       "peer_reviewed": true,
@@ -423,7 +560,18 @@
         "liver tumor segmentation"
       ],
       "note": "",
-      "detail_url": "/publications/peft-few-shot-multiscale-vit-2025/"
+      "detail_url": "/publications/peft-few-shot-multiscale-vit-2025/",
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "https://github.com/Ramtin-Mojtahedi/PEFT-FSL-MViT-LTS",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Mojtahedi2025PEFTFewShot"
     },
     {
       "id": "persistent-homology-liver-tumor-classification-2025",
@@ -454,7 +602,7 @@
       "venue": "Medical Imaging 2025: Computer-Aided Diagnosis",
       "volume": "13407",
       "issue": "",
-      "pages": "",
+      "pages": "407-417",
       "article_number": "134071Q",
       "type": "conference-paper",
       "peer_reviewed": true,
@@ -466,7 +614,18 @@
         "medical imaging"
       ],
       "note": "",
-      "detail_url": "/publications/persistent-homology-liver-tumor-classification-2025/"
+      "detail_url": "/publications/persistent-homology-liver-tumor-classification-2025/",
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Ali2025PersistentHomology"
     },
     {
       "id": "dilated-transformer-liver-cancers-2024",
@@ -507,7 +666,18 @@
         "tumor segmentation"
       ],
       "note": "No DOI or archival proceedings record was located. Listed as a conference presentation, not as a verified peer-reviewed paper.",
-      "detail_url": "/publications/dilated-transformer-liver-cancers-2024/"
+      "detail_url": "/publications/dilated-transformer-liver-cancers-2024/",
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "misc",
+      "bibtex_key": "Mojtahedi2024DilatedTransformer"
     },
     {
       "id": "multimodal-brain-tumour-vit-patch-2022",
@@ -547,8 +717,20 @@
         "patch size",
         "multimodal MRI"
       ],
-      "note": "",
-      "detail_url": "/publications/multimodal-brain-tumour-vit-patch-2022/"
+      "note": "The linked repository is currently a bibliographic record; it should not be interpreted as a complete code release.",
+      "detail_url": "/publications/multimodal-brain-tumour-vit-patch-2022/",
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "https://github.com/Ramtin-Mojtahedi/BRATS_OVTPS",
+      "code_label": "Repository record",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "abstract": "Early diagnosis and grading of gliomas are crucial for determining therapy and prognosis. For this purpose, magnetic resonance (MR) studies of brain tumours are commonly used. Due to the overlap between the intensity distributions of healthy, enhanced, non-enhancing, and edematous areas, automated segmentation is difficult. Convolutional neural networks (CNNs) have been utilized as the dominant networks for segmentation tasks. However, they suffer from the inability to capture long-range dependencies and global features due to their limited kernels. Vision transformers (ViTs) were introduced recently to tackle these limitations. Although transformers are capable of capturing long-range features, their segmentation performance falls as the variety of tumor sizes increases. In this paper, we propose a framework to find the ViT optimal patch resolution for the brain tumor segmentation task, particularly for segmenting smaller tumors. We validated our proposed framework on the BRaTS'21 dataset. This research lays the groundwork for future research on the semantic segmentation of tumor segmentation and detection using vision transformer-based networks for optimal outcomes.",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Mojtahedi2022BrainTumour"
     },
     {
       "id": "simsiam-liver-cancer-classification-2023",
@@ -588,9 +770,21 @@
         "liver cancer classification",
         "self-supervised learning"
       ],
-      "note": "",
+      "note": "Conference year is 2023; the Springer chapter was first published online in 2024.",
       "detail_url": "/publications/simsiam-liver-cancer-classification-2023/",
-      "online_date": "2024-02-03"
+      "online_date": "2024-02-03",
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "https://github.com/Ramtin-Mojtahedi/SimSiam-LiverCancer-CL",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "abstract": "Accurate liver cancer classification is essential, as it substantially influences the selection of effective treatment strategies and impacts patient prognosis. Convolutional neural network (CNN) classifiers typically require extensive labeled datasets for training to attain decent performance. However, the process of obtaining labeled data through manual labeling is time-consuming, potentially biased, and costly when applied to large datasets. This study utilizes the Simple Siamese (SimSiam) contrastive self-supervised learning approach to enhance the classification of liver tumours, especially considering the limited availability of labeled computed tomography (CT) scans of liver cancer. We integrate SimSiam with three baseline CNN-based classifiers - Inception, Xception, and ResNet152 - and pretrain them with two loss functions: mean squared error (MSE) and cosine similarity (COS). Our findings show consistent improvements for three classifiers compared to the baseline models. Specifically, the ResNet152 model exhibits the highest performance among the evaluated networks. With MSE and COS losses, the classification accuracy for ResNet152 improves by 1.27% and 2.53%, respectively. The classification accuracy of the Inception model improves by 3.95% and 5.26%. Similarly, Xception's validation accuracy demonstrates an increase of 2.60% with both loss functions, compared to the baseline models. We validate our pipeline via our multi-resolution in-house abdominal CT scans of primary and secondary liver cancers, including 155 patients with hepatocellular carcinoma, 198 patients with colorectal liver metastases, and 107 patients with intrahepatic cholangiocarcinoma.",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Mojtahedi2023SimSiam"
     },
     {
       "id": "optimal-vit-patch-size-tumor-segmentation-2022",
@@ -632,7 +826,18 @@
         "medical imaging"
       ],
       "note": "",
-      "detail_url": "/publications/optimal-vit-patch-size-tumor-segmentation-2022/"
+      "detail_url": "/publications/optimal-vit-patch-size-tumor-segmentation-2022/",
+      "open_access_url": "https://arxiv.org/abs/2308.16598",
+      "open_access_label": "Read preprint",
+      "open_access_license": "",
+      "preprint_url": "https://arxiv.org/abs/2308.16598",
+      "code_url": "https://github.com/Ramtin-Mojtahedi/OVTPS",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Mojtahedi2022OptimalPatch"
     },
     {
       "id": "smart-package-liquid-flow-meters-2017",
@@ -674,7 +879,18 @@
       "citation_authors": [
         "R. M. Saffari",
         "S. Mirzakuchaki"
-      ]
+      ],
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Saffari2017SmartPackage"
     },
     {
       "id": "dwt-logistic-map-image-encryption-2016",
@@ -716,7 +932,18 @@
       "citation_authors": [
         "R. M. Saffari",
         "S. Mirzakuchaki"
-      ]
+      ],
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Saffari2016ImageEncryption"
     },
     {
       "id": "fpga-human-tracking-particle-filter-2016",
@@ -758,7 +985,18 @@
       "citation_authors": [
         "R. M. Saffari",
         "S. Mirzakuchaki"
-      ]
+      ],
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Saffari2016FPGATracking"
     },
     {
       "id": "carrier-synchronization-bayesian-filtering-2015",
@@ -802,7 +1040,18 @@
         "M. Ayat",
         "R. M. Saffari",
         "S. Mirzakuchaki"
-      ]
+      ],
+      "open_access_url": "",
+      "open_access_label": "",
+      "open_access_license": "",
+      "preprint_url": "",
+      "code_url": "",
+      "code_label": "Code",
+      "pubmed_url": "",
+      "pmc_url": "",
+      "citation_pdf_url": "",
+      "bibtex_type": "inproceedings",
+      "bibtex_key": "Ayat2015CarrierSynchronization"
     }
   ]
 }

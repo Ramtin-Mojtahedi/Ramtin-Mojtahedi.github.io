@@ -9,6 +9,8 @@ on:
       - sitemap.xml
       - robots.txt
       - publications.json
+      - publications.bib
+      - scholarly-pages.json
       - publications/**
       - indexnow.json
       - 898f0caec5d8b22a095db2a4afa88722.txt
@@ -23,6 +25,8 @@ on:
       - sitemap.xml
       - robots.txt
       - publications.json
+      - publications.bib
+      - scholarly-pages.json
       - publications/**
       - indexnow.json
       - 898f0caec5d8b22a095db2a4afa88722.txt
