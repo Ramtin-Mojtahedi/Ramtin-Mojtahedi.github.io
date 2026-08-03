@@ -1,0 +1,26 @@
+TY  - CPAPER
+TI  - Predicting Response to Therapy in Pancreatic Ductal Adenocarcinoma Using Convolutional Neural Networks
+AU  - John Zhou
+AU  - Dashti Ali
+AU  - Ramtin Mojtahedi
+AU  - Ahmad Bashir Barekzai
+AU  - Jayasree Chakraborty
+AU  - Hala Khasawneh
+AU  - Camila Vilela
+AU  - Natally Horvat
+AU  - João Miranda
+AU  - Alice C. Wei
+AU  - Amber L. Simpson
+PY  - 2025
+DA  - 2025-04-04
+T2  - Medical Imaging 2025: Computer-Aided Diagnosis
+VL  - 13407
+SP  - 319
+EP  - 325
+DO  - 10.1117/12.3048961
+UR  - https://doi.org/10.1117/12.3048961
+KW  - pancreatic ductal adenocarcinoma
+KW  - treatment response
+KW  - convolutional neural networks
+KW  - computed tomography
+ER  -

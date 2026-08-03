@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/optimal-vit-patch-size-tumor-segmentation-2022/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "optimal-vit-patch-size-tumor-segmentation-2022",
+    "title": "Towards Optimal Patch Size in Vision Transformers for Tumor Segmentation",
+    "year": 2022,
+    "publication_date": "2022-10-12",
+    "group": "2022-24",
+    "status": "Published · Preprint available",
+    "authors": [
+      "Ramtin Mojtahedi",
+      "Mohammad Hamghalam",
+      "Richard K. G. Do",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "<strong>R. Mojtahedi</strong>, M. Hamghalam, R. K. G. Do, and A. L. Simpson",
+    "citation": "Multiscale Multimodal Medical Imaging, Lecture Notes in Computer Science 13594, pp. 110–120 (2022).",
+    "citation_plain": "Multiscale Multimodal Medical Imaging, Lecture Notes in Computer Science 13594, 110–120 (2022).",
+    "doi": "10.1007/978-3-031-18814-5_11",
+    "url": "https://doi.org/10.1007/978-3-031-18814-5_11",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata; OpenAlex/ORCID; Crossref",
+    "last_verified": "2026-08-02",
+    "title_aliases": [
+      "Tumour Segmentation in Colorectal Liver Metastasis Using an Optimal Vision Transformer Patch Resolution"
+    ],
+    "venue": "Multiscale Multimodal Medical Imaging",
+    "volume": "13594",
+    "issue": "",
+    "pages": "110-120",
+    "article_number": "",
+    "type": "conference-paper",
+    "peer_reviewed": true,
+    "publisher": "Springer",
+    "keywords": [
+      "vision transformers",
+      "patch size",
+      "tumor segmentation",
+      "medical imaging"
+    ],
+    "note": "",
+    "detail_url": "/publications/optimal-vit-patch-size-tumor-segmentation-2022/",
+    "open_access_url": "https://arxiv.org/abs/2308.16598",
+    "open_access_label": "Read preprint",
+    "open_access_license": "",
+    "preprint_url": "https://arxiv.org/abs/2308.16598",
+    "code_url": "https://github.com/Ramtin-Mojtahedi/OVTPS",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "inproceedings",
+    "bibtex_key": "Mojtahedi2022OptimalPatch"
+  },
+  "citation": {
+    "plain_text": "Ramtin Mojtahedi, Mohammad Hamghalam, Richard K. G. Do, and Amber L. Simpson. “Towards Optimal Patch Size in Vision Transformers for Tumor Segmentation.” Multiscale Multimodal Medical Imaging, Lecture Notes in Computer Science 13594, 110–120 (2022). https://doi.org/10.1007/978-3-031-18814-5_11",
+    "bibtex": "@inproceedings{Mojtahedi2022OptimalPatch,\n  author = {Ramtin Mojtahedi and Mohammad Hamghalam and Richard K. G. Do and Amber L. Simpson},\n  title = {{Towards Optimal Patch Size in Vision Transformers for Tumor Segmentation}},\n  year = {2022},\n  booktitle = {Multiscale Multimodal Medical Imaging},\n  volume = {13594},\n  pages = {110-120},\n  publisher = {Springer},\n  doi = {10.1007/978-3-031-18814-5\\_11},\n  url = {https://doi.org/10.1007/978-3-031-18814-5\\_11}\n}",
+    "ris": "TY  - CPAPER\nTI  - Towards Optimal Patch Size in Vision Transformers for Tumor Segmentation\nAU  - Ramtin Mojtahedi\nAU  - Mohammad Hamghalam\nAU  - Richard K. G. Do\nAU  - Amber L. Simpson\nPY  - 2022\nDA  - 2022-10-12\nT2  - Multiscale Multimodal Medical Imaging\nVL  - 13594\nSP  - 110\nEP  - 120\nDO  - 10.1007/978-3-031-18814-5_11\nUR  - https://doi.org/10.1007/978-3-031-18814-5_11\nKW  - vision transformers\nKW  - patch size\nKW  - tumor segmentation\nKW  - medical imaging\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Multi-modal Brain Tumour Segmentation Using Transformer with Optimal Patch Size",
+      "year": 2023,
+      "url": "https://ramtin-mojtahedi.github.io/publications/multimodal-brain-tumour-vit-patch-2022/"
+    },
+    {
+      "title": "Dilated Convolutional Transformer-Based Segmentation for Primary and Secondary Liver Cancers Tumour: A Comparative Study",
+      "year": 2024,
+      "url": "https://ramtin-mojtahedi.github.io/publications/dilated-transformer-liver-cancers-2024/"
+    },
+    {
+      "title": "Leveraging Persistent Homology for Liver Tumour Classification",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/persistent-homology-liver-tumor-classification-2025/"
+    }
+  ]
+}

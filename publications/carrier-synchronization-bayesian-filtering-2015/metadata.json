@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/carrier-synchronization-bayesian-filtering-2015/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "carrier-synchronization-bayesian-filtering-2015",
+    "title": "On Design of Carrier Synchronization System Using Bayesian Filtering Framework",
+    "year": 2015,
+    "publication_date": "2015-08-19",
+    "group": "earlier",
+    "status": "Conference paper · Metadata limited",
+    "authors": [
+      "Mehdi Ayat",
+      "Ramtin Mojtahedi Saffari",
+      "Sattar Mirzakuchaki"
+    ],
+    "authors_html": "M. Ayat, <strong>R. M. Saffari</strong>, and S. Mirzakuchaki",
+    "citation": "7th Iranian Conference on Electrical and Electronics Engineering, Gonabad, Iran, 19–20 August 2015.",
+    "citation_plain": "7th Iranian Conference on Electrical and Electronics Engineering, Gonabad, Iran, 19–20 August 2015.",
+    "doi": "",
+    "url": "",
+    "link_label": "Details ↗",
+    "manual": true,
+    "source": "Author-uploaded conference copy and conference metadata; no DOI located",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "7th Iranian Conference on Electrical and Electronics Engineering",
+    "volume": "",
+    "issue": "",
+    "pages": "",
+    "article_number": "",
+    "type": "conference-paper",
+    "peer_reviewed": true,
+    "publisher": "",
+    "keywords": [
+      "carrier synchronization",
+      "Bayesian filtering",
+      "extended Kalman filter",
+      "particle filter"
+    ],
+    "note": "No DOI, page range, or archival publisher landing page was verified. An author-uploaded copy exists elsewhere, but its redistribution rights were not assumed.",
+    "detail_url": "/publications/carrier-synchronization-bayesian-filtering-2015/",
+    "citation_authors": [
+      "M. Ayat",
+      "R. M. Saffari",
+      "S. Mirzakuchaki"
+    ],
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "inproceedings",
+    "bibtex_key": "Ayat2015CarrierSynchronization"
+  },
+  "citation": {
+    "plain_text": "Mehdi Ayat, Ramtin Mojtahedi Saffari, and Sattar Mirzakuchaki. “On Design of Carrier Synchronization System Using Bayesian Filtering Framework.” 7th Iranian Conference on Electrical and Electronics Engineering, Gonabad, Iran, 19–20 August 2015.",
+    "bibtex": "@inproceedings{Ayat2015CarrierSynchronization,\n  author = {Mehdi Ayat and Ramtin Mojtahedi Saffari and Sattar Mirzakuchaki},\n  title = {{On Design of Carrier Synchronization System Using Bayesian Filtering Framework}},\n  year = {2015},\n  booktitle = {7th Iranian Conference on Electrical and Electronics Engineering},\n  url = {https://ramtin-mojtahedi.github.io/publications/carrier-synchronization-bayesian-filtering-2015/},\n  note = {No DOI, page range, or archival publisher landing page was verified. An author-uploaded copy exists elsewhere, but its redistribution rights were not assumed.}\n}",
+    "ris": "TY  - CPAPER\nTI  - On Design of Carrier Synchronization System Using Bayesian Filtering Framework\nAU  - Mehdi Ayat\nAU  - Ramtin Mojtahedi Saffari\nAU  - Sattar Mirzakuchaki\nPY  - 2015\nDA  - 2015-08-19\nT2  - 7th Iranian Conference on Electrical and Electronics Engineering\nUR  - https://ramtin-mojtahedi.github.io/publications/carrier-synchronization-bayesian-filtering-2015/\nKW  - carrier synchronization\nKW  - Bayesian filtering\nKW  - extended Kalman filter\nKW  - particle filter\nN1  - No DOI, page range, or archival publisher landing page was verified. An author-uploaded copy exists elsewhere, but its redistribution rights were not assumed.\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "A Novel FPGA Design of a High Dynamic Human Tracking System Using Particle Filter",
+      "year": 2016,
+      "url": "https://ramtin-mojtahedi.github.io/publications/fpga-human-tracking-particle-filter-2016/"
+    },
+    {
+      "title": "A Novel Image Encryption Algorithm Based on Discrete Wavelet Transform Using Two-Dimensional Logistic Map",
+      "year": 2016,
+      "url": "https://ramtin-mojtahedi.github.io/publications/dwt-logistic-map-image-encryption-2016/"
+    },
+    {
+      "title": "An Innovative Smart Package for Liquid Flow Meters",
+      "year": 2017,
+      "url": "https://ramtin-mojtahedi.github.io/publications/smart-package-liquid-flow-meters-2017/"
+    }
+  ]
+}

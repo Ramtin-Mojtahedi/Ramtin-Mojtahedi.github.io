@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/radiomic-signatures-chemotherapy-response-2026/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "radiomic-signatures-chemotherapy-response-2026",
+    "title": "Radiomic Signatures from Baseline CT Predict Chemotherapy Response in Unresectable Colorectal Liver Metastases",
+    "year": 2026,
+    "publication_date": "2026-01-01",
+    "group": "2026",
+    "status": "Published · Open access",
+    "authors": [
+      "Mane Piliposyan",
+      "Jacob J. Peoples",
+      "Mohammad Hamghalam",
+      "Ramtin Mojtahedi",
+      "Kaitlyn S. M. Kobayashi",
+      "E. Claire Bunker",
+      "Natalie Gangai",
+      "HyunSeon Christine Kang",
+      "Yun Shin Chun",
+      "Christian Muise",
+      "Richard K. G. Do",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "M. Piliposyan, J. J. Peoples, M. Hamghalam, <strong>R. Mojtahedi</strong>, K. S. M. Kobayashi, E. C. Bunker, N. Gangai, H. C. Kang, Y. S. Chun, C. Muise, R. K. G. Do, and A. L. Simpson",
+    "citation": "Journal of Medical Imaging 13(1) (2026), 014505.",
+    "citation_plain": "Journal of Medical Imaging 13(1) (2026), 014505.",
+    "doi": "10.1117/1.JMI.13.1.014505",
+    "url": "https://doi.org/10.1117/1.JMI.13.1.014505",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata; OpenAlex/ORCID",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "Journal of Medical Imaging",
+    "volume": "13",
+    "issue": "1",
+    "pages": "",
+    "article_number": "014505",
+    "type": "journal-article",
+    "peer_reviewed": true,
+    "publisher": "SPIE",
+    "keywords": [
+      "radiomics",
+      "chemotherapy response",
+      "colorectal liver metastases",
+      "computed tomography"
+    ],
+    "note": "The publisher article is currently open under CC BY 4.0. The assigned PubMed Central record is not yet publicly released and is therefore not linked as available full text.",
+    "detail_url": "/publications/radiomic-signatures-chemotherapy-response-2026/",
+    "open_access_url": "https://doi.org/10.1117/1.JMI.13.1.014505",
+    "open_access_label": "Open article",
+    "open_access_license": "CC BY 4.0",
+    "preprint_url": "",
+    "code_url": "",
+    "code_label": "Code",
+    "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41536565/",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "article",
+    "bibtex_key": "Piliposyan2026RadiomicSignatures"
+  },
+  "citation": {
+    "plain_text": "Mane Piliposyan, Jacob J. Peoples, Mohammad Hamghalam, Ramtin Mojtahedi, Kaitlyn S. M. Kobayashi, E. Claire Bunker, Natalie Gangai, HyunSeon Christine Kang, Yun Shin Chun, Christian Muise, Richard K. G. Do, and Amber L. Simpson. “Radiomic Signatures from Baseline CT Predict Chemotherapy Response in Unresectable Colorectal Liver Metastases.” Journal of Medical Imaging 13(1) (2026), 014505. https://doi.org/10.1117/1.JMI.13.1.014505",
+    "bibtex": "@article{Piliposyan2026RadiomicSignatures,\n  author = {Mane Piliposyan and Jacob J. Peoples and Mohammad Hamghalam and Ramtin Mojtahedi and Kaitlyn S. M. Kobayashi and E. Claire Bunker and Natalie Gangai and HyunSeon Christine Kang and Yun Shin Chun and Christian Muise and Richard K. G. Do and Amber L. Simpson},\n  title = {{Radiomic Signatures from Baseline CT Predict Chemotherapy Response in Unresectable Colorectal Liver Metastases}},\n  year = {2026},\n  journal = {Journal of Medical Imaging},\n  volume = {13},\n  number = {1},\n  eid = {014505},\n  doi = {10.1117/1.JMI.13.1.014505},\n  url = {https://doi.org/10.1117/1.JMI.13.1.014505},\n  note = {The publisher article is currently open under CC BY 4.0. The assigned PubMed Central record is not yet publicly released and is therefore not linked as available full text.}\n}",
+    "ris": "TY  - JOUR\nTI  - Radiomic Signatures from Baseline CT Predict Chemotherapy Response in Unresectable Colorectal Liver Metastases\nAU  - Mane Piliposyan\nAU  - Jacob J. Peoples\nAU  - Mohammad Hamghalam\nAU  - Ramtin Mojtahedi\nAU  - Kaitlyn S. M. Kobayashi\nAU  - E. Claire Bunker\nAU  - Natalie Gangai\nAU  - HyunSeon Christine Kang\nAU  - Yun Shin Chun\nAU  - Christian Muise\nAU  - Richard K. G. Do\nAU  - Amber L. Simpson\nPY  - 2026\nDA  - 2026-01-01\nT2  - Journal of Medical Imaging\nVL  - 13\nIS  - 1\nSP  - 014505\nDO  - 10.1117/1.JMI.13.1.014505\nUR  - https://doi.org/10.1117/1.JMI.13.1.014505\nKW  - radiomics\nKW  - chemotherapy response\nKW  - colorectal liver metastases\nKW  - computed tomography\nN1  - The publisher article is currently open under CC BY 4.0. The assigned PubMed Central record is not yet publicly released and is therefore not linked as available full text.\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Improving Preoperative Risk Stratification in Colorectal Liver Metastases: A Multi-Institutional Evaluation of Multimodal Prediction Models",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/multimodal-preoperative-risk-stratification-2026/"
+    },
+    {
+      "title": "The Search for CT Imaging Subtypes of Colorectal Liver Metastases and the Impacts of Slice Thickness",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/ct-imaging-subtypes-slice-thickness-2025/"
+    },
+    {
+      "title": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/"
+    }
+  ]
+}

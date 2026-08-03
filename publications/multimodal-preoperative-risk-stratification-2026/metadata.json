@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/multimodal-preoperative-risk-stratification-2026/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "multimodal-preoperative-risk-stratification-2026",
+    "title": "Improving Preoperative Risk Stratification in Colorectal Liver Metastases: A Multi-Institutional Evaluation of Multimodal Prediction Models",
+    "year": 2026,
+    "publication_date": "2026-07-14",
+    "group": "2026",
+    "status": "Online ahead of print · Open access",
+    "authors": [
+      "Kaitlyn S. M. Kobayashi",
+      "Ramtin Mojtahedi",
+      "E. Claire Bunker",
+      "Joanne F. Chou",
+      "Michael I. D’Angelica",
+      "Natalie Gangai",
+      "Mithat Gönen",
+      "Mohammad Hamghalam",
+      "Anish Jain",
+      "HyunSeon Christine Kang",
+      "Erin Kwak",
+      "Jacob J. Peoples",
+      "Alexandra H. Robins",
+      "Katy L. Scott",
+      "Richard K. G. Do",
+      "Yun Shin Chun",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "K. S. M. Kobayashi<sup>*</sup>, <strong>R. Mojtahedi<sup>*</sup></strong>, E. C. Bunker, J. F. Chou, M. I. D’Angelica, N. Gangai, M. Gönen, M. Hamghalam, A. Jain, H. C. Kang, E. Kwak, J. J. Peoples, A. H. Robins, K. L. Scott, R. K. G. Do, Y. S. Chun, and A. L. Simpson",
+    "citation": "Scientific Reports (2026). Published 14 July 2026.",
+    "citation_plain": "Scientific Reports (2026). Published 14 July 2026.",
+    "doi": "10.1038/s41598-026-60860-9",
+    "url": "https://doi.org/10.1038/s41598-026-60860-9",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "Scientific Reports",
+    "volume": "",
+    "issue": "",
+    "pages": "",
+    "article_number": "",
+    "type": "journal-article",
+    "peer_reviewed": true,
+    "publisher": "Springer Nature",
+    "keywords": [
+      "colorectal liver metastases",
+      "multimodal prediction",
+      "radiomics",
+      "clinical risk stratification"
+    ],
+    "note": "Nature currently provides an unedited early-access version; volume and article number have not yet been assigned.",
+    "contribution_note": "Kaitlyn S. M. Kobayashi and Ramtin Mojtahedi contributed equally.",
+    "detail_url": "/publications/multimodal-preoperative-risk-stratification-2026/",
+    "open_access_url": "https://www.nature.com/articles/s41598-026-60860-9",
+    "open_access_label": "Open article",
+    "open_access_license": "CC BY-NC-ND 4.0",
+    "preprint_url": "",
+    "code_url": "https://github.com/kaitlyn-kobayashi/CRLM_Clinical_Radiomics_Analysis",
+    "code_label": "Code",
+    "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42448749/",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "article",
+    "bibtex_key": "Kobayashi2026PreoperativeRisk"
+  },
+  "citation": {
+    "plain_text": "Kaitlyn S. M. Kobayashi, Ramtin Mojtahedi, E. Claire Bunker, Joanne F. Chou, Michael I. D’Angelica, Natalie Gangai, Mithat Gönen, Mohammad Hamghalam, Anish Jain, HyunSeon Christine Kang, Erin Kwak, Jacob J. Peoples, Alexandra H. Robins, Katy L. Scott, Richard K. G. Do, Yun Shin Chun, and Amber L. Simpson. “Improving Preoperative Risk Stratification in Colorectal Liver Metastases: A Multi-Institutional Evaluation of Multimodal Prediction Models.” Scientific Reports (2026). Published 14 July 2026. https://doi.org/10.1038/s41598-026-60860-9",
+    "bibtex": "@article{Kobayashi2026PreoperativeRisk,\n  author = {Kaitlyn S. M. Kobayashi and Ramtin Mojtahedi and E. Claire Bunker and Joanne F. Chou and Michael I. D’Angelica and Natalie Gangai and Mithat Gönen and Mohammad Hamghalam and Anish Jain and HyunSeon Christine Kang and Erin Kwak and Jacob J. Peoples and Alexandra H. Robins and Katy L. Scott and Richard K. G. Do and Yun Shin Chun and Amber L. Simpson},\n  title = {{Improving Preoperative Risk Stratification in Colorectal Liver Metastases: A Multi-Institutional Evaluation of Multimodal Prediction Models}},\n  year = {2026},\n  journal = {Scientific Reports},\n  doi = {10.1038/s41598-026-60860-9},\n  url = {https://doi.org/10.1038/s41598-026-60860-9},\n  note = {Nature currently provides an unedited early-access version; volume and article number have not yet been assigned.}\n}",
+    "ris": "TY  - JOUR\nTI  - Improving Preoperative Risk Stratification in Colorectal Liver Metastases: A Multi-Institutional Evaluation of Multimodal Prediction Models\nAU  - Kaitlyn S. M. Kobayashi\nAU  - Ramtin Mojtahedi\nAU  - E. Claire Bunker\nAU  - Joanne F. Chou\nAU  - Michael I. D’Angelica\nAU  - Natalie Gangai\nAU  - Mithat Gönen\nAU  - Mohammad Hamghalam\nAU  - Anish Jain\nAU  - HyunSeon Christine Kang\nAU  - Erin Kwak\nAU  - Jacob J. Peoples\nAU  - Alexandra H. Robins\nAU  - Katy L. Scott\nAU  - Richard K. G. Do\nAU  - Yun Shin Chun\nAU  - Amber L. Simpson\nPY  - 2026\nDA  - 2026-07-14\nT2  - Scientific Reports\nDO  - 10.1038/s41598-026-60860-9\nUR  - https://doi.org/10.1038/s41598-026-60860-9\nKW  - colorectal liver metastases\nKW  - multimodal prediction\nKW  - radiomics\nKW  - clinical risk stratification\nN1  - Nature currently provides an unedited early-access version; volume and article number have not yet been assigned.\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Radiomic Signatures from Baseline CT Predict Chemotherapy Response in Unresectable Colorectal Liver Metastases",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/radiomic-signatures-chemotherapy-response-2026/"
+    },
+    {
+      "title": "Radiomic Carotid Plaque Features Integrated into Machine Learning Models for Cardiovascular Risk Prediction",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/carotid-plaque-radiomics-risk-2026/"
+    },
+    {
+      "title": "Performance Evaluation of a Stacked Classifier for Predicting Treatment Response in Unresectable Colorectal Liver Metastases",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/stacked-classifier-treatment-response-2025/"
+    }
+  ]
+}

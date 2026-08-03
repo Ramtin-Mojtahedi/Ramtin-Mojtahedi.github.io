@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/ct-imaging-subtypes-slice-thickness-2025/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "ct-imaging-subtypes-slice-thickness-2025",
+    "title": "The Search for CT Imaging Subtypes of Colorectal Liver Metastases and the Impacts of Slice Thickness",
+    "year": 2025,
+    "publication_date": "2025-04-04",
+    "group": "2025",
+    "status": "Published",
+    "authors": [
+      "Kaitlyn S. Kobayashi",
+      "Dashti A. Ali",
+      "Ramtin Mojtahedi",
+      "Jacob J. Peoples",
+      "Mohammad Hamghalam",
+      "Natalie Gangai",
+      "Mithat Gönen",
+      "Richard K. G. Do",
+      "Yun Shin Chun",
+      "HyunSeon Christine Kang",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "K. S. Kobayashi, D. A. Ali, <strong>R. Mojtahedi</strong>, J. J. Peoples, M. Hamghalam, N. Gangai, M. Gönen, R. K. G. Do, Y. S. Chun, H. C. Kang, and A. L. Simpson",
+    "citation": "Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407, 134071I.",
+    "citation_plain": "Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071I.",
+    "doi": "10.1117/12.3048815",
+    "url": "https://doi.org/10.1117/12.3048815",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata; OpenAlex/ORCID",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "Medical Imaging 2025: Computer-Aided Diagnosis",
+    "volume": "13407",
+    "issue": "",
+    "pages": "356-362",
+    "article_number": "134071I",
+    "type": "conference-paper",
+    "peer_reviewed": true,
+    "publisher": "SPIE",
+    "keywords": [
+      "colorectal liver metastases",
+      "imaging subtypes",
+      "slice thickness",
+      "computed tomography"
+    ],
+    "note": "",
+    "detail_url": "/publications/ct-imaging-subtypes-slice-thickness-2025/",
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "inproceedings",
+    "bibtex_key": "Kobayashi2025CTSubtypes"
+  },
+  "citation": {
+    "plain_text": "Kaitlyn S. Kobayashi, Dashti A. Ali, Ramtin Mojtahedi, Jacob J. Peoples, Mohammad Hamghalam, Natalie Gangai, Mithat Gönen, Richard K. G. Do, Yun Shin Chun, HyunSeon Christine Kang, and Amber L. Simpson. “The Search for CT Imaging Subtypes of Colorectal Liver Metastases and the Impacts of Slice Thickness.” Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071I. https://doi.org/10.1117/12.3048815",
+    "bibtex": "@inproceedings{Kobayashi2025CTSubtypes,\n  author = {Kaitlyn S. Kobayashi and Dashti A. Ali and Ramtin Mojtahedi and Jacob J. Peoples and Mohammad Hamghalam and Natalie Gangai and Mithat Gönen and Richard K. G. Do and Yun Shin Chun and HyunSeon Christine Kang and Amber L. Simpson},\n  title = {{The Search for CT Imaging Subtypes of Colorectal Liver Metastases and the Impacts of Slice Thickness}},\n  year = {2025},\n  booktitle = {Medical Imaging 2025: Computer-Aided Diagnosis},\n  volume = {13407},\n  pages = {356-362},\n  publisher = {SPIE},\n  doi = {10.1117/12.3048815},\n  url = {https://doi.org/10.1117/12.3048815}\n}",
+    "ris": "TY  - CPAPER\nTI  - The Search for CT Imaging Subtypes of Colorectal Liver Metastases and the Impacts of Slice Thickness\nAU  - Kaitlyn S. Kobayashi\nAU  - Dashti A. Ali\nAU  - Ramtin Mojtahedi\nAU  - Jacob J. Peoples\nAU  - Mohammad Hamghalam\nAU  - Natalie Gangai\nAU  - Mithat Gönen\nAU  - Richard K. G. Do\nAU  - Yun Shin Chun\nAU  - HyunSeon Christine Kang\nAU  - Amber L. Simpson\nPY  - 2025\nDA  - 2025-04-04\nT2  - Medical Imaging 2025: Computer-Aided Diagnosis\nVL  - 13407\nSP  - 356\nEP  - 362\nDO  - 10.1117/12.3048815\nUR  - https://doi.org/10.1117/12.3048815\nKW  - colorectal liver metastases\nKW  - imaging subtypes\nKW  - slice thickness\nKW  - computed tomography\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Radiomic Signatures from Baseline CT Predict Chemotherapy Response in Unresectable Colorectal Liver Metastases",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/radiomic-signatures-chemotherapy-response-2026/"
+    },
+    {
+      "title": "Performance Evaluation of a Stacked Classifier for Predicting Treatment Response in Unresectable Colorectal Liver Metastases",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/stacked-classifier-treatment-response-2025/"
+    },
+    {
+      "title": "Predicting Response to Therapy in Pancreatic Ductal Adenocarcinoma Using Convolutional Neural Networks",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/pdac-treatment-response-cnn-2025/"
+    }
+  ]
+}

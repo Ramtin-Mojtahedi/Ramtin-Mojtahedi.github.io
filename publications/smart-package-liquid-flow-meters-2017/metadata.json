@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/smart-package-liquid-flow-meters-2017/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "smart-package-liquid-flow-meters-2017",
+    "title": "An Innovative Smart Package for Liquid Flow Meters",
+    "year": 2017,
+    "publication_date": "2017",
+    "group": "earlier",
+    "status": "Published",
+    "authors": [
+      "Ramtin Mojtahedi Saffari",
+      "Sattar Mirzakuchaki"
+    ],
+    "authors_html": "<strong>R. M. Saffari</strong> and S. Mirzakuchaki",
+    "citation": "2017 Iranian Conference on Electrical Engineering (ICEE), pp. 158–163.",
+    "citation_plain": "2017 Iranian Conference on Electrical Engineering (ICEE), 158–163.",
+    "doi": "10.1109/IranianCEE.2017.7985342",
+    "url": "https://doi.org/10.1109/IranianCEE.2017.7985342",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "2017 Iranian Conference on Electrical Engineering (ICEE)",
+    "volume": "",
+    "issue": "",
+    "pages": "158-163",
+    "article_number": "",
+    "type": "conference-paper",
+    "peer_reviewed": true,
+    "publisher": "IEEE",
+    "keywords": [
+      "liquid flow meters",
+      "embedded systems",
+      "RFID",
+      "remote monitoring"
+    ],
+    "note": "",
+    "detail_url": "/publications/smart-package-liquid-flow-meters-2017/",
+    "citation_authors": [
+      "R. M. Saffari",
+      "S. Mirzakuchaki"
+    ],
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "inproceedings",
+    "bibtex_key": "Saffari2017SmartPackage"
+  },
+  "citation": {
+    "plain_text": "Ramtin Mojtahedi Saffari and Sattar Mirzakuchaki. “An Innovative Smart Package for Liquid Flow Meters.” 2017 Iranian Conference on Electrical Engineering (ICEE), 158–163. https://doi.org/10.1109/IranianCEE.2017.7985342",
+    "bibtex": "@inproceedings{Saffari2017SmartPackage,\n  author = {Ramtin Mojtahedi Saffari and Sattar Mirzakuchaki},\n  title = {{An Innovative Smart Package for Liquid Flow Meters}},\n  year = {2017},\n  booktitle = {2017 Iranian Conference on Electrical Engineering (ICEE)},\n  pages = {158-163},\n  publisher = {IEEE},\n  doi = {10.1109/IranianCEE.2017.7985342},\n  url = {https://doi.org/10.1109/IranianCEE.2017.7985342}\n}",
+    "ris": "TY  - CPAPER\nTI  - An Innovative Smart Package for Liquid Flow Meters\nAU  - Ramtin Mojtahedi Saffari\nAU  - Sattar Mirzakuchaki\nPY  - 2017\nDA  - 2017\nT2  - 2017 Iranian Conference on Electrical Engineering (ICEE)\nSP  - 158\nEP  - 163\nDO  - 10.1109/IranianCEE.2017.7985342\nUR  - https://doi.org/10.1109/IranianCEE.2017.7985342\nKW  - liquid flow meters\nKW  - embedded systems\nKW  - RFID\nKW  - remote monitoring\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "A Novel FPGA Design of a High Dynamic Human Tracking System Using Particle Filter",
+      "year": 2016,
+      "url": "https://ramtin-mojtahedi.github.io/publications/fpga-human-tracking-particle-filter-2016/"
+    },
+    {
+      "title": "A Novel Image Encryption Algorithm Based on Discrete Wavelet Transform Using Two-Dimensional Logistic Map",
+      "year": 2016,
+      "url": "https://ramtin-mojtahedi.github.io/publications/dwt-logistic-map-image-encryption-2016/"
+    },
+    {
+      "title": "On Design of Carrier Synchronization System Using Bayesian Filtering Framework",
+      "year": 2015,
+      "url": "https://ramtin-mojtahedi.github.io/publications/carrier-synchronization-bayesian-filtering-2015/"
+    }
+  ]
+}

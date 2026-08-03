@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/peft-few-shot-multiscale-vit-2025/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "peft-few-shot-multiscale-vit-2025",
+    "title": "Parameter-Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Tumour Segmentation in CT",
+    "year": 2025,
+    "publication_date": "2025-04-04",
+    "group": "2025",
+    "status": "Published",
+    "authors": [
+      "Ramtin Mojtahedi",
+      "Mohammad Hamghalam",
+      "Jacob J. Peoples",
+      "William R. Jarnagin",
+      "Richard K. G. Do",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "<strong>R. Mojtahedi</strong>, M. Hamghalam, J. J. Peoples, W. R. Jarnagin, R. K. G. Do, and A. L. Simpson",
+    "citation": "Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407, 1340738.",
+    "citation_plain": "Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 1340738.",
+    "doi": "10.1117/12.3046253",
+    "url": "https://doi.org/10.1117/12.3046253",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata; OpenAlex/ORCID; Crossref",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "Medical Imaging 2025: Computer-Aided Diagnosis",
+    "volume": "13407",
+    "issue": "",
+    "pages": "801-810",
+    "article_number": "1340738",
+    "type": "conference-paper",
+    "peer_reviewed": true,
+    "publisher": "SPIE",
+    "keywords": [
+      "parameter-efficient fine-tuning",
+      "few-shot learning",
+      "multiscale vision transformers",
+      "liver tumor segmentation"
+    ],
+    "note": "",
+    "detail_url": "/publications/peft-few-shot-multiscale-vit-2025/",
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "https://github.com/Ramtin-Mojtahedi/PEFT-FSL-MViT-LTS",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "inproceedings",
+    "bibtex_key": "Mojtahedi2025PEFTFewShot"
+  },
+  "citation": {
+    "plain_text": "Ramtin Mojtahedi, Mohammad Hamghalam, Jacob J. Peoples, William R. Jarnagin, Richard K. G. Do, and Amber L. Simpson. “Parameter-Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Tumour Segmentation in CT.” Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 1340738. https://doi.org/10.1117/12.3046253",
+    "bibtex": "@inproceedings{Mojtahedi2025PEFTFewShot,\n  author = {Ramtin Mojtahedi and Mohammad Hamghalam and Jacob J. Peoples and William R. Jarnagin and Richard K. G. Do and Amber L. Simpson},\n  title = {{Parameter-Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Tumour Segmentation in CT}},\n  year = {2025},\n  booktitle = {Medical Imaging 2025: Computer-Aided Diagnosis},\n  volume = {13407},\n  pages = {801-810},\n  publisher = {SPIE},\n  doi = {10.1117/12.3046253},\n  url = {https://doi.org/10.1117/12.3046253}\n}",
+    "ris": "TY  - CPAPER\nTI  - Parameter-Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Tumour Segmentation in CT\nAU  - Ramtin Mojtahedi\nAU  - Mohammad Hamghalam\nAU  - Jacob J. Peoples\nAU  - William R. Jarnagin\nAU  - Richard K. G. Do\nAU  - Amber L. Simpson\nPY  - 2025\nDA  - 2025-04-04\nT2  - Medical Imaging 2025: Computer-Aided Diagnosis\nVL  - 13407\nSP  - 801\nEP  - 810\nDO  - 10.1117/12.3046253\nUR  - https://doi.org/10.1117/12.3046253\nKW  - parameter-efficient fine-tuning\nKW  - few-shot learning\nKW  - multiscale vision transformers\nKW  - liver tumor segmentation\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/"
+    },
+    {
+      "title": "Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/self-supervised-transformer-liver-tumor-2026/"
+    },
+    {
+      "title": "Leveraging Persistent Homology for Liver Tumour Classification",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/persistent-homology-liver-tumor-classification-2025/"
+    }
+  ]
+}

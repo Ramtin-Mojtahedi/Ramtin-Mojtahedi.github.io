@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/stacked-classifier-treatment-response-2025/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "stacked-classifier-treatment-response-2025",
+    "title": "Performance Evaluation of a Stacked Classifier for Predicting Treatment Response in Unresectable Colorectal Liver Metastases",
+    "year": 2025,
+    "publication_date": "2025-04-04",
+    "group": "2025",
+    "status": "Published",
+    "authors": [
+      "Mane Piliposyan",
+      "Mohammad Hamghalam",
+      "Ramtin Mojtahedi",
+      "Jacob J. Peoples",
+      "Kaitlyn S. Kobayashi",
+      "E. Claire Bunker",
+      "Natalie Gangai",
+      "Yun Shin Chun",
+      "Richard K. G. Do",
+      "Christian Muise",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "M. Piliposyan, M. Hamghalam, <strong>R. Mojtahedi</strong>, J. J. Peoples, K. S. Kobayashi, E. C. Bunker, N. Gangai, Y. S. Chun, R. K. G. Do, C. Muise, and A. L. Simpson",
+    "citation": "Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407, 134071P.",
+    "citation_plain": "Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071P.",
+    "doi": "10.1117/12.3048943",
+    "url": "https://doi.org/10.1117/12.3048943",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata; OpenAlex/ORCID",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "Medical Imaging 2025: Computer-Aided Diagnosis",
+    "volume": "13407",
+    "issue": "",
+    "pages": "397-406",
+    "article_number": "134071P",
+    "type": "conference-paper",
+    "peer_reviewed": true,
+    "publisher": "SPIE",
+    "keywords": [
+      "colorectal liver metastases",
+      "treatment response",
+      "stacked classifier",
+      "machine learning"
+    ],
+    "note": "",
+    "detail_url": "/publications/stacked-classifier-treatment-response-2025/",
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "inproceedings",
+    "bibtex_key": "Piliposyan2025StackedClassifier"
+  },
+  "citation": {
+    "plain_text": "Mane Piliposyan, Mohammad Hamghalam, Ramtin Mojtahedi, Jacob J. Peoples, Kaitlyn S. Kobayashi, E. Claire Bunker, Natalie Gangai, Yun Shin Chun, Richard K. G. Do, Christian Muise, and Amber L. Simpson. “Performance Evaluation of a Stacked Classifier for Predicting Treatment Response in Unresectable Colorectal Liver Metastases.” Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071P. https://doi.org/10.1117/12.3048943",
+    "bibtex": "@inproceedings{Piliposyan2025StackedClassifier,\n  author = {Mane Piliposyan and Mohammad Hamghalam and Ramtin Mojtahedi and Jacob J. Peoples and Kaitlyn S. Kobayashi and E. Claire Bunker and Natalie Gangai and Yun Shin Chun and Richard K. G. Do and Christian Muise and Amber L. Simpson},\n  title = {{Performance Evaluation of a Stacked Classifier for Predicting Treatment Response in Unresectable Colorectal Liver Metastases}},\n  year = {2025},\n  booktitle = {Medical Imaging 2025: Computer-Aided Diagnosis},\n  volume = {13407},\n  pages = {397-406},\n  publisher = {SPIE},\n  doi = {10.1117/12.3048943},\n  url = {https://doi.org/10.1117/12.3048943}\n}",
+    "ris": "TY  - CPAPER\nTI  - Performance Evaluation of a Stacked Classifier for Predicting Treatment Response in Unresectable Colorectal Liver Metastases\nAU  - Mane Piliposyan\nAU  - Mohammad Hamghalam\nAU  - Ramtin Mojtahedi\nAU  - Jacob J. Peoples\nAU  - Kaitlyn S. Kobayashi\nAU  - E. Claire Bunker\nAU  - Natalie Gangai\nAU  - Yun Shin Chun\nAU  - Richard K. G. Do\nAU  - Christian Muise\nAU  - Amber L. Simpson\nPY  - 2025\nDA  - 2025-04-04\nT2  - Medical Imaging 2025: Computer-Aided Diagnosis\nVL  - 13407\nSP  - 397\nEP  - 406\nDO  - 10.1117/12.3048943\nUR  - https://doi.org/10.1117/12.3048943\nKW  - colorectal liver metastases\nKW  - treatment response\nKW  - stacked classifier\nKW  - machine learning\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Predicting Response to Therapy in Pancreatic Ductal Adenocarcinoma Using Convolutional Neural Networks",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/pdac-treatment-response-cnn-2025/"
+    },
+    {
+      "title": "The Search for CT Imaging Subtypes of Colorectal Liver Metastases and the Impacts of Slice Thickness",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/ct-imaging-subtypes-slice-thickness-2025/"
+    },
+    {
+      "title": "Improving Preoperative Risk Stratification in Colorectal Liver Metastases: A Multi-Institutional Evaluation of Multimodal Prediction Models",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/multimodal-preoperative-risk-stratification-2026/"
+    }
+  ]
+}

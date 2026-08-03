@@ -340,6 +340,48 @@ def validate_scholarly_exports(publications: list[dict]) -> None:
     }:
         fail("The scholarly-page manifest does not advertise all citation exports.")
 
+    expected_record_exports = [
+        {
+            "id": publication["id"],
+            "page": f"/publications/{publication['id']}/",
+            "bibtex": f"/publications/{publication['id']}/citation.bib",
+            "ris": f"/publications/{publication['id']}/citation.ris",
+            "json": f"/publications/{publication['id']}/metadata.json",
+        }
+        for publication in publications
+    ]
+    if manifest.get("record_exports") != expected_record_exports:
+        fail("The scholarly-page manifest differs from the per-record citation exports.")
+
+    for publication in publications:
+        record_dir = ROOT / "publications" / str(publication["id"])
+        record_page = read(record_dir / "index.html")
+        citation_bib = read(record_dir / "citation.bib")
+        citation_ris = read(record_dir / "citation.ris")
+        metadata = read_json(record_dir / "metadata.json")
+        pipeline_labels = re.findall(
+            r'<span class="pipeline-label">([^<]+)</span>', record_page
+        )
+        if record_page.count('class="discovery-pipeline"') != 1 or pipeline_labels != [
+            "Source",
+            "Read",
+            "Cite",
+            "Explore",
+        ]:
+            fail(
+                f"{publication['id']}: the four-stage publication access pipeline is missing or malformed."
+            )
+        expected_key = str(publication["bibtex_key"])
+        if not re.search(rf"(?m)^@[A-Za-z]+\{{{re.escape(expected_key)},", citation_bib):
+            fail(f"{publication['id']}: the per-record BibTeX export has the wrong key.")
+        if not citation_ris.startswith("TY  - ") or not citation_ris.rstrip().endswith("ER  -"):
+            fail(f"{publication['id']}: the per-record RIS export is malformed.")
+        if metadata.get("publication") != publication:
+            fail(f"{publication['id']}: the per-record JSON differs from the curated record.")
+        expected_url = f"https://ramtin-mojtahedi.github.io/publications/{publication['id']}/"
+        if metadata.get("record_url") != expected_url:
+            fail(f"{publication['id']}: the per-record JSON has the wrong canonical URL.")
+
 
 def validate_discovery_pages(sources: dict[str, str]) -> None:
     expected_pages = {

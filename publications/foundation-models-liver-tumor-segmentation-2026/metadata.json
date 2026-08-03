@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "foundation-models-liver-tumor-segmentation-2026",
+    "title": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
+    "year": 2026,
+    "publication_date": "2026-04-08",
+    "group": "2026",
+    "status": "Published",
+    "authors": [
+      "Ramtin Mojtahedi",
+      "Mohammad Hamghalam",
+      "Jacob J. Peoples",
+      "Richard K. G. Do",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "<strong>R. Mojtahedi</strong>, M. Hamghalam, J. J. Peoples, R. K. G. Do, and A. L. Simpson",
+    "citation": "Medical Imaging 2026: Computer-Aided Diagnosis, Proc. SPIE 13926, 1392612.",
+    "citation_plain": "Medical Imaging 2026: Computer-Aided Diagnosis, Proceedings of SPIE 13926, 1392612.",
+    "doi": "10.1117/12.3087835",
+    "url": "https://doi.org/10.1117/12.3087835",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata; OpenAlex/ORCID; Crossref",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "Medical Imaging 2026: Computer-Aided Diagnosis",
+    "volume": "13926",
+    "issue": "",
+    "pages": "260-268",
+    "article_number": "1392612",
+    "type": "conference-paper",
+    "peer_reviewed": true,
+    "publisher": "SPIE",
+    "keywords": [
+      "foundation models",
+      "parameter-efficient fine-tuning",
+      "liver tumor segmentation",
+      "computed tomography"
+    ],
+    "note": "",
+    "detail_url": "/publications/foundation-models-liver-tumor-segmentation-2026/",
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "https://github.com/Ramtin-Mojtahedi/peft-sam-liver-ct",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "abstract": "State-of-the-art interactive segmentation with foundation models remains constrained by compute and the need for annotations. We evaluated parameter-efficient fine-tuning (PEFT) of the Segment Anything Model (SAM) by inserting baseline adapters, Low-Rank Adaptation (LoRA), 4-bit Quantized Low-Rank Adaptation (QLoRA), and a convolutional adapter (Conv-Adapter), as well as our proposed Directional Spectral Top-K adapter (DiSCo), training only the adapters while keeping the SAM backbone frozen. DiSCo performs singular value decomposition of row-normalized weights to obtain spectral bases, then learns rank-gated spectral coefficients, per-output magnitude offsets, and a spectral gain; it supports optional Top-K rank selection at inference while keeping only 0.14 M parameters trainable. We benchmarked five prompting regimes, none, single-point, multi-point, and bounding boxes at an intersection over union (IoU) of 0.50 and 0.75, applied to abdominal CT scans of colorectal liver metastases, and reported segmentation metrics (Dice and the 95th-percentile Hausdorff distance (HD95)) and compute metrics (trainable parameters, latency, memory, throughput). Conv-Adapter and LoRA achieved the highest accuracy (overall Dice 0.793 and 0.792; single-point 0.795 and 0.792; HD95 32 mm). QLoRA was close (overall 0.766; single-point 0.768; HD95 36.41 mm) while offering the most favorable compute profile (0.91 M trainable parameters, 120 ms latency, 4.9 GB peak memory). DiSCo maximized parameter efficiency, achieving the highest Dice per million trainable parameters (4.66), showing an accuracy-efficiency trade-off (overall Dice 0.653; single-point 0.698; HD95 49.53 mm). These results indicate that PEFT on foundation models enables more accurate liver tumor segmentation with reduced adaptation costs, supporting rapid scanner-specific tuning, point- or box-prompt workflows, and broader deployability for preoperative volumetrics when compute and labeled data are limited.",
+    "bibtex_type": "inproceedings",
+    "bibtex_key": "Mojtahedi2026PEFTFoundation"
+  },
+  "citation": {
+    "plain_text": "Ramtin Mojtahedi, Mohammad Hamghalam, Jacob J. Peoples, Richard K. G. Do, and Amber L. Simpson. “Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT.” Medical Imaging 2026: Computer-Aided Diagnosis, Proceedings of SPIE 13926, 1392612. https://doi.org/10.1117/12.3087835",
+    "bibtex": "@inproceedings{Mojtahedi2026PEFTFoundation,\n  author = {Ramtin Mojtahedi and Mohammad Hamghalam and Jacob J. Peoples and Richard K. G. Do and Amber L. Simpson},\n  title = {{Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT}},\n  year = {2026},\n  booktitle = {Medical Imaging 2026: Computer-Aided Diagnosis},\n  volume = {13926},\n  pages = {260-268},\n  publisher = {SPIE},\n  doi = {10.1117/12.3087835},\n  url = {https://doi.org/10.1117/12.3087835}\n}",
+    "ris": "TY  - CPAPER\nTI  - Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT\nAU  - Ramtin Mojtahedi\nAU  - Mohammad Hamghalam\nAU  - Jacob J. Peoples\nAU  - Richard K. G. Do\nAU  - Amber L. Simpson\nPY  - 2026\nDA  - 2026-04-08\nT2  - Medical Imaging 2026: Computer-Aided Diagnosis\nVL  - 13926\nSP  - 260\nEP  - 268\nDO  - 10.1117/12.3087835\nUR  - https://doi.org/10.1117/12.3087835\nKW  - foundation models\nKW  - parameter-efficient fine-tuning\nKW  - liver tumor segmentation\nKW  - computed tomography\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Parameter-Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Tumour Segmentation in CT",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/peft-few-shot-multiscale-vit-2025/"
+    },
+    {
+      "title": "Radiomic Signatures from Baseline CT Predict Chemotherapy Response in Unresectable Colorectal Liver Metastases",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/radiomic-signatures-chemotherapy-response-2026/"
+    },
+    {
+      "title": "Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/self-supervised-transformer-liver-tumor-2026/"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/pdac-treatment-response-cnn-2025/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "pdac-treatment-response-cnn-2025",
+    "title": "Predicting Response to Therapy in Pancreatic Ductal Adenocarcinoma Using Convolutional Neural Networks",
+    "year": 2025,
+    "publication_date": "2025-04-04",
+    "group": "2025",
+    "status": "Published",
+    "authors": [
+      "John Zhou",
+      "Dashti Ali",
+      "Ramtin Mojtahedi",
+      "Ahmad Bashir Barekzai",
+      "Jayasree Chakraborty",
+      "Hala Khasawneh",
+      "Camila Vilela",
+      "Natally Horvat",
+      "João Miranda",
+      "Alice C. Wei",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "J. Zhou, D. Ali, <strong>R. Mojtahedi</strong>, A. B. Barekzai, J. Chakraborty, H. Khasawneh, C. Vilela, N. Horvat, J. Miranda, A. C. Wei, and A. L. Simpson",
+    "citation": "Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407, 134071C.",
+    "citation_plain": "Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071C.",
+    "doi": "10.1117/12.3048961",
+    "url": "https://doi.org/10.1117/12.3048961",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata; OpenAlex/ORCID",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "Medical Imaging 2025: Computer-Aided Diagnosis",
+    "volume": "13407",
+    "issue": "",
+    "pages": "319-325",
+    "article_number": "134071C",
+    "type": "conference-paper",
+    "peer_reviewed": true,
+    "publisher": "SPIE",
+    "keywords": [
+      "pancreatic ductal adenocarcinoma",
+      "treatment response",
+      "convolutional neural networks",
+      "computed tomography"
+    ],
+    "note": "",
+    "detail_url": "/publications/pdac-treatment-response-cnn-2025/",
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "inproceedings",
+    "bibtex_key": "Zhou2025PDACResponse"
+  },
+  "citation": {
+    "plain_text": "John Zhou, Dashti Ali, Ramtin Mojtahedi, Ahmad Bashir Barekzai, Jayasree Chakraborty, Hala Khasawneh, Camila Vilela, Natally Horvat, João Miranda, Alice C. Wei, and Amber L. Simpson. “Predicting Response to Therapy in Pancreatic Ductal Adenocarcinoma Using Convolutional Neural Networks.” Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071C. https://doi.org/10.1117/12.3048961",
+    "bibtex": "@inproceedings{Zhou2025PDACResponse,\n  author = {John Zhou and Dashti Ali and Ramtin Mojtahedi and Ahmad Bashir Barekzai and Jayasree Chakraborty and Hala Khasawneh and Camila Vilela and Natally Horvat and João Miranda and Alice C. Wei and Amber L. Simpson},\n  title = {{Predicting Response to Therapy in Pancreatic Ductal Adenocarcinoma Using Convolutional Neural Networks}},\n  year = {2025},\n  booktitle = {Medical Imaging 2025: Computer-Aided Diagnosis},\n  volume = {13407},\n  pages = {319-325},\n  publisher = {SPIE},\n  doi = {10.1117/12.3048961},\n  url = {https://doi.org/10.1117/12.3048961}\n}",
+    "ris": "TY  - CPAPER\nTI  - Predicting Response to Therapy in Pancreatic Ductal Adenocarcinoma Using Convolutional Neural Networks\nAU  - John Zhou\nAU  - Dashti Ali\nAU  - Ramtin Mojtahedi\nAU  - Ahmad Bashir Barekzai\nAU  - Jayasree Chakraborty\nAU  - Hala Khasawneh\nAU  - Camila Vilela\nAU  - Natally Horvat\nAU  - João Miranda\nAU  - Alice C. Wei\nAU  - Amber L. Simpson\nPY  - 2025\nDA  - 2025-04-04\nT2  - Medical Imaging 2025: Computer-Aided Diagnosis\nVL  - 13407\nSP  - 319\nEP  - 325\nDO  - 10.1117/12.3048961\nUR  - https://doi.org/10.1117/12.3048961\nKW  - pancreatic ductal adenocarcinoma\nKW  - treatment response\nKW  - convolutional neural networks\nKW  - computed tomography\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Performance Evaluation of a Stacked Classifier for Predicting Treatment Response in Unresectable Colorectal Liver Metastases",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/stacked-classifier-treatment-response-2025/"
+    },
+    {
+      "title": "The Search for CT Imaging Subtypes of Colorectal Liver Metastases and the Impacts of Slice Thickness",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/ct-imaging-subtypes-slice-thickness-2025/"
+    },
+    {
+      "title": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/"
+    }
+  ]
+}

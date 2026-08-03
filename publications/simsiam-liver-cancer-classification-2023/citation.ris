@@ -1,0 +1,21 @@
+TY  - CPAPER
+TI  - Leveraging Contrastive Learning with SimSiam for the Classification of Primary and Secondary Liver Cancers
+AU  - Ramtin Mojtahedi
+AU  - Mohammad Hamghalam
+AU  - William R. Jarnagin
+AU  - Richard K. G. Do
+AU  - Amber L. Simpson
+PY  - 2023
+DA  - 2023
+T2  - Medical Image Computing and Computer Assisted Intervention – MICCAI 2023 Workshops
+VL  - 14394
+SP  - 311
+EP  - 321
+DO  - 10.1007/978-3-031-47425-5_28
+UR  - https://doi.org/10.1007/978-3-031-47425-5_28
+KW  - contrastive learning
+KW  - SimSiam
+KW  - liver cancer classification
+KW  - self-supervised learning
+N1  - Conference year is 2023; the Springer chapter was first published online in 2024.
+ER  -

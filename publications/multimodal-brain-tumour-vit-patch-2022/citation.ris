@@ -1,0 +1,19 @@
+TY  - CPAPER
+TI  - Multi-modal Brain Tumour Segmentation Using Transformer with Optimal Patch Size
+AU  - Ramtin Mojtahedi
+AU  - Mohammad Hamghalam
+AU  - Amber L. Simpson
+PY  - 2023
+DA  - 2023-07-18
+T2  - Brainlesion: Glioma, Multiple Sclerosis, Stroke and Traumatic Brain Injuries (BrainLes 2022)
+VL  - 13769
+SP  - 195
+EP  - 204
+DO  - 10.1007/978-3-031-33842-7_17
+UR  - https://doi.org/10.1007/978-3-031-33842-7_17
+KW  - brain tumor segmentation
+KW  - vision transformers
+KW  - patch size
+KW  - multimodal MRI
+N1  - The linked repository is currently a bibliographic record; it should not be interpreted as a complete code release.
+ER  -

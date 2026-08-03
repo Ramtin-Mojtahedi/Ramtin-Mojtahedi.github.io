@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/self-supervised-transformer-liver-tumor-2026/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "self-supervised-transformer-liver-tumor-2026",
+    "title": "Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification",
+    "year": 2026,
+    "publication_date": "2026-01-30",
+    "group": "2026",
+    "status": "Published · Free manuscript",
+    "authors": [
+      "Ramtin Mojtahedi",
+      "Mohammad Hamghalam",
+      "Jacob J. Peoples",
+      "William R. Jarnagin",
+      "Richard K. G. Do",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "<strong>R. Mojtahedi</strong>, M. Hamghalam, J. J. Peoples, W. R. Jarnagin, R. K. G. Do, and A. L. Simpson",
+    "citation": "JCO Clinical Cancer Informatics 10 (2026), e2500135.",
+    "citation_plain": "JCO Clinical Cancer Informatics 10 (2026), e2500135.",
+    "doi": "10.1200/CCI-25-00135",
+    "url": "https://doi.org/10.1200/CCI-25-00135",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata; OpenAlex/ORCID; Crossref",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "JCO Clinical Cancer Informatics",
+    "volume": "10",
+    "issue": "1",
+    "pages": "",
+    "article_number": "e2500135",
+    "type": "journal-article",
+    "peer_reviewed": true,
+    "publisher": "American Society of Clinical Oncology",
+    "keywords": [
+      "self-supervised learning",
+      "vision transformers",
+      "liver tumor segmentation",
+      "tumor classification"
+    ],
+    "note": "The public PMC copy is the NIH author manuscript; no Creative Commons licence is asserted here.",
+    "detail_url": "/publications/self-supervised-transformer-liver-tumor-2026/",
+    "open_access_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12866948/",
+    "open_access_label": "Free NIH manuscript",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "",
+    "code_label": "Code",
+    "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41616240/",
+    "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12866948/",
+    "citation_pdf_url": "",
+    "bibtex_type": "article",
+    "bibtex_key": "Mojtahedi2026SelfSupervised"
+  },
+  "citation": {
+    "plain_text": "Ramtin Mojtahedi, Mohammad Hamghalam, Jacob J. Peoples, William R. Jarnagin, Richard K. G. Do, and Amber L. Simpson. “Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification.” JCO Clinical Cancer Informatics 10 (2026), e2500135. https://doi.org/10.1200/CCI-25-00135",
+    "bibtex": "@article{Mojtahedi2026SelfSupervised,\n  author = {Ramtin Mojtahedi and Mohammad Hamghalam and Jacob J. Peoples and William R. Jarnagin and Richard K. G. Do and Amber L. Simpson},\n  title = {{Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification}},\n  year = {2026},\n  journal = {JCO Clinical Cancer Informatics},\n  volume = {10},\n  number = {1},\n  eid = {e2500135},\n  doi = {10.1200/CCI-25-00135},\n  url = {https://doi.org/10.1200/CCI-25-00135},\n  note = {The public PMC copy is the NIH author manuscript; no Creative Commons licence is asserted here.}\n}",
+    "ris": "TY  - JOUR\nTI  - Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification\nAU  - Ramtin Mojtahedi\nAU  - Mohammad Hamghalam\nAU  - Jacob J. Peoples\nAU  - William R. Jarnagin\nAU  - Richard K. G. Do\nAU  - Amber L. Simpson\nPY  - 2026\nDA  - 2026-01-30\nT2  - JCO Clinical Cancer Informatics\nVL  - 10\nIS  - 1\nSP  - e2500135\nDO  - 10.1200/CCI-25-00135\nUR  - https://doi.org/10.1200/CCI-25-00135\nKW  - self-supervised learning\nKW  - vision transformers\nKW  - liver tumor segmentation\nKW  - tumor classification\nN1  - The public PMC copy is the NIH author manuscript; no Creative Commons licence is asserted here.\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/"
+    },
+    {
+      "title": "Parameter-Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Tumour Segmentation in CT",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/peft-few-shot-multiscale-vit-2025/"
+    },
+    {
+      "title": "Leveraging Contrastive Learning with SimSiam for the Classification of Primary and Secondary Liver Cancers",
+      "year": 2023,
+      "url": "https://ramtin-mojtahedi.github.io/publications/simsiam-liver-cancer-classification-2023/"
+    }
+  ]
+}

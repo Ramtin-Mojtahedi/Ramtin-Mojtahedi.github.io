@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/fpga-human-tracking-particle-filter-2016/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "fpga-human-tracking-particle-filter-2016",
+    "title": "A Novel FPGA Design of a High Dynamic Human Tracking System Using Particle Filter",
+    "year": 2016,
+    "publication_date": "2016",
+    "group": "earlier",
+    "status": "Published",
+    "authors": [
+      "Ramtin Mojtahedi Saffari",
+      "Sattar Mirzakuchaki"
+    ],
+    "authors_html": "<strong>R. M. Saffari</strong> and S. Mirzakuchaki",
+    "citation": "2016 24th Iranian Conference on Electrical Engineering (ICEE), pp. 1043–1048.",
+    "citation_plain": "2016 24th Iranian Conference on Electrical Engineering (ICEE), 1043–1048.",
+    "doi": "10.1109/IranianCEE.2016.7585675",
+    "url": "https://doi.org/10.1109/IranianCEE.2016.7585675",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "2016 24th Iranian Conference on Electrical Engineering (ICEE)",
+    "volume": "",
+    "issue": "",
+    "pages": "1043-1048",
+    "article_number": "",
+    "type": "conference-paper",
+    "peer_reviewed": true,
+    "publisher": "IEEE",
+    "keywords": [
+      "FPGA",
+      "human tracking",
+      "particle filter",
+      "high-dynamic systems"
+    ],
+    "note": "",
+    "detail_url": "/publications/fpga-human-tracking-particle-filter-2016/",
+    "citation_authors": [
+      "R. M. Saffari",
+      "S. Mirzakuchaki"
+    ],
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "inproceedings",
+    "bibtex_key": "Saffari2016FPGATracking"
+  },
+  "citation": {
+    "plain_text": "Ramtin Mojtahedi Saffari and Sattar Mirzakuchaki. “A Novel FPGA Design of a High Dynamic Human Tracking System Using Particle Filter.” 2016 24th Iranian Conference on Electrical Engineering (ICEE), 1043–1048. https://doi.org/10.1109/IranianCEE.2016.7585675",
+    "bibtex": "@inproceedings{Saffari2016FPGATracking,\n  author = {Ramtin Mojtahedi Saffari and Sattar Mirzakuchaki},\n  title = {{A Novel FPGA Design of a High Dynamic Human Tracking System Using Particle Filter}},\n  year = {2016},\n  booktitle = {2016 24th Iranian Conference on Electrical Engineering (ICEE)},\n  pages = {1043-1048},\n  publisher = {IEEE},\n  doi = {10.1109/IranianCEE.2016.7585675},\n  url = {https://doi.org/10.1109/IranianCEE.2016.7585675}\n}",
+    "ris": "TY  - CPAPER\nTI  - A Novel FPGA Design of a High Dynamic Human Tracking System Using Particle Filter\nAU  - Ramtin Mojtahedi Saffari\nAU  - Sattar Mirzakuchaki\nPY  - 2016\nDA  - 2016\nT2  - 2016 24th Iranian Conference on Electrical Engineering (ICEE)\nSP  - 1043\nEP  - 1048\nDO  - 10.1109/IranianCEE.2016.7585675\nUR  - https://doi.org/10.1109/IranianCEE.2016.7585675\nKW  - FPGA\nKW  - human tracking\nKW  - particle filter\nKW  - high-dynamic systems\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "On Design of Carrier Synchronization System Using Bayesian Filtering Framework",
+      "year": 2015,
+      "url": "https://ramtin-mojtahedi.github.io/publications/carrier-synchronization-bayesian-filtering-2015/"
+    },
+    {
+      "title": "A Novel Image Encryption Algorithm Based on Discrete Wavelet Transform Using Two-Dimensional Logistic Map",
+      "year": 2016,
+      "url": "https://ramtin-mojtahedi.github.io/publications/dwt-logistic-map-image-encryption-2016/"
+    },
+    {
+      "title": "An Innovative Smart Package for Liquid Flow Meters",
+      "year": 2017,
+      "url": "https://ramtin-mojtahedi.github.io/publications/smart-package-liquid-flow-meters-2017/"
+    }
+  ]
+}

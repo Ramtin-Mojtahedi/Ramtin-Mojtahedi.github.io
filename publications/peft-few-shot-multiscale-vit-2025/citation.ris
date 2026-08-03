@@ -1,0 +1,21 @@
+TY  - CPAPER
+TI  - Parameter-Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Tumour Segmentation in CT
+AU  - Ramtin Mojtahedi
+AU  - Mohammad Hamghalam
+AU  - Jacob J. Peoples
+AU  - William R. Jarnagin
+AU  - Richard K. G. Do
+AU  - Amber L. Simpson
+PY  - 2025
+DA  - 2025-04-04
+T2  - Medical Imaging 2025: Computer-Aided Diagnosis
+VL  - 13407
+SP  - 801
+EP  - 810
+DO  - 10.1117/12.3046253
+UR  - https://doi.org/10.1117/12.3046253
+KW  - parameter-efficient fine-tuning
+KW  - few-shot learning
+KW  - multiscale vision transformers
+KW  - liver tumor segmentation
+ER  -

@@ -1,0 +1,20 @@
+TY  - CPAPER
+TI  - Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT
+AU  - Ramtin Mojtahedi
+AU  - Mohammad Hamghalam
+AU  - Jacob J. Peoples
+AU  - Richard K. G. Do
+AU  - Amber L. Simpson
+PY  - 2026
+DA  - 2026-04-08
+T2  - Medical Imaging 2026: Computer-Aided Diagnosis
+VL  - 13926
+SP  - 260
+EP  - 268
+DO  - 10.1117/12.3087835
+UR  - https://doi.org/10.1117/12.3087835
+KW  - foundation models
+KW  - parameter-efficient fine-tuning
+KW  - liver tumor segmentation
+KW  - computed tomography
+ER  -

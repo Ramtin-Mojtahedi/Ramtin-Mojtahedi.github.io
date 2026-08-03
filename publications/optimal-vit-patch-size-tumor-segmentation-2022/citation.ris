@@ -1,0 +1,19 @@
+TY  - CPAPER
+TI  - Towards Optimal Patch Size in Vision Transformers for Tumor Segmentation
+AU  - Ramtin Mojtahedi
+AU  - Mohammad Hamghalam
+AU  - Richard K. G. Do
+AU  - Amber L. Simpson
+PY  - 2022
+DA  - 2022-10-12
+T2  - Multiscale Multimodal Medical Imaging
+VL  - 13594
+SP  - 110
+EP  - 120
+DO  - 10.1007/978-3-031-18814-5_11
+UR  - https://doi.org/10.1007/978-3-031-18814-5_11
+KW  - vision transformers
+KW  - patch size
+KW  - tumor segmentation
+KW  - medical imaging
+ER  -

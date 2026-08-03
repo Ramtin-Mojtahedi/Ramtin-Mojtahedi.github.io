@@ -1,0 +1,22 @@
+TY  - JOUR
+TI  - Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification
+AU  - Ramtin Mojtahedi
+AU  - Mohammad Hamghalam
+AU  - Jacob J. Peoples
+AU  - William R. Jarnagin
+AU  - Richard K. G. Do
+AU  - Amber L. Simpson
+PY  - 2026
+DA  - 2026-01-30
+T2  - JCO Clinical Cancer Informatics
+VL  - 10
+IS  - 1
+SP  - e2500135
+DO  - 10.1200/CCI-25-00135
+UR  - https://doi.org/10.1200/CCI-25-00135
+KW  - self-supervised learning
+KW  - vision transformers
+KW  - liver tumor segmentation
+KW  - tumor classification
+N1  - The public PMC copy is the NIH author manuscript; no Creative Commons licence is asserted here.
+ER  -

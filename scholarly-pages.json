@@ -22,6 +22,134 @@
     "/publications/fpga-human-tracking-particle-filter-2016/",
     "/publications/carrier-synchronization-bayesian-filtering-2015/"
   ],
+  "record_exports": [
+    {
+      "id": "multimodal-preoperative-risk-stratification-2026",
+      "page": "/publications/multimodal-preoperative-risk-stratification-2026/",
+      "bibtex": "/publications/multimodal-preoperative-risk-stratification-2026/citation.bib",
+      "ris": "/publications/multimodal-preoperative-risk-stratification-2026/citation.ris",
+      "json": "/publications/multimodal-preoperative-risk-stratification-2026/metadata.json"
+    },
+    {
+      "id": "carotid-plaque-radiomics-risk-2026",
+      "page": "/publications/carotid-plaque-radiomics-risk-2026/",
+      "bibtex": "/publications/carotid-plaque-radiomics-risk-2026/citation.bib",
+      "ris": "/publications/carotid-plaque-radiomics-risk-2026/citation.ris",
+      "json": "/publications/carotid-plaque-radiomics-risk-2026/metadata.json"
+    },
+    {
+      "id": "foundation-models-liver-tumor-segmentation-2026",
+      "page": "/publications/foundation-models-liver-tumor-segmentation-2026/",
+      "bibtex": "/publications/foundation-models-liver-tumor-segmentation-2026/citation.bib",
+      "ris": "/publications/foundation-models-liver-tumor-segmentation-2026/citation.ris",
+      "json": "/publications/foundation-models-liver-tumor-segmentation-2026/metadata.json"
+    },
+    {
+      "id": "self-supervised-transformer-liver-tumor-2026",
+      "page": "/publications/self-supervised-transformer-liver-tumor-2026/",
+      "bibtex": "/publications/self-supervised-transformer-liver-tumor-2026/citation.bib",
+      "ris": "/publications/self-supervised-transformer-liver-tumor-2026/citation.ris",
+      "json": "/publications/self-supervised-transformer-liver-tumor-2026/metadata.json"
+    },
+    {
+      "id": "radiomic-signatures-chemotherapy-response-2026",
+      "page": "/publications/radiomic-signatures-chemotherapy-response-2026/",
+      "bibtex": "/publications/radiomic-signatures-chemotherapy-response-2026/citation.bib",
+      "ris": "/publications/radiomic-signatures-chemotherapy-response-2026/citation.ris",
+      "json": "/publications/radiomic-signatures-chemotherapy-response-2026/metadata.json"
+    },
+    {
+      "id": "ct-imaging-subtypes-slice-thickness-2025",
+      "page": "/publications/ct-imaging-subtypes-slice-thickness-2025/",
+      "bibtex": "/publications/ct-imaging-subtypes-slice-thickness-2025/citation.bib",
+      "ris": "/publications/ct-imaging-subtypes-slice-thickness-2025/citation.ris",
+      "json": "/publications/ct-imaging-subtypes-slice-thickness-2025/metadata.json"
+    },
+    {
+      "id": "pdac-treatment-response-cnn-2025",
+      "page": "/publications/pdac-treatment-response-cnn-2025/",
+      "bibtex": "/publications/pdac-treatment-response-cnn-2025/citation.bib",
+      "ris": "/publications/pdac-treatment-response-cnn-2025/citation.ris",
+      "json": "/publications/pdac-treatment-response-cnn-2025/metadata.json"
+    },
+    {
+      "id": "stacked-classifier-treatment-response-2025",
+      "page": "/publications/stacked-classifier-treatment-response-2025/",
+      "bibtex": "/publications/stacked-classifier-treatment-response-2025/citation.bib",
+      "ris": "/publications/stacked-classifier-treatment-response-2025/citation.ris",
+      "json": "/publications/stacked-classifier-treatment-response-2025/metadata.json"
+    },
+    {
+      "id": "peft-few-shot-multiscale-vit-2025",
+      "page": "/publications/peft-few-shot-multiscale-vit-2025/",
+      "bibtex": "/publications/peft-few-shot-multiscale-vit-2025/citation.bib",
+      "ris": "/publications/peft-few-shot-multiscale-vit-2025/citation.ris",
+      "json": "/publications/peft-few-shot-multiscale-vit-2025/metadata.json"
+    },
+    {
+      "id": "persistent-homology-liver-tumor-classification-2025",
+      "page": "/publications/persistent-homology-liver-tumor-classification-2025/",
+      "bibtex": "/publications/persistent-homology-liver-tumor-classification-2025/citation.bib",
+      "ris": "/publications/persistent-homology-liver-tumor-classification-2025/citation.ris",
+      "json": "/publications/persistent-homology-liver-tumor-classification-2025/metadata.json"
+    },
+    {
+      "id": "dilated-transformer-liver-cancers-2024",
+      "page": "/publications/dilated-transformer-liver-cancers-2024/",
+      "bibtex": "/publications/dilated-transformer-liver-cancers-2024/citation.bib",
+      "ris": "/publications/dilated-transformer-liver-cancers-2024/citation.ris",
+      "json": "/publications/dilated-transformer-liver-cancers-2024/metadata.json"
+    },
+    {
+      "id": "multimodal-brain-tumour-vit-patch-2022",
+      "page": "/publications/multimodal-brain-tumour-vit-patch-2022/",
+      "bibtex": "/publications/multimodal-brain-tumour-vit-patch-2022/citation.bib",
+      "ris": "/publications/multimodal-brain-tumour-vit-patch-2022/citation.ris",
+      "json": "/publications/multimodal-brain-tumour-vit-patch-2022/metadata.json"
+    },
+    {
+      "id": "simsiam-liver-cancer-classification-2023",
+      "page": "/publications/simsiam-liver-cancer-classification-2023/",
+      "bibtex": "/publications/simsiam-liver-cancer-classification-2023/citation.bib",
+      "ris": "/publications/simsiam-liver-cancer-classification-2023/citation.ris",
+      "json": "/publications/simsiam-liver-cancer-classification-2023/metadata.json"
+    },
+    {
+      "id": "optimal-vit-patch-size-tumor-segmentation-2022",
+      "page": "/publications/optimal-vit-patch-size-tumor-segmentation-2022/",
+      "bibtex": "/publications/optimal-vit-patch-size-tumor-segmentation-2022/citation.bib",
+      "ris": "/publications/optimal-vit-patch-size-tumor-segmentation-2022/citation.ris",
+      "json": "/publications/optimal-vit-patch-size-tumor-segmentation-2022/metadata.json"
+    },
+    {
+      "id": "smart-package-liquid-flow-meters-2017",
+      "page": "/publications/smart-package-liquid-flow-meters-2017/",
+      "bibtex": "/publications/smart-package-liquid-flow-meters-2017/citation.bib",
+      "ris": "/publications/smart-package-liquid-flow-meters-2017/citation.ris",
+      "json": "/publications/smart-package-liquid-flow-meters-2017/metadata.json"
+    },
+    {
+      "id": "dwt-logistic-map-image-encryption-2016",
+      "page": "/publications/dwt-logistic-map-image-encryption-2016/",
+      "bibtex": "/publications/dwt-logistic-map-image-encryption-2016/citation.bib",
+      "ris": "/publications/dwt-logistic-map-image-encryption-2016/citation.ris",
+      "json": "/publications/dwt-logistic-map-image-encryption-2016/metadata.json"
+    },
+    {
+      "id": "fpga-human-tracking-particle-filter-2016",
+      "page": "/publications/fpga-human-tracking-particle-filter-2016/",
+      "bibtex": "/publications/fpga-human-tracking-particle-filter-2016/citation.bib",
+      "ris": "/publications/fpga-human-tracking-particle-filter-2016/citation.ris",
+      "json": "/publications/fpga-human-tracking-particle-filter-2016/metadata.json"
+    },
+    {
+      "id": "carrier-synchronization-bayesian-filtering-2015",
+      "page": "/publications/carrier-synchronization-bayesian-filtering-2015/",
+      "bibtex": "/publications/carrier-synchronization-bayesian-filtering-2015/citation.bib",
+      "ris": "/publications/carrier-synchronization-bayesian-filtering-2015/citation.ris",
+      "json": "/publications/carrier-synchronization-bayesian-filtering-2015/metadata.json"
+    }
+  ],
   "exports": {
     "json": "/publications.json",
     "bibtex": "/publications.bib",

@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/carotid-plaque-radiomics-risk-2026/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "carotid-plaque-radiomics-risk-2026",
+    "title": "Radiomic Carotid Plaque Features Integrated into Machine Learning Models for Cardiovascular Risk Prediction",
+    "year": 2026,
+    "publication_date": "2026-06-12",
+    "group": "2026",
+    "status": "In press · Corrected proof",
+    "authors": [
+      "Ricky Hu",
+      "Ramtin Mojtahedi",
+      "Ergi Duli",
+      "Marie-France Hétu",
+      "Laura Mantella",
+      "Amber L. Simpson",
+      "Michael J. Blaha",
+      "Taylor Barwell",
+      "Kiera Liblik",
+      "Jasjit S. Suri",
+      "Amer M. Johri"
+    ],
+    "authors_html": "R. Hu<sup>*</sup>, <strong>R. Mojtahedi<sup>*</sup></strong>, E. Duli, M.-F. Hétu, L. Mantella, A. L. Simpson, M. J. Blaha, T. Barwell, K. Liblik, J. S. Suri, and A. M. Johri",
+    "citation": "Ultrasound in Medicine &amp; Biology. Corrected proof online 12 June 2026. <sup>*</sup>Co-first authors.",
+    "citation_plain": "Ultrasound in Medicine & Biology. Corrected proof online 12 June 2026.",
+    "doi": "10.1016/j.ultrasmedbio.2026.05.006",
+    "url": "https://doi.org/10.1016/j.ultrasmedbio.2026.05.006",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata; OpenAlex/ORCID",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "Ultrasound in Medicine & Biology",
+    "volume": "",
+    "issue": "",
+    "pages": "",
+    "article_number": "",
+    "type": "journal-article",
+    "peer_reviewed": true,
+    "publisher": "Elsevier",
+    "keywords": [
+      "carotid plaque",
+      "radiomics",
+      "cardiovascular risk",
+      "machine learning"
+    ],
+    "note": "Issue, volume, and page range have not yet been assigned by the journal.",
+    "contribution_note": "Ricky Hu and Ramtin Mojtahedi are co-first authors.",
+    "detail_url": "/publications/carotid-plaque-radiomics-risk-2026/",
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "https://github.com/Ramtin-Mojtahedi/AI-Radiomics-Carotid",
+    "code_label": "Code",
+    "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42285860/",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "article",
+    "bibtex_key": "Hu2026CarotidRadiomics"
+  },
+  "citation": {
+    "plain_text": "Ricky Hu, Ramtin Mojtahedi, Ergi Duli, Marie-France Hétu, Laura Mantella, Amber L. Simpson, Michael J. Blaha, Taylor Barwell, Kiera Liblik, Jasjit S. Suri, and Amer M. Johri. “Radiomic Carotid Plaque Features Integrated into Machine Learning Models for Cardiovascular Risk Prediction.” Ultrasound in Medicine & Biology. Corrected proof online 12 June 2026. https://doi.org/10.1016/j.ultrasmedbio.2026.05.006",
+    "bibtex": "@article{Hu2026CarotidRadiomics,\n  author = {Ricky Hu and Ramtin Mojtahedi and Ergi Duli and Marie-France Hétu and Laura Mantella and Amber L. Simpson and Michael J. Blaha and Taylor Barwell and Kiera Liblik and Jasjit S. Suri and Amer M. Johri},\n  title = {{Radiomic Carotid Plaque Features Integrated into Machine Learning Models for Cardiovascular Risk Prediction}},\n  year = {2026},\n  journal = {Ultrasound in Medicine \\& Biology},\n  doi = {10.1016/j.ultrasmedbio.2026.05.006},\n  url = {https://doi.org/10.1016/j.ultrasmedbio.2026.05.006},\n  note = {Issue, volume, and page range have not yet been assigned by the journal.}\n}",
+    "ris": "TY  - JOUR\nTI  - Radiomic Carotid Plaque Features Integrated into Machine Learning Models for Cardiovascular Risk Prediction\nAU  - Ricky Hu\nAU  - Ramtin Mojtahedi\nAU  - Ergi Duli\nAU  - Marie-France Hétu\nAU  - Laura Mantella\nAU  - Amber L. Simpson\nAU  - Michael J. Blaha\nAU  - Taylor Barwell\nAU  - Kiera Liblik\nAU  - Jasjit S. Suri\nAU  - Amer M. Johri\nPY  - 2026\nDA  - 2026-06-12\nT2  - Ultrasound in Medicine & Biology\nDO  - 10.1016/j.ultrasmedbio.2026.05.006\nUR  - https://doi.org/10.1016/j.ultrasmedbio.2026.05.006\nKW  - carotid plaque\nKW  - radiomics\nKW  - cardiovascular risk\nKW  - machine learning\nN1  - Issue, volume, and page range have not yet been assigned by the journal.\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Improving Preoperative Risk Stratification in Colorectal Liver Metastases: A Multi-Institutional Evaluation of Multimodal Prediction Models",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/multimodal-preoperative-risk-stratification-2026/"
+    },
+    {
+      "title": "Radiomic Signatures from Baseline CT Predict Chemotherapy Response in Unresectable Colorectal Liver Metastases",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/radiomic-signatures-chemotherapy-response-2026/"
+    },
+    {
+      "title": "Performance Evaluation of a Stacked Classifier for Predicting Treatment Response in Unresectable Colorectal Liver Metastases",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/stacked-classifier-treatment-response-2025/"
+    }
+  ]
+}

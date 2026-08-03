@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/persistent-homology-liver-tumor-classification-2025/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "persistent-homology-liver-tumor-classification-2025",
+    "title": "Leveraging Persistent Homology for Liver Tumour Classification",
+    "year": 2025,
+    "publication_date": "2025-04-04",
+    "group": "2025",
+    "status": "Published",
+    "authors": [
+      "Dashti A. Ali",
+      "Jacob J. Peoples",
+      "Ramtin Mojtahedi",
+      "Kaitlyn S. Kobayashi",
+      "William R. Jarnagin",
+      "Richard K. G. Do",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "D. A. Ali, J. J. Peoples, <strong>R. Mojtahedi</strong>, K. S. Kobayashi, W. R. Jarnagin, R. K. G. Do, and A. L. Simpson",
+    "citation": "Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407, 134071Q.",
+    "citation_plain": "Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071Q.",
+    "doi": "10.1117/12.3045640",
+    "url": "https://doi.org/10.1117/12.3045640",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata; OpenAlex/ORCID; Crossref",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "Medical Imaging 2025: Computer-Aided Diagnosis",
+    "volume": "13407",
+    "issue": "",
+    "pages": "407-417",
+    "article_number": "134071Q",
+    "type": "conference-paper",
+    "peer_reviewed": true,
+    "publisher": "SPIE",
+    "keywords": [
+      "persistent homology",
+      "topological data analysis",
+      "liver tumor classification",
+      "medical imaging"
+    ],
+    "note": "",
+    "detail_url": "/publications/persistent-homology-liver-tumor-classification-2025/",
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "inproceedings",
+    "bibtex_key": "Ali2025PersistentHomology"
+  },
+  "citation": {
+    "plain_text": "Dashti A. Ali, Jacob J. Peoples, Ramtin Mojtahedi, Kaitlyn S. Kobayashi, William R. Jarnagin, Richard K. G. Do, and Amber L. Simpson. “Leveraging Persistent Homology for Liver Tumour Classification.” Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071Q. https://doi.org/10.1117/12.3045640",
+    "bibtex": "@inproceedings{Ali2025PersistentHomology,\n  author = {Dashti A. Ali and Jacob J. Peoples and Ramtin Mojtahedi and Kaitlyn S. Kobayashi and William R. Jarnagin and Richard K. G. Do and Amber L. Simpson},\n  title = {{Leveraging Persistent Homology for Liver Tumour Classification}},\n  year = {2025},\n  booktitle = {Medical Imaging 2025: Computer-Aided Diagnosis},\n  volume = {13407},\n  pages = {407-417},\n  publisher = {SPIE},\n  doi = {10.1117/12.3045640},\n  url = {https://doi.org/10.1117/12.3045640}\n}",
+    "ris": "TY  - CPAPER\nTI  - Leveraging Persistent Homology for Liver Tumour Classification\nAU  - Dashti A. Ali\nAU  - Jacob J. Peoples\nAU  - Ramtin Mojtahedi\nAU  - Kaitlyn S. Kobayashi\nAU  - William R. Jarnagin\nAU  - Richard K. G. Do\nAU  - Amber L. Simpson\nPY  - 2025\nDA  - 2025-04-04\nT2  - Medical Imaging 2025: Computer-Aided Diagnosis\nVL  - 13407\nSP  - 407\nEP  - 417\nDO  - 10.1117/12.3045640\nUR  - https://doi.org/10.1117/12.3045640\nKW  - persistent homology\nKW  - topological data analysis\nKW  - liver tumor classification\nKW  - medical imaging\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Towards Optimal Patch Size in Vision Transformers for Tumor Segmentation",
+      "year": 2022,
+      "url": "https://ramtin-mojtahedi.github.io/publications/optimal-vit-patch-size-tumor-segmentation-2022/"
+    },
+    {
+      "title": "Parameter-Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Tumour Segmentation in CT",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/peft-few-shot-multiscale-vit-2025/"
+    },
+    {
+      "title": "Performance Evaluation of a Stacked Classifier for Predicting Treatment Response in Unresectable Colorectal Liver Metastases",
+      "year": 2025,
+      "url": "https://ramtin-mojtahedi.github.io/publications/stacked-classifier-treatment-response-2025/"
+    }
+  ]
+}

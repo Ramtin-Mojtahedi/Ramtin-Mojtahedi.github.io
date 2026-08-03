@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/simsiam-liver-cancer-classification-2023/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "simsiam-liver-cancer-classification-2023",
+    "title": "Leveraging Contrastive Learning with SimSiam for the Classification of Primary and Secondary Liver Cancers",
+    "year": 2023,
+    "publication_date": "2023",
+    "group": "2022-24",
+    "status": "Published",
+    "authors": [
+      "Ramtin Mojtahedi",
+      "Mohammad Hamghalam",
+      "William R. Jarnagin",
+      "Richard K. G. Do",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "<strong>R. Mojtahedi</strong>, M. Hamghalam, W. R. Jarnagin, R. K. G. Do, and A. L. Simpson",
+    "citation": "Medical Image Computing and Computer Assisted Intervention – MICCAI 2023 Workshops, Lecture Notes in Computer Science 14394, pp. 311–321 (2023). First online 3 February 2024.",
+    "citation_plain": "Medical Image Computing and Computer Assisted Intervention – MICCAI 2023 Workshops, Lecture Notes in Computer Science 14394, 311–321 (2023). First online 3 February 2024.",
+    "doi": "10.1007/978-3-031-47425-5_28",
+    "url": "https://doi.org/10.1007/978-3-031-47425-5_28",
+    "link_label": "DOI ↗",
+    "manual": true,
+    "source": "Publisher and DOI metadata; OpenAlex/ORCID; Crossref",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "Medical Image Computing and Computer Assisted Intervention – MICCAI 2023 Workshops",
+    "volume": "14394",
+    "issue": "",
+    "pages": "311-321",
+    "article_number": "",
+    "type": "conference-paper",
+    "peer_reviewed": true,
+    "publisher": "Springer",
+    "keywords": [
+      "contrastive learning",
+      "SimSiam",
+      "liver cancer classification",
+      "self-supervised learning"
+    ],
+    "note": "Conference year is 2023; the Springer chapter was first published online in 2024.",
+    "detail_url": "/publications/simsiam-liver-cancer-classification-2023/",
+    "online_date": "2024-02-03",
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "https://github.com/Ramtin-Mojtahedi/SimSiam-LiverCancer-CL",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "abstract": "Accurate liver cancer classification is essential, as it substantially influences the selection of effective treatment strategies and impacts patient prognosis. Convolutional neural network (CNN) classifiers typically require extensive labeled datasets for training to attain decent performance. However, the process of obtaining labeled data through manual labeling is time-consuming, potentially biased, and costly when applied to large datasets. This study utilizes the Simple Siamese (SimSiam) contrastive self-supervised learning approach to enhance the classification of liver tumours, especially considering the limited availability of labeled computed tomography (CT) scans of liver cancer. We integrate SimSiam with three baseline CNN-based classifiers - Inception, Xception, and ResNet152 - and pretrain them with two loss functions: mean squared error (MSE) and cosine similarity (COS). Our findings show consistent improvements for three classifiers compared to the baseline models. Specifically, the ResNet152 model exhibits the highest performance among the evaluated networks. With MSE and COS losses, the classification accuracy for ResNet152 improves by 1.27% and 2.53%, respectively. The classification accuracy of the Inception model improves by 3.95% and 5.26%. Similarly, Xception's validation accuracy demonstrates an increase of 2.60% with both loss functions, compared to the baseline models. We validate our pipeline via our multi-resolution in-house abdominal CT scans of primary and secondary liver cancers, including 155 patients with hepatocellular carcinoma, 198 patients with colorectal liver metastases, and 107 patients with intrahepatic cholangiocarcinoma.",
+    "bibtex_type": "inproceedings",
+    "bibtex_key": "Mojtahedi2023SimSiam"
+  },
+  "citation": {
+    "plain_text": "Ramtin Mojtahedi, Mohammad Hamghalam, William R. Jarnagin, Richard K. G. Do, and Amber L. Simpson. “Leveraging Contrastive Learning with SimSiam for the Classification of Primary and Secondary Liver Cancers.” Medical Image Computing and Computer Assisted Intervention – MICCAI 2023 Workshops, Lecture Notes in Computer Science 14394, 311–321 (2023). First online 3 February 2024. https://doi.org/10.1007/978-3-031-47425-5_28",
+    "bibtex": "@inproceedings{Mojtahedi2023SimSiam,\n  author = {Ramtin Mojtahedi and Mohammad Hamghalam and William R. Jarnagin and Richard K. G. Do and Amber L. Simpson},\n  title = {{Leveraging Contrastive Learning with SimSiam for the Classification of Primary and Secondary Liver Cancers}},\n  year = {2023},\n  booktitle = {Medical Image Computing and Computer Assisted Intervention – MICCAI 2023 Workshops},\n  volume = {14394},\n  pages = {311-321},\n  publisher = {Springer},\n  doi = {10.1007/978-3-031-47425-5\\_28},\n  url = {https://doi.org/10.1007/978-3-031-47425-5\\_28},\n  note = {Conference year is 2023; the Springer chapter was first published online in 2024.}\n}",
+    "ris": "TY  - CPAPER\nTI  - Leveraging Contrastive Learning with SimSiam for the Classification of Primary and Secondary Liver Cancers\nAU  - Ramtin Mojtahedi\nAU  - Mohammad Hamghalam\nAU  - William R. Jarnagin\nAU  - Richard K. G. Do\nAU  - Amber L. Simpson\nPY  - 2023\nDA  - 2023\nT2  - Medical Image Computing and Computer Assisted Intervention – MICCAI 2023 Workshops\nVL  - 14394\nSP  - 311\nEP  - 321\nDO  - 10.1007/978-3-031-47425-5_28\nUR  - https://doi.org/10.1007/978-3-031-47425-5_28\nKW  - contrastive learning\nKW  - SimSiam\nKW  - liver cancer classification\nKW  - self-supervised learning\nN1  - Conference year is 2023; the Springer chapter was first published online in 2024.\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/self-supervised-transformer-liver-tumor-2026/"
+    },
+    {
+      "title": "Multi-modal Brain Tumour Segmentation Using Transformer with Optimal Patch Size",
+      "year": 2023,
+      "url": "https://ramtin-mojtahedi.github.io/publications/multimodal-brain-tumour-vit-patch-2022/"
+    },
+    {
+      "title": "Dilated Convolutional Transformer-Based Segmentation for Primary and Secondary Liver Cancers Tumour: A Comparative Study",
+      "year": 2024,
+      "url": "https://ramtin-mojtahedi.github.io/publications/dilated-transformer-liver-cancers-2024/"
+    }
+  ]
+}

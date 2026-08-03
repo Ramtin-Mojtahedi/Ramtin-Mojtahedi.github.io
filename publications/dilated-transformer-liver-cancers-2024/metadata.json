@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "record_url": "https://ramtin-mojtahedi.github.io/publications/dilated-transformer-liver-cancers-2024/",
+  "last_verified": "2026-08-02",
+  "profile": {
+    "name": "Ramtin Mojtahedi",
+    "orcid": "https://orcid.org/0000-0002-3953-3256",
+    "google_scholar": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+    "website": "https://ramtin-mojtahedi.github.io/"
+  },
+  "publication": {
+    "id": "dilated-transformer-liver-cancers-2024",
+    "title": "Dilated Convolutional Transformer-Based Segmentation for Primary and Secondary Liver Cancers Tumour: A Comparative Study",
+    "year": 2024,
+    "publication_date": "2024",
+    "group": "2022-24",
+    "status": "Conference presentation · Record pending",
+    "authors": [
+      "Ramtin Mojtahedi",
+      "Mohammad Hamghalam",
+      "William R. Jarnagin",
+      "Richard K. G. Do",
+      "Amber L. Simpson"
+    ],
+    "authors_html": "<strong>R. Mojtahedi</strong>, M. Hamghalam, W. R. Jarnagin, R. K. G. Do, and A. L. Simpson",
+    "citation": "IMNO 2024 Conference, Mississauga, Canada (2024).",
+    "citation_plain": "IMNO 2024 Conference, Mississauga, Canada (2024).",
+    "doi": "",
+    "url": "",
+    "link_label": "Details ↗",
+    "manual": true,
+    "source": "Author CV; no archival publisher record located",
+    "last_verified": "2026-08-02",
+    "title_aliases": [],
+    "venue": "IMNO 2024 Conference",
+    "volume": "",
+    "issue": "",
+    "pages": "",
+    "article_number": "",
+    "type": "conference-presentation",
+    "peer_reviewed": false,
+    "publisher": "",
+    "keywords": [
+      "dilated convolution",
+      "transformers",
+      "liver cancer",
+      "tumor segmentation"
+    ],
+    "note": "No DOI or archival proceedings record was located. Listed as a conference presentation, not as a verified peer-reviewed paper.",
+    "detail_url": "/publications/dilated-transformer-liver-cancers-2024/",
+    "open_access_url": "",
+    "open_access_label": "",
+    "open_access_license": "",
+    "preprint_url": "",
+    "code_url": "",
+    "code_label": "Code",
+    "pubmed_url": "",
+    "pmc_url": "",
+    "citation_pdf_url": "",
+    "bibtex_type": "misc",
+    "bibtex_key": "Mojtahedi2024DilatedTransformer"
+  },
+  "citation": {
+    "plain_text": "Ramtin Mojtahedi, Mohammad Hamghalam, William R. Jarnagin, Richard K. G. Do, and Amber L. Simpson. “Dilated Convolutional Transformer-Based Segmentation for Primary and Secondary Liver Cancers Tumour: A Comparative Study.” IMNO 2024 Conference, Mississauga, Canada (2024).",
+    "bibtex": "@misc{Mojtahedi2024DilatedTransformer,\n  author = {Ramtin Mojtahedi and Mohammad Hamghalam and William R. Jarnagin and Richard K. G. Do and Amber L. Simpson},\n  title = {{Dilated Convolutional Transformer-Based Segmentation for Primary and Secondary Liver Cancers Tumour: A Comparative Study}},\n  year = {2024},\n  howpublished = {IMNO 2024 Conference},\n  url = {https://ramtin-mojtahedi.github.io/publications/dilated-transformer-liver-cancers-2024/},\n  note = {No DOI or archival proceedings record was located. Listed as a conference presentation, not as a verified peer-reviewed paper.}\n}",
+    "ris": "TY  - CONF\nTI  - Dilated Convolutional Transformer-Based Segmentation for Primary and Secondary Liver Cancers Tumour: A Comparative Study\nAU  - Ramtin Mojtahedi\nAU  - Mohammad Hamghalam\nAU  - William R. Jarnagin\nAU  - Richard K. G. Do\nAU  - Amber L. Simpson\nPY  - 2024\nDA  - 2024\nT2  - IMNO 2024 Conference\nUR  - https://ramtin-mojtahedi.github.io/publications/dilated-transformer-liver-cancers-2024/\nKW  - dilated convolution\nKW  - transformers\nKW  - liver cancer\nKW  - tumor segmentation\nN1  - No DOI or archival proceedings record was located. Listed as a conference presentation, not as a verified peer-reviewed paper.\nER  -\n"
+  },
+  "related_records": [
+    {
+      "title": "Towards Optimal Patch Size in Vision Transformers for Tumor Segmentation",
+      "year": 2022,
+      "url": "https://ramtin-mojtahedi.github.io/publications/optimal-vit-patch-size-tumor-segmentation-2022/"
+    },
+    {
+      "title": "Leveraging Contrastive Learning with SimSiam for the Classification of Primary and Secondary Liver Cancers",
+      "year": 2023,
+      "url": "https://ramtin-mojtahedi.github.io/publications/simsiam-liver-cancer-classification-2023/"
+    },
+    {
+      "title": "Multi-modal Brain Tumour Segmentation Using Transformer with Optimal Patch Size",
+      "year": 2023,
+      "url": "https://ramtin-mojtahedi.github.io/publications/multimodal-brain-tumour-vit-patch-2022/"
+    }
+  ]
+}
