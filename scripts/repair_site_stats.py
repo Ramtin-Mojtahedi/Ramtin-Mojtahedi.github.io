@@ -95,8 +95,8 @@ def replace_heading(source: str, section_pattern: str, text: str) -> str:
 def main() -> int:
     metrics = json.loads(METRICS_PATH.read_text(encoding="utf-8"))
     publications = json.loads(PUBLICATIONS_PATH.read_text(encoding="utf-8"))
-    if not isinstance(publications, list) or len(publications) < 19:
-        raise RuntimeError("The curated publication baseline must contain at least 19 records.")
+    if not isinstance(publications, list) or len(publications) < 18:
+        raise RuntimeError("The curated publication baseline must contain at least 18 records.")
     hero = HERO_PATH.read_text(encoding="utf-8")
     activity = ACTIVITY_PATH.read_text(encoding="utf-8")
     service = SERVICE_PATH.read_text(encoding="utf-8")

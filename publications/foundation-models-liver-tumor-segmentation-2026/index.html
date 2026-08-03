@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT | Ramtin Mojtahedi</title>
-  <meta name="description" content="State-of-the-art interactive segmentation with foundation models remains constrained by compute and the need for annotations. We evaluated parameter-effic…">
+  <meta name="description" content="State-of-the-art interactive segmentation with foundation models remains constrained by compute and the need for annotations. We evaluated…">
   <meta name="author" content="Dr. Ramtin Mojtahedi">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="citation_title" content="Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT">
@@ -14,88 +14,136 @@
   <meta name="citation_author" content="Jacob J. Peoples">
   <meta name="citation_author" content="Richard K. G. Do">
   <meta name="citation_author" content="Amber L. Simpson">
+  <meta name="citation_language" content="en">
   <meta name="citation_conference_title" content="Medical Imaging 2026: Computer-Aided Diagnosis">
   <meta name="citation_volume" content="13926">
   <meta name="citation_firstpage" content="260">
   <meta name="citation_lastpage" content="268">
   <meta name="citation_doi" content="10.1117/12.3087835">
+  <meta name="citation_publisher" content="SPIE">
+  <meta name="citation_keywords" content="foundation models; parameter-efficient fine-tuning; liver tumor segmentation; computed tomography">
   <meta name="citation_publication_date" content="2026/04/08">
   <link rel="canonical" href="https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/">
   <link rel="author" href="https://orcid.org/0000-0002-3953-3256">
+  <link rel="alternate" type="application/atom+xml" title="Ramtin Mojtahedi publications" href="https://ramtin-mojtahedi.github.io/publications.atom.xml">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/search-pages.css?v=20260802-2">
   <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Ramtin Mojtahedi">
   <meta property="og:url" content="https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/">
   <meta property="og:title" content="Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT">
-  <meta property="og:description" content="State-of-the-art interactive segmentation with foundation models remains constrained by compute and the need for annotations. We evaluated parameter-effic…">
+  <meta property="og:description" content="State-of-the-art interactive segmentation with foundation models remains constrained by compute and the need for annotations. We evaluated…">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/85639926?v=4">
+  <meta property="og:image:alt" content="Portrait of Dr. Ramtin Mojtahedi">
   <meta property="article:published_time" content="2026-04-08">
+  <meta property="article:author" content="https://ramtin-mojtahedi.github.io/about/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT">
+  <meta name="twitter:description" content="State-of-the-art interactive segmentation with foundation models remains constrained by compute and the need for annotations. We evaluated…">
+  <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/85639926?v=4">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ScholarlyArticle",
-  "@id": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/#article",
-  "url": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/",
-  "mainEntityOfPage": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/",
-  "headline": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
-  "name": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
-  "datePublished": "2026-04-08",
-  "author": [
+  "@graph": [
     {
-      "@type": "Person",
-      "@id": "https://ramtin-mojtahedi.github.io/#person",
-      "name": "Ramtin Mojtahedi",
-      "alternateName": [
-        "Ramtin Mojtahedi",
-        "Ramtin Mojtahedi Saffari",
-        "R. M. Saffari"
+      "@type": "ScholarlyArticle",
+      "@id": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/#article",
+      "url": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/",
+      "mainEntityOfPage": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/",
+      "headline": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
+      "name": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
+      "description": "State-of-the-art interactive segmentation with foundation models remains constrained by compute and the need for annotations. We evaluated parameter-efficient fine-tuning (PEFT) of the Segment Anything Model (SAM) by inserting baseline adapters, Low-Rank Adaptation (LoRA), 4-bit Quantized Low-Rank Adaptation (QLoRA), and a convolutional adapter (Conv-Adapter), as well as our proposed Directional Spectral Top-K adapter (DiSCo), training only the adapters while keeping the SAM backbone frozen. DiSCo performs singular value decomposition of row-normalized weights to obtain spectral bases, then learns rank-gated spectral coefficients, per-output magnitude offsets, and a spectral gain; it supports optional Top-K rank selection at inference while keeping only 0.14 M parameters trainable. We benchmarked five prompting regimes, none, single-point, multi-point, and bounding boxes at an intersection over union (IoU) of 0.50 and 0.75, applied to abdominal CT scans of colorectal liver metastases, and reported segmentation metrics (Dice and the 95th-percentile Hausdorff distance (HD95)) and compute metrics (trainable parameters, latency, memory, throughput). Conv-Adapter and LoRA achieved the highest accuracy (overall Dice 0.793 and 0.792; single-point 0.795 and 0.792; HD95 32 mm). QLoRA was close (overall 0.766; single-point 0.768; HD95 36.41 mm) while offering the most favorable compute profile (0.91 M trainable parameters, 120 ms latency, 4.9 GB peak memory). DiSCo maximized parameter efficiency, achieving the highest Dice per million trainable parameters (4.66), showing an accuracy-efficiency trade-off (overall Dice 0.653; single-point 0.698; HD95 49.53 mm). These results indicate that PEFT on foundation models enables more accurate liver tumor segmentation with reduced adaptation costs, supporting rapid scanner-specific tuning, point- or box-prompt workflows, and broader deployability for preoperative volumetrics when compute and labeled data are limited.",
+      "datePublished": "2026-04-08",
+      "dateModified": "2026-08-02",
+      "author": [
+        {
+          "@type": "Person",
+          "@id": "https://ramtin-mojtahedi.github.io/#person",
+          "name": "Ramtin Mojtahedi",
+          "alternateName": [
+            "Ramtin Mojtahedi",
+            "Ramtin Mojtahedi Saffari",
+            "R. M. Saffari"
+          ],
+          "url": "https://ramtin-mojtahedi.github.io/about/",
+          "sameAs": [
+            "https://orcid.org/0000-0002-3953-3256",
+            "https://github.com/Ramtin-Mojtahedi",
+            "https://www.linkedin.com/in/ramtin-mojtahedi/",
+            "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
+            "https://sagelabuhn.ca/our-team/",
+            "https://labs.cs.queensu.ca/simpsonlab/members/ramtin-mojtahedi/"
+          ]
+        },
+        {
+          "@type": "Person",
+          "name": "Mohammad Hamghalam"
+        },
+        {
+          "@type": "Person",
+          "name": "Jacob J. Peoples"
+        },
+        {
+          "@type": "Person",
+          "name": "Richard K. G. Do"
+        },
+        {
+          "@type": "Person",
+          "name": "Amber L. Simpson"
+        }
       ],
-      "sameAs": "https://orcid.org/0000-0002-3953-3256"
+      "inLanguage": "en-CA",
+      "isPartOf": {
+        "@type": "PublicationVolume",
+        "volumeNumber": "13926",
+        "isPartOf": {
+          "@type": "CreativeWork",
+          "name": "Medical Imaging 2026: Computer-Aided Diagnosis"
+        }
+      },
+      "keywords": [
+        "foundation models",
+        "parameter-efficient fine-tuning",
+        "liver tumor segmentation",
+        "computed tomography"
+      ],
+      "abstract": "State-of-the-art interactive segmentation with foundation models remains constrained by compute and the need for annotations. We evaluated parameter-efficient fine-tuning (PEFT) of the Segment Anything Model (SAM) by inserting baseline adapters, Low-Rank Adaptation (LoRA), 4-bit Quantized Low-Rank Adaptation (QLoRA), and a convolutional adapter (Conv-Adapter), as well as our proposed Directional Spectral Top-K adapter (DiSCo), training only the adapters while keeping the SAM backbone frozen. DiSCo performs singular value decomposition of row-normalized weights to obtain spectral bases, then learns rank-gated spectral coefficients, per-output magnitude offsets, and a spectral gain; it supports optional Top-K rank selection at inference while keeping only 0.14 M parameters trainable. We benchmarked five prompting regimes, none, single-point, multi-point, and bounding boxes at an intersection over union (IoU) of 0.50 and 0.75, applied to abdominal CT scans of colorectal liver metastases, and reported segmentation metrics (Dice and the 95th-percentile Hausdorff distance (HD95)) and compute metrics (trainable parameters, latency, memory, throughput). Conv-Adapter and LoRA achieved the highest accuracy (overall Dice 0.793 and 0.792; single-point 0.795 and 0.792; HD95 32 mm). QLoRA was close (overall 0.766; single-point 0.768; HD95 36.41 mm) while offering the most favorable compute profile (0.91 M trainable parameters, 120 ms latency, 4.9 GB peak memory). DiSCo maximized parameter efficiency, achieving the highest Dice per million trainable parameters (4.66), showing an accuracy-efficiency trade-off (overall Dice 0.653; single-point 0.698; HD95 49.53 mm). These results indicate that PEFT on foundation models enables more accurate liver tumor segmentation with reduced adaptation costs, supporting rapid scanner-specific tuning, point- or box-prompt workflows, and broader deployability for preoperative volumetrics when compute and labeled data are limited.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "SPIE"
+      },
+      "pagination": "260-268",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "DOI",
+        "value": "10.1117/12.3087835"
+      },
+      "sameAs": "https://doi.org/10.1117/12.3087835"
     },
     {
-      "@type": "Person",
-      "name": "Mohammad Hamghalam"
-    },
-    {
-      "@type": "Person",
-      "name": "Jacob J. Peoples"
-    },
-    {
-      "@type": "Person",
-      "name": "Richard K. G. Do"
-    },
-    {
-      "@type": "Person",
-      "name": "Amber L. Simpson"
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://ramtin-mojtahedi.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Publications",
+          "item": "https://ramtin-mojtahedi.github.io/publications/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
+          "item": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/"
+        }
+      ]
     }
-  ],
-  "inLanguage": "en-CA",
-  "isPartOf": {
-    "@type": "PublicationVolume",
-    "volumeNumber": "13926",
-    "isPartOf": {
-      "@type": "CreativeWork",
-      "name": "Medical Imaging 2026: Computer-Aided Diagnosis"
-    }
-  },
-  "keywords": [
-    "foundation models",
-    "parameter-efficient fine-tuning",
-    "liver tumor segmentation",
-    "computed tomography"
-  ],
-  "abstract": "State-of-the-art interactive segmentation with foundation models remains constrained by compute and the need for annotations. We evaluated parameter-efficient fine-tuning (PEFT) of the Segment Anything Model (SAM) by inserting baseline adapters, Low-Rank Adaptation (LoRA), 4-bit Quantized Low-Rank Adaptation (QLoRA), and a convolutional adapter (Conv-Adapter), as well as our proposed Directional Spectral Top-K adapter (DiSCo), training only the adapters while keeping the SAM backbone frozen. DiSCo performs singular value decomposition of row-normalized weights to obtain spectral bases, then learns rank-gated spectral coefficients, per-output magnitude offsets, and a spectral gain; it supports optional Top-K rank selection at inference while keeping only 0.14 M parameters trainable. We benchmarked five prompting regimes, none, single-point, multi-point, and bounding boxes at an intersection over union (IoU) of 0.50 and 0.75, applied to abdominal CT scans of colorectal liver metastases, and reported segmentation metrics (Dice and the 95th-percentile Hausdorff distance (HD95)) and compute metrics (trainable parameters, latency, memory, throughput). Conv-Adapter and LoRA achieved the highest accuracy (overall Dice 0.793 and 0.792; single-point 0.795 and 0.792; HD95 32 mm). QLoRA was close (overall 0.766; single-point 0.768; HD95 36.41 mm) while offering the most favorable compute profile (0.91 M trainable parameters, 120 ms latency, 4.9 GB peak memory). DiSCo maximized parameter efficiency, achieving the highest Dice per million trainable parameters (4.66), showing an accuracy-efficiency trade-off (overall Dice 0.653; single-point 0.698; HD95 49.53 mm). These results indicate that PEFT on foundation models enables more accurate liver tumor segmentation with reduced adaptation costs, supporting rapid scanner-specific tuning, point- or box-prompt workflows, and broader deployability for preoperative volumetrics when compute and labeled data are limited.",
-  "description": "State-of-the-art interactive segmentation with foundation models remains constrained by compute and the need for annotations. We evaluated parameter-efficient fine-tuning (PEFT) of the Segment Anything Model (SAM) by inserting baseline adapters, Low-Rank Adaptation (LoRA), 4-bit Quantized Low-Rank Adaptation (QLoRA), and a convolutional adapter (Conv-Adapter), as well as our proposed Directional Spectral Top-K adapter (DiSCo), training only the adapters while keeping the SAM backbone frozen. DiSCo performs singular value decomposition of row-normalized weights to obtain spectral bases, then learns rank-gated spectral coefficients, per-output magnitude offsets, and a spectral gain; it supports optional Top-K rank selection at inference while keeping only 0.14 M parameters trainable. We benchmarked five prompting regimes, none, single-point, multi-point, and bounding boxes at an intersection over union (IoU) of 0.50 and 0.75, applied to abdominal CT scans of colorectal liver metastases, and reported segmentation metrics (Dice and the 95th-percentile Hausdorff distance (HD95)) and compute metrics (trainable parameters, latency, memory, throughput). Conv-Adapter and LoRA achieved the highest accuracy (overall Dice 0.793 and 0.792; single-point 0.795 and 0.792; HD95 32 mm). QLoRA was close (overall 0.766; single-point 0.768; HD95 36.41 mm) while offering the most favorable compute profile (0.91 M trainable parameters, 120 ms latency, 4.9 GB peak memory). DiSCo maximized parameter efficiency, achieving the highest Dice per million trainable parameters (4.66), showing an accuracy-efficiency trade-off (overall Dice 0.653; single-point 0.698; HD95 49.53 mm). These results indicate that PEFT on foundation models enables more accurate liver tumor segmentation with reduced adaptation costs, supporting rapid scanner-specific tuning, point- or box-prompt workflows, and broader deployability for preoperative volumetrics when compute and labeled data are limited.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "SPIE"
-  },
-  "pagination": "260-268",
-  "identifier": {
-    "@type": "PropertyValue",
-    "propertyID": "DOI",
-    "value": "10.1117/12.3087835"
-  },
-  "sameAs": "https://doi.org/10.1117/12.3087835"
+  ]
 }
   </script>
 </head>
@@ -104,13 +152,15 @@
   <header class="site-header">
     <a class="identity" href="/">RM <span>Dr. Ramtin Mojtahedi</span></a>
     <nav aria-label="Publication navigation">
-      <a href="/">Portfolio</a>
-      <a href="/publications/">All publications</a>
+      <a href="/about/">About</a>
+      <a href="/research/">Research</a>
+      <a href="/publications/">Publications</a>
       <a href="https://orcid.org/0000-0002-3953-3256" rel="me">ORCID</a>
     </nav>
   </header>
   <main id="main-content">
     <article class="record">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/publications/">Publications</a></nav>
       <p class="eyebrow">Published · 2026</p>
       <h1>Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT</h1>
       <p class="authors">Ramtin Mojtahedi, Mohammad Hamghalam, Jacob J. Peoples, Richard K. G. Do, Amber L. Simpson</p>
@@ -127,6 +177,7 @@
       </section>
       <section class="topics" aria-labelledby="topics-heading"><h2 id="topics-heading">Research topics</h2><ul role="list"><li>foundation models</li><li>parameter-efficient fine-tuning</li><li>liver tumor segmentation</li><li>computed tomography</li></ul></section>
 
+      <section class="related" aria-labelledby="related-heading"><h2 id="related-heading">Related research</h2><ul role="list"><li><a href="/publications/peft-few-shot-multiscale-vit-2025/">Parameter-Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Tumour Segmentation in CT</a><span>2025</span></li><li><a href="/publications/radiomic-signatures-chemotherapy-response-2026/">Radiomic Signatures from Baseline CT Predict Chemotherapy Response in Unresectable Colorectal Liver Metastases</a><span>2026</span></li><li><a href="/publications/self-supervised-transformer-liver-tumor-2026/">Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification</a><span>2026</span></li></ul><p><a href="/research/">Explore the research themes →</a></p></section>
       <section class="cite" id="cite" aria-labelledby="cite-heading">
         <div class="section-heading"><h2 id="cite-heading">Cite this work</h2><a href="/publications.bib" download>Download complete BibTeX</a></div>
         <pre><code>@inproceedings{Mojtahedi2026PEFTFoundation,

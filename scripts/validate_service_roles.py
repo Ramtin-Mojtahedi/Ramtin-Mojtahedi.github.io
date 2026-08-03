@@ -21,6 +21,7 @@ METRICS_FILE = ROOT / "_data" / "site_metrics.json"
 MINIMUM_ROLE_COUNT = 28
 PUBLIC_NAME = "Dr. Ramtin Mojtahedi"
 PUBLIC_NAME_WITH_CREDENTIAL = "Dr. Ramtin Mojtahedi, Ph.D."
+STRUCTURED_PERSON_NAME = "Ramtin Mojtahedi"
 
 PROGRAMMING_LANGUAGES = (
     "Python",
@@ -127,7 +128,7 @@ def validate_public_identity() -> None:
             f'<meta name="author" content="{PUBLIC_NAME}">',
             f'<meta property="og:title" content="{PUBLIC_NAME_WITH_CREDENTIAL} | Medical AI Researcher">',
             f'<meta name="twitter:title" content="{PUBLIC_NAME_WITH_CREDENTIAL} | Medical AI Researcher">',
-            f'"name": "{PUBLIC_NAME}"',
+            f'"name": "{STRUCTURED_PERSON_NAME}"',
             '"honorificPrefix": "Dr."',
             '"honorificSuffix": "Ph.D."',
         ),

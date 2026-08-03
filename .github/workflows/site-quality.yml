@@ -6,12 +6,16 @@ on:
       - main
     paths:
       - index.html
+      - about/**
+      - research/**
       - sitemap.xml
       - robots.txt
       - publications.json
       - publications.bib
+      - publications.atom.xml
       - scholarly-pages.json
       - publications/**
+      - CITATION.cff
       - indexnow.json
       - 898f0caec5d8b22a095db2a4afa88722.txt
       - _includes/**
@@ -19,15 +23,20 @@ on:
       - assets/**
       - scripts/**
       - .github/workflows/site-quality.yml
+      - .github/workflows/seo-indexing.yml
   pull_request:
     paths:
       - index.html
+      - about/**
+      - research/**
       - sitemap.xml
       - robots.txt
       - publications.json
       - publications.bib
+      - publications.atom.xml
       - scholarly-pages.json
       - publications/**
+      - CITATION.cff
       - indexnow.json
       - 898f0caec5d8b22a095db2a4afa88722.txt
       - _includes/**
@@ -35,6 +44,7 @@ on:
       - assets/**
       - scripts/**
       - .github/workflows/site-quality.yml
+      - .github/workflows/seo-indexing.yml
   workflow_dispatch:
   schedule:
     - cron: "47 11 * * *"
@@ -188,7 +198,7 @@ jobs:
             echo "- Statistics and section hierarchy: clear and interactive"
             echo "- Leadership and volunteer roles: complete and unique"
             echo "- Contact routing and safeguards: valid"
-            echo "- Crawlable publication pages and sitemap: synchronized"
+            echo "- Crawlable biography, research, publication, feed, and sitemap pages: synchronized"
             echo "- Visitor-facing implementation markers: absent"
             echo "- Responsive and reduced-motion behavior: valid"
             echo "- Rendered browser overlap audit: passed at 320–1600 px"

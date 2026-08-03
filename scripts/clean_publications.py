@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBS = ROOT / "_data/publications.json"
 METRICS = ROOT / "_data/site_metrics.json"
 FEED = ROOT / "publications.json"
-MINIMUM = 19
+MINIMUM = 18
 
 EXCLUDED_TITLE_PATTERNS = (
     r"^review for\b",

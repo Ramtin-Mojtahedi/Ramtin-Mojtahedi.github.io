@@ -13,13 +13,13 @@ permissions:
   pages: read
 
 concurrency:
-  group: seo-indexing
+  group: seo-indexing-${{ github.event_name }}
   cancel-in-progress: true
 
 jobs:
   verify-and-notify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 45
     steps:
       - name: Check out the deployed revision
         if: github.event_name != 'schedule'
@@ -46,6 +46,8 @@ jobs:
 
           for attempt in $(seq 1 60); do
             if curl \
+              --connect-timeout 5 \
+              --max-time 20 \
               --fail \
               --location \
               --silent \
@@ -92,11 +94,14 @@ jobs:
           deployed_sitemap="$RUNNER_TEMP/sitemap-${EXPECTED_SHA}.xml"
           deployed_publications="$RUNNER_TEMP/publications-${EXPECTED_SHA}.json"
           deployed_bibtex="$RUNNER_TEMP/publications-${EXPECTED_SHA}.bib"
+          deployed_atom="$RUNNER_TEMP/publications-${EXPECTED_SHA}.atom.xml"
           deployed_scholarly_pages="$RUNNER_TEMP/scholarly-pages-${EXPECTED_SHA}.json"
           deployed=false
 
           for attempt in $(seq 1 20); do
             if curl \
+              --connect-timeout 5 \
+              --max-time 20 \
               --fail \
               --location \
               --silent \
@@ -104,6 +109,8 @@ jobs:
               --output "$manifest" \
               "https://ramtin-mojtahedi.github.io/indexnow.json" \
               && curl \
+                --connect-timeout 5 \
+                --max-time 20 \
                 --fail \
                 --location \
                 --silent \
@@ -111,6 +118,8 @@ jobs:
                 --output "$deployed_sitemap" \
                 "https://ramtin-mojtahedi.github.io/sitemap.xml" \
               && curl \
+                --connect-timeout 5 \
+                --max-time 20 \
                 --fail \
                 --location \
                 --silent \
@@ -118,6 +127,8 @@ jobs:
                 --output "$deployed_publications" \
                 "https://ramtin-mojtahedi.github.io/publications.json" \
               && curl \
+                --connect-timeout 5 \
+                --max-time 20 \
                 --fail \
                 --location \
                 --silent \
@@ -125,6 +136,17 @@ jobs:
                 --output "$deployed_bibtex" \
                 "https://ramtin-mojtahedi.github.io/publications.bib" \
               && curl \
+                --connect-timeout 5 \
+                --max-time 20 \
+                --fail \
+                --location \
+                --silent \
+                --show-error \
+                --output "$deployed_atom" \
+                "https://ramtin-mojtahedi.github.io/publications.atom.xml" \
+              && curl \
+                --connect-timeout 5 \
+                --max-time 20 \
                 --fail \
                 --location \
                 --silent \
@@ -135,6 +157,7 @@ jobs:
               && cmp --silent sitemap.xml "$deployed_sitemap" \
               && cmp --silent publications.json "$deployed_publications" \
               && cmp --silent publications.bib "$deployed_bibtex" \
+              && cmp --silent publications.atom.xml "$deployed_atom" \
               && cmp --silent scholarly-pages.json "$deployed_scholarly_pages"; then
               deployed=true
               break
@@ -150,7 +173,7 @@ jobs:
           echo "manifest_path=${manifest}" >> "$GITHUB_OUTPUT"
           {
             echo "- GitHub Pages revision: ${EXPECTED_SHA}"
-            echo "- Deployed sitemap, IndexNow manifest, and citation exports: exact"
+            echo "- Deployed sitemap, IndexNow manifest, citation exports, and Atom feed: exact"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Verify public website and SEO files
@@ -159,12 +182,15 @@ jobs:
           set -euo pipefail
           urls=(
             "https://ramtin-mojtahedi.github.io/"
+            "https://ramtin-mojtahedi.github.io/about/"
+            "https://ramtin-mojtahedi.github.io/research/"
             "https://ramtin-mojtahedi.github.io/publications/"
             "https://ramtin-mojtahedi.github.io/robots.txt"
             "https://ramtin-mojtahedi.github.io/sitemap.xml"
             "https://ramtin-mojtahedi.github.io/indexnow.json"
             "https://ramtin-mojtahedi.github.io/publications.json"
             "https://ramtin-mojtahedi.github.io/publications.bib"
+            "https://ramtin-mojtahedi.github.io/publications.atom.xml"
             "https://ramtin-mojtahedi.github.io/scholarly-pages.json"
             "https://ramtin-mojtahedi.github.io/898f0caec5d8b22a095db2a4afa88722.txt"
           )
@@ -172,6 +198,8 @@ jobs:
           for url in "${urls[@]}"; do
             echo "Checking ${url}"
             curl \
+              --connect-timeout 5 \
+              --max-time 20 \
               --fail \
               --location \
               --silent \
@@ -189,7 +217,8 @@ jobs:
             echo "- robots.txt: available"
             echo "- sitemap.xml: available"
             echo "- IndexNow manifest: available"
-            echo "- Publication JSON, BibTeX, and scholarly-page manifest: available"
+            echo "- Biography and research hub: available"
+            echo "- Publication JSON, BibTeX, Atom, and scholarly-page manifest: available"
             echo "- IndexNow key: available"
           } >> "$GITHUB_STEP_SUMMARY"
 
@@ -201,6 +230,8 @@ jobs:
         run: |
           set -euo pipefail
           curl \
+            --connect-timeout 5 \
+            --max-time 30 \
             --fail \
             --silent \
             --show-error \

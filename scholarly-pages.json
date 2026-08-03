@@ -1,14 +1,13 @@
 {
   "schema_version": 1,
   "generated_at": "2026-08-02",
-  "count": 19,
+  "count": 18,
   "pages": [
     "/publications/multimodal-preoperative-risk-stratification-2026/",
     "/publications/carotid-plaque-radiomics-risk-2026/",
     "/publications/foundation-models-liver-tumor-segmentation-2026/",
     "/publications/self-supervised-transformer-liver-tumor-2026/",
     "/publications/radiomic-signatures-chemotherapy-response-2026/",
-    "/publications/doctoral-dissertation-liver-cancer-2025/",
     "/publications/ct-imaging-subtypes-slice-thickness-2025/",
     "/publications/pdac-treatment-response-cnn-2025/",
     "/publications/stacked-classifier-treatment-response-2025/",
@@ -25,6 +24,7 @@
   ],
   "exports": {
     "json": "/publications.json",
-    "bibtex": "/publications.bib"
+    "bibtex": "/publications.bib",
+    "atom": "/publications.atom.xml"
   }
 }

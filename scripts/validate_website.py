@@ -7,13 +7,15 @@ import datetime as dt
 import json
 import re
 import sys
+import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_EMAIL = "Ramtin.Mojtahedi@utoronto.ca"
-MINIMUM_PUBLICATIONS = 19
-REQUIRED_PUBLICATION_IDS = {"doctoral-dissertation-liver-cancer-2025"}
+MINIMUM_PUBLICATIONS = 18
+REQUIRED_PUBLICATION_IDS = {"self-supervised-transformer-liver-tumor-2026"}
+EXCLUDED_UNVERIFIED_IDS = {"doctoral-dissertation-liver-cancer-2025"}
 SUCCESS_MESSAGE = "Thanks for your message. We will contact you shortly. Thanks!"
 
 FILES = {
@@ -28,9 +30,13 @@ FILES = {
     "publications": ROOT / "_data/publications.json",
     "publication_feed": ROOT / "publications.json",
     "publication_bibtex": ROOT / "publications.bib",
+    "publication_atom": ROOT / "publications.atom.xml",
     "scholarly_pages": ROOT / "scholarly-pages.json",
     "metrics": ROOT / "_data/site_metrics.json",
     "maintenance": ROOT / "_data/site_maintenance.json",
+    "about": ROOT / "about/index.html",
+    "research": ROOT / "research/index.html",
+    "citation": ROOT / "CITATION.cff",
     "sitemap": ROOT / "sitemap.xml",
     "robots": ROOT / "robots.txt",
     "indexnow": ROOT / "indexnow.json",
@@ -147,6 +153,9 @@ def validate_publications() -> tuple[list[dict], dict]:
     missing_ids = sorted(REQUIRED_PUBLICATION_IDS - publication_ids)
     if missing_ids:
         fail(f"Required curated publication records are missing: {missing_ids}")
+    unverified_ids = sorted(EXCLUDED_UNVERIFIED_IDS & publication_ids)
+    if unverified_ids:
+        fail(f"Unverified publication records must remain excluded: {unverified_ids}")
     if int(metrics.get("publication_count", -1)) != len(publications):
         fail("Publication count and publication data differ.")
     if any(not isinstance(item.get("peer_reviewed"), bool) for item in publications):
@@ -298,6 +307,26 @@ def validate_scholarly_exports(publications: list[dict]) -> None:
     if exported_keys != expected_keys:
         fail("The complete BibTeX export differs from the curated publication order or keys.")
 
+    atom = read(FILES["publication_atom"])
+    try:
+        atom_feed = ET.fromstring(atom)
+    except ET.ParseError as error:
+        fail(f"Publication Atom feed is invalid XML: {error}")
+    namespace = {"atom": "http://www.w3.org/2005/Atom"}
+    entries = atom_feed.findall("atom:entry", namespace)
+    if len(entries) != len(publications):
+        fail("Publication Atom feed entry count differs from the curated data.")
+    if not all(entry.find("atom:link", namespace) is not None for entry in entries):
+        fail("Publication Atom feed contains an entry without a canonical link.")
+    for publication, entry in zip(publications, entries):
+        publication_date = str(publication.get("publication_date") or "")
+        published_element = entry.find("atom:published", namespace)
+        if re.fullmatch(r"\d{4}", publication_date):
+            if published_element is not None:
+                fail(f"Atom feed invents an exact date for year-only record: {publication['id']}")
+        elif published_element is None or published_element.text != f"{publication_date}T00:00:00Z":
+            fail(f"Atom feed publication date is missing or incorrect: {publication['id']}")
+
     manifest = read_json(FILES["scholarly_pages"])
     expected_pages = [f"/publications/{publication['id']}/" for publication in publications]
     if manifest.get("schema_version") != 1 or int(manifest.get("count", -1)) != len(publications):
@@ -307,8 +336,53 @@ def validate_scholarly_exports(publications: list[dict]) -> None:
     if manifest.get("exports") != {
         "json": "/publications.json",
         "bibtex": "/publications.bib",
+        "atom": "/publications.atom.xml",
     }:
-        fail("The scholarly-page manifest does not advertise both citation exports.")
+        fail("The scholarly-page manifest does not advertise all citation exports.")
+
+
+def validate_discovery_pages(sources: dict[str, str]) -> None:
+    expected_pages = {
+        "about": "https://ramtin-mojtahedi.github.io/about/",
+        "research": "https://ramtin-mojtahedi.github.io/research/",
+    }
+    for name, canonical in expected_pages.items():
+        page = sources[name]
+        if f'<link rel="canonical" href="{canonical}">' not in page:
+            fail(f"{name} page canonical URL is missing or incorrect.")
+        if 'name="robots" content="index, follow' not in page:
+            fail(f"{name} page is not explicitly indexable.")
+        if 'application/ld+json' not in page or 'BreadcrumbList' not in page:
+            fail(f"{name} page is missing structured discovery metadata.")
+
+    inaccurate_degree_copy = (
+        "Ph.D. completed in 2025",
+        "Ph.D. in Medical AI",
+        "Completed 2025",
+    )
+    if any(value in sources["hero"] for value in inaccurate_degree_copy):
+        fail("The homepage contains a degree label or date that conflicts with the Queen's record.")
+    required_identity_copy = (
+        "Ph.D. in Computing conferred by Queen’s University in 2026",
+        "Ramtin Mojtahedi Saffari",
+        "R. M. Saffari",
+        "href='/about/'",
+        "href='/research/'",
+    )
+    if any(value not in sources["hero"] for value in required_identity_copy):
+        fail("The homepage is missing corrected degree, name-identity, or discovery links.")
+
+    required_citation_tokens = (
+        "cff-version: 1.2.0",
+        "orcid: https://orcid.org/0000-0002-3953-3256",
+        "url: https://ramtin-mojtahedi.github.io/",
+    )
+    if any(token not in sources["citation"] for token in required_citation_tokens):
+        fail("CITATION.cff is missing required identity metadata.")
+    if '"name": "Ramtin Mojtahedi"' not in sources["index"]:
+        fail("Homepage Person structured data does not use the canonical personal name.")
+    if "<image:image>" not in sources["sitemap"]:
+        fail("The sitemap does not advertise the portfolio's public images.")
 
 
 def validate_maintenance(publications: list[dict], metrics: dict) -> None:
@@ -331,9 +405,12 @@ def validate_maintenance(publications: list[dict], metrics: dict) -> None:
         fail("The obsolete public status endpoint remains.")
     required_urls = [
         "https://ramtin-mojtahedi.github.io/",
+        "https://ramtin-mojtahedi.github.io/about/",
+        "https://ramtin-mojtahedi.github.io/research/",
         "https://ramtin-mojtahedi.github.io/publications/",
         "https://ramtin-mojtahedi.github.io/publications.json",
         "https://ramtin-mojtahedi.github.io/publications.bib",
+        "https://ramtin-mojtahedi.github.io/publications.atom.xml",
         "https://ramtin-mojtahedi.github.io/scholarly-pages.json",
         *(
             f"https://ramtin-mojtahedi.github.io/publications/{publication['id']}/"
@@ -371,6 +448,7 @@ def main() -> int:
         "maintenance",
         "publication_feed",
         "publication_bibtex",
+        "publication_atom",
         "scholarly_pages",
     }
     sources = {name: read(path) for name, path in FILES.items() if name not in structured_files}
@@ -381,6 +459,7 @@ def main() -> int:
     validate_public_copy(sources["index"], parts)
     validate_contact(sources["index"], sources["contact"], sources["contact_js"], sources["contact_css"])
     validate_scholarly_exports(publications)
+    validate_discovery_pages(sources)
     validate_maintenance(publications, metrics)
 
     print("Website validation passed.")
@@ -390,6 +469,7 @@ def main() -> int:
     print(f"- Recognition entries: {counts['recognition_count']}")
     print(f"- Leadership roles: {counts['leadership_role_count']}")
     print("- Visitor-facing implementation markers: none")
+    print("- Biography, research hub, Atom feed, and citation metadata: valid")
     print("- Maintenance schedule: daily")
     return 0
 
