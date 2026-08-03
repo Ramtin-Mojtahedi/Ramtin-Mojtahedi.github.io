@@ -356,6 +356,8 @@ def validate_scholarly_exports(publications: list[dict]) -> None:
     for publication in publications:
         record_dir = ROOT / "publications" / str(publication["id"])
         record_page = read(record_dir / "index.html")
+        if "{len(publications)}" in record_page:
+            fail(f"{publication['id']}: an unresolved publication-count template remains visible.")
         citation_bib = read(record_dir / "citation.bib")
         citation_ris = read(record_dir / "citation.ris")
         metadata = read_json(record_dir / "metadata.json")

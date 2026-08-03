@@ -941,7 +941,7 @@ def publication_page(
     related_html = (
         '<section class="related" aria-labelledby="related-heading">'
         '<div class="section-heading"><div><p class="section-kicker">Connected portfolio</p>'
-        '<h2 id="related-heading">Related research</h2></div><a href="/publications/">View all {len(publications)} records</a></div>'
+        f'<h2 id="related-heading">Related research</h2></div><a href="/publications/">View all {len(publications)} records</a></div>'
         '<div class="related-grid">'
         + "".join(
             f'<article><p class="related-meta">{esc(item.get("year"))} · {esc(publication_type_label(item))}</p>'
