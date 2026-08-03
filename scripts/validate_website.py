@@ -12,8 +12,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_EMAIL = "Ramtin.Mojtahedi@utoronto.ca"
-PRIVATE_RECIPIENT = "MojtahediRamtin@gmail.com"
-MINIMUM_PUBLICATIONS = 18
+MINIMUM_PUBLICATIONS = 19
+REQUIRED_PUBLICATION_IDS = {"doctoral-dissertation-liver-cancer-2025"}
 SUCCESS_MESSAGE = "Thanks for your message. We will contact you shortly. Thanks!"
 
 FILES = {
@@ -26,6 +26,9 @@ FILES = {
     "contact_css": ROOT / "assets/contact-form-polish.css",
     "publications_css": ROOT / "assets/publications.css",
     "publications": ROOT / "_data/publications.json",
+    "publication_feed": ROOT / "publications.json",
+    "publication_bibtex": ROOT / "publications.bib",
+    "scholarly_pages": ROOT / "scholarly-pages.json",
     "metrics": ROOT / "_data/site_metrics.json",
     "maintenance": ROOT / "_data/site_maintenance.json",
     "sitemap": ROOT / "sitemap.xml",
@@ -140,6 +143,10 @@ def validate_publications() -> tuple[list[dict], dict]:
     titles = [str(item.get("title") or "").strip() for item in publications]
     if any(not title for title in titles) or len({title.casefold() for title in titles}) != len(titles):
         fail("Publication titles are missing or duplicated.")
+    publication_ids = {str(item.get("id") or "") for item in publications}
+    missing_ids = sorted(REQUIRED_PUBLICATION_IDS - publication_ids)
+    if missing_ids:
+        fail(f"Required curated publication records are missing: {missing_ids}")
     if int(metrics.get("publication_count", -1)) != len(publications):
         fail("Publication count and publication data differ.")
     if any(not isinstance(item.get("peer_reviewed"), bool) for item in publications):
@@ -246,7 +253,7 @@ def validate_contact(index: str, contact: str, script: str, style: str) -> None:
         fail(f"Unexpected visible mailto addresses: {sorted(mailtos)}")
     if not all(f"'{piece}'" in script for piece in ("Mojtahedi", "Ramtin", "@gmail.com")):
         fail("The private form recipient is not assembled correctly.")
-    if PRIVATE_RECIPIENT.lower() in (index + contact).lower() or "Ramtn" in script:
+    if re.search(r"mailto:[^\"'<>\s]+@gmail\.com", index + contact, flags=re.I) or "Ramtn" in script:
         fail("Private or misspelled recipient data is visible.")
     if "Please do not include patient-identifiable" in index + contact:
         fail("The removed contact disclaimer remains.")
@@ -267,6 +274,41 @@ def validate_contact(index: str, contact: str, script: str, style: str) -> None:
         fail("Contact assets are not connected.")
     if ".contact .field select" not in style:
         fail("The contact-category control lacks dedicated styling.")
+
+
+def validate_scholarly_exports(publications: list[dict]) -> None:
+    feed = read_json(FILES["publication_feed"])
+    if not isinstance(feed, dict):
+        fail("publications.json must be an object-format publication feed.")
+    if feed.get("schema_version") != 1:
+        fail("The publication feed schema version is invalid.")
+    if int(feed.get("publication_count", -1)) != len(publications):
+        fail("The publication feed count differs from the curated data.")
+    if feed.get("publications") != publications:
+        fail("The publication feed records differ from the curated data.")
+    profile = feed.get("profile") or {}
+    if profile.get("orcid") != "https://orcid.org/0000-0002-3953-3256" or not feed.get("updated_at"):
+        fail("The publication feed profile or update timestamp is incomplete.")
+
+    bibtex = read(FILES["publication_bibtex"])
+    expected_keys = [str(publication.get("bibtex_key") or "") for publication in publications]
+    if any(not key for key in expected_keys) or len(expected_keys) != len(set(expected_keys)):
+        fail("Every curated publication must have a unique BibTeX key.")
+    exported_keys = re.findall(r"(?m)^@[A-Za-z]+\{([^,\s]+),", bibtex)
+    if exported_keys != expected_keys:
+        fail("The complete BibTeX export differs from the curated publication order or keys.")
+
+    manifest = read_json(FILES["scholarly_pages"])
+    expected_pages = [f"/publications/{publication['id']}/" for publication in publications]
+    if manifest.get("schema_version") != 1 or int(manifest.get("count", -1)) != len(publications):
+        fail("The scholarly-page manifest count or schema version is invalid.")
+    if manifest.get("pages") != expected_pages:
+        fail("The scholarly-page manifest differs from the curated publication pages.")
+    if manifest.get("exports") != {
+        "json": "/publications.json",
+        "bibtex": "/publications.bib",
+    }:
+        fail("The scholarly-page manifest does not advertise both citation exports.")
 
 
 def validate_maintenance(publications: list[dict], metrics: dict) -> None:
@@ -290,6 +332,9 @@ def validate_maintenance(publications: list[dict], metrics: dict) -> None:
     required_urls = [
         "https://ramtin-mojtahedi.github.io/",
         "https://ramtin-mojtahedi.github.io/publications/",
+        "https://ramtin-mojtahedi.github.io/publications.json",
+        "https://ramtin-mojtahedi.github.io/publications.bib",
+        "https://ramtin-mojtahedi.github.io/scholarly-pages.json",
         *(
             f"https://ramtin-mojtahedi.github.io/publications/{publication['id']}/"
             for publication in publications
@@ -301,7 +346,7 @@ def validate_maintenance(publications: list[dict], metrics: dict) -> None:
         fail(f"Sitemap entries are missing: {missing_urls}")
     unexpected_urls = sorted(set(sitemap_locations) - set(required_urls))
     if unexpected_urls:
-        fail(f"Sitemap contains non-canonical or non-HTML URLs: {unexpected_urls}")
+        fail(f"Sitemap contains unexpected non-canonical URLs: {unexpected_urls}")
     if re.search(r"<lastmod>", sitemap, flags=re.IGNORECASE):
         fail("Sitemap last-modified values must be omitted until meaningful page-change dates are tracked.")
 
@@ -320,13 +365,22 @@ def validate_maintenance(publications: list[dict], metrics: dict) -> None:
 
 
 def main() -> int:
-    sources = {name: read(path) for name, path in FILES.items() if name not in {"publications", "metrics", "maintenance"}}
+    structured_files = {
+        "publications",
+        "metrics",
+        "maintenance",
+        "publication_feed",
+        "publication_bibtex",
+        "scholarly_pages",
+    }
+    sources = {name: read(path) for name, path in FILES.items() if name not in structured_files}
     parts = "\n".join(sources[name] for name in ("hero", "publications_section", "activity", "contact"))
     publications, metrics = validate_publications()
     counts = validate_counts(sources["hero"], sources["activity"], sources["contact"], metrics)
     validate_structure(sources["index"], parts)
     validate_public_copy(sources["index"], parts)
     validate_contact(sources["index"], sources["contact"], sources["contact_js"], sources["contact_css"])
+    validate_scholarly_exports(publications)
     validate_maintenance(publications, metrics)
 
     print("Website validation passed.")
