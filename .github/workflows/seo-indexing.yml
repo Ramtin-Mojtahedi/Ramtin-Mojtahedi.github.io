@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Check out the deployed revision
         if: github.event_name != 'schedule'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event_name == 'push' && github.sha || github.event.repository.default_branch }}
 
