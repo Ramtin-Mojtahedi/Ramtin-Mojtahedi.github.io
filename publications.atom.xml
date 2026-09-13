@@ -4,15 +4,25 @@
   <id>https://ramtin-mojtahedi.github.io/publications/</id>
   <link rel="self" href="https://ramtin-mojtahedi.github.io/publications.atom.xml" />
   <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/" />
-  <updated>2026-08-02T21:15:14Z</updated>
+  <updated>2026-09-13T00:00:00Z</updated>
   <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
+  <entry>
+    <title>Spectral Adapters for Segment Anything Model-based Segmentation of Colorectal Liver Metastases in Computed Tomography</title>
+    <id>https://ramtin-mojtahedi.github.io/publications/spectral-adapters-sam-crlm-2026/</id>
+    <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/spectral-adapters-sam-crlm-2026/" />
+    <link rel="related" href="https://arxiv.org/abs/2609.11703" />
+    <published>2026-09-10T00:00:00Z</published>
+    <updated>2026-09-13T00:00:00Z</updated>
+    <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
+    <summary>arXiv:2609.11703 [cs.CV] (2026). Version 1, submitted 10 September 2026.</summary>
+  </entry>
   <entry>
     <title>Improving Preoperative Risk Stratification in Colorectal Liver Metastases: A Multi-Institutional Evaluation of Multimodal Prediction Models</title>
     <id>https://ramtin-mojtahedi.github.io/publications/multimodal-preoperative-risk-stratification-2026/</id>
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/multimodal-preoperative-risk-stratification-2026/" />
     <link rel="related" href="https://doi.org/10.1038/s41598-026-60860-9" />
     <published>2026-07-14T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Scientific Reports (2026). Published 14 July 2026.</summary>
   </entry>
@@ -22,7 +32,7 @@
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/carotid-plaque-radiomics-risk-2026/" />
     <link rel="related" href="https://doi.org/10.1016/j.ultrasmedbio.2026.05.006" />
     <published>2026-06-12T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Ultrasound in Medicine &amp; Biology. Corrected proof online 12 June 2026.</summary>
   </entry>
@@ -32,7 +42,7 @@
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/" />
     <link rel="related" href="https://doi.org/10.1117/12.3087835" />
     <published>2026-04-08T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Medical Imaging 2026: Computer-Aided Diagnosis, Proceedings of SPIE 13926, 1392612.</summary>
   </entry>
@@ -42,7 +52,7 @@
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/self-supervised-transformer-liver-tumor-2026/" />
     <link rel="related" href="https://doi.org/10.1200/CCI-25-00135" />
     <published>2026-01-30T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>JCO Clinical Cancer Informatics 10 (2026), e2500135.</summary>
   </entry>
@@ -52,7 +62,7 @@
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/radiomic-signatures-chemotherapy-response-2026/" />
     <link rel="related" href="https://doi.org/10.1117/1.JMI.13.1.014505" />
     <published>2026-01-01T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Journal of Medical Imaging 13(1) (2026), 014505.</summary>
   </entry>
@@ -62,7 +72,7 @@
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/ct-imaging-subtypes-slice-thickness-2025/" />
     <link rel="related" href="https://doi.org/10.1117/12.3048815" />
     <published>2025-04-04T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071I.</summary>
   </entry>
@@ -72,7 +82,7 @@
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/pdac-treatment-response-cnn-2025/" />
     <link rel="related" href="https://doi.org/10.1117/12.3048961" />
     <published>2025-04-04T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071C.</summary>
   </entry>
@@ -82,7 +92,7 @@
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/stacked-classifier-treatment-response-2025/" />
     <link rel="related" href="https://doi.org/10.1117/12.3048943" />
     <published>2025-04-04T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071P.</summary>
   </entry>
@@ -92,7 +102,7 @@
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/peft-few-shot-multiscale-vit-2025/" />
     <link rel="related" href="https://doi.org/10.1117/12.3046253" />
     <published>2025-04-04T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 1340738.</summary>
   </entry>
@@ -102,7 +112,7 @@
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/persistent-homology-liver-tumor-classification-2025/" />
     <link rel="related" href="https://doi.org/10.1117/12.3045640" />
     <published>2025-04-04T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Medical Imaging 2025: Computer-Aided Diagnosis, Proceedings of SPIE 13407, 134071Q.</summary>
   </entry>
@@ -110,7 +120,7 @@
     <title>Dilated Convolutional Transformer-Based Segmentation for Primary and Secondary Liver Cancers Tumour: A Comparative Study</title>
     <id>https://ramtin-mojtahedi.github.io/publications/dilated-transformer-liver-cancers-2024/</id>
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/dilated-transformer-liver-cancers-2024/" />
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>IMNO 2024 Conference, Mississauga, Canada (2024).</summary>
   </entry>
@@ -120,7 +130,7 @@
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/multimodal-brain-tumour-vit-patch-2022/" />
     <link rel="related" href="https://doi.org/10.1007/978-3-031-33842-7_17" />
     <published>2023-07-18T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Brainlesion: Glioma, Multiple Sclerosis, Stroke and Traumatic Brain Injuries, Lecture Notes in Computer Science 13769, 195–204 (2023). BrainLes 2022; first online 18 July 2023.</summary>
   </entry>
@@ -129,7 +139,7 @@
     <id>https://ramtin-mojtahedi.github.io/publications/simsiam-liver-cancer-classification-2023/</id>
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/simsiam-liver-cancer-classification-2023/" />
     <link rel="related" href="https://doi.org/10.1007/978-3-031-47425-5_28" />
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Medical Image Computing and Computer Assisted Intervention – MICCAI 2023 Workshops, Lecture Notes in Computer Science 14394, 311–321 (2023). First online 3 February 2024.</summary>
   </entry>
@@ -139,7 +149,7 @@
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/optimal-vit-patch-size-tumor-segmentation-2022/" />
     <link rel="related" href="https://doi.org/10.1007/978-3-031-18814-5_11" />
     <published>2022-10-12T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>Multiscale Multimodal Medical Imaging, Lecture Notes in Computer Science 13594, 110–120 (2022).</summary>
   </entry>
@@ -148,7 +158,7 @@
     <id>https://ramtin-mojtahedi.github.io/publications/smart-package-liquid-flow-meters-2017/</id>
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/smart-package-liquid-flow-meters-2017/" />
     <link rel="related" href="https://doi.org/10.1109/IranianCEE.2017.7985342" />
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>2017 Iranian Conference on Electrical Engineering (ICEE), 158–163.</summary>
   </entry>
@@ -157,7 +167,7 @@
     <id>https://ramtin-mojtahedi.github.io/publications/dwt-logistic-map-image-encryption-2016/</id>
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/dwt-logistic-map-image-encryption-2016/" />
     <link rel="related" href="https://doi.org/10.1109/IranianCEE.2016.7585810" />
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>2016 24th Iranian Conference on Electrical Engineering (ICEE), 1785–1790.</summary>
   </entry>
@@ -166,7 +176,7 @@
     <id>https://ramtin-mojtahedi.github.io/publications/fpga-human-tracking-particle-filter-2016/</id>
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/fpga-human-tracking-particle-filter-2016/" />
     <link rel="related" href="https://doi.org/10.1109/IranianCEE.2016.7585675" />
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>2016 24th Iranian Conference on Electrical Engineering (ICEE), 1043–1048.</summary>
   </entry>
@@ -175,7 +185,7 @@
     <id>https://ramtin-mojtahedi.github.io/publications/carrier-synchronization-bayesian-filtering-2015/</id>
     <link rel="alternate" href="https://ramtin-mojtahedi.github.io/publications/carrier-synchronization-bayesian-filtering-2015/" />
     <published>2015-08-19T00:00:00Z</published>
-    <updated>2026-08-02T21:15:14Z</updated>
+    <updated>2026-09-13T00:00:00Z</updated>
     <author><name>Ramtin Mojtahedi</name><uri>https://orcid.org/0000-0002-3953-3256</uri></author>
     <summary>7th Iranian Conference on Electrical and Electronics Engineering, Gonabad, Iran, 19–20 August 2015.</summary>
   </entry>

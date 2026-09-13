@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-02",
-  "count": 18,
+  "generated_at": "2026-09-13",
+  "count": 19,
   "pages": [
+    "/publications/spectral-adapters-sam-crlm-2026/",
     "/publications/multimodal-preoperative-risk-stratification-2026/",
     "/publications/carotid-plaque-radiomics-risk-2026/",
     "/publications/foundation-models-liver-tumor-segmentation-2026/",
@@ -23,6 +24,13 @@
     "/publications/carrier-synchronization-bayesian-filtering-2015/"
   ],
   "record_exports": [
+    {
+      "id": "spectral-adapters-sam-crlm-2026",
+      "page": "/publications/spectral-adapters-sam-crlm-2026/",
+      "bibtex": "/publications/spectral-adapters-sam-crlm-2026/citation.bib",
+      "ris": "/publications/spectral-adapters-sam-crlm-2026/citation.ris",
+      "json": "/publications/spectral-adapters-sam-crlm-2026/metadata.json"
+    },
     {
       "id": "multimodal-preoperative-risk-stratification-2026",
       "page": "/publications/multimodal-preoperative-risk-stratification-2026/",

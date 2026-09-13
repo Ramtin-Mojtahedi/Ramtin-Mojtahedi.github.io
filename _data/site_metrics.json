@@ -1,9 +1,9 @@
 {
-  "publication_count": 18,
+  "publication_count": 19,
   "peer_reviewed_or_accepted_count": 17,
   "submitted_count": 0,
-  "publication_sync_date": "2026-08-02",
-  "publication_sync_timestamp": "2026-08-02T21:15:14Z",
+  "publication_sync_date": "2026-09-13",
+  "publication_sync_timestamp": "2026-09-13T00:00:00Z",
   "publication_source_note": "CV baseline preserved; external scholarly sources checked daily.",
   "google_scholar_profile": "https://scholar.google.com/citations?user=KjUrlGUAAAAJ&hl=en",
   "orcid": "https://orcid.org/0000-0002-3953-3256",
@@ -22,8 +22,8 @@
   },
   "auto_added_count": 0,
   "enriched_record_count": 18,
-  "minimum_preserved_records": 18,
-  "invalid_nonpublication_records_removed": 1,
+  "minimum_preserved_records": 19,
+  "invalid_nonpublication_records_removed": 0,
   "presentation_count": 9,
   "oral_presentation_count": 5,
   "poster_presentation_count": 4,
@@ -44,5 +44,6 @@
     "SQL",
     "Bash"
   ],
-  "maintenance_frequency": "daily"
+  "maintenance_frequency": "daily",
+  "preprint_count": 1
 }

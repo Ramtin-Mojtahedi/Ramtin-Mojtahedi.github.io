@@ -115,28 +115,25 @@ def render_publications_section(
 ) -> str:
     source = render_metrics(read(INCLUDES / "site-part-2.html"), metrics)
 
-    submitted_start = "{% if site.data.site_metrics.submitted_count > 0 %}"
-    submitted_end = "{% endif %}"
-    submitted_count = int(metrics.get("submitted_count", 0))
-    submitted_start_index = source.find(submitted_start)
-    if submitted_start_index < 0:
-        raise RuntimeError("Could not locate the submitted-publication conditional.")
-    submitted_end_index = source.find(
-        submitted_end,
-        submitted_start_index + len(submitted_start),
-    )
-    if submitted_end_index < 0:
-        raise RuntimeError("Could not locate the end of the submitted-publication conditional.")
-    submitted_inner = source[
-        submitted_start_index + len(submitted_start):submitted_end_index
-    ]
-    source = replace_delimited_block(
-        source,
-        submitted_start,
-        submitted_end,
-        submitted_inner if submitted_count > 0 else "",
-        "submitted-publication conditional",
-    )
+    # Mirror the two non-nested Liquid count conditionals in the template.
+    # Keep strict marker checks so the audit cannot silently skip new syntax.
+    for metric in ("submitted_count", "preprint_count"):
+        start_marker = "{% if site.data.site_metrics." + metric + " > 0 %}"
+        end_marker = "{% endif %}"
+        start = source.find(start_marker)
+        if start < 0:
+            raise RuntimeError(f"Could not locate the {metric} conditional.")
+        end = source.find(end_marker, start + len(start_marker))
+        if end < 0:
+            raise RuntimeError(f"Could not locate the end of the {metric} conditional.")
+        inner = source[start + len(start_marker):end]
+        source = replace_delimited_block(
+            source,
+            start_marker,
+            end_marker,
+            inner if int(metrics.get(metric, 0)) > 0 else "",
+            f"{metric} conditional",
+        )
 
     rendered_records = "\n".join(
         render_publication(publication) for publication in publications

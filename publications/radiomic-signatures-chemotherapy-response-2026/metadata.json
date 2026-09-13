@@ -79,14 +79,14 @@
       "url": "https://ramtin-mojtahedi.github.io/publications/multimodal-preoperative-risk-stratification-2026/"
     },
     {
+      "title": "Spectral Adapters for Segment Anything Model-based Segmentation of Colorectal Liver Metastases in Computed Tomography",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/spectral-adapters-sam-crlm-2026/"
+    },
+    {
       "title": "The Search for CT Imaging Subtypes of Colorectal Liver Metastases and the Impacts of Slice Thickness",
       "year": 2025,
       "url": "https://ramtin-mojtahedi.github.io/publications/ct-imaging-subtypes-slice-thickness-2025/"
-    },
-    {
-      "title": "Parameter-Efficient Fine-Tuning of Foundation Models for Liver Tumor Segmentation in CT",
-      "year": 2026,
-      "url": "https://ramtin-mojtahedi.github.io/publications/foundation-models-liver-tumor-segmentation-2026/"
     }
   ]
 }

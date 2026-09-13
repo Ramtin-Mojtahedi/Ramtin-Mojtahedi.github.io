@@ -1,0 +1,54 @@
+name: Prepare reviewed publication and news update
+
+# One-time preparation branch only. This does not scrape LinkedIn or change
+# the repository's existing read-only daily publication checks.
+on:
+  push:
+    branches: [website-news-20260913]
+    paths:
+      - scripts/publish_verified_updates.py
+      - _data/verified_publication_additions.json
+      - _data/news.json
+      - assets/news.css
+      - .github/workflows/publish-verified-updates.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prepare-verified-news-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: website-news-20260913
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate the reviewed site update and validate it
+        run: |
+          python scripts/publish_verified_updates.py
+          python scripts/validate_service_roles.py
+          python scripts/validate_site_impact.py
+          python scripts/validate_layout_safety.py
+          python -m py_compile scripts/*.py
+      - name: Commit generated files to the preparation branch
+        run: |
+          git add _data/publications.json _data/site_metrics.json _data/site_maintenance.json
+          git add index.html _includes/site-part-1.html _includes/site-part-2.html scripts/build_search_pages.py
+          git add publications.json publications.bib publications.atom.xml scholarly-pages.json sitemap.xml indexnow.json
+          git add publications about research
+          git diff --cached --stat
+          if git diff --cached --quiet; then
+            echo 'The reviewed update is already applied.'
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Add spectral-adapter preprint, featured news, and regenerated citation exports'
+            git push origin HEAD:website-news-20260913
+          fi
