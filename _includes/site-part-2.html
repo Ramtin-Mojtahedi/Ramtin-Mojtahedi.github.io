@@ -7,6 +7,9 @@
       </div>
       <p>
         {{ site.data.site_metrics.peer_reviewed_or_accepted_count }} peer-reviewed, accepted, or in-press works spanning medical imaging, clinical prediction, segmentation, and biomedical engineering.
+        {% if site.data.site_metrics.preprint_count > 0 %}
+        Plus {{ site.data.site_metrics.preprint_count }} public preprint, listed separately from the peer-reviewed count.
+        {% endif %}
         <a class="publication-index-link" href="/publications/">Browse all publication records →</a>
       </p>
     </div>

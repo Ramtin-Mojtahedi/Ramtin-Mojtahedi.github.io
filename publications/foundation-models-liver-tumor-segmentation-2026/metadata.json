@@ -68,6 +68,11 @@
   },
   "related_records": [
     {
+      "title": "Spectral Adapters for Segment Anything Model-based Segmentation of Colorectal Liver Metastases in Computed Tomography",
+      "year": 2026,
+      "url": "https://ramtin-mojtahedi.github.io/publications/spectral-adapters-sam-crlm-2026/"
+    },
+    {
       "title": "Parameter-Efficient Fine-Tuning and Few-Shot Learning of Multiscale Vision Transformers for Liver Tumour Segmentation in CT",
       "year": 2025,
       "url": "https://ramtin-mojtahedi.github.io/publications/peft-few-shot-multiscale-vit-2025/"
@@ -76,11 +81,6 @@
       "title": "Radiomic Signatures from Baseline CT Predict Chemotherapy Response in Unresectable Colorectal Liver Metastases",
       "year": 2026,
       "url": "https://ramtin-mojtahedi.github.io/publications/radiomic-signatures-chemotherapy-response-2026/"
-    },
-    {
-      "title": "Self-Supervised Transformer-Based Pipeline for Liver Tumor Segmentation and Type Classification",
-      "year": 2026,
-      "url": "https://ramtin-mojtahedi.github.io/publications/self-supervised-transformer-liver-tumor-2026/"
     }
   ]
 }

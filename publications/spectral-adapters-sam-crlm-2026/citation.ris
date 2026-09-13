@@ -1,0 +1,26 @@
+TY  - GEN
+TI  - Spectral Adapters for Segment Anything Model-based Segmentation of Colorectal Liver Metastases in Computed Tomography
+AU  - Ramtin Mojtahedi
+AU  - Mohammad Hamghalam
+AU  - Jacob J. Peoples
+AU  - Natalie Gangai
+AU  - Mithat Gonen
+AU  - Yun Shin Chun
+AU  - HyunSeon Christine Kang
+AU  - Richard K. G. Do
+AU  - Amber L. Simpson
+PY  - 2026
+DA  - 2026-09-10
+T2  - arXiv
+DO  - 10.48550/arXiv.2609.11703
+UR  - https://arxiv.org/abs/2609.11703
+KW  - colorectal liver metastases
+KW  - computed tomography
+KW  - Segment Anything Model
+KW  - spectral adapters
+KW  - DiSECT
+KW  - SiGA
+KW  - parameter-efficient fine-tuning
+KW  - medical image segmentation
+N1  - Public preprint; not peer reviewed. 13 pages, 1 figure, 4 tables.
+ER  -
