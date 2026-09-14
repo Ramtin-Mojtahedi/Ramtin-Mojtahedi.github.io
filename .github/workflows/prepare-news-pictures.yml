@@ -30,14 +30,13 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           file = Path('scripts/prepare_news_pictures.py')
-          code = file.read_text(encoding='utf-8')
-          code = code.replace('width * height > 25000000', 'width * height > 80000000')
+          code = file.read_text(encoding='utf-8').replace('width * height > 25000000', 'width * height > 80000000')
           code = code.replace('raise ValueError("Unexpected image dimensions")', 'raise ValueError(f"Unexpected image dimensions: {width}x{height}; {len(data)} bytes")')
-          if 'print(f"Source image' not in code:
-              code = code.replace('        width, height = image.size', '        width, height = image.size\n        print(f"Source image {stem}: {width}x{height}; {len(data)} bytes")')
           file.write_text(code, encoding='utf-8')
           PY
           python scripts/prepare_news_pictures.py 2>&1 | tee news-picture-provenance.txt
+          # Workflow changes are reviewed and applied separately through the owner connection.
+          git restore .github/workflows/news-carousel-audit.yml
           python scripts/validate_website.py
           python scripts/validate_layout_safety.py
           python scripts/build_search_pages.py --check
@@ -55,11 +54,11 @@ jobs:
             _data/news.json
             news-picture-provenance.txt
           retention-days: 7
-      - name: Commit only the requested news changes to the preparation branch
+      - name: Commit requested content to the preparation branch
         shell: bash
         run: |
           set -euo pipefail
-          git add assets/news assets/news-carousel.js _data/news.json _includes/site-part-1.html index.html .github/workflows/news-carousel-audit.yml scripts/prepare_news_pictures.py
+          git add assets/news assets/news-carousel.js _data/news.json _includes/site-part-1.html index.html scripts/prepare_news_pictures.py
           if ! git diff --cached --quiet; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
