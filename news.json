@@ -1,0 +1,9 @@
+---
+layout: null
+---
+{
+  "schema_version": 1,
+  "updated_at": {{ site.data.news.updated_at | jsonify }},
+  "linkedin_activity": {{ site.data.news.linkedin_activity | jsonify }},
+  "items": {{ site.data.news.items | jsonify }}
+}
