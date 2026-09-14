@@ -3,7 +3,9 @@ on:
   pull_request:
     paths:
       - index.html
-      - assets/news-carousel.*
+      - _includes/**
+      - assets/news*
+      - assets/news/**
       - news.json
       - news.xml
       - _data/news.json
@@ -29,9 +31,10 @@ jobs:
           node --check assets/news-carousel.js
           npm install --no-save --no-package-lock playwright@1.52.0
           npx playwright install --with-deps chromium
-      - name: Verify rotating news at desktop and mobile sizes
+      - name: Verify news pictures and rotation at desktop and mobile sizes
         shell: bash
         run: |
+          set -euo pipefail
           python -m http.server 4173 --bind 127.0.0.1 > /tmp/news-test-server.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid" 2>/dev/null || true' EXIT
@@ -40,6 +43,7 @@ jobs:
           const fs = require('node:fs');
           const {chromium} = require('playwright');
           const feed = JSON.parse(fs.readFileSync('_data/news.json','utf8'));
+          const active = feed.items.filter(item=>!item.archived).sort((a,b)=>String(b.date||b.publication_month||'').localeCompare(String(a.date||a.publication_month||''))).slice(0,12);
           (async () => {
             const browser = await chromium.launch();
             const report = [];
@@ -51,11 +55,23 @@ jobs:
               await page.waitForFunction(()=>document.querySelector('#news')?.dataset.carouselReady==='true');
               return page;
             }
+            async function picture(page) {
+              await page.locator('.news-current img').evaluate(img=>img.loading='eager');
+              await page.waitForFunction(()=>{const img=document.querySelector('#news .news-current img');return img?.complete&&img.naturalWidth>0});
+              assert.ok((await page.locator('.news-current img').getAttribute('alt')).length>10);
+              const box=await page.locator('.news-window').boundingBox();
+              const image=await page.locator('.news-current img').boundingBox();
+              assert.ok(image.width>100&&image.height>100);
+              assert.ok(image.x>=box.x&&image.x+image.width<=box.x+box.width+1);
+              assert.ok(image.y>=box.y&&image.y+image.height<=box.y+box.height+1);
+            }
             try {
               for(const width of [320,390,768,1280,1600]) {
                 const page=await open(width);
                 const current=page.locator('#news .news-current');
                 assert.equal(await current.count(),1);
+                await page.waitForFunction(id=>document.querySelector('.news-current')?.dataset.newsId===id,active[0].id);
+                await picture(page);
                 const initial=await current.locator('h3').textContent();
                 const height=(await page.locator('.news-window').boundingBox()).height;
                 await page.getByRole('button',{name:'Next news item',exact:true}).click();
@@ -64,17 +80,21 @@ jobs:
                 await page.getByRole('button',{name:'Previous news item',exact:true}).click();
                 assert.equal(await current.locator('h3').textContent(),initial);
                 await page.keyboard.press('End');
-                assert.equal(await page.locator('.news-counter').textContent(),`${feed.items.length} / ${feed.items.length}`);
+                assert.equal(await page.locator('.news-counter').textContent(),`${active.length} / ${active.length}`);
                 await page.keyboard.press('Home');
-                assert.equal(await page.locator('.news-counter').textContent(),`1 / ${feed.items.length}`);
+                assert.equal(await page.locator('.news-counter').textContent(),`1 / ${active.length}`);
                 assert.equal(await page.locator('#news .news-card[aria-hidden="true"]:not([inert])').count(),0);
-                const fits=await page.locator('#news').evaluate(n=>n.scrollWidth<=n.clientWidth+1);
-                assert.ok(fits);
+                assert.ok(await page.locator('#news').evaluate(n=>n.scrollWidth<=n.clientWidth+1));
                 assert.ok((await page.locator('.news-window').boundingBox()).width<=781);
+                for(let i=0;i<active.length;i++) {
+                  await picture(page);
+                  if(width===390||width===1280) await page.locator('#news').screenshot({path:`news-story-${width}-${i+1}.png`});
+                  await page.getByRole('button',{name:'Next news item',exact:true}).click();
+                }
                 await page.locator('#news').screenshot({path:`news-preview-${width}.png`});
                 await page.evaluate(()=>document.documentElement.dataset.theme='dark');
                 await page.locator('#news').screenshot({path:`news-preview-dark-${width}.png`});
-                report.push({width,height,passed:true});
+                report.push({width,height,passed:true,images:active.length,newest:active[0].id});
                 await page.close();
               }
               const autoplay=await open(1280);
@@ -101,14 +121,23 @@ jobs:
               await updating.unroute('**/news.json');
               await updating.route('**/news.json',route=>route.fulfill({contentType:'application/json',body:JSON.stringify(modified)}));
               await updating.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));
-              await updating.waitForFunction(()=>document.querySelectorAll('#news .news-card').length===4);
+              await updating.waitForFunction(n=>document.querySelectorAll('#news .news-card').length===n,active.length+1);
               assert.equal(await updating.locator('.news-current').getAttribute('data-news-id'),previousId);
               await updating.close();
               const fallback=await open(390,false,{items:[]});
-              assert.equal(await fallback.locator('.news-card').count(),feed.items.length);
+              assert.equal(await fallback.locator('.news-card').count(),active.length);
+              await picture(fallback);
               await fallback.close();
-              fs.writeFileSync('news-test-results.json',JSON.stringify({passed:true,viewports:report,checks:['next/previous','keyboard','fixed-height','focus-isolation','autoplay','pause','reduced-motion','feed-refresh','offline-fallback']},null,2));
-              console.log('All news carousel checks passed.');
+              const bad=structuredClone(feed);
+              const newest=bad.items.find(item=>item.id===active[0].id);
+              newest.image={src:'/assets/nonexistent-news-image.png',alt:'Test missing image',source_url:'https://example.com',credit:'Test'};
+              const broken=await open(390,true,bad);
+              await picture(broken);
+              await broken.waitForFunction(()=>document.querySelector('.news-current img')?.dataset.fallback==='true');
+              assert.match(await broken.locator('.news-current figcaption').textContent(),/original image unavailable/);
+              await broken.close();
+              fs.writeFileSync('news-test-results.json',JSON.stringify({passed:true,viewports:report,checks:['newest-first','pictures-inside-box','image-loads','image-failure-fallback','next/previous','keyboard','stable-height','focus-isolation','autoplay','pause','reduced-motion','feed-refresh','offline-fallback']},null,2));
+              console.log('All news carousel and picture checks passed.');
             } finally {await browser.close();}
           })().catch(error=>{console.error(error);process.exit(1);});
           JS
@@ -119,6 +148,7 @@ jobs:
           path: |
             news-test-results.json
             news-preview*.png
+            news-story*.png
             visual-audit.html
             assets
             _data/news.json
