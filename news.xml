@@ -2,31 +2,21 @@
 layout: null
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ramtin Mojtahedi — Research and community news</title>
+    <title>Ramtin Mojtahedi — Original LinkedIn posts</title>
     <link>https://ramtin-mojtahedi.github.io/#news</link>
-    <description>Selected public research updates and LinkedIn highlights from Ramtin Mojtahedi.</description>
-    <language>en-ca</language>
-    <lastBuildDate>{{ site.data.news.updated_at | date_to_rfc822 }}</lastBuildDate>
-    <ttl>60</ttl>
+    <description>Links to verified original LinkedIn posts. Not a LinkedIn discovery service.</description>
     <atom:link href="https://ramtin-mojtahedi.github.io/news.xml" rel="self" type="application/rss+xml"/>
-    {% for item in site.data.news.items %}{% unless item.archived %}
+    <language>en-ca</language>
+    {% for item in site.data.news.items %}{% if item.kind == 'linkedin-embed' and item.source_verified and item.embed_verified and item.embed_full %}{% unless item.archived %}
     <item>
-      <title>{{ item.title | xml_escape }}</title>
+      <title>Original LinkedIn post</title>
       <link>{{ item.source_url | xml_escape }}</link>
-      <guid isPermaLink="false">ramtin-news:{{ item.id | xml_escape }}</guid>
-      <description>{{ item.summary | xml_escape }}</description>
-      <category>{{ item.category | xml_escape }}</category>
-      {% if item.date %}<pubDate>{{ item.date | date_to_rfc822 }}</pubDate>{% endif %}
-      {% if item.image.src %}
-      {% assign image_url = item.image.src %}{% unless image_url contains '://' %}{% assign image_url = image_url | prepend: 'https://ramtin-mojtahedi.github.io' %}{% endunless %}
-      <media:content url="{{ image_url | xml_escape }}" medium="image">
-        <media:description>{{ item.image.alt | xml_escape }}</media:description>
-        <media:credit>{{ item.image.credit | xml_escape }}</media:credit>
-      </media:content>
-      {% endif %}
+      <guid isPermaLink="true">{{ item.source_url | xml_escape }}</guid>
+      <description>Open the original post on LinkedIn.</description>
+      {% if item.published_at %}<pubDate>{{ item.published_at | date_to_rfc822 }}</pubDate>{% endif %}
     </item>
-    {% endunless %}{% endfor %}
+    {% endunless %}{% endif %}{% endfor %}
   </channel>
 </rss>
