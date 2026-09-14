@@ -2,7 +2,7 @@
 layout: null
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Ramtin Mojtahedi — Research and community news</title>
     <link>https://ramtin-mojtahedi.github.io/#news</link>
@@ -11,7 +11,7 @@ layout: null
     <lastBuildDate>{{ site.data.news.updated_at | date_to_rfc822 }}</lastBuildDate>
     <ttl>60</ttl>
     <atom:link href="https://ramtin-mojtahedi.github.io/news.xml" rel="self" type="application/rss+xml"/>
-    {% for item in site.data.news.items %}
+    {% for item in site.data.news.items %}{% unless item.archived %}
     <item>
       <title>{{ item.title | xml_escape }}</title>
       <link>{{ item.source_url | xml_escape }}</link>
@@ -19,7 +19,14 @@ layout: null
       <description>{{ item.summary | xml_escape }}</description>
       <category>{{ item.category | xml_escape }}</category>
       {% if item.date %}<pubDate>{{ item.date | date_to_rfc822 }}</pubDate>{% endif %}
+      {% if item.image.src %}
+      {% assign image_url = item.image.src %}{% unless image_url contains '://' %}{% assign image_url = image_url | prepend: 'https://ramtin-mojtahedi.github.io' %}{% endunless %}
+      <media:content url="{{ image_url | xml_escape }}" medium="image">
+        <media:description>{{ item.image.alt | xml_escape }}</media:description>
+        <media:credit>{{ item.image.credit | xml_escape }}</media:credit>
+      </media:content>
+      {% endif %}
     </item>
-    {% endfor %}
+    {% endunless %}{% endfor %}
   </channel>
 </rss>

@@ -1,0 +1,94 @@
+name: Prepare source-linked news pictures
+on:
+  push:
+    branches: [latest-news-pictures-20260913]
+    paths:
+      - .github/workflows/prepare-news-pictures.yml
+permissions:
+  contents: write
+concurrency:
+  group: prepare-news-pictures
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: latest-news-pictures-20260913
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify and install the public profile image
+        shell: bash
+        run: |
+          set -euo pipefail
+          pip install 'Pillow>=11,<13'
+          python - <<'PY'
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+          from urllib.parse import urlparse
+          import hashlib, importlib.util, io, json
+          from PIL import Image
+          url = 'https://avatars.githubusercontent.com/u/85639926?v=4'
+          with urlopen(Request(url, headers={'User-Agent':'PortfolioImagePreview/1.0'}), timeout=25) as response:
+              if urlparse(response.url).hostname != 'avatars.githubusercontent.com':
+                  raise ValueError('Unexpected image host')
+              data = response.read(5000001)
+          if len(data)>5000000:
+              raise ValueError('Profile image is too large')
+          with Image.open(io.BytesIO(data)) as image:
+              image.verify()
+          with Image.open(io.BytesIO(data)) as image:
+              image.load()
+              if min(image.size)<80 or image.width*image.height>10000000:
+                  raise ValueError('Profile image dimensions are unsuitable')
+              image=image.convert('RGB')
+              image.thumbnail((640,640))
+              destination=Path('assets/news/author-profile.jpg')
+              image.save(destination, 'JPEG', quality=92, optimize=True)
+          profile={'src':'/assets/news/author-profile.jpg','alt':'GitHub profile image for Ramtin Mojtahedi','credit':'GitHub profile image','source_url':'https://github.com/Ramtin-Mojtahedi','original_url':url,'kind':'author-profile','sha256':hashlib.sha256(destination.read_bytes()).hexdigest()}
+          file=Path('_data/news.json')
+          feed=json.loads(file.read_text(encoding='utf-8'))
+          for item in feed['items']:
+              if item.get('image',{}).get('src')=='/assets/ramtin-graduation.svg':
+                  item['image']=dict(profile)
+          file.write_text(json.dumps(feed,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          js=Path('assets/news-carousel.js')
+          text=js.read_text(encoding='utf-8').replace('/assets/ramtin-graduation.svg','/assets/news/author-profile.jpg')
+          text=text.replace('Portfolio portrait of Ramtin Mojtahedi','GitHub profile image for Ramtin Mojtahedi')
+          text=text.replace('Author portrait from this portfolio','GitHub profile image').replace('Author portrait · original image unavailable','Profile image · original image unavailable')
+          js.write_text(text,encoding='utf-8')
+          spec=importlib.util.spec_from_file_location('news_builder','scripts/prepare_news_pictures.py')
+          module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+          module.render_static_news(feed)
+          Path('news-profile-provenance.json').write_text(json.dumps(profile,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(profile,indent=2))
+          PY
+          python scripts/validate_website.py
+          python scripts/validate_layout_safety.py
+          python scripts/build_search_pages.py --check
+          python scripts/render_visual_audit.py
+          node --check assets/news-carousel.js
+      - name: Preserve the decoded image for visual review
+        uses: actions/upload-artifact@v4
+        with:
+          name: news-profile-image
+          path: |
+            assets/news/author-profile.jpg
+            _data/news.json
+            news-profile-provenance.json
+          retention-days: 7
+      - name: Commit verified news-box image files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add assets/news/author-profile.jpg assets/news-carousel.js _data/news.json _includes/site-part-1.html
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Use verified raster profile pictures inside the news box'
+            git pull --rebase origin latest-news-pictures-20260913
+            git push origin HEAD:latest-news-pictures-20260913
+          fi

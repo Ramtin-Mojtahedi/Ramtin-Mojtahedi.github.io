@@ -2,8 +2,38 @@
   "updated_at": "2026-09-13",
   "linkedin_profile": "https://www.linkedin.com/in/ramtin-mojtahedi/",
   "linkedin_activity": "https://www.linkedin.com/in/ramtin-mojtahedi/recent-activity/all/",
-  "maintenance_note": "Curated public updates, not an automatic LinkedIn feed. Personal recent-activity content was not retrievable on 13 September 2026; the LinkedIn highlight below is sourced to a publicly visible institutional reshare. No exact reshare date is asserted.",
+  "maintenance_note": "Latest verified public research updates. Personal LinkedIn posts remain inaccessible; no private or unverified post is represented as retrieved. The undated institutional reshare is retained as archived history.",
   "items": [
+    {
+      "id": "pycad-spectral-adapters-coverage-20260911",
+      "date": "2026-09-11",
+      "date_label": "11 September 2026",
+      "category": "Research coverage",
+      "featured": false,
+      "title": "Our spectral-adapter research featured by PYCAD",
+      "summary": "PYCAD covered our new DiSECT and SiGA preprint, discussing spectral adaptation of Segment Anything for colorectal liver metastasis segmentation. This is research coverage, not a clinical product announcement.",
+      "source_url": "https://pycad.co/blog/point-box-colorectal-liver-met-overlay-ct/",
+      "last_verified": "2026-09-13",
+      "links": [
+        {
+          "label": "Read the coverage",
+          "url": "https://pycad.co/blog/point-box-colorectal-liver-met-overlay-ct/"
+        },
+        {
+          "label": "Original preprint",
+          "url": "https://arxiv.org/abs/2609.11703"
+        }
+      ],
+      "image": {
+        "src": "/assets/news/author-profile.jpg",
+        "alt": "GitHub profile image for Ramtin Mojtahedi",
+        "credit": "GitHub profile image",
+        "source_url": "https://github.com/Ramtin-Mojtahedi",
+        "original_url": "https://avatars.githubusercontent.com/u/85639926?v=4",
+        "kind": "author-profile",
+        "sha256": "7f34190d96ef9352861d53ab910acc4623bca85368e2cf53baf4ed70200220b2"
+      }
+    },
     {
       "id": "spectral-adapters-preprint-2026",
       "date": "2026-09-10",
@@ -11,13 +41,59 @@
       "category": "Featured · Preprint",
       "featured": true,
       "title": "Spectral adapters for liver metastasis segmentation",
-      "summary": "New arXiv preprint introducing DiSECT and SiGA, two parameter-efficient adapters for Segment Anything. Evaluated on 446 CT volumes, SiGA achieved 0.77 Dice with a single-point prompt. Preprint; not peer reviewed.",
+      "summary": "Our DiSECT and SiGA adapters adapt Segment Anything for colorectal liver metastasis segmentation. In the 91-case held-out, no-prompt evaluation, SiGA achieved 0.76 Dice on tumour-positive CT slices. Preprint; not peer reviewed.",
       "source_url": "https://arxiv.org/abs/2609.11703",
       "last_verified": "2026-09-13",
       "links": [
-        {"label": "Publication details", "url": "/publications/spectral-adapters-sam-crlm-2026/"},
-        {"label": "Read on arXiv", "url": "https://arxiv.org/abs/2609.11703"}
-      ]
+        {
+          "label": "Publication details",
+          "url": "/publications/spectral-adapters-sam-crlm-2026/"
+        },
+        {
+          "label": "Read on arXiv",
+          "url": "https://arxiv.org/abs/2609.11703"
+        }
+      ],
+      "image": {
+        "src": "/assets/news/spectral-adapters-pipeline.png",
+        "alt": "Published diagram showing CT images, SAM encoders, adapters and tumour segmentation masks",
+        "credit": "Mojtahedi et al. · Preprint figure 1",
+        "source_url": "https://arxiv.org/html/2609.11703v1#S2.F1",
+        "original_url": "https://arxiv.org/html/2609.11703v1/figure1.png",
+        "license_url": "",
+        "width": 6788,
+        "height": 3708,
+        "sha256": "f50a474069849ab5ac1a8ce38c179016ad66843bdb835db9e43ff875d454af6c",
+        "kind": "paper-preview"
+      }
+    },
+    {
+      "id": "carotid-plaque-september-issue-2026",
+      "date": null,
+      "publication_month": "2026-09",
+      "date_label": "September 2026 issue",
+      "category": "Journal issue",
+      "featured": false,
+      "title": "Carotid radiomics study in the September issue",
+      "summary": "Our co-first-author study appears in Ultrasound in Medicine & Biology, volume 52, issue 9, pages 1890–1899. The work combines carotid plaque radiomic features with machine learning for cardiovascular risk prediction.",
+      "source_url": "https://www.umbjournal.org/article/S0301-5629(26)00197-3/fulltext",
+      "last_verified": "2026-09-13",
+      "note": "September is the journal issue month; the article was first available online on 12 June 2026. No exact September publication day is asserted.",
+      "links": [
+        {
+          "label": "Journal article",
+          "url": "https://doi.org/10.1016/j.ultrasmedbio.2026.05.006"
+        }
+      ],
+      "image": {
+        "src": "/assets/news/author-profile.jpg",
+        "alt": "GitHub profile image for Ramtin Mojtahedi",
+        "credit": "GitHub profile image",
+        "source_url": "https://github.com/Ramtin-Mojtahedi",
+        "original_url": "https://avatars.githubusercontent.com/u/85639926?v=4",
+        "kind": "author-profile",
+        "sha256": "7f34190d96ef9352861d53ab910acc4623bca85368e2cf53baf4ed70200220b2"
+      }
     },
     {
       "id": "scientific-reports-multimodal-2026",
@@ -30,8 +106,20 @@
       "source_url": "https://www.nature.com/articles/s41598-026-60860-9",
       "last_verified": "2026-09-13",
       "links": [
-        {"label": "Read the study", "url": "https://www.nature.com/articles/s41598-026-60860-9"}
-      ]
+        {
+          "label": "Read the study",
+          "url": "https://www.nature.com/articles/s41598-026-60860-9"
+        }
+      ],
+      "image": {
+        "src": "/assets/news/author-profile.jpg",
+        "alt": "GitHub profile image for Ramtin Mojtahedi",
+        "credit": "GitHub profile image",
+        "source_url": "https://github.com/Ramtin-Mojtahedi",
+        "original_url": "https://avatars.githubusercontent.com/u/85639926?v=4",
+        "kind": "author-profile",
+        "sha256": "7f34190d96ef9352861d53ab910acc4623bca85368e2cf53baf4ed70200220b2"
+      }
     },
     {
       "id": "grad-chat-linkedin-highlight",
@@ -45,9 +133,26 @@
       "source_url": "https://ca.linkedin.com/company/centre-for-health-innovation",
       "last_verified": "2026-09-13",
       "links": [
-        {"label": "Listen to the interview", "url": "https://podcast.cfrc.ca/podcast/ramtin-mojtahedi-computing-deep-learning-approaches-for-liver-cancer-segmentation-tumour-type-classification-and-survival-prediction-from-contrast-enhanced-ct-imaging/"},
-        {"label": "LinkedIn highlight", "url": "https://ca.linkedin.com/company/centre-for-health-innovation"}
-      ]
+        {
+          "label": "Listen to the interview",
+          "url": "https://podcast.cfrc.ca/podcast/ramtin-mojtahedi-computing-deep-learning-approaches-for-liver-cancer-segmentation-tumour-type-classification-and-survival-prediction-from-contrast-enhanced-ct-imaging/"
+        },
+        {
+          "label": "LinkedIn highlight",
+          "url": "https://ca.linkedin.com/company/centre-for-health-innovation"
+        }
+      ],
+      "archived": true,
+      "archive_reason": "The reshare date is unverified; the original episode is from 2025.",
+      "image": {
+        "src": "/assets/news/author-profile.jpg",
+        "alt": "GitHub profile image for Ramtin Mojtahedi",
+        "credit": "GitHub profile image",
+        "source_url": "https://github.com/Ramtin-Mojtahedi",
+        "original_url": "https://avatars.githubusercontent.com/u/85639926?v=4",
+        "kind": "author-profile",
+        "sha256": "7f34190d96ef9352861d53ab910acc4623bca85368e2cf53baf4ed70200220b2"
+      }
     }
   ]
 }
