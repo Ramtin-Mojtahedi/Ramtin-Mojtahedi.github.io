@@ -162,7 +162,8 @@
     const stamp = make(date?'time':'span','',excerpt(item.date_label || date || 'Selected highlight',80));
     if (date) stamp.dateTime = date;
     meta.append(stamp);
-    card.append(meta,make('h3','',excerpt(item.title,180)),make('p','',excerpt(item.summary,420)));
+    const body = make('div','news-card-body');
+    body.append(meta,make('h3','',excerpt(item.title,180)),make('p','',excerpt(item.summary,420)));
     const links = make('div','news-card-links');
     const choices = Array.isArray(item.links) ? item.links.slice(0,3) : [];
     if (!choices.length && item.source_url) choices.push({url:item.source_url,label:'Read update'});
@@ -174,17 +175,54 @@
       if (new URL(href).origin !== location.origin) { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
       links.append(link);
     });
-    card.append(links);
+    body.append(links);
+    const image = item.image && typeof item.image === 'object' ? item.image : {};
+    const imageURL = safeURL(image.src) || new URL('/assets/ramtin-graduation.svg',location.origin).href;
+    const sourceURL = safeURL(image.source_url) || new URL('/about/',location.origin).href;
+    const figure = make('figure','news-picture');
+    const imageLink = make('a','news-picture-link');
+    imageLink.href = sourceURL;
+    imageLink.target = '_blank'; imageLink.rel = 'noopener noreferrer';
+    imageLink.setAttribute('aria-label','Open image source');
+    const img = make('img');
+    img.alt = excerpt(image.alt || 'Portfolio portrait of Ramtin Mojtahedi',240);
+    img.width = 640; img.height = 440; img.decoding = 'async'; img.loading = 'lazy';
+    img.referrerPolicy = 'no-referrer';
+    const caption = make('figcaption');
+    const credit = make('a','',excerpt(image.credit || 'Author portrait from this portfolio',120));
+    credit.href = sourceURL; credit.target = '_blank'; credit.rel = 'noopener noreferrer';
+    caption.append(credit);
+    const licenceURL = safeURL(image.license_url);
+    if (licenceURL) {
+      const licence = make('a','','Licence');
+      licence.href = licenceURL; licence.target = '_blank'; licence.rel = 'noopener noreferrer';
+      caption.append(document.createTextNode(' · '),licence);
+    }
+    img.addEventListener('error',()=>{
+      if (img.dataset.fallback) {
+        figure.replaceChildren(make('span','news-picture-unavailable','Image unavailable'));
+        return;
+      }
+      img.dataset.fallback = 'true';
+      img.alt = 'Portfolio portrait of Ramtin Mojtahedi';
+      imageLink.href = new URL('/about/',location.origin).href;
+      caption.textContent = 'Author portrait · original image unavailable';
+      img.src = '/assets/ramtin-graduation.svg';
+    });
+    img.src = imageURL;
+    imageLink.append(img); figure.append(imageLink,caption);
+    card.classList.add('news-has-image');
+    card.append(figure,body);
     return card;
   }
   function applyFeed(feed) {
     if (!feed || !Array.isArray(feed.items) || !feed.items.length || feed.items.length>100) return;
     const ids = new Set();
     const valid = feed.items.filter(item => {
-      if (!item || typeof item.id !== 'string' || ids.has(item.id) || typeof item.title !== 'string' || !item.title.trim() || typeof item.summary !== 'string') return false;
+      if (!item || item.archived === true || typeof item.id !== 'string' || ids.has(item.id) || typeof item.title !== 'string' || !item.title.trim() || typeof item.summary !== 'string') return false;
       ids.add(item.id);
       return true;
-    }).sort((a,b)=>String(b.date || '').localeCompare(String(a.date || ''))).slice(0,12);
+    }).sort((a,b)=>String(b.date || b.publication_month || '').localeCompare(String(a.date || a.publication_month || ''))).slice(0,12);
     if (!valid.length) return;
     const signature = JSON.stringify([feed.updated_at,valid]);
     if (signature === fingerprint) return;
@@ -192,7 +230,8 @@
     const oldId = slides[index]?.dataset.newsId;
     const oldTitle = slides[index]?.querySelector('h3')?.textContent;
     const cards = valid.map(cardFor);
-    const preserved = cards.findIndex(card => card.dataset.newsId === oldId || card.querySelector('h3').textContent === oldTitle);
+    // Initial load starts at the newest dated item; later refreshes preserve reading.
+    const preserved = fingerprint ? cards.findIndex(card => card.dataset.newsId === oldId || card.querySelector('h3').textContent === oldTitle) : -1;
     deck.replaceChildren(...cards);
     slides = cards;
     fingerprint = signature;

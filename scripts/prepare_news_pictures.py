@@ -48,8 +48,8 @@ def save_picture(url: str, stem: str, alt: str, credit: str, source: str, licens
         image.verify()
     with Image.open(io.BytesIO(data)) as image:
         width, height = image.size
-        if width < 300 or height < 100 or width * height > 25000000:
-            raise ValueError("Unexpected image dimensions")
+        if width < 300 or height < 100 or width * height > 80000000:
+            raise ValueError(f"Unexpected image dimensions: {width}x{height}; {len(data)} bytes")
         fmt = image.format
     suffix = {"PNG": "png", "JPEG": "jpg", "WEBP": "webp"}.get(fmt)
     if not suffix:
