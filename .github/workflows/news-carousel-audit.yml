@@ -1,0 +1,125 @@
+name: Check rotating news panel
+on:
+  pull_request:
+    paths:
+      - index.html
+      - assets/news-carousel.*
+      - news.json
+      - news.xml
+      - _data/news.json
+      - .github/workflows/news-carousel-audit.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare browser tests
+        run: |
+          python scripts/render_visual_audit.py
+          node --check assets/news-carousel.js
+          npm install --no-save --no-package-lock playwright@1.52.0
+          npx playwright install --with-deps chromium
+      - name: Verify rotating news at desktop and mobile sizes
+        shell: bash
+        run: |
+          python -m http.server 4173 --bind 127.0.0.1 > /tmp/news-test-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          node <<'JS'
+          const assert = require('node:assert/strict');
+          const fs = require('node:fs');
+          const {chromium} = require('playwright');
+          const feed = JSON.parse(fs.readFileSync('_data/news.json','utf8'));
+          (async () => {
+            const browser = await chromium.launch();
+            const report = [];
+            async function open(width, reduced=false, data=feed) {
+              const page = await browser.newPage({viewport:{width,height:1000},reducedMotion:reduced?'reduce':'no-preference'});
+              await page.route('**/news.json',route=>route.fulfill({contentType:'application/json',body:JSON.stringify(data)}));
+              await page.goto('http://127.0.0.1:4173/visual-audit.html',{waitUntil:'networkidle'});
+              await page.locator('#news').scrollIntoViewIfNeeded();
+              await page.waitForFunction(()=>document.querySelector('#news')?.dataset.carouselReady==='true');
+              return page;
+            }
+            try {
+              for(const width of [320,390,768,1280,1600]) {
+                const page=await open(width);
+                const current=page.locator('#news .news-current');
+                assert.equal(await current.count(),1);
+                const initial=await current.locator('h3').textContent();
+                const height=(await page.locator('.news-window').boundingBox()).height;
+                await page.getByRole('button',{name:'Next news item',exact:true}).click();
+                assert.notEqual(await current.locator('h3').textContent(),initial);
+                assert.ok(Math.abs(height-(await page.locator('.news-window').boundingBox()).height)<2);
+                await page.getByRole('button',{name:'Previous news item',exact:true}).click();
+                assert.equal(await current.locator('h3').textContent(),initial);
+                await page.keyboard.press('End');
+                assert.equal(await page.locator('.news-counter').textContent(),`${feed.items.length} / ${feed.items.length}`);
+                await page.keyboard.press('Home');
+                assert.equal(await page.locator('.news-counter').textContent(),`1 / ${feed.items.length}`);
+                assert.equal(await page.locator('#news .news-card[aria-hidden="true"]:not([inert])').count(),0);
+                const fits=await page.locator('#news').evaluate(n=>n.scrollWidth<=n.clientWidth+1);
+                assert.ok(fits);
+                assert.ok((await page.locator('.news-window').boundingBox()).width<=781);
+                await page.locator('#news').screenshot({path:`news-preview-${width}.png`});
+                await page.evaluate(()=>document.documentElement.dataset.theme='dark');
+                await page.locator('#news').screenshot({path:`news-preview-dark-${width}.png`});
+                report.push({width,height,passed:true});
+                await page.close();
+              }
+              const autoplay=await open(1280);
+              await autoplay.mouse.move(0,0);
+              const first=await autoplay.locator('.news-current h3').textContent();
+              await autoplay.waitForTimeout(8500);
+              assert.notEqual(await autoplay.locator('.news-current h3').textContent(),first);
+              await autoplay.getByRole('button',{name:'Pause news rotation',exact:true}).click();
+              const held=await autoplay.locator('.news-current h3').textContent();
+              await autoplay.mouse.move(0,0);
+              await autoplay.waitForTimeout(8500);
+              assert.equal(await autoplay.locator('.news-current h3').textContent(),held);
+              await autoplay.close();
+              const reduced=await open(390,true);
+              assert.equal(await reduced.getByRole('button',{name:'Start news rotation',exact:true}).count(),1);
+              const reducedTitle=await reduced.locator('.news-current h3').textContent();
+              await reduced.waitForTimeout(8500);
+              assert.equal(await reduced.locator('.news-current h3').textContent(),reducedTitle);
+              await reduced.close();
+              const updating=await open(1280);
+              const previousId=await updating.locator('.news-current').getAttribute('data-news-id');
+              const modified=structuredClone(feed);
+              modified.items.unshift({id:'test-update',date:'2026-09-13',title:'Feed refresh test',summary:'Newly added test news.',links:[]});
+              await updating.unroute('**/news.json');
+              await updating.route('**/news.json',route=>route.fulfill({contentType:'application/json',body:JSON.stringify(modified)}));
+              await updating.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));
+              await updating.waitForFunction(()=>document.querySelectorAll('#news .news-card').length===4);
+              assert.equal(await updating.locator('.news-current').getAttribute('data-news-id'),previousId);
+              await updating.close();
+              const fallback=await open(390,false,{items:[]});
+              assert.equal(await fallback.locator('.news-card').count(),feed.items.length);
+              await fallback.close();
+              fs.writeFileSync('news-test-results.json',JSON.stringify({passed:true,viewports:report,checks:['next/previous','keyboard','fixed-height','focus-isolation','autoplay','pause','reduced-motion','feed-refresh','offline-fallback']},null,2));
+              console.log('All news carousel checks passed.');
+            } finally {await browser.close();}
+          })().catch(error=>{console.error(error);process.exit(1);});
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compact-news-browser-audit
+          path: |
+            news-test-results.json
+            news-preview*.png
+            visual-audit.html
+            assets
+            _data/news.json
+          retention-days: 7
