@@ -25,11 +25,13 @@
         }
       ],
       "image": {
-        "src": "/assets/ramtin-graduation.svg",
-        "alt": "Portfolio portrait of Ramtin Mojtahedi",
-        "credit": "Author portrait from this portfolio",
-        "source_url": "https://ramtin-mojtahedi.github.io/about/",
-        "kind": "author-portrait"
+        "src": "/assets/news/author-profile.jpg",
+        "alt": "GitHub profile image for Ramtin Mojtahedi",
+        "credit": "GitHub profile image",
+        "source_url": "https://github.com/Ramtin-Mojtahedi",
+        "original_url": "https://avatars.githubusercontent.com/u/85639926?v=4",
+        "kind": "author-profile",
+        "sha256": "7f34190d96ef9352861d53ab910acc4623bca85368e2cf53baf4ed70200220b2"
       }
     },
     {
@@ -84,11 +86,13 @@
         }
       ],
       "image": {
-        "src": "/assets/ramtin-graduation.svg",
-        "alt": "Portfolio portrait of Ramtin Mojtahedi",
-        "credit": "Author portrait from this portfolio",
-        "source_url": "https://ramtin-mojtahedi.github.io/about/",
-        "kind": "author-portrait"
+        "src": "/assets/news/author-profile.jpg",
+        "alt": "GitHub profile image for Ramtin Mojtahedi",
+        "credit": "GitHub profile image",
+        "source_url": "https://github.com/Ramtin-Mojtahedi",
+        "original_url": "https://avatars.githubusercontent.com/u/85639926?v=4",
+        "kind": "author-profile",
+        "sha256": "7f34190d96ef9352861d53ab910acc4623bca85368e2cf53baf4ed70200220b2"
       }
     },
     {
@@ -108,11 +112,13 @@
         }
       ],
       "image": {
-        "src": "/assets/ramtin-graduation.svg",
-        "alt": "Portfolio portrait of Ramtin Mojtahedi",
-        "credit": "Author portrait from this portfolio",
-        "source_url": "https://ramtin-mojtahedi.github.io/about/",
-        "kind": "author-portrait"
+        "src": "/assets/news/author-profile.jpg",
+        "alt": "GitHub profile image for Ramtin Mojtahedi",
+        "credit": "GitHub profile image",
+        "source_url": "https://github.com/Ramtin-Mojtahedi",
+        "original_url": "https://avatars.githubusercontent.com/u/85639926?v=4",
+        "kind": "author-profile",
+        "sha256": "7f34190d96ef9352861d53ab910acc4623bca85368e2cf53baf4ed70200220b2"
       }
     },
     {
@@ -139,11 +145,13 @@
       "archived": true,
       "archive_reason": "The reshare date is unverified; the original episode is from 2025.",
       "image": {
-        "src": "/assets/ramtin-graduation.svg",
-        "alt": "Portfolio portrait of Ramtin Mojtahedi",
-        "credit": "Author portrait from this portfolio",
-        "source_url": "https://ramtin-mojtahedi.github.io/about/",
-        "kind": "author-portrait"
+        "src": "/assets/news/author-profile.jpg",
+        "alt": "GitHub profile image for Ramtin Mojtahedi",
+        "credit": "GitHub profile image",
+        "source_url": "https://github.com/Ramtin-Mojtahedi",
+        "original_url": "https://avatars.githubusercontent.com/u/85639926?v=4",
+        "kind": "author-profile",
+        "sha256": "7f34190d96ef9352861d53ab910acc4623bca85368e2cf53baf4ed70200220b2"
       }
     }
   ]

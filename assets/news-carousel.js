@@ -177,7 +177,7 @@
     });
     body.append(links);
     const image = item.image && typeof item.image === 'object' ? item.image : {};
-    const imageURL = safeURL(image.src) || new URL('/assets/ramtin-graduation.svg',location.origin).href;
+    const imageURL = safeURL(image.src) || new URL('/assets/news/author-profile.jpg',location.origin).href;
     const sourceURL = safeURL(image.source_url) || new URL('/about/',location.origin).href;
     const figure = make('figure','news-picture');
     const imageLink = make('a','news-picture-link');
@@ -185,11 +185,11 @@
     imageLink.target = '_blank'; imageLink.rel = 'noopener noreferrer';
     imageLink.setAttribute('aria-label','Open image source');
     const img = make('img');
-    img.alt = excerpt(image.alt || 'Portfolio portrait of Ramtin Mojtahedi',240);
+    img.alt = excerpt(image.alt || 'GitHub profile image for Ramtin Mojtahedi',240);
     img.width = 640; img.height = 440; img.decoding = 'async'; img.loading = 'lazy';
     img.referrerPolicy = 'no-referrer';
     const caption = make('figcaption');
-    const credit = make('a','',excerpt(image.credit || 'Author portrait from this portfolio',120));
+    const credit = make('a','',excerpt(image.credit || 'GitHub profile image',120));
     credit.href = sourceURL; credit.target = '_blank'; credit.rel = 'noopener noreferrer';
     caption.append(credit);
     const licenceURL = safeURL(image.license_url);
@@ -204,10 +204,10 @@
         return;
       }
       img.dataset.fallback = 'true';
-      img.alt = 'Portfolio portrait of Ramtin Mojtahedi';
+      img.alt = 'GitHub profile image for Ramtin Mojtahedi';
       imageLink.href = new URL('/about/',location.origin).href;
-      caption.textContent = 'Author portrait · original image unavailable';
-      img.src = '/assets/ramtin-graduation.svg';
+      caption.textContent = 'Profile image · original image unavailable';
+      img.src = '/assets/news/author-profile.jpg';
     });
     img.src = imageURL;
     imageLink.append(img); figure.append(imageLink,caption);
