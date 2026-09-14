@@ -1,0 +1,40 @@
+name: Prepare original LinkedIn feed
+on:
+  push:
+    branches: [linkedin-original-feed-20260913]
+    paths: [.github/workflows/prepare-linkedin-originals.yml]
+permissions:
+  contents: write
+concurrency:
+  group: prepare-linkedin-originals
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: linkedin-original-feed-20260913
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Migrate only news display and preserve publications
+        run: |
+          sha256sum _data/publications.json publications.json publications.bib > /tmp/publication-hashes
+          python scripts/prepare_linkedin_originals.py
+          sha256sum --check /tmp/publication-hashes
+          python scripts/validate_website.py
+          python scripts/validate_service_roles.py
+          python scripts/validate_site_impact.py
+          python scripts/validate_layout_safety.py
+          python scripts/build_search_pages.py --check
+          python scripts/render_visual_audit.py
+          node --check assets/news-carousel.js
+      - name: Commit the validated migration to this branch
+        run: |
+          git add _data/news.json _data/news_archive.json _includes/site-part-1.html index.html assets/news-carousel.js assets/news-carousel.css news.xml docs/linkedin-feed.md
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Use original LinkedIn embeds only; archive substitute news and expose feed connection state'
+          git push origin HEAD:linkedin-original-feed-20260913
