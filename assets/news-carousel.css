@@ -1,6 +1,8 @@
 /* Scoped compact news panel; all other website sections are unchanged. */
 #news.news-is-carousel{padding-block:clamp(1.5rem,3vw,2.5rem)}
 #news.news-is-carousel>.wrap{max-width:780px}
+/* The following section's old hero overlap must not cover the news footer. */
+#news.news-is-carousel + .statsSec .impact-intro{margin-top:0}
 #news.news-is-carousel .news-heading{align-items:center;gap:.7rem;margin-bottom:.9rem}
 #news.news-is-carousel .news-heading h2{font-size:clamp(1.3rem,2.1vw,1.65rem);line-height:1.2;letter-spacing:-.02em;margin:.3rem 0 0}
 #news.news-is-carousel .news-heading .kicker{font-size:.7rem;margin:0}
@@ -33,6 +35,6 @@
 #news .news-rss{color:var(--news-ink);text-underline-offset:.2em;white-space:nowrap}
 #news .news-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 @keyframes news-progress{to{transform:scaleX(1)}}
-@media(max-width:760px){#news.news-is-carousel .news-heading{flex-direction:row;align-items:center}#news.news-is-carousel .news-heading>div{flex:1}#news.news-is-carousel .news-linkedin{max-width:115px;flex-shrink:1}}
+@media(max-width:760px){#news.news-is-carousel .news-heading{flex-direction:row;align-items:center}#news.news-is-carousel .news-heading>div{flex:1}#news.news-is-carousel .news-linkedin{max-width:128px;flex-shrink:1}}
 @media(max-width:420px){#news.news-is-carousel .news-card{padding:1.15rem}#news .news-toolbar{padding:.55rem .6rem;gap:.15rem}#news .news-dot{padding:6px;min-width:23px}#news .news-navigation{gap:0}#news .news-dots{max-width:140px}#news.news-is-carousel .news-card p{font-size:.85rem}}
 @media(prefers-reduced-motion:reduce){#news.news-is-carousel .news-card{transition:none}#news .news-progress-running{animation:none}}
