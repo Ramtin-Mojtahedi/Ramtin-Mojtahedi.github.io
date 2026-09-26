@@ -1,3 +1,11 @@
+<picture>
+  <img width="100%" src="https://raw.githubusercontent.com/Ramtin-Mojtahedi/Ramtin-Mojtahedi/main/assets/cover-software.png" alt="Web engineering: Research portfolio cover.">
+</picture>
+
+**Web engineering · Research portfolio**
+
+[Profile](https://github.com/Ramtin-Mojtahedi) · [Project directory](https://github.com/Ramtin-Mojtahedi/Ramtin-Mojtahedi/blob/main/REPOSITORY_INDEX.md)
+
 # Dr. Ramtin Mojtahedi — Medical AI Researcher
 
 This repository publishes the official professional portfolio of Dr. Ramtin Mojtahedi, a medical AI researcher working in medical imaging, foundation models, multimodal prediction, and clinically grounded validation.
