@@ -14,7 +14,8 @@
     { code: 'bn', lang: 'bn', name: 'বাংলা', english: 'Bengali' },
     { code: 'pt', lang: 'pt', name: 'Português', english: 'Portuguese' },
     { code: 'ru', lang: 'ru', name: 'Русский', english: 'Russian' },
-    { code: 'ur', lang: 'ur', name: 'اردو', english: 'Urdu', direction: 'rtl' }
+    { code: 'ur', lang: 'ur', name: 'اردو', english: 'Urdu', direction: 'rtl' },
+    { code: 'fa', lang: 'fa', name: 'فارسی', english: 'Persian (Farsi)', direction: 'rtl' }
   ];
 
   function publicPageUrl() {

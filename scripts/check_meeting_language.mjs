@@ -10,7 +10,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const origin = 'http://127.0.0.1:4173';
 const publicOrigin = 'https://ramtin-mojtahedi.github.io';
-const expectedCodes = ['en', 'zh-CN', 'hi', 'es', 'fr', 'ar', 'bn', 'pt', 'ru', 'ur'];
+const expectedCodes = ['en', 'zh-CN', 'hi', 'es', 'fr', 'ar', 'bn', 'pt', 'ru', 'ur', 'fa'];
 const outputDirectory = process.env.SITE_AUDIT_SCREENSHOTS;
 const currentConfig = JSON.parse(await readFile(path.join(root, 'assets/booking-config.json'), 'utf8'));
 let checks = 0;
@@ -121,7 +121,7 @@ try {
     check(await page.locator('.brand .mark').count(), 0, `${route}: old monogram removed`);
     if (expectedPath !== '/') check((await page.locator('.identity').textContent()).startsWith('RM '), false, `${route}: old header initials removed`);
     const links = await page.locator('.site-language-option').evaluateAll(nodes => nodes.map(node => ({ code: node.dataset.language, href: node.href })));
-    check(links.map(link => link.code), expectedCodes, `${route}: ten languages`);
+    check(links.map(link => link.code), expectedCodes, `${route}: eleven languages`);
     for (const link of links) {
       const destination = new URL(link.href);
       const publicPage = link.code === 'en' ? destination : new URL(destination.searchParams.get('u'));
@@ -157,7 +157,7 @@ try {
   const languageScript = await readFile(path.join(root, 'assets/site-language.js'), 'utf8');
   const languageStyle = await readFile(path.join(root, 'assets/site-language.css'), 'utf8');
   await proxyPage.route('**/*', route => route.fulfill({ status: 200, contentType: 'text/html', body:
-    `<html><head><link rel="canonical" href="${publicOrigin}/research/"><style>body{margin:0}.nav{position:fixed;top:0;left:0;right:0;height:64px;box-sizing:border-box;padding:10px 12px;display:flex;justify-content:flex-end;align-items:center;z-index:200;backdrop-filter:blur(18px)}${languageStyle}</style></head><body><iframe id="gt-nvframe" title="Translation toolbar" src="about:blank" style="position:fixed;top:0;left:0;width:100%;height:57px;border:0;z-index:9999"></iframe><nav class="nav"><div class="tools"></div></nav><script>${languageScript}</script></body></html>` }));
+    `<html><head><meta charset="utf-8"><link rel="canonical" href="${publicOrigin}/research/"><style>body{margin:0}.nav{position:fixed;top:0;left:0;right:0;height:64px;box-sizing:border-box;padding:10px 12px;display:flex;justify-content:flex-end;align-items:center;z-index:200;backdrop-filter:blur(18px)}${languageStyle}</style></head><body><iframe id="gt-nvframe" title="Translation toolbar" src="about:blank" style="position:fixed;top:0;left:0;width:100%;height:57px;border:0;z-index:9999"></iframe><nav class="nav"><div class="tools"></div></nav><script>${languageScript}</script></body></html>` }));
   await proxyPage.goto('https://ramtin-mojtahedi-github-io.translate.goog/research/?_x_tr_tl=ar&private=visitor-data');
   await proxyPage.waitForSelector('.site-language-trigger');
   check(await proxyPage.locator('[aria-current][data-language]').getAttribute('data-language'), 'ar', 'translation proxy selects Arabic');
@@ -172,6 +172,11 @@ try {
     check(panel.y >= 57 && panel.y + panel.height <= 901 && panel.x >= -1 && panel.x + panel.width <= width + 1, true, `${width}px translated language panel stays below toolbar within viewport`);
     await proxyPage.keyboard.press('Escape');
   }
+  await proxyPage.goto('https://ramtin-mojtahedi-github-io.translate.goog/research/?_x_tr_tl=fa&private=visitor-data');
+  await proxyPage.waitForSelector('.site-language-trigger');
+  check(await proxyPage.locator('[aria-current][data-language]').getAttribute('data-language'), 'fa', 'translation proxy selects Persian');
+  check(await proxyPage.locator('.site-language-current').textContent(), 'فارسی', 'Persian selector native label');
+  check(await proxyPage.locator('.site-language-current').getAttribute('dir'), 'rtl', 'Persian selector label direction');
   await proxyPage.close();
 
   for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 },
@@ -184,7 +189,7 @@ try {
     const bounds = await page.locator('.site-language-panel').boundingBox();
     check(bounds.x >= -1 && bounds.x + bounds.width <= viewport.width + 1, true, `${viewport.name}: language menu horizontal bounds`);
     check(bounds.y >= 0 && bounds.y + bounds.height <= viewport.height + 1, true, `${viewport.name}: language menu vertical bounds`);
-    check(await page.locator('.site-language-option').count(), 10, `${viewport.name}: full language choices`);
+    check(await page.locator('.site-language-option').count(), expectedCodes.length, `${viewport.name}: full language choices`);
     check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, `${viewport.name}: document width`);
     if (outputDirectory && ['desktop', 'mobile'].includes(viewport.name)) {
       await mkdir(outputDirectory, { recursive: true });
@@ -291,4 +296,4 @@ try {
   await page.close();
 } finally { await browser.close(); }
 
-console.log(`Meeting/language smoke validation passed: ${checks} checks, DST, calendar format, five page paths, ten languages, and four viewport sizes.`);
+console.log(`Meeting/language smoke validation passed: ${checks} checks, DST, calendar format, five page paths, eleven languages, and four viewport sizes.`);

@@ -1018,7 +1018,7 @@ def publication_page(
   {json_script(schema)}
   <script src="/assets/scholarly-pages.js?v=20260802-2" defer></script>
   <link rel="stylesheet" href="/assets/site-language.css?v=20261014-2">
-  <script src="/assets/site-language.js?v=20261014-2" defer></script>
+  <script src="/assets/site-language.js?v=20261014-3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to publication record</a>
@@ -1193,7 +1193,7 @@ def publications_index(publications: list[dict[str, object]]) -> str:
   {json_script(schema)}
   <script src="/assets/scholarly-pages.js?v=20260802-2" defer></script>
   <link rel="stylesheet" href="/assets/site-language.css?v=20261014-2">
-  <script src="/assets/site-language.js?v=20261014-2" defer></script>
+  <script src="/assets/site-language.js?v=20261014-3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to publication records</a>
@@ -1338,7 +1338,7 @@ def about_page(publications: list[dict[str, object]]) -> str:
   <meta name="twitter:image" content="{SOCIAL_IMAGE_URL}">
   {json_script(schema)}
   <link rel="stylesheet" href="/assets/site-language.css?v=20261014-2">
-  <script src="/assets/site-language.js?v=20261014-2" defer></script>
+  <script src="/assets/site-language.js?v=20261014-3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to biography</a>
@@ -1511,7 +1511,7 @@ def research_page(publications: list[dict[str, object]]) -> str:
   <meta name="twitter:image" content="{SOCIAL_IMAGE_URL}">
   {json_script(schema)}
   <link rel="stylesheet" href="/assets/site-language.css?v=20261014-2">
-  <script src="/assets/site-language.js?v=20261014-2" defer></script>
+  <script src="/assets/site-language.js?v=20261014-3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to research themes</a>
