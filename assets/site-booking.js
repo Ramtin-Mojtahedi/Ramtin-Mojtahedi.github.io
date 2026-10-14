@@ -3,7 +3,8 @@
 
   const DEFAULT_EMAIL = 'Ramtin.Mojtahedi@utoronto.ca';
   const PURPOSES = {
-    research: 'Research and collaboration',
+    consultation: 'Medical AI and technical consultation',
+    research: 'Research collaboration',
     mentoring: 'Mentoring and academic advice',
     speaking: 'Speaking and professional opportunities',
     other: 'Another topic'
@@ -73,8 +74,8 @@
     const duration = Number(values.duration);
     if (!name || name.length > 100 || /[\r\n]/.test(name)) throw new Error('Enter your name (up to 100 characters).');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 180) throw new Error('Enter a valid email address.');
-    if (!Object.prototype.hasOwnProperty.call(PURPOSES, values.purpose)) throw new Error('Choose a conversation topic.');
-    if (duration !== 30 && duration !== 60) throw new Error('Choose a 30- or 60-minute conversation.');
+    if (!Object.prototype.hasOwnProperty.call(PURPOSES, values.purpose)) throw new Error('Choose a meeting topic.');
+    if (duration !== 30 && duration !== 60) throw new Error('Choose a 30- or 60-minute session.');
     if (message.length > 1200) throw new Error('Keep your message to 1,200 characters or fewer.');
     const start = localTimeToUTC(String(values.date || ''), String(values.time || ''), values.timezone);
     if (start <= now) throw new Error('Choose a date and time in the future in the selected time zone.');
@@ -239,6 +240,9 @@
 
   // Public configuration contains scheduling links only; no credentials belong here.
   const scriptURL = document.currentScript?.src || new URL('assets/site-booking.js', document.baseURI).href;
+  const showRequestIntro = () => {
+    document.querySelector('[data-i18n="booking.intro"]').textContent = 'Request a consultation or collaboration meeting about medical AI, research, technical projects, or professional opportunities. Share a little context and propose a time.';
+  };
   fetch(new URL('booking-config.json', scriptURL), { credentials: 'same-origin' })
     .then(response => { if (!response.ok) throw new Error('Configuration unavailable'); return response.json(); })
     .then(config => {
@@ -248,10 +252,10 @@
         updateDateMinimum();
       }
       const bookingURL = validBookingURL(config.provider, config.bookingUrl);
-      if (!bookingURL) return;
+      if (!bookingURL) { showRequestIntro(); return; }
       const providerLink = document.getElementById('booking-provider-link');
       providerLink.href = bookingURL;
-      document.querySelector('[data-i18n="booking.intro"]').textContent = 'Book an online conversation about research, collaboration, or professional opportunities. Choose a time that works for you.';
+      document.querySelector('[data-i18n="booking.intro"]').textContent = 'Book a consultation or collaboration meeting about medical AI, research, technical projects, or professional opportunities. Choose an available time below.';
       if (typeof config.bookingSummary === 'string' && config.bookingSummary.length <= 300) {
         document.querySelector('[data-i18n="booking.noteIntro"]').textContent = config.bookingSummary;
       }
@@ -261,7 +265,7 @@
         embedURL.searchParams.set('embed_type', 'Inline');
         const iframe = document.createElement('iframe');
         iframe.src = embedURL.href;
-        iframe.title = 'Book a meeting with Ramtin Mojtahedi';
+        iframe.title = 'Book a consultation or collaboration meeting with Ramtin Mojtahedi';
         iframe.className = 'booking-calendar';
         iframe.loading = 'lazy';
         iframe.referrerPolicy = 'strict-origin-when-cross-origin';
@@ -289,5 +293,5 @@
       explanation.querySelector('p').textContent = 'The scheduling service manages available times and booking confirmations. To propose a different time, use the optional meeting request form below.';
       explanation.querySelectorAll('[data-i18n]').forEach(element => element.removeAttribute('data-i18n'));
     })
-    .catch(() => { /* The complete request flow remains available when configuration cannot load. */ });
+    .catch(showRequestIntro);
 })(typeof globalThis !== 'undefined' ? globalThis : this);
