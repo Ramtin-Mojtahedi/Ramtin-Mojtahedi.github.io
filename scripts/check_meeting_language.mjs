@@ -138,26 +138,40 @@ try {
 
   await page.goto(`${origin}/visual-audit.html?message=secret#contact`, { waitUntil: 'networkidle' });
   await page.locator('.site-language-trigger').click();
-  const spanishPage = () => page.locator('[data-language="es"]').getAttribute('href');
-  check(new URL(new URL(await spanishPage()).searchParams.get('u')).hash, '#contact', 'valid section anchor retained');
+  const translatedPage = () => page.locator('[data-language="fr"]').getAttribute('href');
+  check(new URL(new URL(await translatedPage()).searchParams.get('u')).hash, '', 'translation source omits section fragment');
+  check(new URL(await translatedPage()).hash, '#contact', 'translation outer link retains valid section anchor');
+  check(new URL(await page.locator('[data-language="en"]').getAttribute('href')).hash, '#contact', 'English retains original section anchor');
   await page.evaluate(() => { location.hash = 'meeting-email'; });
   await page.waitForTimeout(50);
-  check(new URL(new URL(await spanishPage()).searchParams.get('u')).hash, '', 'input anchor omitted');
+  check(new URL(new URL(await translatedPage()).searchParams.get('u')).hash, '', 'input anchor omitted from source');
+  check(new URL(await translatedPage()).hash, '', 'input anchor omitted from outer link');
   await page.evaluate(() => { location.hash = 'unknown-secret'; });
   await page.waitForTimeout(50);
-  check(new URL(new URL(await spanishPage()).searchParams.get('u')).hash, '', 'unknown fragment omitted');
+  check(new URL(new URL(await translatedPage()).searchParams.get('u')).hash, '', 'unknown fragment omitted from source');
+  check(new URL(await translatedPage()).hash, '', 'unknown fragment omitted from outer link');
   await page.keyboard.press('Escape');
   check(await page.locator('.site-language').getAttribute('open'), null, 'Escape closes language menu');
 
   const proxyPage = await browser.newPage();
   const languageScript = await readFile(path.join(root, 'assets/site-language.js'), 'utf8');
+  const languageStyle = await readFile(path.join(root, 'assets/site-language.css'), 'utf8');
   await proxyPage.route('**/*', route => route.fulfill({ status: 200, contentType: 'text/html', body:
-    `<html><head><link rel="canonical" href="${publicOrigin}/research/"></head><body><header class="site-header"></header><script>${languageScript}</script></body></html>` }));
+    `<html><head><link rel="canonical" href="${publicOrigin}/research/"><style>body{margin:0}.nav{position:fixed;top:0;left:0;right:0;height:64px;box-sizing:border-box;padding:10px 12px;display:flex;justify-content:flex-end;align-items:center;z-index:200;backdrop-filter:blur(18px)}${languageStyle}</style></head><body><iframe id="gt-nvframe" title="Translation toolbar" src="about:blank" style="position:fixed;top:0;left:0;width:100%;height:57px;border:0;z-index:9999"></iframe><nav class="nav"><div class="tools"></div></nav><script>${languageScript}</script></body></html>` }));
   await proxyPage.goto('https://ramtin-mojtahedi-github-io.translate.goog/research/?_x_tr_tl=ar&private=visitor-data');
   await proxyPage.waitForSelector('.site-language-trigger');
   check(await proxyPage.locator('[aria-current][data-language]').getAttribute('data-language'), 'ar', 'translation proxy selects Arabic');
   check(await proxyPage.locator('.site-language-current').getAttribute('dir'), 'rtl', 'Arabic selector label direction');
   check(await proxyPage.locator('[data-language="en"]').getAttribute('href'), `${publicOrigin}/research/`, 'translation proxy returns to original page');
+  for (const width of [1024, 390]) {
+    await proxyPage.setViewportSize({ width, height: 900 });
+    check((await proxyPage.locator('.nav').boundingBox()).y >= 57, true, `${width}px translated navigation clears toolbar`);
+    await proxyPage.locator('.site-language-trigger').click();
+    check(await proxyPage.locator('.site-language').getAttribute('open') !== null, true, `${width}px translated language control receives pointer click`);
+    const panel = await proxyPage.locator('.site-language-panel').boundingBox();
+    check(panel.y >= 57 && panel.y + panel.height <= 901 && panel.x >= -1 && panel.x + panel.width <= width + 1, true, `${width}px translated language panel stays below toolbar within viewport`);
+    await proxyPage.keyboard.press('Escape');
+  }
   await proxyPage.close();
 
   for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 },

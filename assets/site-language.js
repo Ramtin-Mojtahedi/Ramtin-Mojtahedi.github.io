@@ -3,6 +3,7 @@
   'use strict';
 
   const publicOrigin = 'https://ramtin-mojtahedi.github.io';
+  const translatedHost = window.location.hostname.endsWith('.translate.goog');
   const languages = [
     { code: 'en', lang: 'en', name: 'English', english: 'English' },
     { code: 'zh-CN', lang: 'zh-Hans', name: '简体中文', english: 'Simplified Chinese' },
@@ -41,18 +42,23 @@
   }
 
   function languageUrl(code) {
-    const original = publicPageUrl();
-    if (code === 'en') return original;
+    const original = new URL(publicPageUrl());
+    if (code === 'en') return original.href;
+    const publicFragment = original.hash;
+    // Google fetches the public page URL; section fragments stay on the outer link.
+    // Encoding a fragment inside u can cause Google's website translator to reject it.
+    original.hash = '';
     const translated = new URL('https://translate.google.com/translate');
     translated.searchParams.set('sl', 'en');
     translated.searchParams.set('tl', code);
-    translated.searchParams.set('u', original);
+    translated.searchParams.set('u', original.href);
+    translated.hash = publicFragment;
     return translated.href;
   }
 
   function selectedLanguage() {
     // Google's translated-page proxy exposes the selected language in its URL.
-    if (window.location.hostname.endsWith('.translate.goog')) {
+    if (translatedHost) {
       const code = new URLSearchParams(window.location.search).get('_x_tr_tl');
       const selected = languages.find(language => language.code.toLowerCase() === (code || '').toLowerCase());
       if (selected) return selected;
@@ -163,7 +169,47 @@
       const bounds = summary.getBoundingClientRect();
       const top = Math.max(12, Math.min(bounds.bottom + 10, window.innerHeight - 120));
       selector.style.setProperty('--site-language-top', `${top}px`);
+      if (translatedHost) {
+        // A header with backdrop-filter is the containing block for its fixed panel.
+        const header = selector.closest('.nav, .site-header');
+        selector.style.setProperty('--site-language-fixed-parent-top', `${header ? header.getBoundingClientRect().top : 0}px`);
+      }
     };
+    if (translatedHost) {
+      const root = document.documentElement;
+      const navigation = document.querySelector('.nav') || document.querySelector('.site-header');
+      let toolbar = null;
+      root.classList.add('site-translated');
+      root.style.setProperty('--site-translation-toolbar-height', '57px');
+      const updateTranslationLayout = () => {
+        const toolbarHeight = toolbar ? Math.max(0, toolbar.getBoundingClientRect().height) : 57;
+        const navigationHeight = navigation ? Math.max(0, navigation.getBoundingClientRect().height) : 72;
+        root.style.setProperty('--site-translation-toolbar-height', `${toolbarHeight}px`);
+        root.style.setProperty('--site-translated-nav-height', `${navigationHeight}px`);
+        if (selector.open) positionPanel();
+      };
+      const sizeObserver = typeof ResizeObserver === 'function'
+        ? new ResizeObserver(updateTranslationLayout) : null;
+      if (navigation && sizeObserver) sizeObserver.observe(navigation);
+      const bindToolbar = () => {
+        const next = document.getElementById('gt-nvframe');
+        if (!next || next === toolbar) return Boolean(toolbar);
+        if (toolbar && sizeObserver) sizeObserver.unobserve(toolbar);
+        toolbar = next;
+        if (sizeObserver) sizeObserver.observe(toolbar);
+        updateTranslationLayout();
+        return true;
+      };
+      if (!bindToolbar() && typeof MutationObserver === 'function') {
+        // Google can inject its toolbar after the original site's scripts run.
+        const insertionObserver = new MutationObserver(() => {
+          if (bindToolbar()) insertionObserver.disconnect();
+        });
+        insertionObserver.observe(root, { childList: true, subtree: true });
+      }
+      window.addEventListener('resize', updateTranslationLayout, { passive: true });
+      updateTranslationLayout();
+    }
     selector.addEventListener('toggle', () => {
       if (!selector.open) return;
       refreshLinks();

@@ -1017,8 +1017,8 @@ def publication_page(
   <meta name="twitter:description" content="{esc(description, attribute=True)}">
   {json_script(schema)}
   <script src="/assets/scholarly-pages.js?v=20260802-2" defer></script>
-  <link rel="stylesheet" href="/assets/site-language.css?v=20261014">
-  <script src="/assets/site-language.js?v=20261014" defer></script>
+  <link rel="stylesheet" href="/assets/site-language.css?v=20261014-2">
+  <script src="/assets/site-language.js?v=20261014-2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to publication record</a>
@@ -1192,8 +1192,8 @@ def publications_index(publications: list[dict[str, object]]) -> str:
   <meta name="twitter:card" content="summary">
   {json_script(schema)}
   <script src="/assets/scholarly-pages.js?v=20260802-2" defer></script>
-  <link rel="stylesheet" href="/assets/site-language.css?v=20261014">
-  <script src="/assets/site-language.js?v=20261014" defer></script>
+  <link rel="stylesheet" href="/assets/site-language.css?v=20261014-2">
+  <script src="/assets/site-language.js?v=20261014-2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to publication records</a>
@@ -1337,8 +1337,8 @@ def about_page(publications: list[dict[str, object]]) -> str:
   <meta name="twitter:description" content="Professional biography, research identity, education, and authoritative profiles.">
   <meta name="twitter:image" content="{SOCIAL_IMAGE_URL}">
   {json_script(schema)}
-  <link rel="stylesheet" href="/assets/site-language.css?v=20261014">
-  <script src="/assets/site-language.js?v=20261014" defer></script>
+  <link rel="stylesheet" href="/assets/site-language.css?v=20261014-2">
+  <script src="/assets/site-language.js?v=20261014-2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to biography</a>
@@ -1510,8 +1510,8 @@ def research_page(publications: list[dict[str, object]]) -> str:
   <meta name="twitter:description" content="Research themes and linked scholarly records in medical imaging AI, multimodal prediction, radiomics, and engineering.">
   <meta name="twitter:image" content="{SOCIAL_IMAGE_URL}">
   {json_script(schema)}
-  <link rel="stylesheet" href="/assets/site-language.css?v=20261014">
-  <script src="/assets/site-language.js?v=20261014" defer></script>
+  <link rel="stylesheet" href="/assets/site-language.css?v=20261014-2">
+  <script src="/assets/site-language.js?v=20261014-2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to research themes</a>

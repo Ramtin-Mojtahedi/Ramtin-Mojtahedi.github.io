@@ -4,6 +4,20 @@ import { mkdir, writeFile } from 'node:fs/promises';
 const auditUrl = process.env.VISUAL_AUDIT_URL || 'http://127.0.0.1:4173/visual-audit.html';
 const artifactDirectory = 'visual-audit-artifacts';
 
+async function isolateSchedulingProvider(page) {
+  // Calendly can emit browser storage/payment permission errors unrelated to
+  // our page layout. Its live UI is verified separately; retain the actual
+  // iframe URL and dimensions while isolating only its document in this audit.
+  await page.route(/^https:\/\/(?:www\.)?calendly\.com\//, route => {
+    const request = route.request();
+    if (request.resourceType() !== 'document' || !request.frame().parentFrame()) {
+      return route.continue();
+    }
+    return route.fulfill({ status: 200, contentType: 'text/html', body:
+      '<!doctype html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1"><title>Scheduling provider layout placeholder</title><style>body{margin:0;padding:24px;font:16px/1.5 system-ui,sans-serif;color:#14221e;background:#fffdf8}main{max-width:48rem}</style></head><body><main aria-label="External scheduling provider"><h1>Online scheduling</h1><p>External calendar content is isolated during automated layout checks. The live scheduling page is verified separately.</p></main></body></html>' });
+  });
+}
+
 const viewports = [
   { name: 'desktop-wide', width: 1600, height: 1000, capture: true },
   { name: 'desktop', width: 1440, height: 900, capture: false },
@@ -266,6 +280,7 @@ try {
       if (message.type() === 'error') consoleErrors.push(`console: ${message.text()}`);
     });
 
+    await isolateSchedulingProvider(page);
     await page.goto(auditUrl, { waitUntil: 'networkidle' });
     await page.waitForFunction(
       () => document.documentElement.classList.contains('layout-safety-ready'),

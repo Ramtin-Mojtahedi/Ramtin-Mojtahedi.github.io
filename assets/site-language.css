@@ -125,6 +125,34 @@
 .site-header.has-site-language .site-language { margin-left: auto; }
 .site-header.has-site-language > nav { flex: 1 1 auto; justify-content: flex-end; }
 
+/* Google's toolbar occupies its own strip above the translated site's navigation. */
+html.site-translated {
+  scroll-padding-top: calc(var(--site-translation-toolbar-height, 57px) + var(--site-translated-nav-height, 72px) + 16px);
+}
+html.site-translated .nav { top: var(--site-translation-toolbar-height, 57px); }
+html.site-translated .site-header {
+  top: var(--site-translation-toolbar-height, 57px);
+  margin-top: var(--site-translation-toolbar-height, 57px);
+}
+html.site-translated .hero { padding-top: calc(142px + var(--site-translation-toolbar-height, 57px)); }
+html.site-translated.nav-layout-compact .nav .links {
+  max-height: calc(100dvh - var(--site-translation-toolbar-height, 57px) - var(--site-translated-nav-height, 72px) - 24px);
+}
+
+@media (max-width: 1080px) {
+  html.site-translated .nav .links {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    bottom: auto;
+    max-height: calc(100dvh - var(--site-translation-toolbar-height, 57px) - var(--site-translated-nav-height, 72px) - 24px);
+  }
+}
+@media (max-width: 920px) {
+  html.site-translated .hero { padding-top: calc(122px + var(--site-translation-toolbar-height, 57px)); }
+}
+
 @media (max-width: 640px) {
   .site-language-panel {
     position: fixed;
@@ -140,9 +168,13 @@
   .site-header.has-site-language { flex-direction: row; align-items: center; gap: .75rem; }
   .site-header.has-site-language > .identity { flex: 1 1 auto; font-size: .91rem; }
   .site-header.has-site-language > nav { order: 3; flex-basis: 100%; justify-content: flex-start; }
+  html.site-translated .site-language-panel {
+    top: calc(var(--site-language-top, 84px) - var(--site-language-fixed-parent-top, var(--site-translation-toolbar-height, 57px)));
+  }
 }
 @media (max-width: 440px) {
   .tools .site-language-trigger { min-width: 39px; width: 39px; min-height: 39px; }
+  html.site-translated .hero { padding-top: calc(108px + var(--site-translation-toolbar-height, 57px)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-language-trigger { transition: none; }
