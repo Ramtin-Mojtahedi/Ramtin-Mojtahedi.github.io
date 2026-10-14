@@ -73,3 +73,14 @@ The scheduled maintenance workflow builds and validates a temporary candidate. I
 - External publication sources and public web endpoints can change independently of the repository, so candidate updates require review before committing.
 - This repository is a static site and maintenance toolkit; it does not publish an installable software package or GitHub Package.
 <!-- repository-guide:end -->
+
+
+## Languages and meeting booking
+
+The header offers English plus Chinese, Hindi, Spanish, French, Arabic, Bengali, Portuguese, Russian, and Urdu. Non-English choices open Google Translate’s public website view for the current page; English returns to the canonical original. These are automatic translations, not reviewed language editions. URL queries and visitor form values are excluded from translation links.
+
+The meeting section immediately follows the introduction. `assets/booking-config.json` connects the live Calendly event at https://calendly.com/ramtinrms/research-conversation. The host’s Google Calendar checks conflicts and receives bookings; Calendly supplies Google Meet links and calendar invitations. The initial schedule is 30-minute meetings Monday–Friday, 18:00–20:00 Eastern time. Visitors see times in their own time zone. Availability and meeting notifications are managed in Calendly. No scheduling credentials are stored in the public repository.
+
+If the scheduling link cannot load, the direct booking link remains available. The optional meeting-request form prepares an email draft and can save a tentative calendar hold; it does not send email or claim a confirmed booking. Clear the provider and bookingUrl fields to use that fallback alone.
+
+Validation includes `node scripts/check_meeting_language.mjs`, the existing static checks, and responsive layout/heading audits.

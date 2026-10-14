@@ -1,0 +1,59 @@
+<section id="meeting" class="booking-section" aria-labelledby="meeting-title">
+  <div class="wrap">
+    <div class="head booking-heading">
+      <div>
+        <p class="kicker" data-i18n="booking.kicker">Make a connection</p>
+        <h2 id="meeting-title" class="title" data-i18n="booking.title">Let’s find a time.</h2>
+      </div>
+      <p data-i18n="booking.intro">Have a research idea, a collaboration in mind, or a question? Share a little context and propose a time to talk.</p>
+    </div>
+    <div class="booking-layout">
+      <aside class="booking-note">
+        <div class="booking-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" fill="none"><rect x="5" y="7" width="22" height="21" rx="4" stroke="currentColor" stroke-width="1.8"/><path d="M5 13h22M11 4v6M21 4v6M11 19h3M18 19h3M11 23h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3 data-i18n="booking.noteTitle">A thoughtful conversation starts here.</h3>
+        <p data-i18n="booking.noteIntro">Choose a 30- or 60-minute conversation and the time zone that works for you.</p>
+        <ol id="booking-steps" class="booking-steps">
+          <li><span aria-hidden="true">01</span><div data-i18n="booking.step1">Propose a date and time.</div></li>
+          <li><span aria-hidden="true">02</span><div data-i18n="booking.step2">Open the prepared email draft and send your request.</div></li>
+          <li><span aria-hidden="true">03</span><div data-i18n="booking.step3">Receive a reply with the agreed time and calendar invitation.</div></li>
+        </ol>
+        <div id="booking-explanation" class="booking-explanation"><strong data-i18n="booking.proposalHeading">A request, subject to confirmation</strong><p data-i18n="booking.proposalNote">Proposed times do not show live availability. Your meeting is confirmed after I reply with a calendar invitation. An online meeting link will be included if arranged.</p></div>
+        <a class="booking-contact-link" href="#contact" data-i18n="booking.contactAlternative">Prefer the contact form? Send a message →</a>
+      </aside>
+      <div class="booking-card">
+        <div id="booking-provider" class="booking-provider" hidden>
+          <p class="booking-provider-label" data-i18n="booking.liveScheduling">Online scheduling</p>
+          <h3 data-i18n="booking.providerTitle">Choose an available time.</h3>
+          <p data-i18n="booking.providerNote">Open my scheduling page to view availability and receive the booking confirmation from the scheduling service.</p>
+          <a id="booking-provider-link" class="btn booking-primary" target="_blank" rel="noopener noreferrer" data-i18n="booking.bookMeeting">Book a meeting</a>
+          <details class="booking-provider-fallback"><summary data-i18n="booking.requestInstead">Prefer to send a meeting request?</summary><div id="booking-fallback-mount"></div></details>
+        </div>
+        <div id="booking-request-panel">
+          <h3 class="booking-form-title" data-i18n="booking.formTitle">Propose a meeting</h3>
+          <p class="booking-form-intro" data-i18n="booking.formIntro">Times are proposals and will be confirmed by email.</p>
+          <form id="meeting-request" class="booking-form" novalidate>
+            <div class="booking-field"><label for="meeting-name" data-i18n="booking.name">Your name</label><input id="meeting-name" name="name" autocomplete="name" required maxlength="100" /></div>
+            <div class="booking-field"><label for="meeting-email" data-i18n="booking.email">Email address</label><input id="meeting-email" name="email" type="email" autocomplete="email" required maxlength="180" /></div>
+            <div class="booking-field booking-full"><label for="meeting-purpose" data-i18n="booking.purpose">What would you like to discuss?</label><select id="meeting-purpose" name="purpose" required><option value="" data-i18n="booking.choosePurpose">Choose a topic</option><option value="research" data-i18n="booking.research">Research and collaboration</option><option value="mentoring" data-i18n="booking.mentoring">Mentoring and academic advice</option><option value="speaking" data-i18n="booking.speaking">Speaking and professional opportunities</option><option value="other" data-i18n="booking.other">Another topic</option></select></div>
+            <div class="booking-field"><label for="meeting-date" data-i18n="booking.date">Proposed date</label><input id="meeting-date" name="date" type="date" required /></div>
+            <div class="booking-field"><label for="meeting-time" data-i18n="booking.time">Proposed time</label><input id="meeting-time" name="time" type="time" step="60" required /></div>
+            <div class="booking-field booking-full"><label for="meeting-zone" data-i18n="booking.timezone">Time zone for your proposed time</label><select id="meeting-zone" name="timezone" required><option value="America/Toronto">Toronto / Eastern — America/Toronto</option><option value="America/New_York">New York — America/New_York</option><option value="America/Chicago">Chicago — America/Chicago</option><option value="America/Denver">Denver — America/Denver</option><option value="America/Los_Angeles">Los Angeles / Pacific — America/Los_Angeles</option><option value="America/Vancouver">Vancouver — America/Vancouver</option><option value="America/Sao_Paulo">São Paulo — America/Sao_Paulo</option><option value="Europe/London">London — Europe/London</option><option value="Europe/Paris">Paris — Europe/Paris</option><option value="Europe/Berlin">Berlin — Europe/Berlin</option><option value="Europe/Moscow">Moscow — Europe/Moscow</option><option value="Europe/Istanbul">Istanbul — Europe/Istanbul</option><option value="Africa/Lagos">Lagos — Africa/Lagos</option><option value="Africa/Johannesburg">Johannesburg — Africa/Johannesburg</option><option value="Africa/Cairo">Cairo — Africa/Cairo</option><option value="Asia/Riyadh">Riyadh — Asia/Riyadh</option><option value="Asia/Dubai">Dubai — Asia/Dubai</option><option value="Asia/Tehran">Tehran — Asia/Tehran</option><option value="Asia/Karachi">Karachi — Asia/Karachi</option><option value="Asia/Kolkata">New Delhi — Asia/Kolkata</option><option value="Asia/Dhaka">Dhaka — Asia/Dhaka</option><option value="Asia/Singapore">Singapore — Asia/Singapore</option><option value="Asia/Shanghai">Beijing — Asia/Shanghai</option><option value="Asia/Tokyo">Tokyo — Asia/Tokyo</option><option value="Australia/Sydney">Sydney — Australia/Sydney</option><option value="Pacific/Auckland">Auckland — Pacific/Auckland</option></select><small data-i18n="booking.zoneHint">Daylight saving time is calculated for the date you select.</small></div>
+            <div class="booking-field booking-full"><label for="meeting-duration" data-i18n="booking.duration">Conversation length</label><select id="meeting-duration" name="duration" required><option value="30" data-i18n="booking.duration30">30 minutes</option><option value="60" data-i18n="booking.duration60">60 minutes</option></select></div>
+            <div class="booking-field booking-full"><label for="meeting-message" data-i18n="booking.message">A little context (optional)</label><textarea id="meeting-message" name="message" rows="3" maxlength="1200" aria-describedby="meeting-message-hint"></textarea><small id="meeting-message-hint" data-i18n="booking.messageHint">A brief outline helps me prepare for our conversation.</small></div>
+            <p class="booking-privacy booking-full" data-i18n="booking.privacy">Your details are used only to prepare an email draft and optional calendar hold in your browser.</p>
+            <div class="booking-full"><button class="btn booking-primary" type="submit" data-i18n="booking.prepare">Prepare meeting request</button></div>
+            <p id="meeting-error" class="booking-error booking-full" role="alert" hidden></p>
+          </form>
+          <div id="meeting-prepared" class="booking-prepared" aria-labelledby="meeting-prepared-title" hidden>
+            <h4 id="meeting-prepared-title" data-i18n="booking.ready">Your request is ready to send.</h4>
+            <p id="meeting-summary" class="booking-summary"></p>
+            <div class="booking-prepared-actions"><a id="meeting-email-link" class="btn booking-primary" data-i18n="booking.openDraft">Open email draft</a><button id="meeting-calendar" class="btn booking-secondary" type="button" data-i18n="booking.saveHold">Save tentative calendar hold</button></div>
+            <p data-i18n="booking.draftNote">Opens your email app. Review and send the draft. The calendar hold is tentative and does not book or confirm a meeting.</p>
+            <a class="booking-contact-link" href="#contact" data-i18n="booking.draftAlternative">No email app? Use the contact form →</a>
+          </div>
+          <noscript><p class="booking-noscript">Please enable JavaScript to prepare a time-zone-aware request, or <a href="mailto:Ramtin.Mojtahedi@utoronto.ca">email Ramtin directly</a> with your proposed date, time, and time zone.</p></noscript>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

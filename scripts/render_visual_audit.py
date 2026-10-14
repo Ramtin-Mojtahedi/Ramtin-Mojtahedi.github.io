@@ -159,6 +159,7 @@ def render_site(output: Path) -> None:
         "site-part-1.html": read(INCLUDES / "site-part-1.html"),
         "site-part-2.html": render_publications_section(metrics, publications),
         "site-part-3.html": read(INCLUDES / "site-part-3.html"),
+        "site-booking.html": read(INCLUDES / "site-booking.html"),
         "site-part-4.html": read(INCLUDES / "site-part-4.html"),
     }
 

@@ -181,11 +181,12 @@ def latest_verified(publications: list[dict[str, object]]) -> str:
 
 def site_header(*, label: str) -> str:
     return f'''<header class="site-header">
-    <a class="identity" href="/">RM <span>Dr. Ramtin Mojtahedi</span></a>
+    <a class="identity" href="/"><span>Dr. Ramtin Mojtahedi</span></a>
     <nav aria-label="{esc(label, attribute=True)}">
       <a href="/about/">About</a>
       <a href="/research/">Research</a>
       <a href="/publications/">Publications</a>
+      <a href="/#meeting">Meet</a>
       <a href="{ORCID_URL}" rel="me">ORCID</a>
     </nav>
   </header>'''
@@ -1016,14 +1017,17 @@ def publication_page(
   <meta name="twitter:description" content="{esc(description, attribute=True)}">
   {json_script(schema)}
   <script src="/assets/scholarly-pages.js?v=20260802-2" defer></script>
+  <link rel="stylesheet" href="/assets/site-language.css?v=20261014">
+  <script src="/assets/site-language.js?v=20261014" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to publication record</a>
   <header class="site-header">
-    <a class="identity" href="/">RM <span>Dr. Ramtin Mojtahedi</span></a>
+    <a class="identity" href="/"><span>Dr. Ramtin Mojtahedi</span></a>
     <nav aria-label="Publication navigation">
       <a href="/">Portfolio</a>
       <a href="/publications/">All publications</a>
+      <a href="/#meeting">Meet</a>
       <a href="{ORCID_URL}" rel="me">ORCID</a>
     </nav>
   </header>
@@ -1188,11 +1192,13 @@ def publications_index(publications: list[dict[str, object]]) -> str:
   <meta name="twitter:card" content="summary">
   {json_script(schema)}
   <script src="/assets/scholarly-pages.js?v=20260802-2" defer></script>
+  <link rel="stylesheet" href="/assets/site-language.css?v=20261014">
+  <script src="/assets/site-language.js?v=20261014" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to publication records</a>
   <header class="site-header">
-    <a class="identity" href="/">RM <span>Dr. Ramtin Mojtahedi</span></a>
+    <a class="identity" href="/"><span>Dr. Ramtin Mojtahedi</span></a>
     <nav aria-label="Publication navigation"><a href="/">Portfolio</a><a href="/about/">About</a><a href="/research/">Research</a><a href="/publications.bib" download>BibTeX</a><a href="/publications.json">JSON</a><a href="/publications.atom.xml">Atom</a><a href="{ORCID_URL}" rel="me">ORCID</a></nav>
   </header>
   <main id="main-content">
@@ -1331,6 +1337,8 @@ def about_page(publications: list[dict[str, object]]) -> str:
   <meta name="twitter:description" content="Professional biography, research identity, education, and authoritative profiles.">
   <meta name="twitter:image" content="{SOCIAL_IMAGE_URL}">
   {json_script(schema)}
+  <link rel="stylesheet" href="/assets/site-language.css?v=20261014">
+  <script src="/assets/site-language.js?v=20261014" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to biography</a>
@@ -1502,6 +1510,8 @@ def research_page(publications: list[dict[str, object]]) -> str:
   <meta name="twitter:description" content="Research themes and linked scholarly records in medical imaging AI, multimodal prediction, radiomics, and engineering.">
   <meta name="twitter:image" content="{SOCIAL_IMAGE_URL}">
   {json_script(schema)}
+  <link rel="stylesheet" href="/assets/site-language.css?v=20261014">
+  <script src="/assets/site-language.js?v=20261014" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to research themes</a>

@@ -1,0 +1,8 @@
+{
+  "provider": "calendly",
+  "bookingUrl": "https://calendly.com/ramtinrms/research-conversation",
+  "contactEmail": "Ramtin.Mojtahedi@utoronto.ca",
+  "defaultTimeZone": "America/Toronto",
+  "configurationHelp": "To enable real booking, set provider to calendly or cal and bookingUrl to your public HTTPS Calendly event URL or Cal.com event URL. A connected scheduling account must manage your availability and create calendar invitations and meeting links. Do not place passwords, access tokens, or private calendar URLs in this public file. With no booking URL, the site prepares email meeting requests and optional tentative calendar holds.",
+  "bookingSummary": "30 minutes · Google Meet · Monday–Friday, 6–8 pm Toronto time. The calendar shows available times in your time zone."
+}

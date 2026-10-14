@@ -24,6 +24,7 @@ FILES = {
     "publications_section": ROOT / "_includes/site-part-2.html",
     "activity": ROOT / "_includes/site-part-3.html",
     "contact": ROOT / "_includes/site-part-4.html",
+    "booking": ROOT / "_includes/site-booking.html",
     "contact_js": ROOT / "assets/contact-form.js",
     "contact_css": ROOT / "assets/contact-form-polish.css",
     "publications_css": ROOT / "assets/publications.css",
@@ -496,7 +497,7 @@ def main() -> int:
         "scholarly_pages",
     }
     sources = {name: read(path) for name, path in FILES.items() if name not in structured_files}
-    parts = "\n".join(sources[name] for name in ("hero", "publications_section", "activity", "contact"))
+    parts = "\n".join(sources[name] for name in ("hero", "publications_section", "activity", "booking", "contact"))
     publications, metrics = validate_publications()
     counts = validate_counts(sources["hero"], sources["activity"], sources["contact"], metrics)
     validate_structure(sources["index"], parts)
