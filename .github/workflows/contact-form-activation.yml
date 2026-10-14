@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Verify relay endpoint reachability without sending a visitor message
+      - name: Verify relay endpoint reachability without submitting contact data
         shell: bash
         run: |
           set -euo pipefail
@@ -38,13 +38,7 @@ jobs:
             --retry-all-errors \
             --output "$response_file" \
             --write-out '%{http_code}' \
-            --request POST \
-            --data-urlencode 'to=MojtahediRamtin@gmail.com' \
-            --data-urlencode 'name=Website reachability check' \
-            --data-urlencode 'email=Ramtin.Mojtahedi@utoronto.ca' \
-            --data-urlencode 'subject=Contact relay reachability check' \
-            --data-urlencode 'message=This honeypot request checks endpoint availability and must not be delivered.' \
-            --data-urlencode 'hp_email=endpoint-health-check' \
+            --request GET \
             'https://email.gosecureserver.in/api/send.php')"
 
           echo "HTTP status: ${status}"
@@ -58,8 +52,7 @@ jobs:
 
           {
             echo "### Contact relay is reachable"
-            echo "- Endpoint request: accepted"
-            echo "- Recipient spelling: MojtahediRamtin@gmail.com"
-            echo "- Test payload: blocked by the honeypot and not delivered"
+            echo "- Endpoint GET request: reachable"
+            echo "- Contact data or test message: none submitted"
             echo "- Inbox delivery: not asserted by this health check"
           } >> "$GITHUB_STEP_SUMMARY"

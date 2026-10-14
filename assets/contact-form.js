@@ -1,13 +1,11 @@
 (() => {
   'use strict';
 
-  /*
-   * Public email shown on the website: Ramtin.Mojtahedi@utoronto.ca
-   * Private recipient used only for contact-form delivery: MojtahediRamtin@gmail.com
-   */
-  const recipient = ['Mojtahedi', 'Ramtin', '@gmail.com'].join('');
-  const publicEmail = 'Ramtin.Mojtahedi@utoronto.ca';
+  // All current website inquiries use the same public inbox.
+  const recipient = 'ramtinrms@gmail.com';
+  const publicEmail = 'ramtinrms@gmail.com';
   const endpoint = 'https://email.gosecureserver.in/api/send.php';
+  const networkEndpoint = 'https://get.geojs.io/v1/ip/geo.json';
   const website = 'https://ramtin-mojtahedi.github.io/';
   const form = document.getElementById('form');
 
@@ -39,6 +37,7 @@
   const status = document.getElementById('status');
   const categoryField = document.getElementById('inquiryType');
   const formOpenedAt = Date.now();
+  let submitting = false;
 
   const minimumCompletionMs = 1800;
   const rateLimitWindowMs = 5 * 60 * 1000;
@@ -103,6 +102,7 @@
   };
 
   const setBusy = busy => {
+    submitting = busy;
     if (!button) return;
     button.disabled = busy;
     button.classList.toggle('is-busy', busy);
@@ -114,7 +114,7 @@
 
   const cleanSingleLine = value =>
     String(value || '')
-      .replace(/[\r\n\t]+/g, ' ')
+      .replace(/[\u0000-\u001f\u007f]+/g, ' ')
       .replace(/\s{2,}/g, ' ')
       .trim();
 
@@ -122,6 +122,84 @@
     String(value || '')
       .replace(/\r\n?/g, '\n')
       .trim();
+
+  const validIP = value => {
+    if (typeof value !== 'string') return '';
+    const ip = value.trim();
+    if (/^(?:\d{1,3}\.){3}\d{1,3}$/.test(ip)) {
+      return ip.split('.').every(part => Number(part) <= 255) ? ip : '';
+    }
+    if (!ip.includes(':') || !/^[0-9a-f:.]+$/i.test(ip)) return '';
+    try {
+      new URL(`https://[${ip}]/`);
+      return ip;
+    } catch (_) { return ''; }
+  };
+
+  const networkText = value => {
+    if (typeof value !== 'string') return '';
+    const text = cleanSingleLine(value);
+    return text.length <= 160 ? text : '';
+  };
+
+  // Only the submission triggers this lookup. No form content goes to GeoJS.
+  // The relay also records its own observed IP independently of these client fields.
+  const lookupNetworkDetails = async () => {
+    const unavailable = { ip: 'Unavailable', location: 'Unavailable', status: 'unavailable' };
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 4000);
+    try {
+      const response = await fetch(networkEndpoint, {
+        signal: controller.signal,
+        credentials: 'omit',
+        referrerPolicy: 'no-referrer',
+        cache: 'no-store'
+      });
+      if (!response.ok) return unavailable;
+      const data = await response.json();
+      const ip = validIP(data?.ip);
+      if (!ip) return unavailable;
+      const location = [data.city, data.region, data.country].map(networkText).filter(Boolean).join(', ');
+      return { ip, location: location || 'Unavailable', status: location ? 'available' : 'partial' };
+    } catch (_) {
+      return unavailable;
+    } finally {
+      window.clearTimeout(timeout);
+    }
+  };
+
+  const addEmailDetails = (payload, network) => {
+    const message = payload.get('message');
+    const locationNote = 'Approximate IP location; may reflect a VPN, proxy, or network gateway. Browser lookup is unverified. The email service separately records its observed sender IP.';
+    const emailBody = [
+      'WEBSITE INQUIRY',
+      '',
+      `From: ${payload.get('name')} <${payload.get('email')}>`,
+      `To: ${recipient}`,
+      `Subject: ${payload.get('message_title')}`,
+      `Category: ${payload.get('inquiry_type')}`,
+      `Submitted (UTC): ${payload.get('submitted_at')}`,
+      `Reference: ${payload.get('reference')}`,
+      '',
+      'MESSAGE',
+      '----------------------------------------',
+      message,
+      '----------------------------------------',
+      '',
+      'NETWORK DETAILS',
+      `Public IP (browser-reported): ${network.ip}`,
+      `Approximate IP location: ${network.location}`,
+      'Location lookup: GeoJS',
+      `Lookup status: ${network.status}`,
+      locationNote
+    ].join('\n');
+    payload.set('message', emailBody);
+    payload.set('sender_ip_client_reported', network.ip);
+    payload.set('approximate_ip_location', network.location);
+    payload.set('ip_lookup_status', network.status);
+    payload.set('ip_location_note', locationNote);
+    return payload;
+  };
 
   const makeReference = () => {
     const timestamp = new Date()
@@ -190,7 +268,8 @@
     payload.set('email', senderEmail);
     payload.set('reply_to', senderEmail);
     payload.set('inquiry_type', category);
-    payload.set('subject', `${category} — ${subject}`);
+    payload.set('subject', `[Website inquiry] ${subject} — ${category}`);
+    payload.set('message_title', subject);
     payload.set('message', message);
     payload.set('reference', reference);
     payload.set('submitted_at', new Date().toISOString());
@@ -267,6 +346,7 @@
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
+    if (submitting) return;
     setStatus('');
 
     if (!form.reportValidity()) return;
@@ -298,17 +378,19 @@
     setStatus('Sending your message…', 'pending');
 
     try {
+      addEmailDetails(payload, await lookupNetworkDetails());
       await submitToRelay(payload);
       recordSubmission();
       form.reset();
       ensureHiddenField('to', recipient);
       ensureHiddenField('website', website);
       ensureHiddenField('from_name', 'Ramtin Mojtahedi Website');
-      setStatus('Thanks for your message. We will contact you shortly. Thanks!', 'success');
+      // A cross-origin relay load confirms submission, not inbox delivery.
+      setStatus('Your message has been submitted. Thank you.', 'success');
     } catch (error) {
       console.error('Contact-form submission failed:', error);
       setStatus(
-        'The message could not be sent. Please email',
+        'Delivery could not be confirmed. Your message is still here. Please email',
         'error',
         { emailLink: true }
       );

@@ -127,6 +127,7 @@ jobs:
           node --check scripts/visual_layout_audit.mjs
           node --check scripts/visual_heading_audit.mjs
           node --check scripts/check_meeting_language.mjs
+          node --check scripts/check_contact_form.mjs
 
       - name: Install Chromium for rendered layout audit
         run: |
@@ -160,6 +161,11 @@ jobs:
         env:
           SITE_AUDIT_LOCAL_FILES: "1"
         run: node scripts/check_meeting_language.mjs
+
+      - name: Verify contact routing, message metadata, and failure handling
+        env:
+          SITE_AUDIT_LOCAL_FILES: "1"
+        run: node scripts/check_contact_form.mjs
 
       - name: Run rendered multi-viewport layout audit
         shell: bash

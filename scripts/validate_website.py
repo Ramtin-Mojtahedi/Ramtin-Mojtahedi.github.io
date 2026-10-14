@@ -12,11 +12,11 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PUBLIC_EMAIL = "Ramtin.Mojtahedi@utoronto.ca"
+PUBLIC_EMAIL = "ramtinrms@gmail.com"
 MINIMUM_PUBLICATIONS = 18
 REQUIRED_PUBLICATION_IDS = {"self-supervised-transformer-liver-tumor-2026"}
 EXCLUDED_UNVERIFIED_IDS = {"doctoral-dissertation-liver-cancer-2025"}
-SUCCESS_MESSAGE = "Thanks for your message. We will contact you shortly. Thanks!"
+SUCCESS_MESSAGE = "Your message has been submitted. Thank you."
 
 FILES = {
     "index": ROOT / "index.html",
@@ -261,10 +261,12 @@ def validate_contact(index: str, contact: str, script: str, style: str) -> None:
     }
     if mailtos != {PUBLIC_EMAIL.lower()}:
         fail(f"Unexpected visible mailto addresses: {sorted(mailtos)}")
-    if not all(f"'{piece}'" in script for piece in ("Mojtahedi", "Ramtin", "@gmail.com")):
-        fail("The private form recipient is not assembled correctly.")
-    if re.search(r"mailto:[^\"'<>\s]+@gmail\.com", index + contact, flags=re.I) or "Ramtn" in script:
-        fail("Private or misspelled recipient data is visible.")
+    for constant in ("recipient", "publicEmail"):
+        match = re.search(rf"const\s+{constant}\s*=\s*(['\"])([^'\"]+)\1\s*;", script)
+        if not match or match.group(2) != PUBLIC_EMAIL:
+            fail(f"The contact-form {constant} does not use the current public email.")
+    if "Ramtn" in script:
+        fail("Misspelled recipient data remains.")
     if "Please do not include patient-identifiable" in index + contact:
         fail("The removed contact disclaimer remains.")
     if re.search(r"\b(?:minlength|maxlength)\s*=", contact, flags=re.I):

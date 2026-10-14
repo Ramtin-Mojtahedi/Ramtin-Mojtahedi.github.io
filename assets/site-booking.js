@@ -1,7 +1,7 @@
 (function (global) {
   'use strict';
 
-  const DEFAULT_EMAIL = 'Ramtin.Mojtahedi@utoronto.ca';
+  const DEFAULT_EMAIL = 'ramtinrms@gmail.com';
   const PURPOSES = {
     consultation: 'Medical AI and technical consultation',
     research: 'Research collaboration',

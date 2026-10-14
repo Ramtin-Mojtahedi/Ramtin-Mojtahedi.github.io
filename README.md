@@ -63,7 +63,7 @@ The scheduled maintenance workflow builds and validates a temporary candidate. I
 | `.github/workflows/site-quality.yml` | Static, syntax, rendered, responsive, and reduced-motion quality checks |
 | `.github/workflows/update-publications.yml` | Scheduled read-only candidate maintenance check |
 | `.github/workflows/seo-indexing.yml` | Wait for the exact Pages revision, verify deployed artifacts, check public URLs, and notify IndexNow |
-| `.github/workflows/contact-form-activation.yml` | Check contact-relay reachability with a honeypot payload that is not intended for delivery |
+| `.github/workflows/contact-form-activation.yml` | Check contact-relay HTTP reachability without submitting a form or asserting email delivery |
 
 ### Reproducibility and operating boundary
 
@@ -77,10 +77,16 @@ The scheduled maintenance workflow builds and validates a temporary candidate. I
 
 ## Languages and consultation booking
 
+All website email links, meeting-request drafts, and contact-form messages use **ramtinrms@gmail.com**.
+
+Contact submissions format the sender, subject, category, message, reference, and UTC submission time for email. Network fields label the public IP as browser-reported and the city, region, and country as an approximate, unverified IP location. GeoJS is queried only during submission; form content is not sent to it. VPNs and network gateways can affect the estimate. Failed lookups leave these fields unavailable.
+
+The existing email service independently records the IP it observes. Its cross-origin receipt cannot be inspected from the static site, so the form reports submission without claiming inbox delivery. The scheduled endpoint check uses GET and submits no contact data or test messages.
+
 The header offers English plus Chinese, Hindi, Spanish, French, Arabic, Bengali, Portuguese, Russian, Urdu, and Persian (Farsi). Non-English choices open Google Translate’s public website view for the current page; English returns to the canonical original. These are automatic translations, not reviewed language editions. URL queries and visitor form values are excluded from translation links.
 
 The consultation and collaboration section immediately follows the introduction. `assets/booking-config.json` connects the live Calendly event “Consultation & Collaboration” at https://calendly.com/ramtinrms/research-conversation. Sessions cover medical AI, research collaboration, technical projects, and professional opportunities. The host’s Google Calendar checks conflicts and receives bookings; Calendly supplies Google Meet links and calendar invitations. The initial schedule is 30-minute consultation or collaboration meetings Monday–Friday, 18:00–20:00 Toronto time. Visitors see times in their own time zone. Availability and meeting notifications are managed in Calendly. No scheduling credentials are stored in the public repository.
 
 If the scheduling link cannot load, the direct booking link remains available. The optional consultation and collaboration request form prepares an email draft and can save a tentative calendar hold; it does not send email or claim a confirmed booking. Clear the provider and bookingUrl fields to use that fallback alone.
 
-Validation includes `node scripts/check_meeting_language.mjs`, the existing static checks, and responsive layout/heading audits.
+Validation includes `node scripts/check_meeting_language.mjs`, `node scripts/check_contact_form.mjs`, the existing static checks, and responsive layout/heading audits. Contact checks isolate external services and send no messages.

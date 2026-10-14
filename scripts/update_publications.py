@@ -23,7 +23,7 @@ METRICS = ROOT / "_data/site_metrics.json"
 FEED = ROOT / "publications.json"
 
 NAME = "Ramtin Mojtahedi"
-EMAIL = "Ramtin.Mojtahedi@utoronto.ca"
+EMAIL = "ramtinrms@gmail.com"
 SCHOLAR_ID = "KjUrlGUAAAAJ"
 SCHOLAR_URL = f"https://scholar.google.com/citations?user={SCHOLAR_ID}&hl=en"
 ORCID = "0000-0002-3953-3256"

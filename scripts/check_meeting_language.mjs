@@ -107,7 +107,7 @@ try {
     summer: '2026-10-14T14:00:00.000Z', winter: '2026-11-04T15:00:00.000Z',
     beforeFall: '2026-11-01T04:30:00.000Z', afterFall: '2026-11-01T07:30:00.000Z',
     halfHour: '2026-11-04T04:30:00.000Z', durationMinutes: 60,
-    mailtoScheme: 'mailto:', mailtoRecipient: 'Ramtin.Mojtahedi@utoronto.ca'
+    mailtoScheme: 'mailto:', mailtoRecipient: 'ramtinrms@gmail.com'
   };
   for (const [key, actual] of Object.entries(calendarResults)) check(actual, expectedCalendar[key] ?? true, key);
 
