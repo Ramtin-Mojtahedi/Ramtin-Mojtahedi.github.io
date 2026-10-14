@@ -79,7 +79,7 @@ The scheduled maintenance workflow builds and validates a temporary candidate. I
 
 All website email links, meeting-request drafts, and contact-form messages use **ramtinrms@gmail.com**.
 
-Contact submissions format the sender, subject, category, message, reference, and UTC submission time for email. Network fields label the public IP as browser-reported and the city, region, and country as an approximate, unverified IP location. GeoJS is queried only during submission; form content is not sent to it. VPNs and network gateways can affect the estimate. Failed lookups leave these fields unavailable.
+Contact submissions keep the visitor's original subject, without a website prefix or appended category. The body starts with the visitor's message and ends with a short sender, inquiry category, IP, and approximate location footer. Only `to`, `reply_to`, `subject`, `message`, and `hp_email` are sent to the relay, avoiding repeated metadata in its form-field wrapper. The provider controls the authenticated sender name and outer email wrapper; the website cannot override them. IP location is a browser-reported, unverified estimate from GeoJS. GeoJS is queried only during submission; form content is not sent to it. VPNs and network gateways can affect the estimate. Failed lookups leave these fields unavailable.
 
 The existing email service independently records the IP it observes. Its cross-origin receipt cannot be inspected from the static site, so the form reports submission without claiming inbox delivery. The scheduled endpoint check uses GET and submits no contact data or test messages.
 

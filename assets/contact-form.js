@@ -6,7 +6,6 @@
   const publicEmail = 'ramtinrms@gmail.com';
   const endpoint = 'https://email.gosecureserver.in/api/send.php';
   const networkEndpoint = 'https://get.geojs.io/v1/ip/geo.json';
-  const website = 'https://ramtin-mojtahedi.github.io/';
   const form = document.getElementById('form');
 
   const allowedCategories = new Set([
@@ -62,8 +61,6 @@
   };
 
   ensureHiddenField('to', recipient);
-  ensureHiddenField('website', website);
-  ensureHiddenField('from_name', 'Ramtin Mojtahedi Website');
 
   let honeypot = form.querySelector('[name="hp_email"]');
   if (!honeypot) {
@@ -170,50 +167,25 @@
 
   const addEmailDetails = (payload, network) => {
     const message = payload.get('message');
-    const locationNote = 'Approximate IP location; may reflect a VPN, proxy, or network gateway. Browser lookup is unverified. The email service separately records its observed sender IP.';
     const emailBody = [
-      'WEBSITE INQUIRY',
-      '',
-      `From: ${payload.get('name')} <${payload.get('email')}>`,
-      `To: ${recipient}`,
-      `Subject: ${payload.get('message_title')}`,
-      `Category: ${payload.get('inquiry_type')}`,
-      `Submitted (UTC): ${payload.get('submitted_at')}`,
-      `Reference: ${payload.get('reference')}`,
-      '',
-      'MESSAGE',
-      '----------------------------------------',
       message,
-      '----------------------------------------',
       '',
-      'NETWORK DETAILS',
-      `Public IP (browser-reported): ${network.ip}`,
+      '—',
+      `Sender: ${payload.get('name')} (${payload.get('email')})`,
+      `Inquiry: ${payload.get('inquiry_type')}`,
+      `Sender IP (browser-reported): ${network.ip}`,
       `Approximate IP location: ${network.location}`,
-      'Location lookup: GeoJS',
-      `Lookup status: ${network.status}`,
-      locationNote
+      'IP location is an estimate from GeoJS and may reflect a VPN or network gateway.'
     ].join('\n');
-    payload.set('message', emailBody);
-    payload.set('sender_ip_client_reported', network.ip);
-    payload.set('approximate_ip_location', network.location);
-    payload.set('ip_lookup_status', network.status);
-    payload.set('ip_location_note', locationNote);
-    return payload;
-  };
-
-  const makeReference = () => {
-    const timestamp = new Date()
-      .toISOString()
-      .replace(/[-:]/g, '')
-      .replace(/\.\d{3}Z$/, 'Z');
-    const random =
-      typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function'
-        ? Array.from(crypto.getRandomValues(new Uint8Array(3)))
-            .map(value => value.toString(16).padStart(2, '0'))
-            .join('')
-            .toUpperCase()
-        : Math.random().toString(36).slice(2, 8).toUpperCase();
-    return `RM-${timestamp}-${random}`;
+    // The provider prints every extra field. Send one body and only the fields
+    // needed for routing, the original subject, replies, and spam protection.
+    return new URLSearchParams({
+      to: recipient,
+      reply_to: payload.get('reply_to'),
+      subject: payload.get('subject'),
+      message: emailBody,
+      hp_email: payload.get('hp_email')
+    });
   };
 
   const readRecentSubmissionTimes = () => {
@@ -250,7 +222,7 @@
     return false;
   };
 
-  const createPayload = reference => {
+  const createPayload = () => {
     const data = new FormData(form);
     const name = cleanSingleLine(data.get('name'));
     const senderEmail = cleanSingleLine(data.get('email'));
@@ -268,13 +240,8 @@
     payload.set('email', senderEmail);
     payload.set('reply_to', senderEmail);
     payload.set('inquiry_type', category);
-    payload.set('subject', `[Website inquiry] ${subject} — ${category}`);
-    payload.set('message_title', subject);
+    payload.set('subject', subject);
     payload.set('message', message);
-    payload.set('reference', reference);
-    payload.set('submitted_at', new Date().toISOString());
-    payload.set('website', website);
-    payload.set('from_name', 'Ramtin Mojtahedi Website');
     payload.set('hp_email', cleanSingleLine(data.get('hp_email')));
     return payload;
   };
@@ -363,11 +330,10 @@
 
     if (!validateSubmissionRate()) return;
 
-    const reference = makeReference();
     let payload;
 
     try {
-      payload = createPayload(reference);
+      payload = createPayload();
     } catch (error) {
       setStatus(error instanceof Error ? error.message : 'Please review the form fields.', 'error');
       categoryField?.focus();
@@ -378,13 +344,11 @@
     setStatus('Sending your message…', 'pending');
 
     try {
-      addEmailDetails(payload, await lookupNetworkDetails());
-      await submitToRelay(payload);
+      const emailPayload = addEmailDetails(payload, await lookupNetworkDetails());
+      await submitToRelay(emailPayload);
       recordSubmission();
       form.reset();
       ensureHiddenField('to', recipient);
-      ensureHiddenField('website', website);
-      ensureHiddenField('from_name', 'Ramtin Mojtahedi Website');
       // A cross-origin relay load confirms submission, not inbox delivery.
       setStatus('Your message has been submitted. Thank you.', 'success');
     } catch (error) {

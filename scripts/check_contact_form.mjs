@@ -171,22 +171,42 @@ try {
     check(request.childFrame, true, 'relay targets hidden child frame');
     check(payload.getAll('to'), [recipient], 'exactly one fixed recipient despite form tampering');
     check(payload.get('reply_to'), visitor.email, 'Reply-To is the visitor');
-    check(payload.get('name'), visitor.name, 'Unicode sender name preserved');
-    check(payload.get('email'), visitor.email, 'sender email preserved');
-    check(payload.get('message_title'), visitor.title, 'complete title retained');
-    check(payload.get('subject'), `[Website inquiry] ${visitor.title} — ${visitor.category}`, 'professional subject formatting');
+    check([...payload.keys()].sort(), ['hp_email', 'message', 'reply_to', 'subject', 'to'], 'only mail controls and one message body are submitted');
+    check(payload.get('hp_email'), '', 'empty honeypot retained for relay safeguards');
+    check(payload.get('subject'), visitor.title, 'email subject is exactly the visitor title');
     const body = payload.get('message').replace(/\r\n/g, '\n');
-    check(body.includes(visitor.message), true, 'complete long Unicode/newline message retained');
-    check([visitor.name, visitor.email, visitor.title, geoFixture.ip, 'Toronto, Ontario, Canada'].every(value => body.includes(value)), true, 'readable email body includes sender and network details');
-    check(payload.get('sender_ip_client_reported'), geoFixture.ip, 'client-reported IP metadata');
-    check(payload.get('approximate_ip_location'), 'Toronto, Ontario, Canada', 'city/region/country metadata');
-    check(payload.get('ip_lookup_status'), 'available', 'available lookup status');
-    check(/approximate/i.test(payload.get('ip_location_note')) && /unverified/i.test(payload.get('ip_location_note')), true, 'location limitations included');
+    check(body.startsWith(visitor.message + '\n\n—\n'), true, 'complete long Unicode message appears first, followed by a compact footer');
+    for (const detail of [`Sender: ${visitor.name} (${visitor.email})`, `Inquiry: ${visitor.category}`,
+      `Sender IP (browser-reported): ${geoFixture.ip}`, 'Approximate IP location: Toronto, Ontario, Canada']) {
+      check(body.split(detail).length - 1, 1, `${detail.split(':')[0]} appears once in the footer`);
+    }
+    check(body.includes('IP location is an estimate from GeoJS and may reflect a VPN or network gateway.'), true, 'footer explains location estimate limitations');
+    check(body.includes(visitor.title), false, 'subject is not duplicated inside the message');
+    check(/WEBSITE INQUIRY|Submitted \(UTC\):|Reference:|NETWORK DETAILS|Lookup status:/.test(body), false, 'message has no technical report wrapper');
     success.releaseRelay();
     await submitted(success.page);
     check(await success.page.locator('#message').inputValue(), '', 'successful submission resets form');
     check(await success.page.locator('#form input[name="to"]').inputValue(), recipient, 'reset keeps correct recipient');
   } finally { await success.close(); }
+
+  const headerSafety = await fixture();
+  try {
+    await fill(headerSafety.page);
+    // Hidden inputs bypass the browser's single-line text sanitization, exercising
+    // the submission boundary rather than trusting native input behavior.
+    await headerSafety.page.locator('#subject').evaluate(node => {
+      node.type = 'hidden';
+      node.value = 'Research partnership\r\nBcc: attacker@example.test';
+    });
+    await submit(headerSafety.page);
+    await until(() => headerSafety.state.relayRequests.length === 1, 'header safety: relay request prepared');
+    const payload = headerSafety.state.relayRequests[0].payload;
+    check(payload.get('subject'), 'Research partnership Bcc: attacker@example.test', 'CRLF cannot create a second email header');
+    check(/[\r\n\u0000]/.test(payload.get('subject')), false, 'subject contains no header control characters');
+    check(payload.get('reply_to'), visitor.email, 'header attempt cannot alter Reply-To');
+    check([...payload.keys()].sort(), ['hp_email', 'message', 'reply_to', 'subject', 'to'], 'header attempt cannot add recipient or mail fields');
+    await submitted(headerSafety.page);
+  } finally { await headerSafety.close(); }
 
   for (const geo of ['unavailable', 'service-error', 'failure', 'timeout', 'partial']) {
     const sample = await fixture({ geo });
@@ -199,10 +219,11 @@ try {
       await submitted(sample.page);
       const payload = sample.state.relayRequests[0].payload;
       check(payload.get('to'), recipient, `${geo}: correct recipient`);
-      check(payload.get('ip_lookup_status'), geo === 'partial' ? 'partial' : 'unavailable', `${geo}: truthful lookup status`);
-      check(payload.get('sender_ip_client_reported'), geo === 'partial' ? '2001:db8::42' : 'Unavailable', `${geo}: IP handled honestly`);
-      check(payload.get('approximate_ip_location'), 'Unavailable', `${geo}: unavailable location handled honestly`);
-      check(payload.get('message').replace(/\r\n/g, '\n').includes(visitor.message), true, `${geo}: message remains complete`);
+      const body = payload.get('message').replace(/\r\n/g, '\n');
+      check(body.includes(`Sender IP (browser-reported): ${geo === 'partial' ? '2001:db8::42' : 'Unavailable'}`), true, `${geo}: IP handled honestly in footer`);
+      check(body.includes('Approximate IP location: Unavailable'), true, `${geo}: unavailable location handled honestly in footer`);
+      check(body.startsWith(visitor.message + '\n\n—\n'), true, `${geo}: complete message stays first`);
+      check([...payload.keys()].sort(), ['hp_email', 'message', 'reply_to', 'subject', 'to'], `${geo}: no duplicated network fields`);
     } finally { await sample.close(); }
   }
 
