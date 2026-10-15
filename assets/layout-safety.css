@@ -160,7 +160,7 @@ body {
 }
 
 .photoLabel {
-  max-width: calc(100% - 24px);
+  max-width: 100%;
 }
 
 .impact-intro {
@@ -714,12 +714,9 @@ html.nav-layout-compact .links a {
   }
 
   .photoLabel {
-    position: relative;
-    left: auto;
-    right: auto;
-    bottom: auto;
-    max-width: none;
-    margin: -46px 12px 3px;
+    position: static;
+    max-width: 100%;
+    margin: 12px 0 0;
   }
 
   .expertGrid,
