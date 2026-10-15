@@ -263,6 +263,7 @@
         const embedURL = new URL(bookingURL);
         embedURL.searchParams.set('embed_domain', global.location.hostname);
         embedURL.searchParams.set('embed_type', 'Inline');
+        embedURL.searchParams.set('hide_event_type_details', '1');
         const iframe = document.createElement('iframe');
         iframe.src = embedURL.href;
         iframe.title = 'Book a consultation or collaboration meeting with Ramtin Mojtahedi';
