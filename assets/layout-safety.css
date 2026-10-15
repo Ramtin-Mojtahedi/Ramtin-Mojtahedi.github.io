@@ -877,3 +877,56 @@ html.nav-layout-compact .links a {
     transform: none !important;
   }
 }
+
+/* Keep header controls separate and theme labels clear of their borders. */
+.nav .tools {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+.nav .tools > * {
+  flex-shrink: 0;
+  margin: 0;
+}
+.nav .tools .square {
+  width: auto;
+  min-width: 43px;
+  height: 43px;
+  padding: 0 11px;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.nav .tools #theme {
+  display: flex;
+  gap: 8px;
+}
+.nav .tools #theme .rm-theme-icon {
+  flex: 0 0 17px;
+}
+.nav .tools #theme .rm-theme-text {
+  line-height: 1;
+  white-space: nowrap;
+  transform: translateY(-1px);
+}
+.nav .tools .site-language-trigger {
+  height: 43px;
+  min-height: 43px;
+}
+@media (max-width: 640px) {
+  .nav .tools { gap: 10px; }
+  .nav .tools .square {
+    width: 41px;
+    min-width: 41px;
+    height: 41px;
+    padding: 0;
+  }
+  .nav .tools .site-language-trigger {
+    width: 41px;
+    min-width: 41px;
+    height: 41px;
+    min-height: 41px;
+  }
+}
