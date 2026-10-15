@@ -175,3 +175,73 @@
     margin-inline: 16px;
   }
 }
+
+
+/* A compact, theme-native booking panel; the calendar opens only on request. */
+.booking-connected.booking-link-only .booking-layout {
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, .85fr);
+  gap: 30px;
+  align-items: center;
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid color-mix(in srgb, var(--a) 18%, var(--line));
+  border-radius: 24px;
+  background: linear-gradient(125deg, color-mix(in srgb, var(--a) 5%, var(--card)), var(--card));
+  box-shadow: 0 14px 40px color-mix(in srgb, var(--ink) 5%, transparent);
+}
+.booking-connected.booking-link-only .booking-note {
+  position: static;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.booking-connected.booking-link-only .booking-icon { display: none; }
+.booking-connected.booking-link-only .booking-note h3 {
+  max-width: 430px;
+  margin: 0 0 12px;
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
+}
+.booking-connected.booking-link-only .booking-note > p { max-width: 480px; }
+.booking-connected.booking-link-only .booking-contact-link { margin-top: 14px; }
+.booking-connected.booking-link-only .booking-card {
+  width: auto;
+  margin: 0;
+  padding: 0 0 0 28px;
+  border: 0;
+  border-inline-start: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.booking-connected.booking-link-only .booking-provider > h3,
+.booking-connected.booking-link-only .booking-provider > p,
+.booking-connected.booking-link-only #booking-provider-link,
+.booking-connected.booking-link-only .booking-provider-fallback { margin-inline: 0; }
+.booking-connected.booking-link-only #booking-provider-link {
+  min-height: 46px;
+  margin-top: 18px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: .8rem;
+}
+.booking-connected.booking-link-only .booking-provider-fallback {
+  margin-top: 18px;
+  padding-top: 14px;
+}
+@media (max-width: 760px) {
+  .booking-connected.booking-link-only .booking-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    padding: 22px;
+    border-radius: 20px;
+  }
+  .booking-connected.booking-link-only .booking-card {
+    padding: 22px 0 0;
+    border-inline-start: 0;
+    border-top: 1px solid var(--line);
+  }
+}
+@media (max-width: 440px) {
+  .booking-connected.booking-link-only .booking-layout { padding: 18px; }
+  .booking-connected.booking-link-only #booking-provider-link { width: 100%; }
+}

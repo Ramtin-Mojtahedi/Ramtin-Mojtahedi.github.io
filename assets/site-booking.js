@@ -255,33 +255,18 @@
       if (!bookingURL) { showRequestIntro(); return; }
       const providerLink = document.getElementById('booking-provider-link');
       providerLink.href = bookingURL;
-      document.querySelector('[data-i18n="booking.intro"]').textContent = 'Book a consultation or collaboration meeting about medical AI, research, technical projects, or professional opportunities. Choose an available time below.';
+      document.querySelector('[data-i18n="booking.intro"]').textContent = 'Book a consultation or collaboration meeting about medical AI, research, technical projects, or professional opportunities. Open the booking calendar to choose an available time.';
       if (typeof config.bookingSummary === 'string' && config.bookingSummary.length <= 300) {
         document.querySelector('[data-i18n="booking.noteIntro"]').textContent = config.bookingSummary;
       }
-      if (config.provider === 'calendly') {
-        const embedURL = new URL(bookingURL);
-        embedURL.searchParams.set('embed_domain', global.location.hostname);
-        embedURL.searchParams.set('embed_type', 'Inline');
-        embedURL.searchParams.set('hide_event_type_details', '1');
-        const iframe = document.createElement('iframe');
-        iframe.src = embedURL.href;
-        iframe.title = 'Book a consultation or collaboration meeting with Ramtin Mojtahedi';
-        iframe.className = 'booking-calendar';
-        iframe.loading = 'lazy';
-        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-        const calendar = document.getElementById('booking-inline-calendar');
-        calendar.append(iframe);
-        calendar.hidden = false;
-        document.getElementById('meeting').classList.add('booking-connected');
-        const providerNote = document.querySelector('#booking-provider [data-i18n="booking.providerNote"]');
-        providerNote.textContent = 'Choose an available time below. You can also open the scheduling page in a new tab.';
-        providerNote.removeAttribute('data-i18n');
-      }
+      document.getElementById('meeting').classList.add('booking-connected', 'booking-link-only');
+      const providerNote = document.querySelector('#booking-provider [data-i18n="booking.providerNote"]');
+      providerNote.textContent = 'View live availability and choose a time in your time zone. The booking calendar opens in a new tab.';
+      providerNote.removeAttribute('data-i18n');
       document.getElementById('booking-fallback-mount').append(document.getElementById('booking-request-panel'));
       document.getElementById('booking-provider').hidden = false;
       const stepLabels = [
-        'Choose a date in the calendar below.',
+        'Open the booking calendar.',
         'Choose an available date and time in your time zone.',
         'Complete your booking and receive the service’s confirmation.'
       ];

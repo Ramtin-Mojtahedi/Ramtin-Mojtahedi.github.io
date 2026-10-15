@@ -271,19 +271,14 @@ try {
     check(await page.locator('#booking-provider').isVisible(), valid, `${config.provider || 'unconfigured'} provider visibility`);
     if (valid) {
       check(await page.locator('#booking-provider-link').getAttribute('href'), config.bookingUrl, 'provider destination');
-      const inline = page.locator('#booking-inline-calendar iframe');
-      check(await inline.count(), config.provider === 'calendly' ? 1 : 0, 'provider inline calendar mode');
-      if (config.provider === 'calendly') {
-        const src = new URL(await inline.getAttribute('src'));
-        check(src.origin + src.pathname, new URL(config.bookingUrl).origin + new URL(config.bookingUrl).pathname, 'inline calendar event');
-        check(src.searchParams.get('embed_domain'), '127.0.0.1', 'inline embedding domain');
-        check(src.searchParams.get('embed_type'), 'Inline', 'inline embedding type');
-        for (const width of [1440, 390, 320]) {
-          await page.setViewportSize({ width, height: 900 });
-          await inline.scrollIntoViewIfNeeded();
-          const box = await inline.boundingBox();
-          check(box.x >= -1 && box.x + box.width <= width + 1, true, `${width}px inline calendar width`);
-        }
+      check(await page.locator('#meeting iframe').count(), 0, 'booking section has no calendar frame or reserved white space');
+      const link = page.locator('#booking-provider-link');
+      check(await link.getAttribute('target'), '_blank', 'booking calendar opens in a separate tab');
+      for (const width of [1440, 390, 320]) {
+        await page.setViewportSize({ width, height: 900 });
+        await link.scrollIntoViewIfNeeded();
+        const box = await link.boundingBox();
+        check(box.x >= -1 && box.x + box.width <= width + 1, true, `${width}px booking button width`);
       }
       await page.locator('.booking-provider-fallback summary').click();
       check(await page.locator('#meeting-request').isVisible(), true, 'configured provider keeps request fallback');
