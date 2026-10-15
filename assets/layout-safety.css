@@ -927,3 +927,71 @@ html.nav-layout-compact .links a {
     min-height: 41px;
   }
 }
+
+
+/* Keep the portrait beside the name, including narrow browser panels. */
+.heroGrid {
+  grid-template-areas: "heading photo" "details photo";
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+  align-items: start;
+  gap: 0 54px;
+}
+.heroGrid > .hero-heading { grid-area: heading; }
+.heroGrid > .hero-details { grid-area: details; }
+.heroGrid > .photo {
+  grid-area: photo;
+  align-self: start;
+  justify-self: end;
+  margin: 38px 0 0;
+}
+.hero-heading h1 { margin-bottom: 24px; }
+
+@media (max-width: 1040px) {
+  .heroGrid {
+    grid-template-areas: "heading photo" "details details";
+    grid-template-columns: minmax(0, 1.15fr) minmax(230px, .85fr);
+    gap: 30px;
+    align-items: center;
+  }
+  .heroGrid > .hero-heading { align-self: center; }
+  .heroGrid > .photo { margin: 0; }
+  html .hero .hero-heading h1 {
+    font-size: clamp(2.3rem, 5.5vw, 4.4rem);
+    line-height: .98;
+    letter-spacing: -.055em;
+    margin-bottom: 0;
+  }
+  .hero-details .intro { max-width: 780px; }
+}
+
+@media (max-width: 620px) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(112px, 44%);
+    gap: 26px 16px;
+  }
+  html .hero .hero-heading h1 {
+    font-size: clamp(1.35rem, 7.5vw, 2.9rem);
+    line-height: 1.06;
+    letter-spacing: -.05em;
+    margin-top: 14px;
+  }
+  .hero-heading .eyebrow {
+    font-size: .55rem;
+    letter-spacing: .08em;
+    line-height: 1.6;
+  }
+  .hero-heading .eyebrow::before { display: none; }
+  .heroGrid > .photo {
+    width: 100%;
+    padding: 7px;
+    border-radius: 22px;
+  }
+  .heroGrid > .photo img { border-radius: 16px; }
+  .heroGrid > .photo .photoLabel {
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 14px;
+  }
+  .heroGrid > .photo .photoLabel b { font-size: .72rem; }
+  .heroGrid > .photo .photoLabel span { font-size: .625rem; }
+}
