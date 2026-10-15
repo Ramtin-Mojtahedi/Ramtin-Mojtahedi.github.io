@@ -8,6 +8,7 @@ on:
       - assets/news/**
       - news.json
       - news.xml
+      - scripts/render_news.py
       - _data/news.json
       - .github/workflows/news-carousel-audit.yml
   workflow_dispatch:
@@ -27,6 +28,7 @@ jobs:
           node-version: '22'
       - name: Prepare browser tests
         run: |
+          python scripts/render_news.py --check
           python scripts/render_visual_audit.py
           node --check assets/news-carousel.js
           npm install --no-save --no-package-lock playwright@1.52.0
@@ -56,6 +58,7 @@ jobs:
               return page;
             }
             async function picture(page) {
+              if (!await page.locator('.news-current img').count()) return;
               await page.locator('.news-current img').evaluate(img=>img.loading='eager');
               await page.waitForFunction(()=>{const img=document.querySelector('#news .news-current img');return img?.complete&&img.naturalWidth>0});
               assert.ok((await page.locator('.news-current img').getAttribute('alt')).length>10);
@@ -124,6 +127,15 @@ jobs:
               await updating.waitForFunction(n=>document.querySelectorAll('#news .news-card').length===n,active.length+1);
               assert.equal(await updating.locator('.news-current').getAttribute('data-news-id'),previousId);
               await updating.close();
+              const original='Original post 🌿\\n\\n'+('Exact words, punctuation and #research. '.repeat(30));
+              const exact=structuredClone(feed);
+              exact.items.unshift({id:'qa-original-post',content_type:'linkedin-post',date:'2099-01-01',date_label:'Test date',title:'LinkedIn post',summary:original,links:[],images:[active[0].image,active[1].image]});
+              const fidelity=await open(390,true,exact);
+              await fidelity.waitForFunction(()=>document.querySelector('.news-current')?.dataset.newsId==='qa-original-post');
+              assert.equal(await fidelity.locator('.news-current .news-original-post').textContent(),original);
+              assert.equal(await fidelity.locator('.news-current .news-picture').count(),2);
+              assert.equal(await fidelity.locator('.news-original-post').evaluate(n=>getComputedStyle(n).whiteSpace),'pre-wrap');
+              await fidelity.close();
               const fallback=await open(390,false,{items:[]});
               assert.equal(await fallback.locator('.news-card').count(),active.length);
               await picture(fallback);
@@ -132,11 +144,12 @@ jobs:
               const newest=bad.items.find(item=>item.id===active[0].id);
               newest.image={src:'/assets/nonexistent-news-image.png',alt:'Test missing image',source_url:'https://example.com',credit:'Test'};
               const broken=await open(390,true,bad);
-              await picture(broken);
-              await broken.waitForFunction(()=>document.querySelector('.news-current img')?.dataset.fallback==='true');
-              assert.match(await broken.locator('.news-current figcaption').textContent(),/original image unavailable/);
+              await broken.locator('.news-current img').evaluate(img=>img.loading='eager');
+              await broken.waitForFunction(()=>!!document.querySelector('.news-current .news-picture-unavailable'));
+              assert.equal(await broken.locator('.news-current img').count(),0);
+              assert.equal(await broken.locator('.news-current .news-picture-unavailable').getAttribute('href'),'https://example.com/');
               await broken.close();
-              fs.writeFileSync('news-test-results.json',JSON.stringify({passed:true,viewports:report,checks:['newest-first','pictures-inside-box','image-loads','image-failure-fallback','next/previous','keyboard','stable-height','focus-isolation','autoplay','pause','reduced-motion','feed-refresh','offline-fallback']},null,2));
+              fs.writeFileSync('news-test-results.json',JSON.stringify({passed:true,viewports:report,checks:['newest-first','pictures-inside-box','image-loads','image-failure-original-link','next/previous','keyboard','stable-height','focus-isolation','autoplay','pause','reduced-motion','feed-refresh','offline-fallback']},null,2));
               console.log('All news carousel and picture checks passed.');
             } finally {await browser.close();}
           })().catch(error=>{console.error(error);process.exit(1);});

@@ -163,7 +163,7 @@
     if (date) stamp.dateTime = date;
     meta.append(stamp);
     const body = make('div','news-card-body');
-    body.append(meta,make('h3','',excerpt(item.title,180)),make('p','',excerpt(item.summary,420)));
+    body.append(meta,make('h3','',item.title),make('p',item.content_type === 'linkedin-post' ? 'news-original-post' : '',item.summary));
     const links = make('div','news-card-links');
     const choices = Array.isArray(item.links) ? item.links.slice(0,3) : [];
     if (!choices.length && item.source_url) choices.push({url:item.source_url,label:'Read update'});
@@ -176,43 +176,45 @@
       links.append(link);
     });
     body.append(links);
-    const image = item.image && typeof item.image === 'object' ? item.image : {};
-    const imageURL = safeURL(image.src) || new URL('/assets/news/author-profile.jpg',location.origin).href;
-    const sourceURL = safeURL(image.source_url) || new URL('/about/',location.origin).href;
-    const figure = make('figure','news-picture');
-    const imageLink = make('a','news-picture-link');
-    imageLink.href = sourceURL;
-    imageLink.target = '_blank'; imageLink.rel = 'noopener noreferrer';
-    imageLink.setAttribute('aria-label','Open image source');
-    const img = make('img');
-    img.alt = excerpt(image.alt || 'GitHub profile image for Ramtin Mojtahedi',240);
-    img.width = 640; img.height = 440; img.decoding = 'async'; img.loading = 'lazy';
-    img.referrerPolicy = 'no-referrer';
-    const caption = make('figcaption');
-    const credit = make('a','',excerpt(image.credit || 'GitHub profile image',120));
-    credit.href = sourceURL; credit.target = '_blank'; credit.rel = 'noopener noreferrer';
-    caption.append(credit);
-    const licenceURL = safeURL(image.license_url);
-    if (licenceURL) {
-      const licence = make('a','','Licence');
-      licence.href = licenceURL; licence.target = '_blank'; licence.rel = 'noopener noreferrer';
-      caption.append(document.createTextNode(' · '),licence);
-    }
-    img.addEventListener('error',()=>{
-      if (img.dataset.fallback) {
-        figure.replaceChildren(make('span','news-picture-unavailable','Image unavailable'));
-        return;
+    const pictures = Array.isArray(item.images) ? item.images : item.image ? [item.image] : [];
+    const gallery = make('div','news-pictures');
+    pictures.forEach(image => {
+      const imageURL = safeURL(image?.src);
+      const sourceURL = safeURL(image?.source_url);
+      if (!imageURL || !sourceURL) return;
+      const figure = make('figure','news-picture');
+      const imageLink = make('a','news-picture-link');
+      imageLink.href = sourceURL;
+      imageLink.target = '_blank'; imageLink.rel = 'noopener noreferrer';
+      imageLink.setAttribute('aria-label','Open image source');
+      const img = make('img');
+      img.alt = image.alt || 'Original attached image';
+      img.width = 640; img.height = 440; img.decoding = 'async'; img.loading = 'lazy';
+      img.referrerPolicy = 'no-referrer';
+      const caption = make('figcaption');
+      const credit = make('a','',image.credit || 'Original image');
+      credit.href = sourceURL; credit.target = '_blank'; credit.rel = 'noopener noreferrer';
+      caption.append(credit);
+      const licenceURL = safeURL(image.license_url);
+      if (licenceURL) {
+        const licence = make('a','','Licence');
+        licence.href = licenceURL; licence.target = '_blank'; licence.rel = 'noopener noreferrer';
+        caption.append(document.createTextNode(' · '),licence);
       }
-      img.dataset.fallback = 'true';
-      img.alt = 'GitHub profile image for Ramtin Mojtahedi';
-      imageLink.href = new URL('/about/',location.origin).href;
-      caption.textContent = 'Profile image · original image unavailable';
-      img.src = '/assets/news/author-profile.jpg';
+      img.addEventListener('error',()=>{
+        const unavailable = make('a','news-picture-unavailable','View original image ↗');
+        unavailable.href = sourceURL;
+        unavailable.target = '_blank'; unavailable.rel = 'noopener noreferrer';
+        imageLink.replaceWith(unavailable);
+      });
+      img.src = imageURL;
+      imageLink.append(img); figure.append(imageLink,caption); gallery.append(figure);
     });
-    img.src = imageURL;
-    imageLink.append(img); figure.append(imageLink,caption);
-    card.classList.add('news-has-image');
-    card.append(figure,body);
+    if (gallery.children.length) {
+      card.classList.add('news-has-image');
+      card.append(gallery);
+    }
+    card.append(body);
     return card;
   }
   function applyFeed(feed) {
@@ -224,7 +226,7 @@
       return true;
     }).sort((a,b)=>String(b.date || b.publication_month || '').localeCompare(String(a.date || a.publication_month || ''))).slice(0,12);
     if (!valid.length) return;
-    const signature = JSON.stringify([feed.updated_at,valid]);
+    const signature = JSON.stringify([feed.updated_at,feed.checked_at,valid]);
     if (signature === fingerprint) return;
     if (box.contains(document.activeElement)) { pending = feed; return; }
     const oldId = slides[index]?.dataset.newsId;
@@ -235,10 +237,13 @@
     deck.replaceChildren(...cards);
     slides = cards;
     fingerprint = signature;
-    if (/^\d{4}-\d{2}-\d{2}$/.test(feed.updated_at || '')) {
-      const date = new Date(feed.updated_at+'T12:00:00Z');
-      if (!Number.isNaN(date.getTime())) dateText.textContent = 'Selected updates · Updated '+new Intl.DateTimeFormat('en-CA',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(date);
-    }
+    const formatDate = value => {
+      if (!/^\d{4}-\d{2}-\d{2}/.test(value || '')) return null;
+      const date = new Date(value.slice(0,10)+'T12:00:00Z');
+      return Number.isNaN(date.getTime()) ? null : new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(date);
+    };
+    const updated = formatDate(feed.updated_at), checked = formatDate(feed.checked_at);
+    if (updated) dateText.textContent = 'Updated '+updated+(checked ? ' · Checked '+checked : '');
     decorate();
     show(preserved>=0?preserved:0,false);
   }

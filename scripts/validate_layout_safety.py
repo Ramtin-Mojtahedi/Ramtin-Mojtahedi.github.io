@@ -34,9 +34,15 @@ def require_tokens(source: str, tokens: tuple[str, ...], location: str) -> None:
 
 def validate_asset_order(index: str) -> None:
     contact_style = 'href="assets/contact-form-polish.css?v=20260727-1"'
-    safety_style = 'href="assets/layout-safety.css?v=20260802"'
+    safety_style = re.search(r'href="assets/layout-safety\.css\?v=[^"]+"', index)
+    if not safety_style:
+        raise AssertionError("The versioned layout-safety stylesheet is missing.")
+    safety_style = safety_style.group(0)
     contact_script = 'src="assets/contact-form.js?v=20261014-2"'
-    safety_script = 'src="assets/layout-safety.js?v=20260728-1"'
+    safety_script = re.search(r'src="assets/layout-safety\.js\?v=[^"]+"', index)
+    if not safety_script:
+        raise AssertionError("The versioned layout-safety script is missing.")
+    safety_script = safety_script.group(0)
     require_tokens(index, (contact_style, safety_style, contact_script, safety_script), "index.html")
     if index.index(safety_style) < index.index(contact_style):
         raise AssertionError("The layout-safety stylesheet must load after all other component styles.")

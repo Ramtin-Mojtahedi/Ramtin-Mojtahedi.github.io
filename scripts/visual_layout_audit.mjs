@@ -249,6 +249,22 @@ const auditPage = async (page, viewport, state) => page.evaluate(
       issues.push({ type: 'runtime-layout-issues', issues: runtimeIssues });
     }
 
+
+    const navigationLinks = [...document.querySelectorAll('.nav .links a')].filter(isVisible);
+    const navigationControls = [...document.querySelectorAll('.nav .tools > *, .nav .brand')].filter(isVisible);
+    navigationLinks.forEach(link => {
+      const bounds = link.getBoundingClientRect();
+      navigationControls.forEach(control => {
+        if (overlapArea(bounds, control.getBoundingClientRect()) > 2) {
+          issues.push({ type: 'navigation-collision', elements: [descriptor(link), descriptor(control)] });
+        }
+      });
+      if (bounds.top >= 0 && bounds.bottom <= innerHeight) {
+        const target = document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+        if (!link.contains(target)) issues.push({ type: 'navigation-link-obscured', element: descriptor(link) });
+      }
+    });
+
     if (document.documentElement.dataset.layoutAudit !== 'clear') {
       issues.push({
         type: 'runtime-layout-state-not-clear',
@@ -302,7 +318,7 @@ try {
     const states = [];
     states.push(await auditPage(page, viewport, 'default'));
 
-    if (viewport.width <= 1040) {
+    if (await page.locator('#menu').isVisible()) {
       await page.click('#menu');
       await page.waitForTimeout(80);
       states.push(await auditPage(page, viewport, 'mobile-menu-open'));

@@ -119,31 +119,24 @@
         element.classList.remove('layout-stack');
       });
       root.classList.remove('hero-layout-compact', 'stats-layout-compact');
-      if (viewportWidth > 1040) root.classList.remove('nav-layout-compact');
+      root.classList.remove('nav-layout-compact');
     }
 
-    const nav = document.querySelector('.navin');
-    const brand = nav?.querySelector('.brand');
-    const links = nav?.querySelector('.links');
-    const tools = nav?.querySelector('.tools');
-    if (
-      viewportWidth > 1040 &&
-      nav && brand && links && tools &&
-      isVisible(brand) && isVisible(links) && isVisible(tools)
-    ) {
-      const brandBounds = brand.getBoundingClientRect();
-      const linksBounds = links.getBoundingClientRect();
-      const toolsBounds = tools.getBoundingClientRect();
-      const collides =
-        overlapArea(brandBounds, linksBounds) > 0 ||
-        overlapArea(linksBounds, toolsBounds) > 0 ||
-        brandBounds.left < nav.getBoundingClientRect().left - 1 ||
-        toolsBounds.right > nav.getBoundingClientRect().right + 1;
-      if (collides) {
-        issues.push({ type: 'navigation-collision', element: '.navin' });
-        if (applyFixes) root.classList.add('nav-layout-compact');
+
+    const visibleNavigationLinks = [...document.querySelectorAll('.nav .links a')].filter(isVisible);
+    const navigationControls = [...document.querySelectorAll('.nav .tools > *, .nav .brand')].filter(isVisible);
+    visibleNavigationLinks.forEach(link => {
+      const bounds = link.getBoundingClientRect();
+      navigationControls.forEach(control => {
+        if (overlapArea(bounds, control.getBoundingClientRect()) > 2) {
+          issues.push({ type: 'navigation-collision', elements: [descriptor(link), descriptor(control)] });
+        }
+      });
+      if (bounds.top >= 0 && bounds.bottom <= innerHeight) {
+        const target = document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+        if (!link.contains(target)) issues.push({ type: 'navigation-link-obscured', element: descriptor(link) });
       }
-    }
+    });
 
     const heroTitle = document.querySelector('.hero h1');
     if (heroTitle && isVisible(heroTitle)) {
@@ -246,13 +239,54 @@
     return issues;
   };
 
+  const navigation = document.querySelector('.nav');
+  const menuButton = document.getElementById('menu');
+  const navigationLinks = document.getElementById('links');
+  let measuredNavigationHeight = 0;
+  const updateNavigationOffset = () => {
+    if (!navigation) return;
+    if (window.matchMedia('(min-width: 761px)').matches && navigationLinks?.classList.contains('open')) closeNavigationMenu();
+    const height = Math.ceil(navigation.getBoundingClientRect().height);
+    if (height !== measuredNavigationHeight) {
+      measuredNavigationHeight = height;
+      root.style.setProperty('--portfolio-nav-height', `${height}px`);
+    }
+  };
+  const closeNavigationMenu = () => {
+    if (!navigationLinks || !menuButton) return;
+    navigationLinks.classList.remove('open');
+    menuButton.textContent = '☰';
+    menuButton.setAttribute('aria-expanded', 'false');
+  };
+  document.addEventListener('toggle', event => {
+    if (event.target.matches?.('.site-language[open]')) closeNavigationMenu();
+  }, true);
+  document.addEventListener('click', event => {
+    if (event.target.closest('#menu') && navigationLinks?.classList.contains('open')) {
+      document.querySelectorAll('.site-language[open]').forEach(selector => { selector.open = false; });
+    } else if (navigation && !navigation.contains(event.target)) {
+      closeNavigationMenu();
+    }
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && navigationLinks?.classList.contains('open')) {
+      closeNavigationMenu();
+      menuButton?.focus();
+    }
+  });
+  if (navigation && typeof ResizeObserver === 'function') {
+    new ResizeObserver(updateNavigationOffset).observe(navigation);
+  }
+  updateNavigationOffset();
+
   let frame = 0;
   const scheduleAudit = () => {
     if (frame) cancelAnimationFrame(frame);
     frame = requestAnimationFrame(() => {
       frame = 0;
+      updateNavigationOffset();
       scanLayout(true);
-      requestAnimationFrame(() => scanLayout(true));
+      requestAnimationFrame(() => { updateNavigationOffset(); scanLayout(true); });
     });
   };
 

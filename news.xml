@@ -1,32 +1,73 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
     <title>Ramtin Mojtahedi — Research and community news</title>
     <link>https://ramtin-mojtahedi.github.io/#news</link>
-    <description>Selected public research updates and LinkedIn highlights from Ramtin Mojtahedi.</description>
+    <description>Verified research updates and original public LinkedIn posts from Ramtin Mojtahedi.</description>
     <language>en-ca</language>
-    <lastBuildDate>{{ site.data.news.updated_at | date_to_rfc822 }}</lastBuildDate>
-    <ttl>60</ttl>
-    <atom:link href="https://ramtin-mojtahedi.github.io/news.xml" rel="self" type="application/rss+xml"/>
-    {% for item in site.data.news.items %}{% unless item.archived %}
+    <lastBuildDate>Thu, 15 Oct 2026 19:37:40 +0000</lastBuildDate>
+    <ttl>1440</ttl>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>1</sy:updateFrequency>
+    <atom:link href="https://ramtin-mojtahedi.github.io/news.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>{{ item.title | xml_escape }}</title>
-      <link>{{ item.source_url | xml_escape }}</link>
-      <guid isPermaLink="false">ramtin-news:{{ item.id | xml_escape }}</guid>
-      <description>{{ item.summary | xml_escape }}</description>
-      <category>{{ item.category | xml_escape }}</category>
-      {% if item.date %}<pubDate>{{ item.date | date_to_rfc822 }}</pubDate>{% endif %}
-      {% if item.image.src %}
-      {% assign image_url = item.image.src %}{% unless image_url contains '://' %}{% assign image_url = image_url | prepend: 'https://ramtin-mojtahedi.github.io' %}{% endunless %}
-      <media:content url="{{ image_url | xml_escape }}" medium="image">
-        <media:description>{{ item.image.alt | xml_escape }}</media:description>
-        <media:credit>{{ item.image.credit | xml_escape }}</media:credit>
+      <title>Watermarks and fingerprints for content provenance</title>
+      <link>https://arxiv.org/abs/2610.04151</link>
+      <description>Our new public preprint benchmarks invisible watermarks and content fingerprints as C2PA soft bindings across images, audio and video. The openly licensed benchmark includes reproducible code and recorded results. Preprint; not peer reviewed.</description>
+      <category>Preprint · Content provenance</category>
+      <guid isPermaLink="false">ramtin-news:soft-bindings-benchmark-preprint-20261002</guid>
+      <pubDate>Fri, 02 Oct 2026 00:00:00 +0000</pubDate>
+      <media:content url="https://ramtin-mojtahedi.github.io/assets/news/soft-bindings-complementarity.png" medium="image">
+        <media:description>Preprint figure comparing watermark and fingerprint success across image, audio and video transformations</media:description>
+        <media:credit>Kazempourradi, Mojtahedi &amp; Mohseni · Preprint figure</media:credit>
       </media:content>
-      {% endif %}
     </item>
-    {% endunless %}{% endfor %}
+    <item>
+      <title>Our spectral-adapter research featured by PYCAD</title>
+      <link>https://pycad.co/blog/point-box-colorectal-liver-met-overlay-ct/</link>
+      <description>PYCAD covered our new DiSECT and SiGA preprint, discussing spectral adaptation of Segment Anything for colorectal liver metastasis segmentation. This is research coverage, not a clinical product announcement.</description>
+      <category>Research coverage</category>
+      <guid isPermaLink="false">ramtin-news:pycad-spectral-adapters-coverage-20260911</guid>
+      <pubDate>Fri, 11 Sep 2026 00:00:00 +0000</pubDate>
+      <media:content url="https://ramtin-mojtahedi.github.io/assets/news/author-profile.jpg" medium="image">
+        <media:description>GitHub profile image for Ramtin Mojtahedi</media:description>
+        <media:credit>GitHub profile image</media:credit>
+      </media:content>
+    </item>
+    <item>
+      <title>Spectral adapters for liver metastasis segmentation</title>
+      <link>https://arxiv.org/abs/2609.11703</link>
+      <description>Our DiSECT and SiGA adapters adapt Segment Anything for colorectal liver metastasis segmentation. In the 91-case held-out, no-prompt evaluation, SiGA achieved 0.76 Dice on tumour-positive CT slices. Preprint; not peer reviewed.</description>
+      <category>Preprint</category>
+      <guid isPermaLink="false">ramtin-news:spectral-adapters-preprint-2026</guid>
+      <pubDate>Thu, 10 Sep 2026 00:00:00 +0000</pubDate>
+      <media:content url="https://ramtin-mojtahedi.github.io/assets/news/spectral-adapters-pipeline.png" medium="image">
+        <media:description>Published diagram showing CT images, SAM encoders, adapters and tumour segmentation masks</media:description>
+        <media:credit>Mojtahedi et al. · Preprint figure 1</media:credit>
+      </media:content>
+    </item>
+    <item>
+      <title>Carotid radiomics study in the September issue</title>
+      <link>https://www.umbjournal.org/article/S0301-5629(26)00197-3/fulltext</link>
+      <description>Our co-first-author study appears in Ultrasound in Medicine &amp; Biology, volume 52, issue 9, pages 1890–1899. The work combines carotid plaque radiomic features with machine learning for cardiovascular risk prediction.</description>
+      <category>Journal issue</category>
+      <guid isPermaLink="false">ramtin-news:carotid-plaque-september-issue-2026</guid>
+      <media:content url="https://ramtin-mojtahedi.github.io/assets/news/author-profile.jpg" medium="image">
+        <media:description>GitHub profile image for Ramtin Mojtahedi</media:description>
+        <media:credit>GitHub profile image</media:credit>
+      </media:content>
+    </item>
+    <item>
+      <title>Multimodal risk prediction in Scientific Reports</title>
+      <link>https://www.nature.com/articles/s41598-026-60860-9</link>
+      <description>My co-first-author study combines clinical and CT-derived imaging data for preoperative risk prediction in colorectal liver metastases.</description>
+      <category>Publication</category>
+      <guid isPermaLink="false">ramtin-news:scientific-reports-multimodal-2026</guid>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 +0000</pubDate>
+      <media:content url="https://ramtin-mojtahedi.github.io/assets/news/author-profile.jpg" medium="image">
+        <media:description>GitHub profile image for Ramtin Mojtahedi</media:description>
+        <media:credit>GitHub profile image</media:credit>
+      </media:content>
+    </item>
   </channel>
 </rss>

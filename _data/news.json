@@ -1,9 +1,43 @@
 {
-  "updated_at": "2026-09-13",
+  "updated_at": "2026-10-15",
   "linkedin_profile": "https://www.linkedin.com/in/ramtin-mojtahedi/",
   "linkedin_activity": "https://www.linkedin.com/in/ramtin-mojtahedi/recent-activity/all/",
-  "maintenance_note": "Latest verified public research updates. Personal LinkedIn posts remain inaccessible; no private or unverified post is represented as retrieved. The undated institutional reshare is retained as archived history.",
+  "maintenance_note": "Public research sources checked on 15 October 2026. Original LinkedIn posts are included only when complete public text and attached media can be verified; no inaccessible post is represented as retrieved.",
   "items": [
+    {
+      "id": "soft-bindings-benchmark-preprint-20261002",
+      "content_type": "research-update",
+      "date": "2026-10-02",
+      "date_label": "2 October 2026",
+      "category": "Preprint · Content provenance",
+      "featured": true,
+      "title": "Watermarks and fingerprints for content provenance",
+      "summary": "Our new public preprint benchmarks invisible watermarks and content fingerprints as C2PA soft bindings across images, audio and video. The openly licensed benchmark includes reproducible code and recorded results. Preprint; not peer reviewed.",
+      "source_url": "https://arxiv.org/abs/2610.04151",
+      "last_verified": "2026-10-15",
+      "links": [
+        {
+          "label": "Read the preprint",
+          "url": "https://arxiv.org/abs/2610.04151"
+        },
+        {
+          "label": "Code and results",
+          "url": "https://github.com/Original-Pictures/soft-bindings-benchmark"
+        }
+      ],
+      "image": {
+        "src": "/assets/news/soft-bindings-complementarity.png",
+        "alt": "Preprint figure comparing watermark and fingerprint success across image, audio and video transformations",
+        "credit": "Kazempourradi, Mojtahedi & Mohseni · Preprint figure",
+        "source_url": "https://github.com/Original-Pictures/soft-bindings-benchmark/blob/main/paper/figures/fp_fig11_wm_complementarity.pdf",
+        "original_url": "https://raw.githubusercontent.com/Original-Pictures/soft-bindings-benchmark/main/paper/figures/fp_fig11_wm_complementarity.pdf",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "width": 1400,
+        "height": 582,
+        "sha256": "3e29ea59ce432dff25e52cd19e6409caaffc3b4d1df710af24ab93cda04866ac",
+        "kind": "paper-preview"
+      }
+    },
     {
       "id": "pycad-spectral-adapters-coverage-20260911",
       "date": "2026-09-11",
@@ -38,8 +72,8 @@
       "id": "spectral-adapters-preprint-2026",
       "date": "2026-09-10",
       "date_label": "10 September 2026",
-      "category": "Featured · Preprint",
-      "featured": true,
+      "category": "Preprint",
+      "featured": false,
       "title": "Spectral adapters for liver metastasis segmentation",
       "summary": "Our DiSECT and SiGA adapters adapt Segment Anything for colorectal liver metastasis segmentation. In the 91-case held-out, no-prompt evaluation, SiGA achieved 0.76 Dice on tumour-positive CT slices. Preprint; not peer reviewed.",
       "source_url": "https://arxiv.org/abs/2609.11703",
@@ -154,5 +188,6 @@
         "sha256": "7f34190d96ef9352861d53ab910acc4623bca85368e2cf53baf4ed70200220b2"
       }
     }
-  ]
+  ],
+  "checked_at": "2026-10-15T19:37:40Z"
 }
