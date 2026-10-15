@@ -39,8 +39,8 @@ QUEENS_AWARDS_URL = (
     "https://www.cs.queensu.ca/news/2024/07/18/"
     "ramtin-mojtahedi-was-recognized-by-major-graduate-student-awards/"
 )
-PROFILE_IMAGE_URL = f"{BASE_URL}/assets/ramtin-graduation.svg"
-SOCIAL_IMAGE_URL = "https://avatars.githubusercontent.com/u/85639926?v=4"
+PROFILE_IMAGE_URL = f"{BASE_URL}/assets/ramtin-portrait-20261015.jpg"
+SOCIAL_IMAGE_URL = PROFILE_IMAGE_URL
 PERSON_SAME_AS = [
     ORCID_URL,
     "https://github.com/Ramtin-Mojtahedi",
@@ -1352,7 +1352,7 @@ def about_page(publications: list[dict[str, object]]) -> str:
           <h1>Ramtin Mojtahedi</h1>
           <p class="lede">Postdoctoral medical AI researcher working across medical imaging, data-efficient learning, and multimodal clinical prediction.</p>
         </div>
-        <img src="/assets/ramtin-graduation.svg" width="240" height="351" alt="Dr. Ramtin Mojtahedi in Queen’s University doctoral regalia holding his diploma">
+        <img src="/assets/ramtin-portrait-20261015.jpg" width="1697" height="1769" alt="Professional portrait of Dr. Ramtin Mojtahedi">
       </div>
 
       <section aria-labelledby="biography-heading">
@@ -1642,8 +1642,8 @@ def sitemap(publications: list[dict[str, object]]) -> str:
     <loc>{BASE_URL}/</loc>
     <image:image>
       <image:loc>{PROFILE_IMAGE_URL}</image:loc>
-      <image:title>Ramtin Mojtahedi at Queen's University convocation</image:title>
-      <image:caption>Dr. Ramtin Mojtahedi in Queen's University doctoral regalia holding his diploma</image:caption>
+      <image:title>Professional portrait of Ramtin Mojtahedi</image:title>
+      <image:caption>Professional portrait of Dr. Ramtin Mojtahedi</image:caption>
     </image:image>
   </url>
 {nodes}

@@ -78,8 +78,9 @@ body {
 }
 
 .photo img {
-  aspect-ratio: 1 / 1.07;
-  object-position: center 23%;
+  height: auto;
+  aspect-ratio: 1697 / 1769;
+  object-position: center;
   filter: saturate(.98) contrast(1.01);
 }
 
