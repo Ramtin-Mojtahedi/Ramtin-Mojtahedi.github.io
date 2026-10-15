@@ -124,10 +124,10 @@ def validate_public_identity() -> None:
     require_tokens(
         index,
         (
-            f"<title>{PUBLIC_NAME_WITH_CREDENTIAL} | Medical AI Researcher</title>",
+            f"<title>{PUBLIC_NAME_WITH_CREDENTIAL} | AI Researcher</title>",
             f'<meta name="author" content="{PUBLIC_NAME}">',
-            f'<meta property="og:title" content="{PUBLIC_NAME_WITH_CREDENTIAL} | Medical AI Researcher">',
-            f'<meta name="twitter:title" content="{PUBLIC_NAME_WITH_CREDENTIAL} | Medical AI Researcher">',
+            f'<meta property="og:title" content="{PUBLIC_NAME_WITH_CREDENTIAL} | AI Researcher">',
+            f'<meta name="twitter:title" content="{PUBLIC_NAME_WITH_CREDENTIAL} | AI Researcher">',
             f'"name": "{STRUCTURED_PERSON_NAME}"',
             '"honorificPrefix": "Dr."',
             '"honorificSuffix": "Ph.D."',
@@ -137,9 +137,9 @@ def validate_public_identity() -> None:
     require_tokens(
         hero,
         (
-            "<span>Dr. Ramtin Mojtahedi<small>Medical AI Researcher</small></span>",
+            "<span>Dr. Ramtin Mojtahedi<small>AI Researcher</small></span>",
             "<h1>Dr. Ramtin<span>Mojtahedi, Ph.D.</span></h1>",
-            "alt='Dr. Ramtin Mojtahedi in Queen’s University doctoral regalia holding his diploma'",
+            "alt='Professional portrait of Dr. Ramtin Mojtahedi'",
         ),
         "the navigation and hero",
     )
