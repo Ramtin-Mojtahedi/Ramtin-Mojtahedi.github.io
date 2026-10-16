@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-15",
-  "checked_at": "2026-10-15T19:37:40Z",
+  "updated_at": "2026-10-16",
+  "checked_at": "2026-10-16T11:43:38Z",
   "linkedin_activity": "https://www.linkedin.com/in/ramtin-mojtahedi/recent-activity/all/",
   "items": [
     {
@@ -37,6 +37,32 @@
         "sha256": "3e29ea59ce432dff25e52cd19e6409caaffc3b4d1df710af24ab93cda04866ac",
         "kind": "paper-preview"
       }
+    },
+    {
+      "id": "peft-sam-liver-ct-manuscript-20260912",
+      "content_type": "research-update",
+      "date": "2026-09-12",
+      "date_label": "12 September 2026",
+      "category": "Public manuscript · Medical imaging",
+      "featured": false,
+      "title": "Public manuscript for parameter-efficient SAM adaptation",
+      "summary": "A public manuscript of our SPIE 2026 paper on parameter-efficient fine-tuning of Segment Anything for liver-tumour segmentation is now available on arXiv. It compares LoRA, QLoRA, a convolutional adapter and DiSCo across prompt settings and compute measures. This arXiv manuscript is not a separate peer-reviewed publication.",
+      "source_url": "https://arxiv.org/abs/2609.14106",
+      "last_verified": "2026-10-16",
+      "links": [
+        {
+          "label": "Read the manuscript",
+          "url": "https://arxiv.org/abs/2609.14106"
+        },
+        {
+          "label": "Published SPIE paper",
+          "url": "https://doi.org/10.1117/12.3087835"
+        },
+        {
+          "label": "Code",
+          "url": "https://github.com/Ramtin-Mojtahedi/PEFT-SAM-Liver-CT"
+        }
+      ]
     },
     {
       "id": "pycad-spectral-adapters-coverage-20260911",

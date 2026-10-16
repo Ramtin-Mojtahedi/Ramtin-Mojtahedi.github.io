@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-10-15",
+  "updated_at": "2026-10-16",
   "linkedin_profile": "https://www.linkedin.com/in/ramtin-mojtahedi/",
   "linkedin_activity": "https://www.linkedin.com/in/ramtin-mojtahedi/recent-activity/all/",
-  "maintenance_note": "Public research sources checked on 15 October 2026. Original LinkedIn posts are included only when complete public text and attached media can be verified; no inaccessible post is represented as retrieved.",
+  "maintenance_note": "Public research sources checked on 16 October 2026. The public LinkedIn activity page was unavailable during this check, so no personal post was claimed or added. Original LinkedIn posts are included only when complete public text, date, permalink and attached media can be verified.",
   "items": [
     {
       "id": "soft-bindings-benchmark-preprint-20261002",
@@ -37,6 +37,32 @@
         "sha256": "3e29ea59ce432dff25e52cd19e6409caaffc3b4d1df710af24ab93cda04866ac",
         "kind": "paper-preview"
       }
+    },
+    {
+      "id": "peft-sam-liver-ct-manuscript-20260912",
+      "content_type": "research-update",
+      "date": "2026-09-12",
+      "date_label": "12 September 2026",
+      "category": "Public manuscript · Medical imaging",
+      "featured": false,
+      "title": "Public manuscript for parameter-efficient SAM adaptation",
+      "summary": "A public manuscript of our SPIE 2026 paper on parameter-efficient fine-tuning of Segment Anything for liver-tumour segmentation is now available on arXiv. It compares LoRA, QLoRA, a convolutional adapter and DiSCo across prompt settings and compute measures. This arXiv manuscript is not a separate peer-reviewed publication.",
+      "source_url": "https://arxiv.org/abs/2609.14106",
+      "last_verified": "2026-10-16",
+      "links": [
+        {
+          "label": "Read the manuscript",
+          "url": "https://arxiv.org/abs/2609.14106"
+        },
+        {
+          "label": "Published SPIE paper",
+          "url": "https://doi.org/10.1117/12.3087835"
+        },
+        {
+          "label": "Code",
+          "url": "https://github.com/Ramtin-Mojtahedi/PEFT-SAM-Liver-CT"
+        }
+      ]
     },
     {
       "id": "pycad-spectral-adapters-coverage-20260911",
@@ -189,5 +215,6 @@
       }
     }
   ],
-  "checked_at": "2026-10-15T19:37:40Z"
+  "checked_at": "2026-10-16T11:43:38Z"
 }
+

@@ -5,7 +5,7 @@
     <link>https://ramtin-mojtahedi.github.io/#news</link>
     <description>Verified research updates and original public LinkedIn posts from Ramtin Mojtahedi.</description>
     <language>en-ca</language>
-    <lastBuildDate>Thu, 15 Oct 2026 19:37:40 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 11:43:38 +0000</lastBuildDate>
     <ttl>1440</ttl>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
@@ -21,6 +21,14 @@
         <media:description>Preprint figure comparing watermark and fingerprint success across image, audio and video transformations</media:description>
         <media:credit>Kazempourradi, Mojtahedi &amp; Mohseni · Preprint figure</media:credit>
       </media:content>
+    </item>
+    <item>
+      <title>Public manuscript for parameter-efficient SAM adaptation</title>
+      <link>https://arxiv.org/abs/2609.14106</link>
+      <description>A public manuscript of our SPIE 2026 paper on parameter-efficient fine-tuning of Segment Anything for liver-tumour segmentation is now available on arXiv. It compares LoRA, QLoRA, a convolutional adapter and DiSCo across prompt settings and compute measures. This arXiv manuscript is not a separate peer-reviewed publication.</description>
+      <category>Public manuscript · Medical imaging</category>
+      <guid isPermaLink="false">ramtin-news:peft-sam-liver-ct-manuscript-20260912</guid>
+      <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Our spectral-adapter research featured by PYCAD</title>
