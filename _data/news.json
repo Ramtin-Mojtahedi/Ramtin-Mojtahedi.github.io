@@ -2,7 +2,7 @@
   "updated_at": "2026-10-16",
   "linkedin_profile": "https://www.linkedin.com/in/ramtin-mojtahedi/",
   "linkedin_activity": "https://www.linkedin.com/in/ramtin-mojtahedi/recent-activity/all/",
-  "maintenance_note": "Public research sources checked on 17 October 2026. The public LinkedIn activity page remained unavailable during this check, so no personal post was claimed or added. Original LinkedIn posts are included only when complete public text, date, permalink and attached media can be verified.",
+  "maintenance_note": "Public research sources checked on 18 October 2026. The public LinkedIn activity page remained unavailable during this check, so no personal post was claimed or added. Original LinkedIn posts are included only when complete public text, date, permalink and attached media can be verified.",
   "items": [
     {
       "id": "soft-bindings-benchmark-preprint-20261002",
@@ -14,7 +14,7 @@
       "title": "Watermarks and fingerprints for content provenance",
       "summary": "Our new public preprint benchmarks invisible watermarks and content fingerprints as C2PA soft bindings across images, audio and video. The openly licensed benchmark includes reproducible code and recorded results. Preprint; not peer reviewed.",
       "source_url": "https://arxiv.org/abs/2610.04151",
-      "last_verified": "2026-10-17",
+      "last_verified": "2026-10-18",
       "links": [
         {
           "label": "Read the preprint",
@@ -137,7 +137,7 @@
       "title": "Carotid radiomics study in the September issue",
       "summary": "Our co-first-author study appears in Ultrasound in Medicine & Biology, volume 52, issue 9, pages 1890–1899. The work combines carotid plaque radiomic features with machine learning for cardiovascular risk prediction.",
       "source_url": "https://www.umbjournal.org/article/S0301-5629(26)00197-3/fulltext",
-      "last_verified": "2026-09-13",
+      "last_verified": "2026-10-18",
       "note": "September is the journal issue month; the article was first available online on 12 June 2026. No exact September publication day is asserted.",
       "links": [
         {
@@ -215,7 +215,8 @@
       }
     }
   ],
-  "checked_at": "2026-10-17T11:40:20Z"
+  "checked_at": "2026-10-18T12:28:16Z"
 }
+
 
 
