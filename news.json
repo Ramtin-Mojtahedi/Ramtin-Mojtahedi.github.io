@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-10-20",
-  "checked_at": "2026-10-21T11:47:07Z",
+  "checked_at": "2026-10-22T11:33:16Z",
   "linkedin_activity": "https://www.linkedin.com/in/ramtin-mojtahedi/recent-activity/all/",
   "items": [
     {
@@ -14,7 +14,7 @@
       "title": "Watermarks and fingerprints for content provenance",
       "summary": "Our new public preprint benchmarks invisible watermarks and content fingerprints as C2PA soft bindings across images, audio and video. The openly licensed benchmark includes reproducible code and recorded results. Preprint; not peer reviewed.",
       "source_url": "https://arxiv.org/abs/2610.04151",
-      "last_verified": "2026-10-21",
+      "last_verified": "2026-10-22",
       "links": [
         {
           "label": "Read the preprint",
@@ -48,7 +48,7 @@
       "title": "Public manuscript for parameter-efficient SAM adaptation",
       "summary": "A public manuscript of our SPIE 2026 paper on parameter-efficient fine-tuning of Segment Anything for liver-tumour segmentation is now available on arXiv. It compares LoRA, QLoRA, a convolutional adapter and DiSCo across prompt settings and compute measures. This arXiv manuscript is not a separate peer-reviewed publication.",
       "source_url": "https://arxiv.org/abs/2609.14106",
-      "last_verified": "2026-10-21",
+      "last_verified": "2026-10-22",
       "links": [
         {
           "label": "Read the manuscript",
@@ -73,7 +73,7 @@
       "title": "Our spectral-adapter research featured by PYCAD",
       "summary": "PYCAD covered our new DiSECT and SiGA preprint, discussing spectral adaptation of Segment Anything for colorectal liver metastasis segmentation. This is research coverage, not a clinical product announcement.",
       "source_url": "https://pycad.co/blog/point-box-colorectal-liver-met-overlay-ct/",
-      "last_verified": "2026-10-21",
+      "last_verified": "2026-10-22",
       "links": [
         {
           "label": "Read the coverage",
@@ -103,7 +103,7 @@
       "title": "Spectral adapters for liver metastasis segmentation",
       "summary": "Our DiSECT and SiGA adapters adapt Segment Anything for colorectal liver metastasis segmentation. In the 91-case held-out, no-prompt evaluation, SiGA achieved 0.76 Dice on tumour-positive CT slices. Preprint; not peer reviewed.",
       "source_url": "https://arxiv.org/abs/2609.11703",
-      "last_verified": "2026-10-21",
+      "last_verified": "2026-10-22",
       "links": [
         {
           "label": "Publication details",
@@ -164,7 +164,7 @@
       "title": "Multimodal risk prediction in Scientific Reports",
       "summary": "My co-first-author study combines clinical and CT-derived imaging data for preoperative risk prediction in colorectal liver metastases. Springer Nature published the version of record on 14 October 2026.",
       "source_url": "https://www.nature.com/articles/s41598-026-60860-9",
-      "last_verified": "2026-10-21",
+      "last_verified": "2026-10-22",
       "links": [
         {
           "label": "Read the study",
