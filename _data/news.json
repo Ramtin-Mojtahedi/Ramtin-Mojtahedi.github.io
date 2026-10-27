@@ -2,7 +2,7 @@
   "updated_at": "2026-10-20",
   "linkedin_profile": "https://www.linkedin.com/in/ramtin-mojtahedi/",
   "linkedin_activity": "https://www.linkedin.com/in/ramtin-mojtahedi/recent-activity/all/",
-  "maintenance_note": "ArXiv, PubMed, PYCAD and Scientific Reports sources were checked on 26 October 2026. The Ultrasound in Medicine & Biology article page returned HTTP 403, so that individual verification date was not advanced; its indexed PubMed metadata remained available. The public ORCID page required JavaScript and the public LinkedIn activity page remained unavailable, so no personal post was claimed or added. Original LinkedIn posts are included only when complete public text, date, permalink and attached media can be verified.",
+  "maintenance_note": "ArXiv, PubMed and PYCAD sources were checked on 27 October 2026. The Ultrasound in Medicine & Biology article page returned HTTP 403 and the Scientific Reports page redirected to an inaccessible identity endpoint, so those individual verification dates were not advanced; indexed PubMed metadata for both articles remained available. The public ORCID page required JavaScript and the public LinkedIn activity page remained unavailable, so no personal post was claimed or added. Original LinkedIn posts are included only when complete public text, date, permalink and attached media can be verified.",
   "items": [
     {
       "id": "soft-bindings-benchmark-preprint-20261002",
@@ -14,7 +14,7 @@
       "title": "Watermarks and fingerprints for content provenance",
       "summary": "Our new public preprint benchmarks invisible watermarks and content fingerprints as C2PA soft bindings across images, audio and video. The openly licensed benchmark includes reproducible code and recorded results. Preprint; not peer reviewed.",
       "source_url": "https://arxiv.org/abs/2610.04151",
-      "last_verified": "2026-10-26",
+      "last_verified": "2026-10-27",
       "links": [
         {
           "label": "Read the preprint",
@@ -48,7 +48,7 @@
       "title": "Public manuscript for parameter-efficient SAM adaptation",
       "summary": "A public manuscript of our SPIE 2026 paper on parameter-efficient fine-tuning of Segment Anything for liver-tumour segmentation is now available on arXiv. It compares LoRA, QLoRA, a convolutional adapter and DiSCo across prompt settings and compute measures. This arXiv manuscript is not a separate peer-reviewed publication.",
       "source_url": "https://arxiv.org/abs/2609.14106",
-      "last_verified": "2026-10-26",
+      "last_verified": "2026-10-27",
       "links": [
         {
           "label": "Read the manuscript",
@@ -73,7 +73,7 @@
       "title": "Our spectral-adapter research featured by PYCAD",
       "summary": "PYCAD covered our new DiSECT and SiGA preprint, discussing spectral adaptation of Segment Anything for colorectal liver metastasis segmentation. This is research coverage, not a clinical product announcement.",
       "source_url": "https://pycad.co/blog/point-box-colorectal-liver-met-overlay-ct/",
-      "last_verified": "2026-10-26",
+      "last_verified": "2026-10-27",
       "links": [
         {
           "label": "Read the coverage",
@@ -103,7 +103,7 @@
       "title": "Spectral adapters for liver metastasis segmentation",
       "summary": "Our DiSECT and SiGA adapters adapt Segment Anything for colorectal liver metastasis segmentation. In the 91-case held-out, no-prompt evaluation, SiGA achieved 0.76 Dice on tumour-positive CT slices. Preprint; not peer reviewed.",
       "source_url": "https://arxiv.org/abs/2609.11703",
-      "last_verified": "2026-10-26",
+      "last_verified": "2026-10-27",
       "links": [
         {
           "label": "Publication details",
@@ -215,8 +215,9 @@
       }
     }
   ],
-  "checked_at": "2026-10-26T12:16:41Z"
+  "checked_at": "2026-10-27T12:20:10Z"
 }
+
 
 
 
