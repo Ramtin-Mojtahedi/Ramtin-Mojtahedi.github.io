@@ -2,7 +2,7 @@
   "updated_at": "2026-10-20",
   "linkedin_profile": "https://www.linkedin.com/in/ramtin-mojtahedi/",
   "linkedin_activity": "https://www.linkedin.com/in/ramtin-mojtahedi/recent-activity/all/",
-  "maintenance_note": "ArXiv, PubMed and PYCAD sources were checked on 27 October 2026. The Ultrasound in Medicine & Biology article page returned HTTP 403 and the Scientific Reports page redirected to an inaccessible identity endpoint, so those individual verification dates were not advanced; indexed PubMed metadata for both articles remained available. The public ORCID page required JavaScript and the public LinkedIn activity page remained unavailable, so no personal post was claimed or added. Original LinkedIn posts are included only when complete public text, date, permalink and attached media can be verified.",
+  "maintenance_note": "PYCAD, Scientific Reports and PubMed sources were checked on 28 October 2026. The arXiv article pages were unavailable through the public fetch service and the Ultrasound in Medicine & Biology article page returned HTTP 403, so those individual verification dates were not advanced; indexed metadata remained available. The public ORCID page required JavaScript and the public LinkedIn activity page remained unavailable, so no personal post was claimed or added. Original LinkedIn posts are included only when complete public text, date, permalink and attached media can be verified.",
   "items": [
     {
       "id": "soft-bindings-benchmark-preprint-20261002",
@@ -73,7 +73,7 @@
       "title": "Our spectral-adapter research featured by PYCAD",
       "summary": "PYCAD covered our new DiSECT and SiGA preprint, discussing spectral adaptation of Segment Anything for colorectal liver metastasis segmentation. This is research coverage, not a clinical product announcement.",
       "source_url": "https://pycad.co/blog/point-box-colorectal-liver-met-overlay-ct/",
-      "last_verified": "2026-10-27",
+      "last_verified": "2026-10-28",
       "links": [
         {
           "label": "Read the coverage",
@@ -164,7 +164,7 @@
       "title": "Multimodal risk prediction in Scientific Reports",
       "summary": "My co-first-author study combines clinical and CT-derived imaging data for preoperative risk prediction in colorectal liver metastases. Springer Nature published the version of record on 14 October 2026.",
       "source_url": "https://www.nature.com/articles/s41598-026-60860-9",
-      "last_verified": "2026-10-26",
+      "last_verified": "2026-10-28",
       "links": [
         {
           "label": "Read the study",
@@ -215,8 +215,9 @@
       }
     }
   ],
-  "checked_at": "2026-10-27T12:20:10Z"
+  "checked_at": "2026-10-28T11:53:07Z"
 }
+
 
 
 

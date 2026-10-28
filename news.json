@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-10-20",
-  "checked_at": "2026-10-27T12:20:10Z",
+  "checked_at": "2026-10-28T11:53:07Z",
   "linkedin_activity": "https://www.linkedin.com/in/ramtin-mojtahedi/recent-activity/all/",
   "items": [
     {
@@ -73,7 +73,7 @@
       "title": "Our spectral-adapter research featured by PYCAD",
       "summary": "PYCAD covered our new DiSECT and SiGA preprint, discussing spectral adaptation of Segment Anything for colorectal liver metastasis segmentation. This is research coverage, not a clinical product announcement.",
       "source_url": "https://pycad.co/blog/point-box-colorectal-liver-met-overlay-ct/",
-      "last_verified": "2026-10-27",
+      "last_verified": "2026-10-28",
       "links": [
         {
           "label": "Read the coverage",
@@ -164,7 +164,7 @@
       "title": "Multimodal risk prediction in Scientific Reports",
       "summary": "My co-first-author study combines clinical and CT-derived imaging data for preoperative risk prediction in colorectal liver metastases. Springer Nature published the version of record on 14 October 2026.",
       "source_url": "https://www.nature.com/articles/s41598-026-60860-9",
-      "last_verified": "2026-10-26",
+      "last_verified": "2026-10-28",
       "links": [
         {
           "label": "Read the study",
