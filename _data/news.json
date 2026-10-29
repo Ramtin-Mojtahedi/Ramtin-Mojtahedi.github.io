@@ -1,9 +1,99 @@
 {
-  "updated_at": "2026-10-20",
+  "updated_at": "2026-10-29",
   "linkedin_profile": "https://www.linkedin.com/in/ramtin-mojtahedi/",
   "linkedin_activity": "https://www.linkedin.com/in/ramtin-mojtahedi/recent-activity/all/",
-  "maintenance_note": "PYCAD, Scientific Reports and PubMed sources were checked on 28 October 2026. The arXiv article pages were unavailable through the public fetch service and the Ultrasound in Medicine & Biology article page returned HTTP 403, so those individual verification dates were not advanced; indexed metadata remained available. The public ORCID page required JavaScript and the public LinkedIn activity page remained unavailable, so no personal post was claimed or added. Original LinkedIn posts are included only when complete public text, date, permalink and attached media can be verified.",
+  "maintenance_note": "The public arXiv records for the content-provenance and spectral-adapter preprints, PYCAD coverage, and the Scientific Reports PubMed record were checked on 29 October 2026. The parameter-efficient SAM arXiv page was unavailable through the public fetch service, the Ultrasound in Medicine & Biology article page returned HTTP 403, and the public ORCID page required JavaScript, so those individual verification dates were not advanced. The connected LinkedIn activity feed was available: the three newest original personal posts were verified from their full rendered text, stable activity IDs, timestamps, permalinks and attached images. No post was reconstructed from a search snippet.",
   "items": [
+    {
+      "id": "linkedin-activity-7518452739480215552",
+      "content_type": "linkedin-post",
+      "date": "2026-10-20",
+      "date_label": "20 October 2026",
+      "category": "LinkedIn post · Mentorship",
+      "featured": true,
+      "title": "Cross-Institute Research Mentorship Program registration",
+      "summary": "Registration is open for the Cross-Institute Research Mentorship Program across University Health Network.\nI helped design the program as part of UHN Postdoc Association (UHNPA), working with UHN Office of Research Trainees. It connects trainees with mentors outside their own lab for career advice, support, and connections across UHN.\nProgram dates: January–May 2027\nTime commitment: At least one meeting per month, virtually or in person.\n• Mentees: UHN graduate students and postdoctoral researchers. Register as a mentee: https://lnkd.in/gEBigcbu\n• Mentors: Experienced UHN postdocs, scientists, scientific associates, PIs, clinician-scientists/investigators, and research staff. Register as a mentor: https://lnkd.in/gpaeZ3-4\nIf you’d like guidance beyond your own lab or have experience to share, we’d love to have you involved. Certificates are available upon completing the program requirements.\nFull program details: https://lnkd.in/gNFSYShJ\nPlease share with UHN colleagues who may be interested.\nResearch at UHN\nUniversity of Toronto\nTemerty Faculty of Medicine, University of Toronto\nToronto Metropolitan University\n#UHN #UHNPA #Mentorship #CareerDevelopment #GraduateStudents #Postdocs #UofT #TemertyMed #TMU",
+      "source_url": "https://www.linkedin.com/feed/update/urn:li:activity:7518452739480215552/",
+      "last_verified": "2026-10-29",
+      "links": [
+        {
+          "label": "View original post",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7518452739480215552/"
+        }
+      ],
+      "images": [
+        {
+          "src": "https://media.licdn.com/dms/image/v2/D5622AQHj4nDPyxMb5w/feedshare-shrink_800/B56aFbo7PWGQAc-/0/1792538817750?e=1795046400&v=beta&t=qmOp3hujL90m02XQIyaMt3jPSxK-h-VnuimwyJ8ORuk",
+          "alt": "Original image attached to Ramtin Mojtahedi’s LinkedIn post about the Cross-Institute Research Mentorship Program",
+          "credit": "Ramtin Mojtahedi · Original LinkedIn post media",
+          "source_url": "https://www.linkedin.com/feed/update/urn:li:activity:7518452739480215552/",
+          "original_url": "https://media.licdn.com/dms/image/v2/D5622AQHj4nDPyxMb5w/feedshare-shrink_800/B56aFbo7PWGQAc-/0/1792538817750?e=1795046400&v=beta&t=qmOp3hujL90m02XQIyaMt3jPSxK-h-VnuimwyJ8ORuk",
+          "width": 681,
+          "height": 511,
+          "kind": "original-post-media"
+        }
+      ]
+    },
+    {
+      "id": "linkedin-activity-7518443940417601536",
+      "content_type": "linkedin-post",
+      "date": "2026-10-20",
+      "date_label": "20 October 2026",
+      "category": "LinkedIn post · Alumni",
+      "featured": false,
+      "title": "Queen’s Homecoming and alumni mentorship",
+      "summary": "Celebrating 100 years of Homecoming at Queen's University last weekend was a reminder of the value of staying connected across generations and disciplines.\nMy PhD years at Queen's School of Computing, within Queen's University Faculty of Arts and Science, shaped my work in AI and my commitment to teaching and mentorship.\nFor me, alumni connections offer a practical way to contribute: sharing experience, exchanging ideas and helping students navigate their next steps. I’m always glad to connect with students and fellow alumni interested in AI, research or mentorship.\nThank you to the Queen's Alumni team, organizers and volunteers for a memorable weekend.\n#QueensU #QueensAlumni #QueensComputing #QueensArtsAndScience #Homecoming2026",
+      "source_url": "https://www.linkedin.com/feed/update/urn:li:activity:7518443940417601536/",
+      "last_verified": "2026-10-29",
+      "links": [
+        {
+          "label": "View original post",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7518443940417601536/"
+        }
+      ],
+      "images": [
+        {
+          "src": "https://media.licdn.com/dms/image/v2/D5622AQHXL7_Z04W76Q/feedshare-shrink_800/B56aFbg6vBIUAg-/0/1792536719800?e=1795046400&v=beta&t=0XVDjGmpwuOlHTGqMaa3pYb7_5KJB-wgy02xgE8xyOM",
+          "alt": "Original image attached to Ramtin Mojtahedi’s LinkedIn post about Queen’s Homecoming",
+          "credit": "Ramtin Mojtahedi · Original LinkedIn post media",
+          "source_url": "https://www.linkedin.com/feed/update/urn:li:activity:7518443940417601536/",
+          "original_url": "https://media.licdn.com/dms/image/v2/D5622AQHXL7_Z04W76Q/feedshare-shrink_800/B56aFbg6vBIUAg-/0/1792536719800?e=1795046400&v=beta&t=0XVDjGmpwuOlHTGqMaa3pYb7_5KJB-wgy02xgE8xyOM",
+          "width": 681,
+          "height": 498,
+          "kind": "original-post-media"
+        }
+      ]
+    },
+    {
+      "id": "linkedin-activity-7516964444380487680",
+      "content_type": "linkedin-post",
+      "date": "2026-10-16",
+      "date_label": "16 October 2026",
+      "category": "LinkedIn post · Biomedical AI",
+      "featured": false,
+      "title": "Biomedical AI and meaningful evidence",
+      "summary": "The value of AI in biomedical research depends on how well computational methods address the underlying scientific question.\n\nAttending the 2026 iBEST | Institute for Biomedical Engineering, Science and Technology Symposium, bringing together Toronto Metropolitan University and St. Michael’s Hospital at Unity Health Toronto, was an opportunity to explore research beyond my own area and consider where complementary expertise could lead to collaboration.\n\nAs an AI researcher, I’m interested in translating biomedical questions into rigorous computational studies. That involves understanding the limitations of the data, defining the insight we hope to gain and designing validation around the intended application.\n\nAgreeing early on what would constitute meaningful evidence gives a collaboration a clear direction. It guides methodological choices and keeps the work connected to the scientific problem that motivated it.\n\n#ArtificialIntelligence #BiomedicalResearch #ResearchCollaboration #InterdisciplinaryResearch",
+      "source_url": "https://www.linkedin.com/feed/update/urn:li:activity:7516964444380487680/",
+      "last_verified": "2026-10-29",
+      "links": [
+        {
+          "label": "View original post",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7516964444380487680/"
+        }
+      ],
+      "images": [
+        {
+          "src": "https://media.licdn.com/dms/image/v2/D5622AQFJHiIMv-SUJw/feedshare-shrink_800/B56aFGfU6tJcAc-/0/1792183980136?e=1795046400&v=beta&t=TLO2Mek7V-Cp9npFNaljs0C2X41CvIRS_emOqYx61z4",
+          "alt": "Original image attached to Ramtin Mojtahedi’s LinkedIn post about the 2026 iBEST Symposium",
+          "credit": "Ramtin Mojtahedi · Original LinkedIn post media",
+          "source_url": "https://www.linkedin.com/feed/update/urn:li:activity:7516964444380487680/",
+          "original_url": "https://media.licdn.com/dms/image/v2/D5622AQFJHiIMv-SUJw/feedshare-shrink_800/B56aFGfU6tJcAc-/0/1792183980136?e=1795046400&v=beta&t=TLO2Mek7V-Cp9npFNaljs0C2X41CvIRS_emOqYx61z4",
+          "width": 681,
+          "height": 768,
+          "kind": "original-post-media"
+        }
+      ]
+    },
     {
       "id": "soft-bindings-benchmark-preprint-20261002",
       "content_type": "research-update",
@@ -14,7 +104,7 @@
       "title": "Watermarks and fingerprints for content provenance",
       "summary": "Our new public preprint benchmarks invisible watermarks and content fingerprints as C2PA soft bindings across images, audio and video. The openly licensed benchmark includes reproducible code and recorded results. Preprint; not peer reviewed.",
       "source_url": "https://arxiv.org/abs/2610.04151",
-      "last_verified": "2026-10-27",
+      "last_verified": "2026-10-29",
       "links": [
         {
           "label": "Read the preprint",
@@ -73,7 +163,7 @@
       "title": "Our spectral-adapter research featured by PYCAD",
       "summary": "PYCAD covered our new DiSECT and SiGA preprint, discussing spectral adaptation of Segment Anything for colorectal liver metastasis segmentation. This is research coverage, not a clinical product announcement.",
       "source_url": "https://pycad.co/blog/point-box-colorectal-liver-met-overlay-ct/",
-      "last_verified": "2026-10-28",
+      "last_verified": "2026-10-29",
       "links": [
         {
           "label": "Read the coverage",
@@ -103,7 +193,7 @@
       "title": "Spectral adapters for liver metastasis segmentation",
       "summary": "Our DiSECT and SiGA adapters adapt Segment Anything for colorectal liver metastasis segmentation. In the 91-case held-out, no-prompt evaluation, SiGA achieved 0.76 Dice on tumour-positive CT slices. Preprint; not peer reviewed.",
       "source_url": "https://arxiv.org/abs/2609.11703",
-      "last_verified": "2026-10-27",
+      "last_verified": "2026-10-29",
       "links": [
         {
           "label": "Publication details",
@@ -164,7 +254,7 @@
       "title": "Multimodal risk prediction in Scientific Reports",
       "summary": "My co-first-author study combines clinical and CT-derived imaging data for preoperative risk prediction in colorectal liver metastases. Springer Nature published the version of record on 14 October 2026.",
       "source_url": "https://www.nature.com/articles/s41598-026-60860-9",
-      "last_verified": "2026-10-28",
+      "last_verified": "2026-10-29",
       "links": [
         {
           "label": "Read the study",
@@ -215,8 +305,9 @@
       }
     }
   ],
-  "checked_at": "2026-10-28T11:53:07Z"
+  "checked_at": "2026-10-29T12:16:19Z"
 }
+
 
 
 
